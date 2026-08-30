@@ -21,14 +21,40 @@
     h1 {
       font-size: 28px;
       font-weight: 700;
-      margin: 0 0 4px 0;
+      margin: 0 0 6px 0;
       color: #1a1a1a;
+    }
+
+    .subtitle-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .subtitle {
       font-size: 14px;
       color: #6c757d;
       margin: 0;
+    }
+
+    .index-return-badge {
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .return-positive {
+      background-color: #d1e7dd;
+      color: #0f5132;
+    }
+
+    .return-negative {
+      background-color: #f8d7da;
+      color: #842029;
     }
 
     .navigation-bar {
@@ -88,8 +114,7 @@
       display: grid;
       grid-template-columns: repeat(10, 1fr);
       gap: 8px;
-      align-items: end;
-      min-height: 540px;
+      align-items: start;
       background: #ffffff;
       padding: 20px;
       border-radius: 8px;
@@ -99,11 +124,9 @@
 
     .column {
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
       align-items: center;
       gap: 4px;
-      height: 100%;
-      justify-content: flex-start;
     }
 
     .bin-header {
@@ -113,8 +136,15 @@
       padding: 6px 2px;
       width: 100%;
       border-radius: 4px;
-      margin-top: 8px;
+      margin-bottom: 6px;
       line-height: 1.3;
+    }
+
+    .tile-stack {
+      display: flex;
+      flex-direction: column-reverse;
+      width: 100%;
+      gap: 4px;
     }
 
     .tile {
@@ -133,7 +163,10 @@
 
   <div class="header-container">
     <h1>Distribution of Returns in Index</h1>
-    <p class="subtitle" id="updated-date">Individual companies' YTD Returns as on Loading...</p>
+    <div class="subtitle-row">
+      <p class="subtitle" id="updated-date">Loading...</p>
+      <div id="index-return-badge" class="index-return-badge" style="display: none;"></div>
+    </div>
   </div>
 
   <div class="navigation-bar">
@@ -234,10 +267,37 @@
       `).join('');
     }
 
+    function updateIndexReturnBadge() {
+      const badge = document.getElementById('index-return-badge');
+      const indexReturns = stockData.indexReturns || {};
+      const officialReturn = indexReturns[selectedIndex];
+
+      if (officialReturn === undefined || officialReturn === null) {
+        // Fallback to simple average if official index ticker fails to download
+        const stocks = stockData[selectedIndex] || [];
+        if (!stocks.length) { 
+          badge.style.display = 'none'; 
+          return; 
+        }
+        const avg = stocks.reduce((acc, s) => acc + (s.ytd || 0), 0) / stocks.length;
+        badge.innerText = `Equal-Avg Return: ${avg >= 0 ? '+' : ''}${avg.toFixed(2)}%`;
+        badge.className = `index-return-badge ${avg >= 0 ? 'return-positive' : 'return-negative'}`;
+      } else {
+        // Display exact market-cap weighted index return
+        const formattedReturn = `${officialReturn >= 0 ? '+' : ''}${officialReturn.toFixed(2)}%`;
+        badge.innerText = `Index YTD Return: ${formattedReturn}`;
+        badge.className = `index-return-badge ${officialReturn >= 0 ? 'return-positive' : 'return-negative'}`;
+      }
+
+      badge.style.display = 'inline-flex';
+    }
+
     function renderChart() {
       const stocks = stockData[selectedIndex] || [];
       const grid = document.getElementById('chart-grid');
       grid.innerHTML = '';
+
+      updateIndexReturnBadge();
 
       BINS.forEach(bin => {
         const col = document.createElement('div');
@@ -246,6 +306,16 @@
         const matchingStocks = stocks.filter(s => s.ytd >= bin.min && s.ytd < bin.max);
         matchingStocks.sort((a, b) => a.ytd - b.ytd);
 
+        const header = document.createElement('div');
+        header.className = 'bin-header';
+        header.innerHTML = `${bin.label}<br><strong>(${matchingStocks.length})</strong>`;
+        header.style.backgroundColor = bin.bg;
+        header.style.color = bin.text;
+        col.appendChild(header);
+
+        const stack = document.createElement('div');
+        stack.className = 'tile-stack';
+
         matchingStocks.forEach(stock => {
           const tile = document.createElement('div');
           tile.className = 'tile';
@@ -253,16 +323,10 @@
           tile.style.backgroundColor = bin.bg;
           tile.style.color = bin.text;
           tile.title = `${stock.ticker}: ${stock.ytd.toFixed(2)}%`;
-          col.appendChild(tile);
+          stack.appendChild(tile);
         });
 
-        const header = document.createElement('div');
-        header.className = 'bin-header';
-        header.innerHTML = `${bin.label}<br><strong>(${matchingStocks.length})</strong>`;
-        header.style.backgroundColor = bin.bg;
-        header.style.color = bin.text;
-        col.insertBefore(header, col.firstChild);
-
+        col.appendChild(stack);
         grid.appendChild(col);
       });
     }

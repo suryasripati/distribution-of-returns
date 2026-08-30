@@ -273,7 +273,6 @@
       const officialReturn = indexReturns[selectedIndex];
 
       if (officialReturn === undefined || officialReturn === null) {
-        // Fallback to simple average if official index ticker fails to download
         const stocks = stockData[selectedIndex] || [];
         if (!stocks.length) { 
           badge.style.display = 'none'; 
@@ -283,7 +282,6 @@
         badge.innerText = `Equal-Avg Return: ${avg >= 0 ? '+' : ''}${avg.toFixed(2)}%`;
         badge.className = `index-return-badge ${avg >= 0 ? 'return-positive' : 'return-negative'}`;
       } else {
-        // Display exact market-cap weighted index return
         const formattedReturn = `${officialReturn >= 0 ? '+' : ''}${officialReturn.toFixed(2)}%`;
         badge.innerText = `Index YTD Return: ${formattedReturn}`;
         badge.className = `index-return-badge ${officialReturn >= 0 ? 'return-positive' : 'return-negative'}`;

@@ -2,7 +2,7 @@ name: Update Stock Data Daily
 
 on:
   schedule:
-    - cron: '0 23 * * 1-5' # Runs Mon-Fri at 11:00 PM UTC
+    - cron: '0 23 * * 1-5'
   workflow_dispatch:
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
 
           HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
 
-          def fetch_ticker_data(ticker):
+          def fetch_single_ticker(ticker):
               start_date = f"{datetime.date.today().year}-01-01"
               try:
                   t = yf.Ticker(ticker)
@@ -40,17 +40,17 @@ jobs:
                   if not hist.empty and 'Close' in hist:
                       series = hist['Close'].dropna()
                       if len(series) > 0:
-                          start_price = float(series.iloc[0])
-                          current_price = float(series.iloc[-1])
-                          ytd = ((current_price - start_price) / start_price) * 100
-                          clean_ticker = ticker.replace('.NS', '')
-                          return {"ticker": clean_ticker, "ytd": round(ytd, 2)}
+                          start_p = float(series.iloc[0])
+                          curr_p = float(series.iloc[-1])
+                          ytd = ((curr_p - start_p) / start_p) * 100
+                          clean_name = ticker.replace('.NS', '')
+                          return {"ticker": clean_name, "ytd": round(ytd, 2)}
               except Exception:
                   pass
               return None
 
-          def fetch_all_in_batches(ticker_list, batch_size=25):
-              results = []
+          def fetch_robust_list(ticker_list, batch_size=15):
+              results = {}
               start_date = f"{datetime.date.today().year}-01-01"
               
               for i in range(0, len(ticker_list), batch_size):
@@ -67,25 +67,27 @@ jobs:
                                   series = closes[t].dropna()
                                   
                               if len(series) > 0:
-                                  start_price = float(series.iloc[0])
-                                  current_price = float(series.iloc[-1])
-                                  ytd = ((current_price - start_price) / start_price) * 100
-                                  clean_ticker = t.replace('.NS', '')
-                                  results.append({"ticker": clean_ticker, "ytd": round(ytd, 2)})
-                              else:
-                                  res = fetch_ticker_data(t)
-                                  if res: results.append(res)
+                                  start_p = float(series.iloc[0])
+                                  curr_p = float(series.iloc[-1])
+                                  ytd = ((curr_p - start_p) / start_p) * 100
+                                  clean_name = t.replace('.NS', '')
+                                  results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
                           except Exception:
-                              res = fetch_ticker_data(t)
-                              if res: results.append(res)
+                              pass
                   except Exception:
-                      for t in batch:
-                          res = fetch_ticker_data(t)
-                          if res: results.append(res)
-                  time.sleep(0.2)
-              return results
+                      pass
+                  time.sleep(0.1)
 
-          # DYNAMIC US FETCHERS
+              # Retry loop for any dropped tickers during batch download
+              for t in ticker_list:
+                  if t not in results:
+                      res = fetch_single_ticker(t)
+                      if res:
+                          results[t] = res
+                      time.sleep(0.05)
+
+              return list(results.values())
+
           def get_nasdaq100():
               try:
                   url = 'https://en.wikipedia.org/wiki/NASDAQ-100'
@@ -94,12 +96,11 @@ jobs:
                   for t in tables:
                       if 'Ticker' in t.columns or 'Symbol' in t.columns:
                           col = 'Ticker' if 'Ticker' in t.columns else 'Symbol'
-                          symbols = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
-                          if len(symbols) >= 95:
-                              return list(set(symbols))
-              except Exception as e:
-                  print(f"NASDAQ100 Dynamic Fetch Warning: {e}")
-              return ["AAPL","MSFT","NVDA","AMZN","META","GOOGL","GOOG","AVGO","TSLA","COST","AMD","TMUS","NFLX","PEP","CSCO","ADBE","AMAT","QCOM","INTC","TXN","CMCSA","INTU","AMGN","ISRG","BKNG","HON","LRCX","MDLZ","VRTX","ADP","ADI","REGN","PANW","SBUX","SNPS","KLAC","CDNS","MU","PYPL","MELI","CSX","ORLY","MAR","ASML","CTAS","ROP","MNST","PCAR","AEP","ROST","KDP","PAYX","NXPI","CPRT","ODFL","FAST","AZN","DXCM","LULU","GEHC","MRVL","IDXX","VRSK","CTSH","CSGP","KHC","ON","EXC","EA","BKR","XEL","FANG","ANSS","CDW","DLTR","MCHP","BIIB","ILMN","WBD","WWD","TTWO"]
+                          syms = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
+                          if len(syms) >= 95: return syms
+              except Exception:
+                  pass
+              return []
 
           def get_sp500():
               try:
@@ -107,61 +108,64 @@ jobs:
                   r = requests.get(url, headers=HEADERS)
                   tables = pd.read_html(r.text)
                   return [str(t).replace('.', '-') for t in tables[0]['Symbol'].tolist()]
-              except Exception as e:
-                  print(f"SP500 Dynamic Fetch Warning: {e}")
-              return ["AAPL","MSFT","NVDA","AMZN","META","GOOGL","BRK-B","JPM","LLY","V","UNH","XOM","MA","HD","PG","COST","JNJ","ABBV","BAC","NKE"]
-
-          # DYNAMIC INDIAN FETCHERS
-          def clean_nse_symbol(sym):
-              sym = str(sym).strip()
-              if sym == "M&M":
-                  return "MM.NS"
-              return f"{sym.replace('&', '%26')}.NS"
-
-          def get_indian_wiki_index(url_title, expected_len):
-              try:
-                  url = f"https://en.wikipedia.org/wiki/{url_title}"
-                  r = requests.get(url, headers=HEADERS)
-                  tables = pd.read_html(r.text)
-                  for t in tables:
-                      for col in ['Symbol', 'Ticker', 'NSE Symbol']:
-                          if col in t.columns:
-                              symbols = [clean_nse_symbol(x) for x in t[col].dropna().tolist()]
-                              if len(symbols) >= (expected_len * 0.8):
-                                  return list(set(symbols))
-              except Exception as e:
-                  print(f"Dynamic fetch error for {url_title}: {e}")
+              except Exception:
+                  pass
               return []
 
-          # Fallback arrays in case of network block
-          FALLBACK_NIFTY50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
-          FALLBACK_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
-          FALLBACK_MIDCAP100 = ["ABCAPITAL","ABFRL","ACC","AARTIIND","ALKEM","AMBUJACEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BANKBARODA","BATAINDIA","BEL","BHARATFORG","BHEL","BIOCON","BOSCHLTD","BSOFT","CANBK","CANFINHOME","CGPOWER","CHAMBLFERT","CHOLAFIN","COFORGE","COLPAL","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","DLF","ESCORTS","EXIDEIND","FEDERALBNK","GAIL","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HAL","HAVELLS","HDFCAMC","HINDPETRO","HONAUT","IDFCFIRSTB","INDIAMART","INDHOTEL","IOC","IPCALAB","IRCTC","JINDALSTEL","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","L&TFH","LAURUSLABS","LICHSGFIN","LUPIN","MAXHEALTH","MFSL","MGL","MOTHERSON","MPHASIS","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NHPC","NMDC","OBEROIRLTY","OFSS","OIL","PAYTM","PERSISTENT","PETRONET","PFC","POLYCAB","POONAWALLA","RBLBANK","REC","RVNL","SAIL","SIEMENS","SRF","SUPREMEIND","SUZLON","TATACOMM","TATAELXSI","TATAPOWER","TIINDIA","TORNTPHARM","TVSMOTOR","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE"]
+          # Complete NSE Indices Lists
+          NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
-          # Resolve Indices Dynamically
-          n50_list = get_indian_wiki_index("NIFTY_50", 50) or [f"{t}.NS" for t in FALLBACK_NIFTY50]
-          n_next50_list = get_indian_wiki_index("NIFTY_Next_50", 50) or [f"{t}.NS" for t in FALLBACK_NEXT50]
-          n_midcap_list = get_indian_wiki_index("NIFTY_Midcap_100", 100) or [f"{t}.NS" for t in FALLBACK_MIDCAP100]
+          NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
+
+          NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","LTTS"]
+
+          NIFTY_BANK = ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]
+
+          NIFTY_FINSRV = ["AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
+
+          NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","ACC","AARTIIND","ALKEM","AMBUJACEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BANKBARODA","BATAINDIA","BEL","BHARATFORG","BHEL","BIOCON","BOSCHLTD","BSOFT","CANBK","CANFINHOME","CGPOWER","CHAMBLFERT","CHOLAFIN","COFORGE","COLPAL","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","DLF","ESCORTS","EXIDEIND","FEDERALBNK","GAIL","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HAL","HAVELLS","HDFCAMC","HINDPETRO","HONAUT","IDFCFIRSTB","INDIAMART","INDHOTEL","IOC","IPCALAB","IRCTC","JINDALSTEL","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","L&TFH","LAURUSLABS","LICHSGFIN","LUPIN","MAXHEALTH","MFSL","MGL","MOTHERSON","MPHASIS","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NHPC","NMDC","OBEROIRLTY","OFSS","OIL","PAYTM","PERSISTENT","PETRONET","PFC","POLYCAB","POONAWALLA","RBLBANK","REC","RVNL","SAIL","SIEMENS","SRF","SUPREMEIND","SUZLON","TATACOMM","TATAELXSI","TATAPOWER","TIINDIA","TORNTPHARM","TVSMOTOR","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE"]
+
+          NIFTY_500 = list(set(NIFTY_50 + NIFTY_NEXT50 + NIFTY_MIDCAP100))
+
+          BENCHMARK_TICKERS = {
+              "NASDAQ100": "^NDX",
+              "SP500": "^GSPC",
+              "NIFTY50": "^NSEI",
+              "NIFTYNEXT50": "^NSMIDCP",
+              "NIFTYIT": "^CNXIT",
+              "NIFTYBANK": "^NSEBANK",
+              "NIFTYFINSRV": "NIFTY_FIN_SERVICE.NS",
+              "NIFTYMIDCAP100": "^NSEMDCP100",
+              "NIFTY500": "^CRSLDX"
+          }
 
           indices_config = {
               "NASDAQ100": get_nasdaq100(),
               "SP500": get_sp500(),
-              "NIFTY50": n50_list,
-              "NIFTYNEXT50": n_next50_list,
-              "NIFTYIT": [f"{t}.NS" for t in ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","LTTS"]],
-              "NIFTYBANK": [f"{t}.NS" for t in ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]],
-              "NIFTYFINSRV": [f"{t}.NS" for t in ["AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]],
-              "NIFTYMIDCAP100": n_midcap_list,
-              "NIFTY500": list(set(n50_list + n_next50_list + n_midcap_list))
+              "NIFTY50": [f"{t}.NS" for t in NIFTY_50],
+              "NIFTYNEXT50": [f"{t}.NS" for t in NIFTY_NEXT50],
+              "NIFTYIT": [f"{t}.NS" for t in NIFTY_IT],
+              "NIFTYBANK": [f"{t}.NS" for t in NIFTY_BANK],
+              "NIFTYFINSRV": [f"{t}.NS" for t in NIFTY_FINSRV],
+              "NIFTYMIDCAP100": [f"{t}.NS" for t in NIFTY_MIDCAP100],
+              "NIFTY500": [f"{t}.NS" for t in NIFTY_500]
           }
 
+          index_returns = {}
+          print("Fetching Benchmark Index returns...")
+          for idx_name, b_symbol in BENCHMARK_TICKERS.items():
+              res = fetch_single_ticker(b_symbol)
+              if res:
+                  index_returns[idx_name] = res['ytd']
+
           output = {
-              "lastUpdated": datetime.date.today().strftime("%b %d, %Y")
+              "lastUpdated": datetime.date.today().strftime("%b %d, %Y"),
+              "indexReturns": index_returns
           }
 
           for name, tickers in indices_config.items():
-              print(f"Fetching {len(tickers)} tickers for {name}...")
-              output[name] = fetch_all_in_batches(tickers)
+              print(f"Fetching constituents for {name} ({len(tickers)} tickers)...")
+              output[name] = fetch_robust_list(tickers)
 
           with open('data.json', 'w') as f:
               json.dump(output, f, indent=2)
@@ -172,5 +176,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fully dynamic index fetch pipeline updated [skip ci]" || exit 0
+          git commit -m "Added actual benchmark index performance display [skip ci]" || exit 0
           git push

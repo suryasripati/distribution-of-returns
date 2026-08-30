@@ -33,10 +33,10 @@ jobs:
 
           HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
-          # --- HARDCODED LISTS ---
+          # --- BASE INDEX ARRAYS ---
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
-          HARDCODED_NIFTY_NEXT50 = ["ABB","ACC","ADANIENSOL","ADANIGREEN","ADANIPOVR","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
+          HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
 
           HARDCODED_NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","OFSS"]
 
@@ -44,11 +44,31 @@ jobs:
 
           HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
 
-          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE"]
+          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE","AIAENG","ASTRAZEN","ATUL","AUTOMBDNM","BBNL","BCG","BEML","BLSTARLTD","CARBORUNIV","CASTROLIND","CEATLTD","CENTURYTEX","CERA","CESC","CHALET","CHEMCON","CITYUNIONB","CREDITACC","CYIENT","DCMSHRIRAM","DEEPAKFERT","DEVYANI","EIDPARRY","EQUITASBNK","ERIS","FORTIS","GESHIP","GLS","GODREJIND","HAPPSTMNDS"]
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
-          # --- DYNAMIC SCRAPERS ---
+          # --- DYNAMIC SCRAPER FOR NIFTY 500 ---
+          def get_full_nifty500():
+              sources = [
+                  "https://raw.githubusercontent.com/anandheritage/Nifty500-Tickers/main/nifty500.csv",
+                  "https://raw.githubusercontent.com/datasets/investing-india/master/data/nifty500.csv"
+              ]
+              for src in sources:
+                  try:
+                      r = requests.get(src, headers=HEADERS, timeout=10)
+                      if r.status_code == 200:
+                          df = pd.read_csv(io.StringIO(r.text))
+                          col = next((c for c in ['Symbol', 'Ticker', 'NSE Symbol'] if c in df.columns), None)
+                          if col:
+                              syms = [f"{str(x).strip()}.NS" for x in df[col].dropna().tolist() if str(x).strip()]
+                              if len(syms) >= 450:
+                                  print(f"[Dynamic] Successfully fetched {len(syms)} NIFTY 500 tickers.")
+                                  return syms
+                  except Exception:
+                      pass
+              print("[Fallback] Could not fetch NIFTY 500 CSV. Using standard pool.")
+              return []
 
           def get_nasdaq100():
               try:
@@ -77,55 +97,8 @@ jobs:
                   pass
               return []
 
-          def get_nifty500():
-              """Fetch full 500 constituents dynamically from Wikipedia or mirror CSVs"""
-              sources = [
-                  'https://en.wikipedia.org/wiki/NIFTY_500',
-                  'https://raw.githubusercontent.com/anandheritage/Nifty500-Tickers/main/nifty500.csv'
-              ]
-              for src in sources:
-                  try:
-                      if 'wikipedia' in src:
-                          r = requests.get(src, headers=HEADERS, timeout=10)
-                          tables = pd.read_html(r.text)
-                          for t in tables:
-                              col = next((c for c in ['Symbol', 'Ticker', 'NSE Symbol'] if c in t.columns), None)
-                              if col:
-                                  syms = [f"{str(x).strip()}.NS" for x in t[col].dropna().tolist()]
-                                  if len(syms) >= 450:
-                                      print(f"[Dynamic] Loaded {len(syms)} tickers for NIFTY 500 from Wikipedia.")
-                                      return syms
-                      else:
-                          df = pd.read_csv(src)
-                          col = next((c for c in ['Symbol', 'Ticker'] if c in df.columns), None)
-                          if col:
-                              syms = [f"{str(x).strip()}.NS" for x in df[col].dropna().tolist()]
-                              if len(syms) >= 450:
-                                  print(f"[Dynamic] Loaded {len(syms)} tickers for NIFTY 500 from CSV source.")
-                                  return syms
-                  except Exception:
-                      pass
-              print("[Fallback] NIFTY 500 dynamic fetch failed. Using fallback list.")
-              return []
-
-          def fetch_single_ticker(ticker):
-              start_date = f"{datetime.date.today().year}-01-01"
-              try:
-                  t = yf.Ticker(ticker)
-                  hist = t.history(start=start_date)
-                  if not hist.empty and 'Close' in hist:
-                      series = hist['Close'].dropna()
-                      if len(series) > 0:
-                          start_p = float(series.iloc[0])
-                          curr_p = float(series.iloc[-1])
-                          ytd = ((curr_p - start_p) / start_p) * 100
-                          clean_name = ticker.replace('.NS', '')
-                          return {"ticker": clean_name, "ytd": round(ytd, 2)}
-              except Exception:
-                  pass
-              return None
-
-          def fetch_robust_list(ticker_list, batch_size=30):
+          # --- BATCH FETCH WITH GUARANTEED PLACEHOLDERS ---
+          def fetch_robust_list(ticker_list, batch_size=50):
               results = {}
               start_date = f"{datetime.date.today().year}-01-01"
               
@@ -150,30 +123,27 @@ jobs:
                       pass
                   time.sleep(0.05)
 
-              # Ensure every requested ticker gets represented even if download drops
+              # Retain array structure so tiles are never dropped
+              out = []
               for t in ticker_list:
-                  if t not in results:
-                      res = fetch_single_ticker(t)
-                      clean_name = t.replace('.NS', '')
-                      if res:
-                          results[t] = res
-                      else:
-                          results[t] = {"ticker": clean_name, "ytd": 0.0}
+                  clean_name = t.replace('.NS', '')
+                  if t in results:
+                      out.append(results[t])
+                  else:
+                      out.append({"ticker": clean_name, "ytd": 0.0})
 
-              return [results[t] for t in ticker_list if t in results]
+              return out
 
           # --- EXECUTION ---
-
           nifty50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_50]
           niftynext50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50]
           niftymidcap100_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100]
 
-          # Resolve NIFTY 500 constituents
-          nifty500_dynamic = get_nifty500()
-          if len(nifty500_dynamic) >= 450:
-              nifty500_tickers = nifty500_dynamic
-          else:
-              nifty500_tickers = list(dict.fromkeys(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
+          # Fetch 500 list
+          nifty500_list = get_full_nifty500()
+          if len(nifty500_list) < 400:
+              # Fallback if live download fails
+              nifty500_list = list(dict.fromkeys(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
 
           indices_config = {
               "NASDAQ100": get_nasdaq100(),
@@ -184,7 +154,7 @@ jobs:
               "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
               "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
               "NIFTYMIDCAP100": niftymidcap100_tickers,
-              "NIFTY500": nifty500_tickers
+              "NIFTY500": nifty500_list
           }
 
           BENCHMARK_TICKERS = {
@@ -209,20 +179,25 @@ jobs:
               parsed_data[name] = fetch_robust_list(tickers)
               output[name] = parsed_data[name]
 
-          # Benchmark Return Calculations
+          # Calculate benchmark headers
           for idx_name in indices_config.keys():
               if idx_name in BENCHMARK_TICKERS:
-                  res = fetch_single_ticker(BENCHMARK_TICKERS[idx_name])
-                  if res and res.get('ytd') is not None:
-                      output["indexReturns"][idx_name] = res['ytd']
-                      continue
-              
+                  try:
+                      t = yf.Ticker(BENCHMARK_TICKERS[idx_name])
+                      hist = t.history(start=f"{datetime.date.today().year}-01-01")
+                      if not hist.empty and 'Close' in hist:
+                          s = hist['Close'].dropna()
+                          if len(s) > 0:
+                              ytd = round(((float(s.iloc[-1]) - float(s.iloc[0])) / float(s.iloc[0])) * 100, 2)
+                              output["indexReturns"][idx_name] = ytd
+                              continue
+                  except Exception:
+                      pass
+
+              # Equal-weight benchmark fallback
               constituents = parsed_data.get(idx_name, [])
               valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
-              if valid_ytds:
-                  output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2)
-              else:
-                  output["indexReturns"][idx_name] = 0.0
+              output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2) if valid_ytds else 0.0
 
           with open('data.json', 'w') as f:
               json.dump(output, f, indent=2)
@@ -233,5 +208,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fetch complete NIFTY 500 constituents dynamically [skip ci]" || exit 0
+          git commit -m "Fix NIFTY 500 count to fetch full constituent array [skip ci]" || exit 0
           git push

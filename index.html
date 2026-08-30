@@ -3,40 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stock YTD Returns Distribution</title>
+  <title>Distribution of Returns in Index</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
       margin: 0;
-      padding: 20px;
+      padding: 24px;
     }
-    h1 { text-align: center; margin-bottom: 5px; }
-    p.subtitle { text-align: center; color: #666; margin-top: 0; }
     
-    .controls {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    select {
-      padding: 8px 16px;
-      font-size: 16px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      cursor: pointer;
+    .header-container {
+      text-align: left;
+      margin-bottom: 24px;
     }
 
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+      color: #1a1a1a;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #6c757d;
+      margin: 0;
+    }
+
+    /* Top Control Layout */
+    .navigation-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      padding: 16px 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .row-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #495057;
+      min-width: 80px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid #ced4da;
+      background-color: #f8f9fa;
+      color: #333;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: #e9ecef;
+    }
+
+    .nav-btn.active {
+      background-color: #0d6efd;
+      color: #ffffff;
+      border-color: #0d6efd;
+    }
+
+    /* Stack Histogram Layout */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
       gap: 8px;
       align-items: end;
-      min-height: 500px;
-      background: #fff;
+      min-height: 520px;
+      background: #ffffff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       overflow-x: auto;
     }
 
@@ -61,11 +120,11 @@
 
     .tile {
       width: 100%;
-      padding: 6px 0;
+      padding: 5px 0;
       text-align: center;
-      font-size: 11px;
-      font-weight: bold;
-      border: 1px solid rgba(0,0,0,0.15);
+      font-size: 10px;
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,0.12);
       border-radius: 2px;
       box-sizing: border-box;
     }
@@ -73,21 +132,26 @@
 </head>
 <body>
 
-  <h1 id="title">Distribution of Returns</h1>
-  <p class="subtitle" id="updated-date">Loading data...</p>
+  <div class="header-container">
+    <h1>Distribution of Returns in Index</h1>
+    <p class="subtitle" id="updated-date">Individual companies' YTD Returns as on Loading...</p>
+  </div>
 
-  <div class="controls">
-    <select id="index-select" onchange="renderChart()">
-      <option value="NASDAQ100">NASDAQ 100</option>
-      <option value="NIFTY50">NIFTY 50</option>
-      <option value="NIFTYBANK">NIFTY Bank</option>
-      <option value="NIFTYNEXT50">NIFTY Next 50</option>
-      <option value="NIFTYIT">NIFTY IT</option>
-      <option value="NIFTY500">NIFTY 500 (Top Constituents)</option>
-      <option value="NIFTYMIDCAP">NIFTY Midcap</option>
-      <option value="NIFTYFINSRV">NIFTY Fin Service 25/50</option>
-      <option value="SP500">S&P 500</option>
-    </select>
+  <div class="navigation-bar">
+    <!-- Row 1: Country Switcher -->
+    <div class="nav-row">
+      <span class="row-label">Country</span>
+      <div class="btn-group" id="country-buttons">
+        <button class="nav-btn active" onclick="selectCountry('US')">US</button>
+        <button class="nav-btn" onclick="selectCountry('INDIA')">INDIA</button>
+      </div>
+    </div>
+
+    <!-- Row 2: Index Selector -->
+    <div class="nav-row">
+      <span class="row-label">Index</span>
+      <div class="btn-group" id="index-buttons"></div>
+    </div>
   </div>
 
   <div class="grid-container" id="chart-grid"></div>
@@ -106,21 +170,74 @@
       { label: "More than 40%", min: 40, max: Infinity, bg: "#1B651B", text: "#fff" }
     ];
 
+    const INDEX_MAPPING = {
+      US: [
+        { id: 'NASDAQ100', label: 'NASDAQ 100' },
+        { id: 'SP500', label: 'S&P 500' }
+      ],
+      INDIA: [
+        { id: 'NIFTY50', label: 'NIFTY 50' },
+        { id: 'NIFTYNEXT50', label: 'NIFTY NEXT 50' },
+        { id: 'NIFTY500', label: 'NIFTY 500' },
+        { id: 'NIFTYMIDCAP', label: 'NIFTY MIDCAP' },
+        { id: 'NIFTYIT', label: 'NIFTY IT' },
+        { id: 'NIFTYBANK', label: 'NIFTY BANK' },
+        { id: 'NIFTYFINSRV', label: 'NIFTY FINSRV' }
+      ]
+    };
+
     let stockData = {};
+    let selectedCountry = 'US';
+    let selectedIndex = 'NASDAQ100';
 
     async function init() {
       try {
         const response = await fetch('data.json');
         stockData = await response.json();
-        document.getElementById('updated-date').innerText = `YTD (as of ${stockData.lastUpdated || 'Today'})`;
+        const dateStr = stockData.lastUpdated || 'Today';
+        document.getElementById('updated-date').innerText = `Individual companies' YTD Returns as on ${dateStr}`;
+        renderCountryButtons();
+        renderIndexButtons();
         renderChart();
       } catch (err) {
-        document.getElementById('updated-date').innerText = "Failed to load data.json";
+        document.getElementById('updated-date').innerText = "Failed to load stock data.";
       }
     }
 
+    function selectCountry(country) {
+      selectedCountry = country;
+      selectedIndex = INDEX_MAPPING[country][0].id; // Set default index for country
+      renderCountryButtons();
+      renderIndexButtons();
+      renderChart();
+    }
+
+    function selectIndex(indexId) {
+      selectedIndex = indexId;
+      renderIndexButtons();
+      renderChart();
+    }
+
+    function renderCountryButtons() {
+      const container = document.getElementById('country-buttons');
+      container.innerHTML = Object.keys(INDEX_MAPPING).map(country => `
+        <button class="nav-btn ${country === selectedCountry ? 'active' : ''}" onclick="selectCountry('${country}')">
+          ${country}
+        </button>
+      `).join('');
+    }
+
+    function renderIndexButtons() {
+      const container = document.getElementById('index-buttons');
+      const indices = INDEX_MAPPING[selectedCountry] || [];
+      container.innerHTML = indices.map(idx => `
+        <button class="nav-btn ${idx.id === selectedIndex ? 'active' : ''}" onclick="selectIndex('${idx.id}')">
+          ${idx.label}
+        </button>
+      `).join('');
+    }
+
     function renderChart() {
-      const selectedIndex = document.getElementById('index-select').value;
       const stocks = stockData[selectedIndex] || [];
       const grid = document.getElementById('chart-grid');
       grid.innerHTML = '';

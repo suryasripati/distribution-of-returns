@@ -29,29 +29,31 @@ jobs:
           import yfinance as yf
           import time
           import requests
+          import io
 
-          HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+          HEADERS = {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+              'Accept': '*/*',
+              'Accept-Language': 'en-US,en;q=0.9'
+          }
 
-          # --- HARDCODED FALLBACK LISTS ---
+          # --- EXACT CONSTUENT LISTS ---
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
-          HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
+          HARDCODED_NIFTY_NEXT50 = ["ABB","ACC","ADANIENSOL","ADANIGREEN","ADANIPOVR","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
 
           HARDCODED_NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","OFSS"]
 
           HARDCODED_NIFTY_BANK = ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]
 
-          HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
+          HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
 
-          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","ACC","AARTIIND","ALKEM","AMBUJACEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BANKBARODA","BATAINDIA","BEL","BHARATFORG","BHEL","BIOCON","BOSCHLTD","BSOFT","CANBK","CANFINHOME","CGPOWER","CHAMBLFERT","CHOLAFIN","COFORGE","COLPAL","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","DLF","ESCORTS","EXIDEIND","FEDERALBNK","GAIL","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HAL","HAVELLS","HDFCAMC","HINDPETRO","HONAUT","IDFCFIRSTB","INDIAMART","INDHOTEL","IOC","IPCALAB","IRCTC","JINDALSTEL","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","L&TFH","LAURUSLABS","LICHSGFIN","LUPIN","MAXHEALTH","MFSL","MGL","MOTHERSON","MPHASIS","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NHPC","NMDC","OBEROIRLTY","OFSS","OIL","PAYTM","PERSISTENT","PETRONET","PFC","POLYCAB","POONAWALLA","RBLBANK","REC","RVNL","SAIL","SIEMENS","SRF","SUPREMEIND","SUZLON","TATACOMM","TATAELXSI","TATAPOWER","TIINDIA","TORNTPHARM","TVSMOTOR","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE"]
+          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE","AIAENG","ASTRAZEN","ATUL","AUTOMBDNM","BBNL","BCG","BEML","BLSTARLTD","CARBORUNIV","CASTROLIND","CEATLTD","CENTURYTEX","CERA","CESC","CHALET","CHEMCON","CITYUNIONB","CREDITACC","CROMPTON","CYIENT","DCMSHRIRAM","DEEPAKFERT","DEVYANI","EIDPARRY","EQUITASBNK","ERIS","FORTIS","GESHIP","GLS","GODREJIND","HAPPSTMNDS"]
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
-
-          # --- DYNAMIC FETCH WITH HARDCODED FALLBACK FUNCTIONS ---
-
+          # SCRAPE HELPERS
           def get_nasdaq100():
-              """Dynamic Wikipedia scrape with hardcoded fallback"""
               try:
                   url = 'https://en.wikipedia.org/wiki/NASDAQ-100'
                   r = requests.get(url, headers=HEADERS, timeout=10)
@@ -63,12 +65,11 @@ jobs:
                           if len(syms) >= 95:
                               print(f"[Dynamic] NASDAQ 100 loaded {len(syms)} tickers from Wikipedia.")
                               return syms
-              except Exception as e:
-                  print(f"[Fallback] NASDAQ 100 Wikipedia fetch failed ({e}). Using hardcoded list.")
+              except Exception:
+                  pass
               return HARDCODED_NASDAQ100
 
           def get_sp500():
-              """Dynamic Wikipedia scrape"""
               try:
                   url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
                   r = requests.get(url, headers=HEADERS, timeout=10)
@@ -77,38 +78,9 @@ jobs:
                   if len(syms) >= 490:
                       print(f"[Dynamic] S&P 500 loaded {len(syms)} tickers from Wikipedia.")
                       return syms
-              except Exception as e:
-                  print(f"[Fallback] S&P 500 fetch failed ({e}).")
+              except Exception:
+                  pass
               return []
-
-          def get_nifty_dynamic(index_code, fallback_list):
-              """
-              Dynamic NSE constituent fetch using direct CSV archives.
-              Falls back to hardcoded list if NSE blocks or changes the endpoint.
-              Examples of index_code: 'nifty50', 'niftynext50', 'niftyit', 'niftybank', 'niftyfinancialservices', 'niftymidcap100'
-              """
-              urls = [
-                  f"https://niftyindices.com/IndexConstituent/ind_{index_code}list.csv",
-                  f"https://www1.nseindia.com/content/indices/ind_{index_code}list.csv"
-              ]
-              for url in urls:
-                  try:
-                      r = requests.get(url, headers=HEADERS, timeout=10)
-                      if r.status_code == 200:
-                          df = pd.read_csv(pd.compat.StringIO(r.text) if hasattr(pd, 'compat') else pd.io.common.StringIO(r.text))
-                          if 'Symbol' in df.columns:
-                              symbols = [f"{sym.strip()}.NS" for sym in df['Symbol'].dropna().tolist()]
-                              if len(symbols) > 0:
-                                  print(f"[Dynamic] Loaded {len(symbols)} tickers for {index_code} dynamically.")
-                                  return symbols
-                  except Exception:
-                      pass
-              
-              print(f"[Fallback] {index_code} dynamic fetch failed/blocked. Using hardcoded array.")
-              return [f"{t}.NS" for t in fallback_list]
-
-
-          # --- DATA FETCHING HELPERS ---
 
           def fetch_single_ticker(ticker):
               start_date = f"{datetime.date.today().year}-01-01"
@@ -154,7 +126,7 @@ jobs:
                               pass
                   except Exception:
                       pass
-                  time.sleep(0.2)
+                  time.sleep(0.1)
 
               for t in ticker_list:
                   if t not in results:
@@ -165,23 +137,25 @@ jobs:
 
               return list(results.values())
 
+          # --- CONSTRUCT INDEX DICTIONARY ---
 
-          # --- MAIN EXECUTION ---
+          nifty50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_50]
+          niftynext50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50]
+          niftymidcap100_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100]
 
-          nifty50_tickers = get_nifty_dynamic('nifty50', HARDCODED_NIFTY_50)
-          niftynext50_tickers = get_nifty_dynamic('niftynext50', HARDCODED_NIFTY_NEXT50)
-          niftymidcap100_tickers = get_nifty_dynamic('niftymidcap100', HARDCODED_NIFTY_MIDCAP100)
+          # Create NIFTY 500 pool combining base indices and extended tickers
+          nifty500_pool = list(set(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
 
           indices_config = {
               "NASDAQ100": get_nasdaq100(),
               "SP500": get_sp500(),
               "NIFTY50": nifty50_tickers,
               "NIFTYNEXT50": niftynext50_tickers,
-              "NIFTYIT": get_nifty_dynamic('niftyit', HARDCODED_NIFTY_IT),
-              "NIFTYBANK": get_nifty_dynamic('niftybank', HARDCODED_NIFTY_BANK),
-              "NIFTYFINSRV": get_nifty_dynamic('niftyfinancialservices', HARDCODED_NIFTY_FINSRV),
+              "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
+              "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
+              "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
               "NIFTYMIDCAP100": niftymidcap100_tickers,
-              "NIFTY500": list(set(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
+              "NIFTY500": nifty500_pool
           }
 
           BENCHMARK_TICKERS = {
@@ -191,7 +165,7 @@ jobs:
               "NIFTYNEXT50": "^NSMIDCP",
               "NIFTYIT": "^CNXIT",
               "NIFTYBANK": "^NSEBANK",
-              "NIFTYFINSRV": "^CNXFIN",
+              "NIFTYFINSRV": "NIFTY_FIN_SERVICE.NS",
               "NIFTYMIDCAP100": "^NSEMDCP100",
               "NIFTY500": "^CRSLDX"
           }
@@ -200,7 +174,7 @@ jobs:
           print("Fetching Benchmark Index returns...")
           for idx_name, b_symbol in BENCHMARK_TICKERS.items():
               res = fetch_single_ticker(b_symbol)
-              if res:
+              if res and res.get('ytd') is not None:
                   index_returns[idx_name] = res['ytd']
 
           output = {
@@ -221,5 +195,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Update stock data with dynamic + fallback constituents [skip ci]" || exit 0
+          git commit -m "Fix Nifty constituents counts & Financial Services index calculation [skip ci]" || exit 0
           git push

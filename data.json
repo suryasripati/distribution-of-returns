@@ -8,7 +8,7 @@
     "NIFTYIT": -18.05,
     "NIFTYBANK": -3.71,
     "NIFTYFINSRV": -6.53,
-    "NIFTYMIDCAP100": 5.72,
+    "NIFTYMIDCAP100": 4.21,
     "NIFTY500": -2.37
   },
   "NASDAQ100": [
@@ -210,7 +210,7 @@
     },
     {
       "ticker": "ABNB",
-      "ytd": 42.42
+      "ytd": 0.0
     },
     {
       "ticker": "NTES",
@@ -2623,22 +2623,6 @@
       "ytd": 46.99
     },
     {
-      "ticker": "ACC",
-      "ytd": -24.5
-    },
-    {
-      "ticker": "ADANIENSOL",
-      "ytd": 51.13
-    },
-    {
-      "ticker": "ADANIGREEN",
-      "ytd": 27.79
-    },
-    {
-      "ticker": "ADANIPOVR",
-      "ytd": 0.0
-    },
-    {
       "ticker": "AMBUJACEM",
       "ytd": -26.01
     },
@@ -3273,6 +3257,126 @@
     {
       "ticker": "ZYDUSLIFE",
       "ytd": 30.08
+    },
+    {
+      "ticker": "AIAENG",
+      "ytd": 5.02
+    },
+    {
+      "ticker": "ASTRAZEN",
+      "ytd": -18.34
+    },
+    {
+      "ticker": "ATUL",
+      "ytd": 7.27
+    },
+    {
+      "ticker": "AUTOMBDNM",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "BBNL",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "BCG",
+      "ytd": -14.78
+    },
+    {
+      "ticker": "BEML",
+      "ytd": 7.74
+    },
+    {
+      "ticker": "BLSTARLTD",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "CARBORUNIV",
+      "ytd": 28.87
+    },
+    {
+      "ticker": "CASTROLIND",
+      "ytd": 3.23
+    },
+    {
+      "ticker": "CEATLTD",
+      "ytd": -6.05
+    },
+    {
+      "ticker": "CENTURYTEX",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "CERA",
+      "ytd": 9.32
+    },
+    {
+      "ticker": "CESC",
+      "ytd": -8.08
+    },
+    {
+      "ticker": "CHALET",
+      "ytd": 0.17
+    },
+    {
+      "ticker": "CHEMCON",
+      "ytd": -2.25
+    },
+    {
+      "ticker": "CITYUNIONB",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "CREDITACC",
+      "ytd": 10.53
+    },
+    {
+      "ticker": "CYIENT",
+      "ytd": -0.15
+    },
+    {
+      "ticker": "DCMSHRIRAM",
+      "ytd": -18.4
+    },
+    {
+      "ticker": "DEEPAKFERT",
+      "ytd": 16.29
+    },
+    {
+      "ticker": "DEVYANI",
+      "ytd": -0.9
+    },
+    {
+      "ticker": "EIDPARRY",
+      "ytd": -21.88
+    },
+    {
+      "ticker": "EQUITASBNK",
+      "ytd": 15.85
+    },
+    {
+      "ticker": "ERIS",
+      "ytd": -11.96
+    },
+    {
+      "ticker": "FORTIS",
+      "ytd": 1.78
+    },
+    {
+      "ticker": "GESHIP",
+      "ytd": 23.22
+    },
+    {
+      "ticker": "GLS",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "GODREJIND",
+      "ytd": 11.69
+    },
+    {
+      "ticker": "HAPPSTMNDS",
+      "ytd": -9.65
     }
   ],
   "NIFTY500": [
@@ -3483,22 +3587,6 @@
     {
       "ticker": "ABB",
       "ytd": 46.99
-    },
-    {
-      "ticker": "ACC",
-      "ytd": -24.5
-    },
-    {
-      "ticker": "ADANIENSOL",
-      "ytd": 51.13
-    },
-    {
-      "ticker": "ADANIGREEN",
-      "ytd": 27.79
-    },
-    {
-      "ticker": "ADANIPOVR",
-      "ytd": 0.0
     },
     {
       "ticker": "AMBUJACEM",
@@ -3947,6 +4035,126 @@
     {
       "ticker": "YESBANK",
       "ytd": 2.84
+    },
+    {
+      "ticker": "AIAENG",
+      "ytd": 5.02
+    },
+    {
+      "ticker": "ASTRAZEN",
+      "ytd": -18.34
+    },
+    {
+      "ticker": "ATUL",
+      "ytd": 7.27
+    },
+    {
+      "ticker": "AUTOMBDNM",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "BBNL",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "BCG",
+      "ytd": -14.78
+    },
+    {
+      "ticker": "BEML",
+      "ytd": 7.74
+    },
+    {
+      "ticker": "BLSTARLTD",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "CARBORUNIV",
+      "ytd": 28.87
+    },
+    {
+      "ticker": "CASTROLIND",
+      "ytd": 3.23
+    },
+    {
+      "ticker": "CEATLTD",
+      "ytd": -6.05
+    },
+    {
+      "ticker": "CENTURYTEX",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "CERA",
+      "ytd": 9.32
+    },
+    {
+      "ticker": "CESC",
+      "ytd": -8.08
+    },
+    {
+      "ticker": "CHALET",
+      "ytd": 0.17
+    },
+    {
+      "ticker": "CHEMCON",
+      "ytd": -2.25
+    },
+    {
+      "ticker": "CITYUNIONB",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "CREDITACC",
+      "ytd": 10.53
+    },
+    {
+      "ticker": "CYIENT",
+      "ytd": -0.15
+    },
+    {
+      "ticker": "DCMSHRIRAM",
+      "ytd": -18.4
+    },
+    {
+      "ticker": "DEEPAKFERT",
+      "ytd": 16.29
+    },
+    {
+      "ticker": "DEVYANI",
+      "ytd": -0.9
+    },
+    {
+      "ticker": "EIDPARRY",
+      "ytd": -21.88
+    },
+    {
+      "ticker": "EQUITASBNK",
+      "ytd": 15.85
+    },
+    {
+      "ticker": "ERIS",
+      "ytd": -11.96
+    },
+    {
+      "ticker": "FORTIS",
+      "ytd": 1.78
+    },
+    {
+      "ticker": "GESHIP",
+      "ytd": 23.22
+    },
+    {
+      "ticker": "GLS",
+      "ytd": 0.0
+    },
+    {
+      "ticker": "GODREJIND",
+      "ytd": 11.69
+    },
+    {
+      "ticker": "HAPPSTMNDS",
+      "ytd": -9.65
     }
   ]
 }

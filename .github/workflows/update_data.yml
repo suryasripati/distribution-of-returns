@@ -1,0 +1,77 @@
+name: Update Stock Data Daily
+
+on:
+  schedule:
+    - cron: '0 23 * * 1-5' # Runs Mon-Fri at 11:00 PM UTC
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install yfinance pandas
+
+      - name: Fetch Prices & Update JSON
+        run: |
+          python - << 'EOF'
+          import datetime
+          import json
+          import yfinance as yf
+
+          indices = {
+              "NASDAQ100": ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "GOOGL", "META", "PEP", "COST", "AMD"],
+              "NIFTY50": ["RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS", "ICICIBANK.NS", "BHARTIARTL.NS", "ITC.NS", "SBIN.NS", "LTIM.NS", "LT.NS"],
+              "NIFTYBANK": ["HDFCBANK.NS", "ICICIBANK.NS", "SBIN.NS", "KOTAKBANK.NS", "AXISBANK.NS", "BANKBARODA.NS", "PNB.NS", "CANBK.NS", "FEDERALBNK.NS", "IDFCFIRSTB.NS", "AUBANK.NS", "INDUSINDBK.NS"],
+              "NIFTYNEXT50": ["BEL.NS", "TRENT.NS", "HAL.NS", "VBL.NS", "ZOMATO.NS", "DLF.NS", "IOC.NS", "REC.NS", "PFC.NS", "GAIL.NS"],
+              "NIFTYIT": ["TCS.NS", "INFY.NS", "HCLTECH.NS", "WIPRO.NS", "TECHM.NS", "LTIM.NS", "PERSISTENT.NS", "COFORGE.NS", "MPHASIS.NS", "LTTS.NS"],
+              "NIFTY500": ["RELIANCE.NS", "TCS.NS", "INFY.NS", "TRENT.NS", "COFORGE.NS", "SUZLON.NS", "BHEL.NS", "BOSCHLTD.NS", "TATAELXSI.NS", "MRF.NS"],
+              "NIFTYMIDCAP": ["PERSISTENT.NS", "POLYCAB.NS", "DIXON.NS", "MAXHEALTH.NS", "FEDERALBNK.NS", "APOLLOTYRE.NS", "COFORGE.NS", "IDFCFIRSTB.NS", "ASHOKLEY.NS", "BALKRISIND.NS"],
+              "NIFTYFINSRV": ["HDFCBANK.NS", "ICICIBANK.NS", "SBIN.NS", "BAJFINANCE.NS", "BAJAJFINSV.NS", "PFC.NS", "REC.NS", "KOTAKBANK.NS", "AXISBANK.NS", "HDFCLIFE.NS"],
+              "SP500": ["AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "BRK-B", "JPM", "LLY", "V"]
+          }
+
+          def get_ytd_returns(ticker_list):
+              data = []
+              start_date = f"{datetime.date.today().year}-01-01"
+              for t in ticker_list:
+                  try:
+                      stock = yf.Ticker(t)
+                      hist = stock.history(start=start_date)
+                      if len(hist) > 0:
+                          start_price = hist['Close'].iloc[0]
+                          current_price = hist['Close'].iloc[-1]
+                          ytd = ((current_price - start_price) / start_price) * 100
+                          clean_ticker = t.replace('.NS', '')
+                          data.append({"ticker": clean_ticker, "ytd": round(ytd, 2)})
+                  except Exception as e:
+                      print(f"Error fetching {t}: {e}")
+              return data
+
+          output = {
+              "lastUpdated": datetime.date.today().strftime("%b %d, %Y")
+          }
+
+          for index_name, tickers in indices.items():
+              print(f"Fetching data for {index_name}...")
+              output[index_name] = get_ytd_returns(tickers)
+
+          with open('data.json', 'w') as f:
+              json.dump(output, f, indent=2)
+          EOF
+
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+          git add data.json
+          git commit -m "Auto-update multi-index stock YTD returns [skip ci]" || exit 0
+          git push

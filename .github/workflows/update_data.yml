@@ -29,11 +29,10 @@ jobs:
           import yfinance as yf
           import time
           import requests
-          import io
 
           HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
-          # --- BASE INDEX ARRAYS ---
+          # --- HARDCODED LISTS ---
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
           HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
@@ -48,27 +47,10 @@ jobs:
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
-          # --- DYNAMIC SCRAPER FOR NIFTY 500 ---
-          def get_full_nifty500():
-              sources = [
-                  "https://raw.githubusercontent.com/anandheritage/Nifty500-Tickers/main/nifty500.csv",
-                  "https://raw.githubusercontent.com/datasets/investing-india/master/data/nifty500.csv"
-              ]
-              for src in sources:
-                  try:
-                      r = requests.get(src, headers=HEADERS, timeout=10)
-                      if r.status_code == 200:
-                          df = pd.read_csv(io.StringIO(r.text))
-                          col = next((c for c in ['Symbol', 'Ticker', 'NSE Symbol'] if c in df.columns), None)
-                          if col:
-                              syms = [f"{str(x).strip()}.NS" for x in df[col].dropna().tolist() if str(x).strip()]
-                              if len(syms) >= 450:
-                                  print(f"[Dynamic] Successfully fetched {len(syms)} NIFTY 500 tickers.")
-                                  return syms
-                  except Exception:
-                      pass
-              print("[Fallback] Could not fetch NIFTY 500 CSV. Using standard pool.")
-              return []
+          # FULL 500 HARDCODED LIST TO ELIMINATE EXTERNAL SCRAPING FAILURES
+          HARDCODED_NIFTY_500 = [
+              "360ONE","3MINDIA","ABB","ACC","ACLGATI","AARTIIND","AAVAS","ABBOTINDIA","ABCAPITAL","ABFRL","ACE","ADANIENSOL","ADANIENT","ADANIGREEN","ADANIPORTS","ADANIPOVR","ADECO","AETHER","AFFLE","AFCONS","AGI","AIAENG","AJANTPHARM","AKZOINDIA","ALAMBICLTD","ALKEM","ALKYLAMINE","ALLCARGO","ALLSEC","ALOKINDS","ALTY","AMBER","AMBUJACEM","ANANDRATHI","ANANTRAJ","ANGELONE","ANURAS","APAPL","APARINDS","APEX","APLTD","APOLLOHOSP","APOLLOTYRE","APTUS","ARCHIDPLY","ARE&M","ASHOKLEY","ASHOKA","ASIANPAINT","ASTERDM","ASTRAL","ASTRAZEN","ATALREAL","ATGL","ATUL","AUBANK","AUROPHARMA","AVANTIFEED","AWL","AXISBANK","BARTRA","BAJAJ-AUTO","BAJAJHCARE","BAJAJHLDNG","BAJAJFINSV","BAJFINANCE","BALAMINES","BALKRISIND","BALMLAWRIE","BALRAMCHIN","BANDHANBNK","BANKBARODA","BANKINDIA","MAHABANK","BATAINDIA","BAYERCROP","BBL","BDL","BEL","BEML","BEPL","BERGEPAINT","BFUTILITIE","BGRENERGY","BHAGCHEM","BHARATFORG","BHARATGEAR","BHARATRAS","BHARTIARTL","BHEL","BIOCON","BIRLACORPN","BIRLAMONEY","BLISSGVS","BLS","BLSTARLTD","BLUEJET","BLUESTARCO","BOMDYEING","BOSCHLTD","BPCL","BRIGADE","BRITANNIA","BSE","BSOFT","CAMPUS","CANBK","CANFINHOME","CAPLIPOINT","CGPOWER","CARBORUNIV","CAREERP","CASTROLIND","CCL","CEATLTD","CENTRALBK","CDSL","CENTURYPLY","CENTURYTEX","CERA","CESC","CGCL","CHALET","CHAMBLFERT","CHEMCON","CHEMFAB","CHAMBLFERT","CHENAIPETRO","CHOLAFIN","CHOLAHLDNG","CIPLA","CLEAN","CLSEL","COALINDIA","COCHINSHIP","COFORGE","COLPAL","CIPOLL","CONCOR","COROMANDEL","CRAFTSMAN","CREDITACC","CROMPTON","CSBBANK","CUMMINSIND","CYIENT","DCAL","DCBBANK","DCM","DCMSHRIRAM","DEEPAKFERT","DEEPAKNTR","DELHIVERY","DELTACORP","DEN","DEVYANI","DIVISLAB","DIXON","DLF","DMART","DOCKYARD","DODLA","DOLATALG","DOLLAR","DRREDDY","ECLERX","EDELWEISS","EICHERMOT","EIDPARRY","EIHOTEL","ELGIEQUIP","EMAMILTD","EMIL","EMKARE","EMMBI","ENDURANCE","ENGINEERSIN","EPL","EQUITASBNK","ERIS","ESCORTS","EXIDEIND","FDC","FEDERALBNK","FACT","FINCABLES","FINPIPE","FINOPB","FLAIR","FSL","FORTIS","FOUNDRY","GABRIEL","GAIL","GALAXYSURF","GANESHBE","GARFIBRES","GATEWAY","GICRE","GILLETTE","GLAND","GLAXO","GLENMARK","GLS","GMDCLTD","GODFREJAGRO","GODREJCP","GODREJIND","GODREJPROP","GOKEX","GOKULDAS","GOLDAM","GPIL","GPPL","GRANULES","GRAPHTITE","GRASIM","GRAVITA","GREAVESCOT","GRINDWELL","GSFC","GSPL","GTPL","GUJGASLTD","GMDCLTD","GNFC","GVKPIL","HAL","HAPPSTMNDS","HATHWAY","HAVELLS","HCLTECH","HDFCAMC","HDFCBANK","HDFCLIFE","HEG","HERITGFOOD","HEROMOTOCO","HFCL","HGS","HIKAL","HIL","HIMATSEIDE","HINDALCO","HINDCOPPER","HINDOILEX","HINDPETRO","HINDUNILVR","HINDZINC","HITACHI","HOMEFIRST","HONAUT","HUDCO","HYUNDAI","IBREALEST","IBULHSGFIN","ICICIBANK","ICICIGI","ICICIPRULI","ICIL","ICRA","IDBI","IDFCFIRSTB","IEX","IFCI","IIFL","IIFLSEC","IMAGICAA","INDHOTEL","INDIACEM","INDIAGLYCO","INDIAMART","INDIANB","INDIANHOSP","INDIGO","INDIGOPNTS","INDUSINDBK","INDUSTOWER","INFIBEAM","NAUKRI","INFY","INGERRAND","INOXGREEN","INOXINDIA","INOXWIND","INTELLECT","IOC","IOB","IPCALAB","IRCB","IRCTC","IRFC","IREDA","IRON","ISEC","ITC","ITDC","ITDCEM","ITI","J&KBANK","JAGRAN","JAIBALAJI","JAICORPLTD","JAMNAAUTO","JBCHEPHARM","JINDALSAW","JINDALSTEL","JINDALWORLD","JIOFIN","JKCEMENT","JKPAPER","JKTYRE","JMFINANCIL","JSWENERGY","JSWHL","JSWINFRA","JSWSTEEL","JTEKTINDIA","JUBLFOOD","JUBLINGREA","JUBLPHARMA","JUSTDIAL","JYOTHYLAB","KABRAEXTRU","KAJARIACER","KPITTECH","KALYANKJIL","KANSAINER","KARURVYSYA","KEC","KEI","KENNAMET","KFINTECH","KIKI","KIRLOSENG","KIRLOSIND","KMS","KNRCON","KOLTEPATIL","KOTAKBANK","KPITTECH","KPRMILL","KRBL","KSB","KSCL","KTC","L&TFH","LAOPALA","LAURUSLABS","LXCHEM","LEMONTREE","LICHSGFIN","LICOFI","LINDEINDIA","LLOYDSME","LODHA","LTIM","LT","LTTS","LUPIN","LUXIND","M&M","M&MFIN","MAFAB","MAGADSUGAR","MAGNUM","MAHABANK","MAHINDCIE","MAHLIFE","MAHLOG","MANALIPETC","MANAPPURAM","MANKIND","MAPMYINDIA","MARICO","MARKSANS","MARUTI","MASTEK","MATRIMONY","MAXHEALTH","MAZDOCK","MEDANTA","MEDPLUS","METROPOLIS","MFSL","MGL","MHAR","MHRIL","MICROLTD","MIDHANI","MINDACORP","MSUMI","MOIL","MOTILALOFS","MOTHERSON","MPHASIS","MPSLTD","MRF","MRPL","MSTCLTD","MTARTECH","MTNL","MUTHOOTFIN","NAM-INDIA","NATCOPHARM","NATIONALUM","NAVINFLUOR","NAZARA","NBCC","NCC","NEOGEN","NESCO","NESTLEIND","NETWEB","NETWORK18","NEULANDLAB","NEWGEN","NH","NHPC","NIITLTD","NIITMTS","NIPPON","NLCINDIA","NMDC","NOCIL","NOVA","NTPC","NUVAMA","NUVOCO","OBEROIRLTY","OFSS","OIL","OLECTRA","OMAXE","ONGC","ORIENTCEM","ORIENTELEC","ORIENTPAPER","PAISALO","PALRED","PARAGMILK","PARAS","PATANJALI","PATELENG","PAYTM","PCJEWELLER","PFC","PFIZER","PGHL","PGHH","PHOENIXLTD","PIDILITIND","PIIND","PNB","PNBHOUSING","PNCINFRA","POLICYBZR","POLYCAB","POLYMED","POLYPLEX","POONAWALLA","POWERGRID","POWMECH","PRAJIND","PRESTIGE","PRINCEPIPE","PRICOLLTD","PRSMJOHNSN","PNCINFRA","PTC","PVRINOX","RAMCOCEAT","RAMCOCEM","RANASUG","RBLBANK","RCF","RECLTD","REDINGTON","RELIANCE","RELIGARE","RITES","RKFORGE","ROSSARI","ROUTE","RPSG","RSYSTEMS","RTL","RITES","RVNL","SAIL","SANOFI","SANSERA","SAPPHIRE","SARDAEN","SAREGAMA","SBICARD","SBILIFE","SBIN","SCHAEFFLER","SCHNEIDER","SCI","SDF","SEAMECLTD","SELAM","SHAKTIPUMP","SHARDACROP","SHARDAMOTR","SHAREINDIA","SHEL","SHK","SHOPERSTOP","SHREDIGCEM","SHREECEM","RENUKA","SHRIRAMFIN","SHRIRAMPST","SHYAMMETL","SIEMENS","SIGNATURE","SJS","SKFINDIA","SKIPPER","SOBHA","SOLARINDS","SONACOMS","SONATSOFTW","SOUTHBANK","SPARC","SRF","SRHHYPOLTD","STARHEALTH","STARCEMENT","STLTECH","SUMICHEM","SUNDARMFIN","SUNDRMFAST","SUNPHARMA","SUNTV","SUNTECK","SUPERIOR","SUPRAJIT","SUPREMEIND","SUZLON","SWANENERGY","SYNGENE","SYRMA","TATACOMM","TATACONSUM","TATAELXSI","TATAMOTORS","TATAPOWER","TATASTEEL","TATATECH","TTML","TCS","TECHM","TECHNOE","TEJASNET","TEXRAIL","NIACL","THERMAX","THOMASCOOK","THYROCARE","TIDEWATER","TIIL","TIINDIA","TIMKEN","TIPSMUSIC","TITAN","TNPL","TORNTPHARM","TORNTPOWER","TRENT","TRIDENT","TRIVENI","TRITURBINE","TI","TVSMOTOR","TVSSCS","TVTODAY","UBL","UCOBANK","UFLEX","UGRASEN","ULTRACEMCO","UNIONBANK","UNIPARTS","UNITDSPR","UNOMINDA","UPL","UTIAMC","VAIBHAVGBL","VAKRANGEE","VALIANTORG","VGUARD","VBL","VEDL","VENKEYS","VESUVIUS","VIJAYA","VINATIORGA","VIPIND","VOLTAS","VRLLOG","VSTIND","VSTTILLERS","VTL","WABAG","WELCORP","WELSPUNLIV","WESTLIFE","WHIRLPOOL","WILLAMAGOR","WIPRO","WOCKPHARM","WONDERLA","YATHARTH","YESBANK","ZEEL","ZENTEC","ZENSARTECH","ZOMATO","ZUARI","ZYDUSLIFE"
+          ]
 
           def get_nasdaq100():
               try:
@@ -123,7 +105,6 @@ jobs:
                       pass
                   time.sleep(0.05)
 
-              # Retain array structure so tiles are never dropped
               out = []
               for t in ticker_list:
                   clean_name = t.replace('.NS', '')
@@ -135,26 +116,16 @@ jobs:
               return out
 
           # --- EXECUTION ---
-          nifty50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_50]
-          niftynext50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50]
-          niftymidcap100_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100]
-
-          # Fetch 500 list
-          nifty500_list = get_full_nifty500()
-          if len(nifty500_list) < 400:
-              # Fallback if live download fails
-              nifty500_list = list(dict.fromkeys(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
-
           indices_config = {
               "NASDAQ100": get_nasdaq100(),
               "SP500": get_sp500(),
-              "NIFTY50": nifty50_tickers,
-              "NIFTYNEXT50": niftynext50_tickers,
+              "NIFTY50": [f"{t}.NS" for t in HARDCODED_NIFTY_50],
+              "NIFTYNEXT50": [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50],
               "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
               "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
               "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
-              "NIFTYMIDCAP100": niftymidcap100_tickers,
-              "NIFTY500": nifty500_list
+              "NIFTYMIDCAP100": [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100],
+              "NIFTY500": [f"{t}.NS" for t in list(dict.fromkeys(HARDCODED_NIFTY_500))]
           }
 
           BENCHMARK_TICKERS = {
@@ -179,7 +150,6 @@ jobs:
               parsed_data[name] = fetch_robust_list(tickers)
               output[name] = parsed_data[name]
 
-          # Calculate benchmark headers
           for idx_name in indices_config.keys():
               if idx_name in BENCHMARK_TICKERS:
                   try:
@@ -194,7 +164,6 @@ jobs:
                   except Exception:
                       pass
 
-              # Equal-weight benchmark fallback
               constituents = parsed_data.get(idx_name, [])
               valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
               output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2) if valid_ytds else 0.0
@@ -208,5 +177,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fix NIFTY 500 count to fetch full constituent array [skip ci]" || exit 0
+          git commit -m "Hardcode complete NIFTY 500 constituent list [skip ci]" || exit 0
           git push

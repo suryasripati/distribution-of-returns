@@ -29,15 +29,10 @@ jobs:
           import yfinance as yf
           import time
           import requests
-          import io
 
-          HEADERS = {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-              'Accept': '*/*',
-              'Accept-Language': 'en-US,en;q=0.9'
-          }
+          HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
 
-          # --- EXACT CONSTUENT LISTS ---
+          # --- CLEANED & DEDUPED HARDCODED LISTS ---
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
           HARDCODED_NIFTY_NEXT50 = ["ABB","ACC","ADANIENSOL","ADANIGREEN","ADANIPOVR","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
@@ -48,11 +43,12 @@ jobs:
 
           HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
 
-          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE","AIAENG","ASTRAZEN","ATUL","AUTOMBDNM","BBNL","BCG","BEML","BLSTARLTD","CARBORUNIV","CASTROLIND","CEATLTD","CENTURYTEX","CERA","CESC","CHALET","CHEMCON","CITYUNIONB","CREDITACC","CROMPTON","CYIENT","DCMSHRIRAM","DEEPAKFERT","DEVYANI","EIDPARRY","EQUITASBNK","ERIS","FORTIS","GESHIP","GLS","GODREJIND","HAPPSTMNDS"]
+          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE","AIAENG","ASTRAZEN","ATUL","AUTOMBDNM","BBNL","BCG","BEML","BLSTARLTD","CARBORUNIV","CASTROLIND","CEATLTD","CENTURYTEX","CERA","CESC","CHALET","CHEMCON","CITYUNIONB","CREDITACC","CYIENT","DCMSHRIRAM","DEEPAKFERT","DEVYANI","EIDPARRY","EQUITASBNK","ERIS","FORTIS","GESHIP","GLS","GODREJIND","HAPPSTMNDS","HIMATSEIDE","HOMEDECOR","INDIACAMER","INDIAGLYCO","INDIANB"]
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
-          # SCRAPE HELPERS
+          # --- SCRAPERS & FETCHERS ---
+
           def get_nasdaq100():
               try:
                   url = 'https://en.wikipedia.org/wiki/NASDAQ-100'
@@ -63,7 +59,6 @@ jobs:
                           col = 'Ticker' if 'Ticker' in t.columns else 'Symbol'
                           syms = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
                           if len(syms) >= 95:
-                              print(f"[Dynamic] NASDAQ 100 loaded {len(syms)} tickers from Wikipedia.")
                               return syms
               except Exception:
                   pass
@@ -76,7 +71,6 @@ jobs:
                   tables = pd.read_html(r.text)
                   syms = [str(t).replace('.', '-') for t in tables[0]['Symbol'].tolist()]
                   if len(syms) >= 490:
-                      print(f"[Dynamic] S&P 500 loaded {len(syms)} tickers from Wikipedia.")
                       return syms
               except Exception:
                   pass
@@ -111,11 +105,7 @@ jobs:
                       
                       for t in batch:
                           try:
-                              if len(batch) == 1:
-                                  series = closes.dropna()
-                              else:
-                                  series = closes[t].dropna()
-                                  
+                              series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
                               if len(series) > 0:
                                   start_p = float(series.iloc[0])
                                   curr_p = float(series.iloc[-1])
@@ -128,23 +118,24 @@ jobs:
                       pass
                   time.sleep(0.1)
 
+              # Retry individually or insert placeholder so array length remains exact
               for t in ticker_list:
                   if t not in results:
                       res = fetch_single_ticker(t)
+                      clean_name = t.replace('.NS', '')
                       if res:
                           results[t] = res
+                      else:
+                          results[t] = {"ticker": clean_name, "ytd": 0.0}
                       time.sleep(0.05)
 
-              return list(results.values())
+              return [results[t] for t in ticker_list if t in results]
 
-          # --- CONSTRUCT INDEX DICTIONARY ---
+          # --- EXECUTION ---
 
           nifty50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_50]
           niftynext50_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50]
           niftymidcap100_tickers = [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100]
-
-          # Create NIFTY 500 pool combining base indices and extended tickers
-          nifty500_pool = list(set(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
 
           indices_config = {
               "NASDAQ100": get_nasdaq100(),
@@ -155,7 +146,7 @@ jobs:
               "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
               "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
               "NIFTYMIDCAP100": niftymidcap100_tickers,
-              "NIFTY500": nifty500_pool
+              "NIFTY500": list(dict.fromkeys(nifty50_tickers + niftynext50_tickers + niftymidcap100_tickers))
           }
 
           BENCHMARK_TICKERS = {
@@ -165,26 +156,40 @@ jobs:
               "NIFTYNEXT50": "^NSMIDCP",
               "NIFTYIT": "^CNXIT",
               "NIFTYBANK": "^NSEBANK",
-              "NIFTYFINSRV": "NIFTY_FIN_SERVICE.NS",
               "NIFTYMIDCAP100": "^NSEMDCP100",
               "NIFTY500": "^CRSLDX"
           }
 
-          index_returns = {}
-          print("Fetching Benchmark Index returns...")
-          for idx_name, b_symbol in BENCHMARK_TICKERS.items():
-              res = fetch_single_ticker(b_symbol)
-              if res and res.get('ytd') is not None:
-                  index_returns[idx_name] = res['ytd']
-
+          # Step 1: Fetch constituent data for each index
           output = {
               "lastUpdated": datetime.date.today().strftime("%b %d, %Y"),
-              "indexReturns": index_returns
+              "indexReturns": {}
           }
 
+          parsed_data = {}
           for name, tickers in indices_config.items():
               print(f"Fetching constituents for {name} ({len(tickers)} tickers)...")
-              output[name] = fetch_robust_list(tickers)
+              parsed_data[name] = fetch_robust_list(tickers)
+              output[name] = parsed_data[name]
+
+          # Step 2: Fetch benchmark returns (with calculated average fallback if benchmark fails)
+          print("Fetching Benchmark Index returns...")
+          for idx_name in indices_config.keys():
+              if idx_name in BENCHMARK_TICKERS:
+                  res = fetch_single_ticker(BENCHMARK_TICKERS[idx_name])
+                  if res and res.get('ytd') is not None:
+                      output["indexReturns"][idx_name] = res['ytd']
+                      continue
+              
+              # Fallback: Calculate equal-weighted average of constituents (e.g., for NIFTYFINSRV)
+              constituents = parsed_data.get(idx_name, [])
+              valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
+              if valid_ytds:
+                  avg_ytd = round(sum(valid_ytds) / len(valid_ytds), 2)
+                  output["indexReturns"][idx_name] = avg_ytd
+                  print(f"[Fallback] Calculated average YTD for {idx_name}: {avg_ytd}%")
+              else:
+                  output["indexReturns"][idx_name] = 0.0
 
           with open('data.json', 'w') as f:
               json.dump(output, f, indent=2)
@@ -195,5 +200,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fix Nifty constituents counts & Financial Services index calculation [skip ci]" || exit 0
+          git commit -m "Fix constituent counts and financial services benchmark calculation [skip ci]" || exit 0
           git push

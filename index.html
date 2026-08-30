@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock YTD Returns Distribution</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 { text-align: center; margin-bottom: 5px; }
+    p.subtitle { text-align: center; color: #666; margin-top: 0; }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 8px;
+      align-items: end;
+      min-height: 500px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      overflow-x: auto;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      justify-content: flex-start;
+    }
+
+    .bin-header {
+      font-size: 11px;
+      font-weight: bold;
+      text-align: center;
+      padding: 6px 2px;
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    .tile {
+      width: 100%;
+      padding: 6px 0;
+      text-align: center;
+      font-size: 11px;
+      font-weight: bold;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Distribution of Returns</h1>
+  <p class="subtitle" id="updated-date">Loading data...</p>
+
+  <div class="controls">
+    <select id="index-select" onchange="renderChart()">
+      <option value="NASDAQ100">NASDAQ 100</option>
+      <option value="NIFTY50">NIFTY 50</option>
+      <option value="NIFTYBANK">NIFTY Bank</option>
+      <option value="NIFTYNEXT50">NIFTY Next 50</option>
+      <option value="NIFTYIT">NIFTY IT</option>
+      <option value="NIFTY500">NIFTY 500 (Top Constituents)</option>
+      <option value="NIFTYMIDCAP">NIFTY Midcap</option>
+      <option value="NIFTYFINSRV">NIFTY Fin Service 25/50</option>
+      <option value="SP500">S&P 500</option>
+    </select>
+  </div>
+
+  <div class="grid-container" id="chart-grid"></div>
+
+  <script>
+    const BINS = [
+      { label: "More than -40%", min: -Infinity, max: -40, bg: "#680000", text: "#fff" },
+      { label: "-40% to -30%", min: -40, max: -30, bg: "#A03030", text: "#fff" },
+      { label: "-30% to -20%", min: -30, max: -20, bg: "#C05050", text: "#fff" },
+      { label: "-20% to -10%", min: -20, max: -10, bg: "#E08080", text: "#000" },
+      { label: "-10% to 0%", min: -10, max: 0, bg: "#FAD0D0", text: "#000" },
+      { label: "0% to 10%", min: 0, max: 10, bg: "#D5EAD5", text: "#000" },
+      { label: "10% to 20%", min: 10, max: 20, bg: "#A4DAA4", text: "#000" },
+      { label: "20% to 30%", min: 20, max: 30, bg: "#73C873", text: "#000" },
+      { label: "30% to 40%", min: 30, max: 40, bg: "#42B742", text: "#000" },
+      { label: "More than 40%", min: 40, max: Infinity, bg: "#1B651B", text: "#fff" }
+    ];
+
+    let stockData = {};
+
+    async function init() {
+      try {
+        const response = await fetch('data.json');
+        stockData = await response.json();
+        document.getElementById('updated-date').innerText = `YTD (as of ${stockData.lastUpdated || 'Today'})`;
+        renderChart();
+      } catch (err) {
+        document.getElementById('updated-date').innerText = "Failed to load data.json";
+      }
+    }
+
+    function renderChart() {
+      const selectedIndex = document.getElementById('index-select').value;
+      const stocks = stockData[selectedIndex] || [];
+      const grid = document.getElementById('chart-grid');
+      grid.innerHTML = '';
+
+      BINS.forEach(bin => {
+        const col = document.createElement('div');
+        col.className = 'column';
+
+        const matchingStocks = stocks.filter(s => s.ytd >= bin.min && s.ytd < bin.max);
+        matchingStocks.sort((a, b) => a.ytd - b.ytd);
+
+        matchingStocks.forEach(stock => {
+          const tile = document.createElement('div');
+          tile.className = 'tile';
+          tile.innerText = stock.ticker;
+          tile.style.backgroundColor = bin.bg;
+          tile.style.color = bin.text;
+          tile.title = `${stock.ticker}: ${stock.ytd.toFixed(2)}%`;
+          col.appendChild(tile);
+        });
+
+        const header = document.createElement('div');
+        header.className = 'bin-header';
+        header.innerText = bin.label;
+        header.style.backgroundColor = bin.bg;
+        header.style.color = bin.text;
+        col.insertBefore(header, col.firstChild);
+
+        grid.appendChild(col);
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

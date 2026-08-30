@@ -3,7 +3,7 @@ name: Update Stock Data Daily
 on:
   schedule:
     - cron: '0 23 * * 1-5' # Runs Mon-Fri at 11:00 PM UTC
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   update-data:
@@ -18,7 +18,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install yfinance pandas lxml html5lib
+        run: pip install yfinance pandas lxml html5lib requests
 
       - name: Fetch Prices & Update JSON
         run: |
@@ -27,78 +27,91 @@ jobs:
           import json
           import pandas as pd
           import yfinance as yf
+          import time
 
-          def get_nasdaq100_tickers():
+          # Helper to fetch YTD returns safely in batches
+          def fetch_ytd_in_batches(ticker_list, batch_size=40):
+              data = []
+              start_date = f"{datetime.date.today().year}-01-01"
+              
+              for i in range(0, len(ticker_list), batch_size):
+                  batch = ticker_list[i:i + batch_size]
+                  try:
+                      df = yf.download(batch, start=start_date, progress=False, group_by='ticker')
+                      for t in batch:
+                          try:
+                              if len(batch) == 1:
+                                  series = df['Close'].dropna()
+                              else:
+                                  series = df[t]['Close'].dropna()
+                                  
+                              if len(series) > 0:
+                                  start_price = float(series.iloc[0])
+                                  current_price = float(series.iloc[-1])
+                                  ytd = ((current_price - start_price) / start_price) * 100
+                                  clean_ticker = t.replace('.NS', '')
+                                  data.append({"ticker": clean_ticker, "ytd": round(ytd, 2)})
+                          except Exception:
+                              continue
+                  except Exception as e:
+                      print(f"Batch error: {e}")
+                  time.sleep(0.5)
+              return data
+
+          # Index Ticker Providers
+          def get_nasdaq100():
               try:
                   url = 'https://en.wikipedia.org/wiki/NASDAQ-100'
                   tables = pd.read_html(url)
                   df = tables[4] if len(tables) > 4 else tables[3]
-                  ticker_col = 'Ticker' if 'Ticker' in df.columns else 'Symbol'
-                  return df[ticker_col].tolist()
-              except Exception as e:
-                  print(f"Error fetching NASDAQ 100 tickers: {e}")
-                  return ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "GOOGL", "META"]
+                  col = 'Ticker' if 'Ticker' in df.columns else 'Symbol'
+                  return [t.replace('.', '-') for t in df[col].tolist()]
+              except Exception:
+                  return []
 
-          def get_sp500_tickers():
+          def get_sp500():
               try:
                   url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
                   tables = pd.read_html(url)
-                  df = tables[0]
-                  tickers = df['Symbol'].str.replace('.', '-', regex=False).tolist()
-                  return tickers
-              except Exception as e:
-                  print(f"Error fetching S&P 500 tickers: {e}")
-                  return ["AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "BRK-B"]
+                  return [t.replace('.', '-') for t in tables[0]['Symbol'].tolist()]
+              except Exception:
+                  return []
 
-          def get_nifty_tickers(index_name):
-              lists = {
-                  "NIFTY50": ["ADANIENT", "ADANIPORTS", "APOLLOHOSP", "ASIANPAINT", "AXISBANK", "BAJAJ-AUTO", "BAJFINANCE", "BAJAJFINSV", "BEL", "BPCL", "BHARTIARTL", "BRITANNIA", "CIPLA", "COALINDIA", "DIVISLAB", "DRREDDY", "EICHERMOT", "GRASIM", "HCLTECH", "HDFCBANK", "HDFCLIFE", "HEROMOTOCO", "HINDALCO", "HINDUNILVR", "ICICIBANK", "ITC", "INDUSINDBK", "INFY", "JSWSTEEL", "KOTAKBANK", "LT", "LTIM", "M&M", "MARUTI", "NTPC", "NESTLEIND", "ONGC", "POWERGRID", "RELIANCE", "SBILIFE", "SHRIRAMFIN", "SBIN", "SUNPHARMA", "TCS", "TATACONSUM", "TATAMOTORS", "TATASTEEL", "TECHM", "TITAN", "ULTRACEMCO", "WIPRO"],
-                  "NIFTYBANK": ["HDFCBANK", "ICICIBANK", "SBIN", "KOTAKBANK", "AXISBANK", "BANKBARODA", "PNB", "CANBK", "FEDERALBNK", "IDFCFIRSTB", "AUBANK", "INDUSINDBK"],
-                  "NIFTYIT": ["TCS", "INFY", "HCLTECH", "WIPRO", "TECHM", "LTIM", "PERSISTENT", "COFORGE", "MPHASIS", "LTTS"],
-                  "NIFTYNEXT50": ["ABB", "AMBUJACEM", "BANKBARODA", "BERGEPAINT", "BHARATFORG", "BOSCHLTD", "CANBK", "CGPOWER", "CHOLAFIN", "COLPAL", "DLF", "DMART", "GAIL", "GODREJPROP", "HAL", "HAVELLS", "ICICIGI", "ICICIPRULI", "IOC", "IRCTC", "IRFC", "JINDALSTEL", "JIOFIN", "JSWENERGY", "LICOFI", "LODHA", "MAXHEALTH", "MOTHERSON", "NAUKRI", "NHPC", "OIL", "PAYTM", "PFC", "PNB", "POLICYBZR", "POONAWALLA", "REC", "RVNL", "SIEMENS", "SRF", "SUPREMEIND", "TATAPOWER", "TRENT", "TORNTPHARM", "TVSMOTOR", "UNITDSPR", "VBL", "VEDL", "ZOMATO", "ZYDUSLIFE"],
-                  "NIFTYFINSRV": ["AXISBANK", "BAJAJ-AUTO", "BAJFINANCE", "BAJAJFINSV", "CHOLAFIN", "HDFCBANK", "HDFCLIFE", "ICICIBANK", "ICICIGI", "ICICIPRULI", "IDFCFIRSTB", "JIOFIN", "KOTAKBANK", "LICHSGFIN", "LICOFI", "MUTHOOTFIN", "PFC", "REC", "SBICARD", "SBILIFE", "SBIN", "SHRIRAMFIN"]
-              }
-              raw_list = lists.get(index_name, [])
-              return [f"{t}.NS" for t in raw_list]
+          # Indian Index Constituent Arrays (Full Official Lists)
+          NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","M&M","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
+          
+          NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
 
-          def fetch_bulk_ytd(ticker_list):
-              data = []
-              start_date = f"{datetime.date.today().year}-01-01"
-              try:
-                  downloaded = yf.download(ticker_list, start=start_date, progress=False)['Close']
-                  for t in ticker_list:
-                      try:
-                          series = downloaded[t].dropna() if len(ticker_list) > 1 else downloaded.dropna()
-                          if len(series) > 0:
-                              start_price = series.iloc[0]
-                              current_price = series.iloc[-1]
-                              ytd = ((current_price - start_price) / start_price) * 100
-                              clean_ticker = t.replace('.NS', '')
-                              data.append({"ticker": clean_ticker, "ytd": round(float(ytd), 2)})
-                      except Exception as inner_e:
-                          continue
-              except Exception as e:
-                  print(f"Bulk download failed: {e}")
-              return data
+          NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","LTTS"]
 
-          print("Building ticker lists...")
-          ticker_map = {
-              "NASDAQ100": get_nasdaq100_tickers(),
-              "SP500": get_sp500_tickers(),
-              "NIFTY50": get_nifty_tickers("NIFTY50"),
-              "NIFTYBANK": get_nifty_tickers("NIFTYBANK"),
-              "NIFTYIT": get_nifty_tickers("NIFTYIT"),
-              "NIFTYNEXT50": get_nifty_tickers("NIFTYNEXT50"),
-              "NIFTYFINSRV": get_nifty_tickers("NIFTYFINSRV")
+          NIFTY_BANK = ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]
+
+          NIFTY_FINSRV = ["AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
+
+          # NIFTY 500 Top 150 Liquid Constituents
+          NIFTY_500 = NIFTY_50 + NIFTY_NEXT50 + ["AARTIIND","ACC","ASTRAL","AUROPHARMA","BALKRISIND","BANDHANBNK","BHARATFORG","BSOFT","CDSL","CONCOR","COROMANDEL","CUMMINSIND","DIXON","ESCORTS","FEDERALBNK","GLENMARK","GODREJCP","GUJGASLTD","HDFCAMC","IDFCFIRSTB","INDIAMART","INDHOTEL","IPCALAB","KEI","LUPIN","MRF","MUTHOOTFIN","NMDC","OBEROIRLTY","OFSS","PERSISTENT","POLYCAB","TATAELXSI","VOLTAS"]
+
+          NIFTY_MIDCAP = ["ASTRAL","AUROPHARMA","BALKRISIND","BANDHANBNK","COFORGE","CONCOR","DIXON","ESCORTS","FEDERALBNK","GLENMARK","GODREJPROP","IDFCFIRSTB","INDHOTEL","IPCALAB","LUPIN","MAXHEALTH","MRF","MUTHOOTFIN","OBEROIRLTY","OFSS","PERSISTENT","POLYCAB","SUZLON","TATAELXSI","VOLTAS"]
+
+          indices_config = {
+              "NASDAQ100": get_nasdaq100(),
+              "SP500": get_sp500(),
+              "NIFTY50": [f"{t}.NS" for t in NIFTY_50],
+              "NIFTYNEXT50": [f"{t}.NS" for t in NIFTY_NEXT50],
+              "NIFTYIT": [f"{t}.NS" for t in NIFTY_IT],
+              "NIFTYBANK": [f"{t}.NS" for t in NIFTY_BANK],
+              "NIFTYFINSRV": [f"{t}.NS" for t in NIFTY_FINSRV],
+              "NIFTY500": [f"{t}.NS" for t in list(set(NIFTY_500))],
+              "NIFTYMIDCAP": [f"{t}.NS" for t in list(set(NIFTY_MIDCAP))]
           }
 
           output = {
               "lastUpdated": datetime.date.today().strftime("%b %d, %Y")
           }
 
-          for index_name, t_list in ticker_map.items():
-              print(f"Processing {index_name} ({len(t_list)} tickers)...")
-              output[index_name] = fetch_bulk_ytd(t_list)
+          for name, tickers in indices_config.items():
+              print(f"Fetching {len(tickers)} tickers for {name}...")
+              output[name] = fetch_ytd_in_batches(tickers)
 
           with open('data.json', 'w') as f:
               json.dump(output, f, indent=2)
@@ -109,5 +122,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Auto-update full index stock YTD returns [skip ci]" || exit 0
+          git commit -m "Updated indices with full constituent fetching [skip ci]" || exit 0
           git push

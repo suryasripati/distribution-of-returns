@@ -1,17 +1,617 @@
 {
   "lastUpdated": "Aug 30, 2026",
   "NASDAQ100": [
-    { "ticker": "AAPL", "ytd": 12.4 },
-    { "ticker": "MSFT", "ytd": 4.5 },
-    { "ticker": "NVDA", "ytd": 45.2 },
-    { "ticker": "TSLA", "ytd": -22.1 },
-    { "ticker": "AMZN", "ytd": 18.3 }
+    {
+      "ticker": "AAPL",
+      "ytd": 18.29
+    },
+    {
+      "ticker": "MSFT",
+      "ytd": 9.27
+    },
+    {
+      "ticker": "NVDA",
+      "ytd": 15.34
+    },
+    {
+      "ticker": "TSLA",
+      "ytd": -20.39
+    },
+    {
+      "ticker": "GOOGL",
+      "ytd": 10.12
+    },
+    {
+      "ticker": "META",
+      "ytd": -10.97
+    }
+  ],
+  "SP500": [
+    {
+      "ticker": "AAPL",
+      "ytd": 18.29
+    },
+    {
+      "ticker": "MSFT",
+      "ytd": 9.27
+    },
+    {
+      "ticker": "NVDA",
+      "ytd": 15.34
+    },
+    {
+      "ticker": "AMZN",
+      "ytd": 17.63
+    },
+    {
+      "ticker": "META",
+      "ytd": -10.97
+    },
+    {
+      "ticker": "GOOGL",
+      "ytd": 10.12
+    },
+    {
+      "ticker": "BRK-B",
+      "ytd": 1.64
+    }
   ],
   "NIFTY50": [
-    { "ticker": "RELIANCE", "ytd": 8.2 },
-    { "ticker": "TCS", "ytd": -4.1 },
-    { "ticker": "INFY", "ytd": 2.1 },
-    { "ticker": "HDFCBANK", "ytd": 11.5 },
-    { "ticker": "ICICIBANK", "ytd": 19.8 }
+    {
+      "ticker": "ADANIENT",
+      "ytd": 40.26
+    },
+    {
+      "ticker": "ADANIPORTS",
+      "ytd": 15.77
+    },
+    {
+      "ticker": "APOLLOHOSP",
+      "ytd": 24.05
+    },
+    {
+      "ticker": "ASIANPAINT",
+      "ytd": -4.38
+    },
+    {
+      "ticker": "AXISBANK",
+      "ytd": -0.66
+    },
+    {
+      "ticker": "BAJAJ-AUTO",
+      "ytd": 26.36
+    },
+    {
+      "ticker": "BAJFINANCE",
+      "ytd": 11.66
+    },
+    {
+      "ticker": "BAJAJFINSV",
+      "ytd": -1.63
+    },
+    {
+      "ticker": "BEL",
+      "ytd": 4.15
+    },
+    {
+      "ticker": "BPCL",
+      "ytd": -13.96
+    },
+    {
+      "ticker": "BHARTIARTL",
+      "ytd": -9.68
+    },
+    {
+      "ticker": "BRITANNIA",
+      "ytd": -10.19
+    },
+    {
+      "ticker": "CIPLA",
+      "ytd": -4.27
+    },
+    {
+      "ticker": "COALINDIA",
+      "ytd": 2.82
+    },
+    {
+      "ticker": "DIVISLAB",
+      "ytd": 46.23
+    },
+    {
+      "ticker": "DRREDDY",
+      "ytd": -5.42
+    },
+    {
+      "ticker": "EICHERMOT",
+      "ytd": 10.82
+    },
+    {
+      "ticker": "GRASIM",
+      "ytd": 14.6
+    },
+    {
+      "ticker": "HCLTECH",
+      "ytd": -16.5
+    },
+    {
+      "ticker": "HDFCBANK",
+      "ytd": -26.12
+    },
+    {
+      "ticker": "HDFCLIFE",
+      "ytd": -26.68
+    },
+    {
+      "ticker": "HEROMOTOCO",
+      "ytd": -0.83
+    },
+    {
+      "ticker": "HINDALCO",
+      "ytd": 16.52
+    },
+    {
+      "ticker": "HINDUNILVR",
+      "ytd": -12.58
+    },
+    {
+      "ticker": "ICICIBANK",
+      "ytd": 7.23
+    },
+    {
+      "ticker": "ITC",
+      "ytd": -23.33
+    },
+    {
+      "ticker": "INDUSINDBK",
+      "ytd": 11.84
+    },
+    {
+      "ticker": "INFY",
+      "ytd": -28.29
+    },
+    {
+      "ticker": "JSWSTEEL",
+      "ytd": 14.83
+    },
+    {
+      "ticker": "KOTAKBANK",
+      "ytd": -4.31
+    },
+    {
+      "ticker": "LT",
+      "ytd": -1.33
+    },
+    {
+      "ticker": "M&M",
+      "ytd": -10.42
+    },
+    {
+      "ticker": "MARUTI",
+      "ytd": -19.14
+    },
+    {
+      "ticker": "NTPC",
+      "ytd": -1.12
+    },
+    {
+      "ticker": "NESTLEIND",
+      "ytd": 13.47
+    },
+    {
+      "ticker": "ONGC",
+      "ytd": -0.09
+    },
+    {
+      "ticker": "POWERGRID",
+      "ytd": 0.84
+    },
+    {
+      "ticker": "RELIANCE",
+      "ytd": -17.94
+    },
+    {
+      "ticker": "SBILIFE",
+      "ytd": -12.97
+    },
+    {
+      "ticker": "SHRIRAMFIN",
+      "ytd": 7.19
+    },
+    {
+      "ticker": "SBIN",
+      "ytd": 8.29
+    },
+    {
+      "ticker": "SUNPHARMA",
+      "ytd": 12.18
+    },
+    {
+      "ticker": "TCS",
+      "ytd": -24.7
+    },
+    {
+      "ticker": "TATACONSUM",
+      "ytd": -10.82
+    },
+    {
+      "ticker": "TATASTEEL",
+      "ytd": 4.65
+    },
+    {
+      "ticker": "TECHM",
+      "ytd": 4.72
+    },
+    {
+      "ticker": "TITAN",
+      "ytd": 28.08
+    },
+    {
+      "ticker": "ULTRACEMCO",
+      "ytd": -0.63
+    },
+    {
+      "ticker": "WIPRO",
+      "ytd": -29.78
+    }
+  ],
+  "NIFTYBANK": [
+    {
+      "ticker": "HDFCBANK",
+      "ytd": -26.12
+    },
+    {
+      "ticker": "ICICIBANK",
+      "ytd": 7.23
+    },
+    {
+      "ticker": "SBIN",
+      "ytd": 8.29
+    },
+    {
+      "ticker": "KOTAKBANK",
+      "ytd": -4.31
+    },
+    {
+      "ticker": "AXISBANK",
+      "ytd": -0.66
+    },
+    {
+      "ticker": "BANKBARODA",
+      "ytd": -16.97
+    },
+    {
+      "ticker": "PNB",
+      "ytd": -4.18
+    },
+    {
+      "ticker": "CANBK",
+      "ytd": -14.18
+    },
+    {
+      "ticker": "FEDERALBNK",
+      "ytd": 29.94
+    },
+    {
+      "ticker": "IDFCFIRSTB",
+      "ytd": -2.62
+    },
+    {
+      "ticker": "AUBANK",
+      "ytd": 9.27
+    },
+    {
+      "ticker": "INDUSINDBK",
+      "ytd": 11.84
+    }
+  ],
+  "NIFTYIT": [
+    {
+      "ticker": "TCS",
+      "ytd": -24.7
+    },
+    {
+      "ticker": "INFY",
+      "ytd": -28.29
+    },
+    {
+      "ticker": "HCLTECH",
+      "ytd": -16.5
+    },
+    {
+      "ticker": "WIPRO",
+      "ytd": -29.78
+    },
+    {
+      "ticker": "TECHM",
+      "ytd": 4.72
+    },
+    {
+      "ticker": "PERSISTENT",
+      "ytd": -5.82
+    },
+    {
+      "ticker": "COFORGE",
+      "ytd": 22.52
+    },
+    {
+      "ticker": "MPHASIS",
+      "ytd": -10.88
+    },
+    {
+      "ticker": "LTTS",
+      "ytd": -17.6
+    }
+  ],
+  "NIFTYNEXT50": [
+    {
+      "ticker": "ABB",
+      "ytd": 46.99
+    },
+    {
+      "ticker": "AMBUJACEM",
+      "ytd": -26.01
+    },
+    {
+      "ticker": "BANKBARODA",
+      "ytd": -16.97
+    },
+    {
+      "ticker": "BERGEPAINT",
+      "ytd": -5.41
+    },
+    {
+      "ticker": "BHARATFORG",
+      "ytd": 40.57
+    },
+    {
+      "ticker": "BOSCHLTD",
+      "ytd": 35.86
+    },
+    {
+      "ticker": "CANBK",
+      "ytd": -14.18
+    },
+    {
+      "ticker": "CGPOWER",
+      "ytd": 39.67
+    },
+    {
+      "ticker": "CHOLAFIN",
+      "ytd": 8.18
+    },
+    {
+      "ticker": "COLPAL",
+      "ytd": -11.72
+    },
+    {
+      "ticker": "DLF",
+      "ytd": -0.44
+    },
+    {
+      "ticker": "DMART",
+      "ytd": 3.08
+    },
+    {
+      "ticker": "GAIL",
+      "ytd": 2.71
+    },
+    {
+      "ticker": "GODREJPROP",
+      "ytd": 3.18
+    },
+    {
+      "ticker": "HAL",
+      "ytd": 11.68
+    },
+    {
+      "ticker": "HAVELLS",
+      "ytd": -13.03
+    },
+    {
+      "ticker": "ICICIGI",
+      "ytd": -19.88
+    },
+    {
+      "ticker": "ICICIPRULI",
+      "ytd": -24.1
+    },
+    {
+      "ticker": "IOC",
+      "ytd": -15.56
+    },
+    {
+      "ticker": "IRCTC",
+      "ytd": -28.77
+    },
+    {
+      "ticker": "IRFC",
+      "ytd": -32.59
+    },
+    {
+      "ticker": "JINDALSTEL",
+      "ytd": 10.57
+    },
+    {
+      "ticker": "JIOFIN",
+      "ytd": -19.19
+    },
+    {
+      "ticker": "JSWENERGY",
+      "ytd": 7.0
+    },
+    {
+      "ticker": "LODHA",
+      "ytd": 19.17
+    },
+    {
+      "ticker": "MAXHEALTH",
+      "ytd": -3.19
+    },
+    {
+      "ticker": "MOTHERSON",
+      "ytd": 35.82
+    },
+    {
+      "ticker": "NAUKRI",
+      "ytd": 1.51
+    },
+    {
+      "ticker": "NHPC",
+      "ytd": -4.0
+    },
+    {
+      "ticker": "OIL",
+      "ytd": 11.57
+    },
+    {
+      "ticker": "PAYTM",
+      "ytd": 27.81
+    },
+    {
+      "ticker": "PFC",
+      "ytd": 0.66
+    },
+    {
+      "ticker": "PNB",
+      "ytd": -4.18
+    },
+    {
+      "ticker": "POLICYBZR",
+      "ytd": 0.32
+    },
+    {
+      "ticker": "POONAWALLA",
+      "ytd": -0.18
+    },
+    {
+      "ticker": "RVNL",
+      "ytd": -40.37
+    },
+    {
+      "ticker": "SIEMENS",
+      "ytd": 32.92
+    },
+    {
+      "ticker": "SRF",
+      "ytd": -14.47
+    },
+    {
+      "ticker": "SUPREMEIND",
+      "ytd": 5.11
+    },
+    {
+      "ticker": "TATAPOWER",
+      "ytd": -7.29
+    },
+    {
+      "ticker": "TRENT",
+      "ytd": 1.3
+    },
+    {
+      "ticker": "TORNTPHARM",
+      "ytd": 31.05
+    },
+    {
+      "ticker": "TVSMOTOR",
+      "ytd": 13.83
+    },
+    {
+      "ticker": "UNITDSPR",
+      "ytd": 8.85
+    },
+    {
+      "ticker": "VBL",
+      "ytd": -15.53
+    },
+    {
+      "ticker": "VEDL",
+      "ytd": -51.42
+    },
+    {
+      "ticker": "ZYDUSLIFE",
+      "ytd": 30.08
+    }
+  ],
+  "NIFTYFINSRV": [
+    {
+      "ticker": "AXISBANK",
+      "ytd": -0.66
+    },
+    {
+      "ticker": "BAJAJ-AUTO",
+      "ytd": 26.36
+    },
+    {
+      "ticker": "BAJFINANCE",
+      "ytd": 11.66
+    },
+    {
+      "ticker": "BAJAJFINSV",
+      "ytd": -1.63
+    },
+    {
+      "ticker": "CHOLAFIN",
+      "ytd": 8.18
+    },
+    {
+      "ticker": "HDFCBANK",
+      "ytd": -26.12
+    },
+    {
+      "ticker": "HDFCLIFE",
+      "ytd": -26.68
+    },
+    {
+      "ticker": "ICICIBANK",
+      "ytd": 7.23
+    },
+    {
+      "ticker": "ICICIGI",
+      "ytd": -19.88
+    },
+    {
+      "ticker": "ICICIPRULI",
+      "ytd": -24.1
+    },
+    {
+      "ticker": "IDFCFIRSTB",
+      "ytd": -2.62
+    },
+    {
+      "ticker": "JIOFIN",
+      "ytd": -19.19
+    },
+    {
+      "ticker": "KOTAKBANK",
+      "ytd": -4.31
+    },
+    {
+      "ticker": "LICHSGFIN",
+      "ytd": 1.85
+    },
+    {
+      "ticker": "MUTHOOTFIN",
+      "ytd": -18.96
+    },
+    {
+      "ticker": "PFC",
+      "ytd": 0.66
+    },
+    {
+      "ticker": "SBICARD",
+      "ytd": -25.15
+    },
+    {
+      "ticker": "SBILIFE",
+      "ytd": -12.97
+    },
+    {
+      "ticker": "SBIN",
+      "ytd": 8.29
+    },
+    {
+      "ticker": "SHRIRAMFIN",
+      "ytd": 7.19
+    }
   ]
 }

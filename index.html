@@ -254,6 +254,9 @@
         return item.ytd >= b.min && item.ytd < b.max;
       });
 
+      // Sort companies inside each bucket by YTD return (highest performance first)
+      filtered.sort((a, b) => b.ytd - a.ytd);
+
       const col = document.createElement('div');
       col.className = 'bucket-column';
 

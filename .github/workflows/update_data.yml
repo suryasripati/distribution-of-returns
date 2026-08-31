@@ -63,6 +63,18 @@ jobs:
               return HARDCODED_NASDAQ100
 
           def get_sp400():
+              """Fetch constituents directly from iShares S&P MidCap ETF (IJH)."""
+              try:
+                  url = "https://www.ishares.com/us/products/239724/ishares-core-sp-midcap-etf/1467271812596.ajax?fileType=csv&fileName=IJH_holdings&dataType=fund"
+                  df = pd.read_csv(url, skiprows=9)
+                  if 'Ticker' in df.columns:
+                      tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
+                      tickers = [t.replace('.', '-') for t in tickers if len(t) <= 5 and t not in ['USD', '-']]
+                      if len(tickers) >= 300:
+                          return tickers
+              except Exception as e:
+                  print(f"iShares IJH fetch failed: {e}")
+
               try:
                   url = 'https://en.wikipedia.org/wiki/List_of_S%26P_400_companies'
                   r = requests.get(url, headers=HEADERS, timeout=10)
@@ -70,30 +82,40 @@ jobs:
                   for t in tables:
                       if 'Symbol' in t.columns or 'Ticker' in t.columns:
                           col = 'Symbol' if 'Symbol' in t.columns else 'Ticker'
-                          syms = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
-                          if len(syms) >= 300:
-                              return syms
+                          return [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
               except Exception:
                   pass
-              # Fallback: GitHub raw CSV listing of S&P 400 constituents
-              try:
-                  url = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
-                  df = pd.read_csv(url)
-                  return [str(x).replace('.', '-') for x in df['Symbol'].dropna().tolist()]
-              except Exception:
-                  return HARDCODED_NASDAQ100
+
+              return []
 
           def get_russell2000():
-              # Fetch broad US small-cap listings via public GitHub datasets
+              """Fetch full ~2000 constituents directly from iShares Russell 2000 ETF (IWM)."""
+              try:
+                  url = "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund"
+                  df = pd.read_csv(url, skiprows=9)
+                  if 'Ticker' in df.columns:
+                      tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
+                      # Filter valid tickers (ignore cash/currency rows)
+                      tickers = [t.replace('.', '-') for t in tickers if t.isalnum() or '-' in t]
+                      tickers = [t for t in tickers if len(t) <= 5 and t not in ['USD', 'XTSLA', '-']]
+                      if len(tickers) > 1000:
+                          return tickers
+              except Exception as e:
+                  print(f"iShares IWM fetch failed: {e}")
+
+              # Secondary backup if iShares changes CSV layout
               try:
                   url = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
                   df = pd.read_csv(url)
-                  syms = [str(x).replace('.', '-') for x in df['Symbol'].dropna().tolist() if len(str(x)) <= 5]
-                  if len(syms) > 500:
-                      return syms[:1500]  # Cap at 1500 to keep GitHub action runtime under limits
-              except Exception:
-                  pass
-              return ["ALAB","INOD","IONQ","NBIS","TTMI","ACHR","ACLX","ADTN","ADPT","AGTI","AUPH","ASTS","EVGO","FLNC","FSLY","JOBY","LUNR","LCID","OKLO","PLUG","QS","QUBT","RGTI","RKLB","RUN","SOUN","SPCE","STEM"]
+                  cols = [c for c in df.columns if 'symbol' in c.lower() or 'ticker' in c.lower()]
+                  if cols:
+                      syms = [str(x).replace('.', '-') for x in df[cols[0]].dropna().tolist() if len(str(x)) <= 5]
+                      if len(syms) > 500:
+                          return syms[:1800]
+              except Exception as e:
+                  print(f"Secondary Russell fallback failed: {e}")
+
+              return []
 
           def get_sp500_data():
               sp500_list = []
@@ -132,7 +154,7 @@ jobs:
                   print(f"Error scraping S&P 500 GICS sectors: {e}")
               return sp500_list, gics_map
 
-          def fetch_robust_list(ticker_list, batch_size=35):
+          def fetch_robust_list(ticker_list, batch_size=50):
               results = {}
               start_date = f"{datetime.date.today().year}-01-01"
               
@@ -156,7 +178,7 @@ jobs:
                               pass
                   except Exception:
                       pass
-                  time.sleep(0.1)
+                  time.sleep(0.05)
 
               out = []
               for t in ticker_list:
@@ -240,5 +262,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Optimize broad index fetching & rate limits [skip ci]" || exit 0
+          git commit -m "Fix Russell 2000 holding list source [skip ci]" || exit 0
           git push

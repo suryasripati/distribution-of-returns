@@ -103,7 +103,7 @@
     .search-container {
       position: relative;
       flex-grow: 1;
-      max-width: 450px;
+      max-width: 480px;
     }
 
     .search-input {
@@ -128,7 +128,7 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      max-height: 200px;
+      max-height: 220px;
       overflow-y: auto;
       z-index: 100;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -140,17 +140,25 @@
       padding: 8px 14px;
       font-size: 13px;
       cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .suggestion-item:hover {
       background: var(--bg-color);
     }
 
+    .suggestion-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
     .portfolio-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     .tag {
@@ -158,17 +166,27 @@
       color: #3730a3;
       font-size: 12px;
       font-weight: 600;
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
+    }
+
+    .tag.off-screen {
+      background: #fef3c7;
+      color: #92400e;
     }
 
     .tag-remove {
       cursor: pointer;
       font-weight: 700;
       color: #4338ca;
+      margin-left: 2px;
+    }
+    .tag.off-screen .tag-remove {
+      color: #b45309;
     }
 
     .grid-container {
@@ -337,6 +355,26 @@
     renderDashboard();
   }
 
+  function switchIndexToTicker(ticker) {
+    for (const countryKey in INDICES) {
+      for (const idxObj of INDICES[countryKey]) {
+        const list = globalData[idxObj.id] || [];
+        if (list.some(item => item.ticker === ticker)) {
+          currentCountry = countryKey;
+          currentIndex = idxObj.id;
+          
+          document.querySelectorAll('#country-buttons .btn').forEach(btn => {
+            btn.classList.toggle('active', btn.innerText === countryKey);
+          });
+          
+          renderIndexButtons();
+          renderDashboard();
+          return;
+        }
+      }
+    }
+  }
+
   function renderIndexButtons() {
     const container = document.getElementById('index-buttons');
     container.innerHTML = '';
@@ -363,7 +401,8 @@
     const grid = document.getElementById('buckets-grid');
     grid.innerHTML = '';
 
-    const hasSelection = selectedTickers.size > 0;
+    const activeIndexTickers = new Set(constituents.map(c => c.ticker));
+    const hasSelectionInCurrentIndex = Array.from(selectedTickers).some(t => activeIndexTickers.has(t));
 
     BUCKETS.forEach(b => {
       const filtered = constituents.filter(item => {
@@ -388,7 +427,7 @@
         const isMatched = selectedTickers.has(item.ticker);
 
         let tileClass = 'tile';
-        if (hasSelection) {
+        if (hasSelectionInCurrentIndex) {
           tileClass += isMatched ? ' highlighted' : ' dimmed';
         }
 
@@ -416,19 +455,37 @@
         return;
       }
 
-      const constituents = globalData[currentIndex] || [];
-      const matches = constituents.filter(c => c.ticker.includes(query) && !selectedTickers.has(c.ticker));
+      // Collect tickers from ALL indices across globalData
+      const allMatches = [];
+      const seenTickers = new Set();
 
-      if (matches.length === 0) {
+      for (const countryKey in INDICES) {
+        INDICES[countryKey].forEach(idxObj => {
+          const list = globalData[idxObj.id] || [];
+          list.forEach(item => {
+            if (item.ticker.includes(query) && !selectedTickers.has(item.ticker) && !seenTickers.has(item.ticker)) {
+              seenTickers.add(item.ticker);
+              allMatches.push({
+                ticker: item.ticker,
+                ytd: item.ytd,
+                indexName: idxObj.name,
+                indexId: idxObj.id
+              });
+            }
+          });
+        });
+      }
+
+      if (allMatches.length === 0) {
         dropdown.style.display = 'none';
         return;
       }
 
       dropdown.innerHTML = '';
-      matches.slice(0, 8).forEach(item => {
+      allMatches.slice(0, 10).forEach(item => {
         const div = document.createElement('div');
         div.className = 'suggestion-item';
-        div.innerText = `${item.ticker} (${item.ytd}%)`;
+        div.innerHTML = `<span><strong>${item.ticker}</strong> (${item.ytd}%)</span> <span class="suggestion-meta">${item.indexName}</span>`;
         div.onclick = () => {
           addTicker(item.ticker);
           searchInput.value = '';
@@ -459,10 +516,18 @@
   function renderTags() {
     const container = document.getElementById('portfolio-tags-container');
     container.innerHTML = '';
+    
+    const activeConstituents = (globalData[currentIndex] || []).map(c => c.ticker);
+
     selectedTickers.forEach(ticker => {
+      const isInCurrent = activeConstituents.includes(ticker);
       const tag = document.createElement('div');
-      tag.className = 'tag';
-      tag.innerHTML = `${ticker} <span class="tag-remove" onclick="removeTicker('${ticker}')">&times;</span>`;
+      tag.className = `tag ${isInCurrent ? '' : 'off-screen'}`;
+      tag.title = isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view its index.';
+      
+      tag.innerHTML = `${ticker} ${isInCurrent ? '' : '↗'} <span class="tag-remove" onclick="event.stopPropagation(); removeTicker('${ticker}')">&times;</span>`;
+      tag.onclick = () => switchIndexToTicker(ticker);
+      
       container.appendChild(tag);
     });
   }
@@ -473,33 +538,37 @@
       return;
     }
 
-    const indexReturn = globalData.indexReturns ? globalData.indexReturns[currentIndex] : 0;
-    const indexName = INDICES[currentCountry].find(i => i.id === currentIndex)?.name || currentIndex;
-
     let csvContent = "data:text/csv;charset=utf-8,Stock Ticker,Stock YTD Return (%),Benchmark Index,Benchmark YTD Return (%),Outperformance (%)\n";
 
     selectedTickers.forEach(ticker => {
       let foundItem = null;
-      for (const idxKey in globalData) {
-        if (Array.isArray(globalData[idxKey])) {
-          const match = globalData[idxKey].find(i => i.ticker === ticker);
+      let benchmarkName = '';
+      let benchmarkReturn = 0;
+
+      for (const countryKey in INDICES) {
+        for (const idxObj of INDICES[countryKey]) {
+          const list = globalData[idxObj.id] || [];
+          const match = list.find(i => i.ticker === ticker);
           if (match) {
             foundItem = match;
+            benchmarkName = idxObj.name;
+            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] || 0) : 0;
             break;
           }
         }
+        if (foundItem) break;
       }
 
       if (foundItem) {
-        const alpha = (foundItem.ytd - indexReturn).toFixed(2);
-        csvContent += `${ticker},${foundItem.ytd},${indexName},${indexReturn},${alpha}\n`;
+        const alpha = (foundItem.ytd - benchmarkReturn).toFixed(2);
+        csvContent += `${ticker},${foundItem.ytd},${benchmarkName},${benchmarkReturn},${alpha}\n`;
       }
     });
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `portfolio_returns_${currentIndex}.csv`);
+    link.setAttribute("download", `portfolio_returns_export.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

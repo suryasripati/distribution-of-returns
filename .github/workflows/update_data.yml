@@ -28,13 +28,8 @@ jobs:
           import pandas as pd
           import yfinance as yf
           import time
-          import requests
-          import io
           from concurrent.futures import ThreadPoolExecutor, as_completed
-
-          HEADERS = {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-          }
+          from constituents import NSE_500_TICKERS, RUSSELL_2000_TICKERS
 
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
           HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
@@ -44,85 +39,11 @@ jobs:
           HARDCODED_NIFTY_MIDCAP100 = ["3MINDIA","ABB","ACC","AAVAS","AARTIIND","ABBOTINDIA","ABCAPITAL","ABFRL","ADANIENSOL","ADANIPOWER","ALKYLAMINE","ALKEM","AMBUJACEM","APLLTD","APOLLOTYRE","ASHOKLEY","ASTRAL","ATUL","AUBANK","AUROPHARMA","BALKRISIND","BANDHANBNK","BANKBARODA","BANKINDIA","BATAINDIA","BEL","BHARATFORG","BHEL","BIOCON","BIRLACORPN","BSOFT","CANBK","CANFINHOME","CGPOWER","CHAMBLFERT","CHOLAFIN","COFORGE","COLPAL","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","DLF","ESCORTS","EXIDEIND","FEDERALBNK","FORTIS","GAIL","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HAPPIESTM","HAVELLS","HDFCAMC","HINDPETRO","HONAUT","IDFCFIRSTB","INDIAMART","INDHOTEL","INDIANB","INDUSINDBK","INDUSTOWER","IPCALAB","IRCTC","IRFC","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","L&TFH","LAURUSLABS","LICHSGFIN","LUPIN","MAXHEALTH","MFSL","MGL","MPHASIS","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","OFSS","OIL","PAGEIND","PERSISTENT","PETRONET","PFC","POLYCAB","PNB","POONAWALLA","RBLBANK","REC","RELAXO","SAIL","SHRIRAMFIN","SUZLON","TATACOMM","TATAELXSI","TATAPOWER","TIINDIA","TORNTPOWER","TRENT","TVSMOTOR","UBL","UNIONBANK","UPL","VBL","IDEA","VOLTAS","YESBANK","ZEEL","ZYDUSLIFE"]
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
-          def get_nasdaq100():
-              return HARDCODED_NASDAQ100
-
-          def get_sp400():
-              try:
-                  url = 'https://en.wikipedia.org/wiki/List_of_S%26P_400_companies'
-                  r = requests.get(url, headers=HEADERS, timeout=10)
-                  tables = pd.read_html(r.text)
-                  for t in tables:
-                      if 'Symbol' in t.columns or 'Ticker' in t.columns:
-                          col = 'Symbol' if 'Symbol' in t.columns else 'Ticker'
-                          return [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
-              except Exception:
-                  pass
-              return HARDCODED_NASDAQ100
-
-          def get_russell2000():
-              try:
-                  url = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
-                  df = pd.read_csv(url)
-                  sp_tickers = set(df['Symbol'].dropna().tolist())
-                  
-                  url_all = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
-                  df_all = pd.read_csv(url_all)
-                  col = 'Symbol' if 'Symbol' in df_all.columns else df_all.columns[0]
-                  all_syms = [str(x).replace('.', '-').strip() for x in df_all[col].dropna().tolist()]
-                  
-                  small_caps = [s for s in all_syms if s.isalpha() and 2 <= len(s) <= 5 and s not in sp_tickers and s not in HARDCODED_NASDAQ100]
-                  if len(small_caps) > 300:
-                      return small_caps[:1000]
-              except Exception as e:
-                  print(f"Russell fetch error: {e}")
-              
-              # Static fallback for US Small Cap tickers if scraping fails
-              return ["SMCI","CROX","CELH","ELF","SFM","ANF","BOOT","BLDR","WING","SKX","INSM","ONTO","MOD","FIX","AGCO","RBA","GNTX","MTH","TOL","TMHC","KBH","MHO","SKWD","GPI","ABG","LAD","PAG","ASB","BOH","CNO","FHN","FNB","HWC","ONB","OZK","PB","PNFP","SNV","UMBF","VLY","WAL","WTFC","WBS","ZION","AAL","ALGT","ATSG","CAR","CHRW","HUBG","JBHT","KNX","MATX","R","SAIA","WERN","XPO","HALO","HQY","LNTH","MEDP","MMS","NEOG","NTRA","OSUR","PEN","RCM","SILK","SRDX","TNDM","UTHR","CERT","DOCS","EXEL","GKOS","ICUI","IRTC","MASI","MYGN","NEO","NVCR","PODD","QDEL","TXG","RGEN","ALRM","APPF","AYX","BAND","BL","CALX","CCCS","CSGP","DOCN","DOMO","ENV","FSLY","GTLB","JAMF","LAW","LPSN","MAPS","MSTR","NABL","NCNO","NET","NTNX","PAY","PD","PING","PLTR","PRO","PSTG","QTWO","RPD","S","SPSC","SPT","SSNC","TENB","TNGR","U","WK","YEXT","ZI"]
-
-          def get_nifty500():
-              try:
-                  url = "https://raw.githubusercontent.com/indian-stock-market/nifty-500/main/nifty500.csv"
-                  df = pd.read_csv(url)
-                  col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
-                  raw = df[col].dropna().astype(str).str.strip().tolist()
-                  tickers = [f"{t}.NS" if not t.endswith('.NS') else t for t in raw if t and len(t) > 1]
-                  if len(tickers) >= 300:
-                      return list(dict.fromkeys(tickers))
-              except Exception as e:
-                  print(f"Nifty 500 fetch error: {e}")
-              
-              combined = list(dict.fromkeys(HARDCODED_NIFTY_50 + HARDCODED_NIFTY_NEXT50 + HARDCODED_NIFTY_MIDCAP100))
-              return [f"{t}.NS" for t in combined]
-
-          def get_sp500_data():
-              sp500_list = []
-              gics_map = {"SP500_IT": [], "SP500_FIN": [], "SP500_HEALTH": [], "SP500_CONS_DISC": [], "SP500_ENERGY": []}
-              try:
-                  url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
-                  r = requests.get(url, headers=HEADERS, timeout=10)
-                  tables = pd.read_html(r.text)
-                  df = tables[0]
-                  symbol_col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
-                  sector_col = 'GICS Sector' if 'GICS Sector' in df.columns else df.columns[3]
-                  for _, row in df.iterrows():
-                      sym = str(row[symbol_col]).replace('.', '-')
-                      sec = str(row[sector_col]).strip()
-                      sp500_list.append(sym)
-                      if sec == 'Information Technology': gics_map["SP500_IT"].append(sym)
-                      elif sec == 'Financials': gics_map["SP500_FIN"].append(sym)
-                      elif sec == 'Health Care': gics_map["SP500_HEALTH"].append(sym)
-                      elif sec == 'Consumer Discretionary': gics_map["SP500_CONS_DISC"].append(sym)
-                      elif sec == 'Energy': gics_map["SP500_ENERGY"].append(sym)
-              except Exception as e:
-                  print(f"S&P 500 fetch error: {e}")
-              return sp500_list, gics_map
-
           def download_chunk(batch):
               chunk_results = {}
               start_date = f"{datetime.date.today().year}-01-01"
               try:
-                  df = yf.download(batch, start=start_date, progress=False, threads=True)
+                  df = yf.download(batch, start=start_date, progress=False, threads=False)
                   closes = df['Close'] if 'Close' in df else df
                   for t in batch:
                       try:
@@ -140,12 +61,12 @@ jobs:
                   pass
               return chunk_results
 
-          def fetch_robust_list(ticker_list, batch_size=40):
+          def fetch_robust_list(ticker_list, batch_size=25):
               ticker_list = list(dict.fromkeys(ticker_list))
               results = {}
               chunks = [ticker_list[i:i + batch_size] for i in range(0, len(ticker_list), batch_size)]
               
-              with ThreadPoolExecutor(max_workers=5) as executor:
+              with ThreadPoolExecutor(max_workers=3) as executor:
                   future_to_chunk = {executor.submit(download_chunk, chunk): chunk for chunk in chunks}
                   for future in as_completed(future_to_chunk):
                       res = future.result()
@@ -157,21 +78,12 @@ jobs:
                       out.append(results[t])
               return out
 
-          sp500_all, gics_sectors = get_sp500_data()
-
           indices_config = {
-              "NASDAQ100": get_nasdaq100(),
-              "SP500": sp500_all,
-              "RUSSELL2000": get_russell2000(),
-              "SP400": get_sp400(),
-              "SP500_IT": gics_sectors["SP500_IT"],
-              "SP500_FIN": gics_sectors["SP500_FIN"],
-              "SP500_HEALTH": gics_sectors["SP500_HEALTH"],
-              "SP500_CONS_DISC": gics_sectors["SP500_CONS_DISC"],
-              "SP500_ENERGY": gics_sectors["SP500_ENERGY"],
+              "NASDAQ100": HARDCODED_NASDAQ100,
+              "RUSSELL2000": RUSSELL_2000_TICKERS,
               "NIFTY50": [f"{t}.NS" for t in HARDCODED_NIFTY_50],
               "NIFTYNEXT50": [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50],
-              "NIFTY500": get_nifty500(),
+              "NIFTY500": NSE_500_TICKERS,
               "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
               "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
               "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
@@ -179,9 +91,8 @@ jobs:
           }
 
           BENCHMARK_TICKERS = {
-              "NASDAQ100": "^NDX", "SP500": "^GSPC", "RUSSELL2000": "^RUT", "SP400": "^MID",
-              "SP500_IT": "XLK", "SP500_FIN": "XLF", "SP500_HEALTH": "XLV", "SP500_CONS_DISC": "XLY", "SP500_ENERGY": "XLE",
-              "NIFTY50": "^NSEI", "NIFTYNEXT50": "^NSMIDCP", "NIFTY500": "^CRSLDX", "NIFTYIT": "^CNXIT",
+              "NASDAQ100": "^NDX", "RUSSELL2000": "^RUT", "NIFTY50": "^NSEI", 
+              "NIFTYNEXT50": "^NSMIDCP", "NIFTY500": "^CRSLDX", "NIFTYIT": "^CNXIT",
               "NIFTYBANK": "^NSEBANK", "NIFTYMIDCAP100": "^NSEMDCP100"
           }
 
@@ -222,6 +133,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-          git add data.json
-          git commit -m "Fix Russell small-caps list collision and NIFTY 500 parsing [skip ci]" || exit 0
+          git add data.json constituents.py
+          git commit -m "Decouple index fetching using static constituents list [skip ci]" || exit 0
           git push

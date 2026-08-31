@@ -99,6 +99,7 @@
     }
     .btn-export:hover { background: #059669; }
 
+    /* Search & Portfolio Section */
     .search-container {
       position: relative;
       flex-grow: 1;
@@ -115,7 +116,9 @@
       transition: border-color 0.2s;
     }
 
-    .search-input:focus { border-color: var(--primary-blue); }
+    .search-input:focus {
+      border-color: var(--primary-blue);
+    }
 
     .suggestions-dropdown {
       position: absolute;
@@ -125,34 +128,31 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      max-height: 260px;
+      max-height: 220px;
       overflow-y: auto;
       z-index: 100;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       display: none;
       margin-top: 4px;
     }
 
     .suggestion-item {
-      padding: 10px 14px;
+      padding: 8px 14px;
       font-size: 13px;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border-color);
     }
-    .suggestion-item:last-child { border-bottom: none; }
-    .suggestion-item:hover { background: var(--bg-color); }
 
-    .suggestion-meta { font-size: 11px; color: var(--text-muted); }
-
-    .suggestion-add-custom {
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-weight: 600;
+    .suggestion-item:hover {
+      background: var(--bg-color);
     }
-    .suggestion-add-custom:hover { background: #dbeafe; }
+
+    .suggestion-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
 
     .portfolio-tags {
       display: flex;
@@ -174,8 +174,10 @@
       cursor: pointer;
     }
 
-    .tag.off-screen { background: #fef3c7; color: #92400e; }
-    .tag.custom-tag { background: #e0f2fe; color: #0369a1; }
+    .tag.off-screen {
+      background: #fef3c7;
+      color: #92400e;
+    }
 
     .tag-remove {
       cursor: pointer;
@@ -183,8 +185,9 @@
       color: #4338ca;
       margin-left: 2px;
     }
-    .tag.off-screen .tag-remove { color: #b45309; }
-    .tag.custom-tag .tag-remove { color: #0284c7; }
+    .tag.off-screen .tag-remove {
+      color: #b45309;
+    }
 
     .grid-container {
       display: grid;
@@ -217,7 +220,10 @@
       transition: all 0.2s ease;
     }
 
-    .tile.dimmed { opacity: 0.25; }
+    /* Highlight & Dim styles for search matches */
+    .tile.dimmed {
+      opacity: 0.25;
+    }
 
     .tile.highlighted {
       outline: 3px solid #f59e0b;
@@ -226,8 +232,6 @@
       box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
       opacity: 1 !important;
     }
-
-    .tile.custom-tile { border: 2px dashed #0284c7; }
 
     @media (max-width: 1200px) {
       .grid-container { grid-template-columns: repeat(5, 1fr); }
@@ -263,10 +267,11 @@
       <div class="btn-group" id="index-buttons"></div>
     </div>
     
+    <!-- Portfolio Search Row -->
     <div class="control-row">
       <span class="control-label">Spot Stocks</span>
       <div class="search-container">
-        <input type="text" id="ticker-search" class="search-input" placeholder="Search any stock ticker (e.g. TSLA, TCS, ZOMATO)..." autocomplete="off" />
+        <input type="text" id="ticker-search" class="search-input" placeholder="Spot your stocks: Enter tickers to highlight where they land..." autocomplete="off" />
         <div id="suggestions" class="suggestions-dropdown"></div>
       </div>
       <button class="btn-export" onclick="exportPortfolioCSV()">Export Portfolio to CSV</button>
@@ -281,15 +286,17 @@
   let globalData = null;
   let currentCountry = 'US';
   let currentIndex = 'NASDAQ100';
-
-  const selectedPortfolio = new Map();
-  const customSearchedStocks = new Map();
+  let selectedTickers = new Set();
 
   const INDICES = {
     US: [
       { id: 'NASDAQ100', name: 'NASDAQ 100' },
       { id: 'SP500', name: 'S&P 500' },
-      { id: 'RUSSELL2000', name: 'RUSSELL 2000' }
+      { id: 'SP500_IT', name: 'S&P IT' },
+      { id: 'SP500_FIN', name: 'S&P FINANCIALS' },
+      { id: 'SP500_HEALTH', name: 'S&P HEALTHCARE' },
+      { id: 'SP500_CONS_DISC', name: 'S&P CONS DISCR' },
+      { id: 'SP500_ENERGY', name: 'S&P ENERGY' }
     ],
     INDIA: [
       { id: 'NIFTY50', name: 'NIFTY 50' },
@@ -319,7 +326,7 @@
     try {
       const res = await fetch('data.json');
       globalData = await res.json();
-      document.getElementById('date-label').innerText = `Individual companies' YTD Returns as on ${globalData.lastUpdated || '--'}`;
+      document.getElementById('date-label').innerText = `Individual companies' YTD Returns as on ${globalData.lastUpdated}`;
       renderIndexButtons();
       renderDashboard();
       setupSearch();
@@ -349,7 +356,6 @@
   }
 
   function switchIndexToTicker(ticker) {
-    if (!globalData) return;
     for (const countryKey in INDICES) {
       for (const idxObj of INDICES[countryKey]) {
         const list = globalData[idxObj.id] || [];
@@ -372,7 +378,7 @@
   function renderIndexButtons() {
     const container = document.getElementById('index-buttons');
     container.innerHTML = '';
-    (INDICES[currentCountry] || []).forEach(idx => {
+    INDICES[currentCountry].forEach(idx => {
       const btn = document.createElement('button');
       btn.className = `btn ${idx.id === currentIndex ? 'active' : ''}`;
       btn.setAttribute('data-id', idx.id);
@@ -385,29 +391,21 @@
   function renderDashboard() {
     if (!globalData) return;
 
-    const idxReturn = globalData.indexReturns ? (globalData.indexReturns[currentIndex] ?? 0) : 0;
+    const idxReturn = globalData.indexReturns ? globalData.indexReturns[currentIndex] : 0;
     const badge = document.getElementById('index-return-badge');
     badge.innerText = `Index YTD Return: ${idxReturn >= 0 ? '+' : ''}${idxReturn}%`;
     badge.style.backgroundColor = idxReturn >= 0 ? '#dcfce7' : '#ffe4e6';
     badge.style.color = idxReturn >= 0 ? '#15803d' : '#e11d48';
 
-    const constituents = [...(globalData[currentIndex] || [])];
-    
-    customSearchedStocks.forEach((item) => {
-      if (!constituents.some(c => c.ticker === item.ticker)) {
-        constituents.push(item);
-      }
-    });
-
+    const constituents = globalData[currentIndex] || [];
     const grid = document.getElementById('buckets-grid');
     grid.innerHTML = '';
 
     const activeIndexTickers = new Set(constituents.map(c => c.ticker));
-    const hasSelectionInCurrentIndex = Array.from(selectedPortfolio.keys()).some(t => activeIndexTickers.has(t));
+    const hasSelectionInCurrentIndex = Array.from(selectedTickers).some(t => activeIndexTickers.has(t));
 
     BUCKETS.forEach(b => {
       const filtered = constituents.filter(item => {
-        if (typeof item.ytd !== 'number') return false;
         if (b.min === -Infinity) return item.ytd < b.max;
         if (b.max === Infinity) return item.ytd >= b.min;
         return item.ytd >= b.min && item.ytd < b.max;
@@ -426,10 +424,9 @@
 
       filtered.forEach(item => {
         const tile = document.createElement('div');
-        const isMatched = selectedPortfolio.has(item.ticker);
+        const isMatched = selectedTickers.has(item.ticker);
 
         let tileClass = 'tile';
-        if (item.isCustom) tileClass += ' custom-tile';
         if (hasSelectionInCurrentIndex) {
           tileClass += isMatched ? ' highlighted' : ' dimmed';
         }
@@ -437,9 +434,7 @@
         tile.className = tileClass;
         tile.style.backgroundColor = b.tileColor;
         tile.innerText = item.ticker;
-        tile.title = `${item.ticker}: ${item.ytd}% ${item.isCustom ? '(Custom Added)' : ''}`;
-        
-        tile.onclick = () => toggleTileSelection(item);
+        tile.title = `${item.ticker}: ${item.ytd}%`;
         col.appendChild(tile);
       });
 
@@ -449,103 +444,55 @@
     renderTags();
   }
 
-  function toggleTileSelection(stockItem) {
-    if (selectedPortfolio.has(stockItem.ticker)) {
-      selectedPortfolio.delete(stockItem.ticker);
-    } else {
-      addStockToPortfolio(stockItem.ticker, stockItem.ytd, stockItem.isCustom);
-    }
-    renderDashboard();
-  }
-
-  function addStockToPortfolio(ticker, ytd, isCustom = false) {
-    let benchmarkName = 'N/A';
-    let benchmarkReturn = 0;
-
-    if (!isCustom && globalData) {
-      for (const countryKey in INDICES) {
-        for (const idxObj of INDICES[countryKey]) {
-          const list = globalData[idxObj.id] || [];
-          if (list.some(i => i.ticker === ticker)) {
-            benchmarkName = idxObj.name;
-            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] ?? 0) : 0;
-            break;
-          }
-        }
-        if (benchmarkName !== 'N/A') break;
-      }
-    } else {
-      benchmarkName = 'Custom Search';
-    }
-
-    selectedPortfolio.set(ticker, {
-      ticker,
-      ytd,
-      benchmarkName,
-      benchmarkReturn,
-      isCustom
-    });
-  }
-
   function setupSearch() {
     const searchInput = document.getElementById('ticker-search');
     const dropdown = document.getElementById('suggestions');
 
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.trim().toUpperCase();
-
-      if (!query || !globalData) {
+      if (!query) {
         dropdown.style.display = 'none';
         return;
       }
 
-      const matches = [];
+      // Collect tickers from ALL indices across globalData
+      const allMatches = [];
       const seenTickers = new Set();
 
       for (const countryKey in INDICES) {
         INDICES[countryKey].forEach(idxObj => {
           const list = globalData[idxObj.id] || [];
           list.forEach(item => {
-            if (item.ticker.includes(query) && !seenTickers.has(item.ticker)) {
+            if (item.ticker.includes(query) && !selectedTickers.has(item.ticker) && !seenTickers.has(item.ticker)) {
               seenTickers.add(item.ticker);
-              matches.push({
+              allMatches.push({
                 ticker: item.ticker,
                 ytd: item.ytd,
                 indexName: idxObj.name,
-                isCustom: false
+                indexId: idxObj.id
               });
             }
           });
         });
       }
 
-      dropdown.innerHTML = '';
+      if (allMatches.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+      }
 
-      matches.slice(0, 8).forEach(item => {
+      dropdown.innerHTML = '';
+      allMatches.slice(0, 10).forEach(item => {
         const div = document.createElement('div');
         div.className = 'suggestion-item';
         div.innerHTML = `<span><strong>${item.ticker}</strong> (${item.ytd}%)</span> <span class="suggestion-meta">${item.indexName}</span>`;
         div.onclick = () => {
-          addStockToPortfolio(item.ticker, item.ytd, false);
-          switchIndexToTicker(item.ticker);
+          addTicker(item.ticker);
           searchInput.value = '';
           dropdown.style.display = 'none';
         };
         dropdown.appendChild(div);
       });
-
-      if (!seenTickers.has(query)) {
-        const customDiv = document.createElement('div');
-        customDiv.className = 'suggestion-item suggestion-add-custom';
-        customDiv.innerHTML = `<span>+ Add "<strong>${query}</strong>" as Off-Grid Stock</span> <span class="suggestion-meta">Manual YTD</span>`;
-        customDiv.onclick = () => {
-          promptAndAddCustomStock(query);
-          searchInput.value = '';
-          dropdown.style.display = 'none';
-        };
-        dropdown.appendChild(customDiv);
-      }
-
       dropdown.style.display = 'block';
     });
 
@@ -556,20 +503,13 @@
     });
   }
 
-  function promptAndAddCustomStock(ticker) {
-    const val = prompt(`Enter YTD % return for custom stock "${ticker}":`, "0.0");
-    if (val !== null && !isNaN(parseFloat(val))) {
-      const ytd = parseFloat(val);
-      const customObj = { ticker, ytd, isCustom: true };
-      customSearchedStocks.set(ticker, customObj);
-      addStockToPortfolio(ticker, ytd, true);
-      renderDashboard();
-    }
+  function addTicker(ticker) {
+    selectedTickers.add(ticker);
+    renderDashboard();
   }
 
   function removeTicker(ticker) {
-    selectedPortfolio.delete(ticker);
-    customSearchedStocks.delete(ticker);
+    selectedTickers.delete(ticker);
     renderDashboard();
   }
 
@@ -577,45 +517,52 @@
     const container = document.getElementById('portfolio-tags-container');
     container.innerHTML = '';
     
-    const activeConstituents = (globalData && globalData[currentIndex] ? globalData[currentIndex] : []).map(c => c.ticker);
+    const activeConstituents = (globalData[currentIndex] || []).map(c => c.ticker);
 
-    selectedPortfolio.forEach((item, ticker) => {
+    selectedTickers.forEach(ticker => {
       const isInCurrent = activeConstituents.includes(ticker);
       const tag = document.createElement('div');
+      tag.className = `tag ${isInCurrent ? '' : 'off-screen'}`;
+      tag.title = isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view its index.';
       
-      let tagClass = 'tag';
-      if (item.isCustom) {
-        tagClass += ' custom-tag';
-      } else if (!isInCurrent) {
-        tagClass += ' off-screen';
-      }
-
-      tag.className = tagClass;
-      tag.title = item.isCustom ? 'Custom Off-Grid Stock' : (isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view.');
-      
-      tag.innerHTML = `${ticker} <span class="tag-remove" onclick="event.stopPropagation(); removeTicker('${ticker}')">&times;</span>`;
-      tag.onclick = () => {
-        if (!item.isCustom) switchIndexToTicker(ticker);
-      };
+      tag.innerHTML = `${ticker} ${isInCurrent ? '' : '↗'} <span class="tag-remove" onclick="event.stopPropagation(); removeTicker('${ticker}')">&times;</span>`;
+      tag.onclick = () => switchIndexToTicker(ticker);
       
       container.appendChild(tag);
     });
   }
 
   function exportPortfolioCSV() {
-    if (selectedPortfolio.size === 0) {
-      alert('Please select or search at least one stock to export.');
+    if (selectedTickers.size === 0) {
+      alert('Please add at least one stock to export.');
       return;
     }
 
     let csvContent = "data:text/csv;charset=utf-8,Stock Ticker,Stock YTD Return (%),Benchmark Index,Benchmark YTD Return (%),Outperformance (%)\n";
 
-    selectedPortfolio.forEach(item => {
-      const alpha = item.benchmarkName !== 'Custom Search' 
-        ? (item.ytd - item.benchmarkReturn).toFixed(2) 
-        : 'N/A';
-        
-      csvContent += `${item.ticker},${item.ytd},${item.benchmarkName},${item.benchmarkReturn},${alpha}\n`;
+    selectedTickers.forEach(ticker => {
+      let foundItem = null;
+      let benchmarkName = '';
+      let benchmarkReturn = 0;
+
+      for (const countryKey in INDICES) {
+        for (const idxObj of INDICES[countryKey]) {
+          const list = globalData[idxObj.id] || [];
+          const match = list.find(i => i.ticker === ticker);
+          if (match) {
+            foundItem = match;
+            benchmarkName = idxObj.name;
+            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] || 0) : 0;
+            break;
+          }
+        }
+        if (foundItem) break;
+      }
+
+      if (foundItem) {
+        const alpha = (foundItem.ytd - benchmarkReturn).toFixed(2);
+        csvContent += `${ticker},${foundItem.ytd},${benchmarkName},${benchmarkReturn},${alpha}\n`;
+      }
     });
 
     const encodedUri = encodeURI(csvContent);

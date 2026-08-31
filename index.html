@@ -292,6 +292,8 @@
     US: [
       { id: 'NASDAQ100', name: 'NASDAQ 100' },
       { id: 'SP500', name: 'S&P 500' },
+      { id: 'RUSSELL2000', name: 'RUSSELL 2000' },
+      { id: 'SP400', name: 'S&P 400 MIDCAP' },
       { id: 'SP500_IT', name: 'S&P IT' },
       { id: 'SP500_FIN', name: 'S&P FINANCIALS' },
       { id: 'SP500_HEALTH', name: 'S&P HEALTHCARE' },
@@ -455,7 +457,6 @@
         return;
       }
 
-      // Collect tickers from ALL indices across globalData
       const allMatches = [];
       const seenTickers = new Set();
 

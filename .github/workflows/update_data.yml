@@ -18,7 +18,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install yfinance pandas requests lxml html5lib
+        run: pip install yfinance pandas requests lxml html5lib concurrent-log-handler
 
       - name: Fetch Prices & Update JSON
         run: |
@@ -30,6 +30,7 @@ jobs:
           import time
           import requests
           import io
+          from concurrent.futures import ThreadPoolExecutor, as_completed
 
           HEADERS = {
               'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
@@ -60,18 +61,24 @@ jobs:
               return HARDCODED_NASDAQ100
 
           def get_russell2000():
-              # Direct reliable source for ~1200 US small-cap tickers
               try:
-                  url = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
+                  url = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
                   df = pd.read_csv(url)
-                  col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
-                  syms = [str(x).replace('.', '-').strip() for x in df[col].dropna().tolist()]
-                  clean = [s for s in syms if s.isalpha() and 2 <= len(s) <= 5]
-                  if len(clean) > 500:
-                      return clean[:1200]
+                  sp_tickers = set(df['Symbol'].dropna().tolist())
+                  
+                  url_all = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
+                  df_all = pd.read_csv(url_all)
+                  col = 'Symbol' if 'Symbol' in df_all.columns else df_all.columns[0]
+                  all_syms = [str(x).replace('.', '-').strip() for x in df_all[col].dropna().tolist()]
+                  
+                  small_caps = [s for s in all_syms if s.isalpha() and 2 <= len(s) <= 5 and s not in sp_tickers and s not in HARDCODED_NASDAQ100]
+                  if len(small_caps) > 300:
+                      return small_caps[:1000]
               except Exception as e:
-                  print(f"Russell fetch failed: {e}")
-              return HARDCODED_NASDAQ100
+                  print(f"Russell fetch error: {e}")
+              
+              # Static fallback for US Small Cap tickers if scraping fails
+              return ["SMCI","CROX","CELH","ELF","SFM","ANF","BOOT","BLDR","WING","SKX","INSM","ONTO","MOD","FIX","AGCO","RBA","GNTX","MTH","TOL","TMHC","KBH","MHO","SKWD","GPI","ABG","LAD","PAG","ASB","BOH","CNO","FHN","FNB","HWC","ONB","OZK","PB","PNFP","SNV","UMBF","VLY","WAL","WTFC","WBS","ZION","AAL","ALGT","ATSG","CAR","CHRW","HUBG","JBHT","KNX","MATX","R","SAIA","WERN","XPO","HALO","HQY","LNTH","MEDP","MMS","NEOG","NTRA","OSUR","PEN","RCM","SILK","SRDX","TNDM","UTHR","CERT","DOCS","EXEL","GKOS","ICUI","IRTC","MASI","MYGN","NEO","NVCR","PODD","QDEL","TXG","RGEN","ALRM","APPF","AYX","BAND","BL","CALX","CCCS","CSGP","DOCN","DOMO","ENV","FSLY","GTLB","JAMF","LAW","LPSN","MAPS","MSTR","NABL","NCNO","NET","NTNX","PAY","PD","PING","PLTR","PRO","PSTG","QTWO","RPD","S","SPSC","SPT","SSNC","TENB","TNGR","U","WK","YEXT","ZI"]
 
           def get_nifty500():
               try:
@@ -79,11 +86,11 @@ jobs:
                   df = pd.read_csv(url)
                   col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
                   raw = df[col].dropna().astype(str).str.strip().tolist()
-                  tickers = [f"{t}.NS" if not t.endswith('.NS') else t for t in raw if t]
+                  tickers = [f"{t}.NS" if not t.endswith('.NS') else t for t in raw if t and len(t) > 1]
                   if len(tickers) >= 300:
-                      return tickers
-              except Exception:
-                  pass
+                      return list(dict.fromkeys(tickers))
+              except Exception as e:
+                  print(f"Nifty 500 fetch error: {e}")
               
               combined = list(dict.fromkeys(HARDCODED_NIFTY_50 + HARDCODED_NIFTY_NEXT50 + HARDCODED_NIFTY_MIDCAP100))
               return [f"{t}.NS" for t in combined]
@@ -111,32 +118,38 @@ jobs:
                   print(f"S&P 500 fetch error: {e}")
               return sp500_list, gics_map
 
-          def fetch_robust_list(ticker_list, batch_size=30):
+          def download_chunk(batch):
+              chunk_results = {}
+              start_date = f"{datetime.date.today().year}-01-01"
+              try:
+                  df = yf.download(batch, start=start_date, progress=False, threads=True)
+                  closes = df['Close'] if 'Close' in df else df
+                  for t in batch:
+                      try:
+                          series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
+                          if len(series) > 1:
+                              start_p = float(series.iloc[0])
+                              curr_p = float(series.iloc[-1])
+                              if start_p > 0:
+                                  ytd = ((curr_p - start_p) / start_p) * 100
+                                  clean_name = t.replace('.NS', '')
+                                  chunk_results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
+                      except Exception:
+                          pass
+              except Exception:
+                  pass
+              return chunk_results
+
+          def fetch_robust_list(ticker_list, batch_size=40):
               ticker_list = list(dict.fromkeys(ticker_list))
               results = {}
-              start_date = f"{datetime.date.today().year}-01-01"
-
-              for i in range(0, len(ticker_list), batch_size):
-                  batch = ticker_list[i:i + batch_size]
-                  try:
-                      df = yf.download(batch, start=start_date, progress=False, threads=False)
-                      closes = df['Close'] if 'Close' in df else df
-
-                      for t in batch:
-                          try:
-                              series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
-                              if len(series) > 1:
-                                  start_p = float(series.iloc[0])
-                                  curr_p = float(series.iloc[-1])
-                                  if start_p > 0:
-                                      ytd = ((curr_p - start_p) / start_p) * 100
-                                      clean_name = t.replace('.NS', '')
-                                      results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
-                          except Exception:
-                              pass
-                  except Exception:
-                      pass
-                  time.sleep(0.2)
+              chunks = [ticker_list[i:i + batch_size] for i in range(0, len(ticker_list), batch_size)]
+              
+              with ThreadPoolExecutor(max_workers=5) as executor:
+                  future_to_chunk = {executor.submit(download_chunk, chunk): chunk for chunk in chunks}
+                  for future in as_completed(future_to_chunk):
+                      res = future.result()
+                      results.update(res)
 
               out = []
               for t in ticker_list:
@@ -210,5 +223,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fix data fetching rate limits for Russell 2000, Nifty 500, and Midcap 100 [skip ci]" || exit 0
+          git commit -m "Fix Russell small-caps list collision and NIFTY 500 parsing [skip ci]" || exit 0
           git push

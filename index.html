@@ -99,7 +99,6 @@
     }
     .btn-export:hover { background: #059669; }
 
-    /* Search & Dynamic Suggestions */
     .search-container {
       position: relative;
       flex-grow: 1;
@@ -264,11 +263,10 @@
       <div class="btn-group" id="index-buttons"></div>
     </div>
     
-    <!-- Portfolio Search Row -->
     <div class="control-row">
       <span class="control-label">Spot Stocks</span>
       <div class="search-container">
-        <input type="text" id="ticker-search" class="search-input" placeholder="Search any stock ticker (e.g. TSLA, IONQ, CYIENT)..." autocomplete="off" />
+        <input type="text" id="ticker-search" class="search-input" placeholder="Search any stock ticker (e.g. TSLA, TCS, ZOMATO)..." autocomplete="off" />
         <div id="suggestions" class="suggestions-dropdown"></div>
       </div>
       <button class="btn-export" onclick="exportPortfolioCSV()">Export Portfolio to CSV</button>
@@ -284,22 +282,14 @@
   let currentCountry = 'US';
   let currentIndex = 'NASDAQ100';
 
-  // Portfolio tracking structures
   const selectedPortfolio = new Map();
   const customSearchedStocks = new Map();
 
-  // Full Index Configurations Restored
   const INDICES = {
     US: [
       { id: 'NASDAQ100', name: 'NASDAQ 100' },
       { id: 'SP500', name: 'S&P 500' },
-      { id: 'RUSSELL2000', name: 'RUSSELL 2000' },
-      { id: 'SP400', name: 'S&P 400 MIDCAP' },
-      { id: 'SP500_IT', name: 'S&P IT' },
-      { id: 'SP500_FIN', name: 'S&P FINANCIALS' },
-      { id: 'SP500_HEALTH', name: 'S&P HEALTHCARE' },
-      { id: 'SP500_CONS_DISC', name: 'S&P CONS DISCR' },
-      { id: 'SP500_ENERGY', name: 'S&P ENERGY' }
+      { id: 'RUSSELL2000', name: 'RUSSELL 2000' }
     ],
     INDIA: [
       { id: 'NIFTY50', name: 'NIFTY 50' },
@@ -359,6 +349,7 @@
   }
 
   function switchIndexToTicker(ticker) {
+    if (!globalData) return;
     for (const countryKey in INDICES) {
       for (const idxObj of INDICES[countryKey]) {
         const list = globalData[idxObj.id] || [];
@@ -381,7 +372,7 @@
   function renderIndexButtons() {
     const container = document.getElementById('index-buttons');
     container.innerHTML = '';
-    INDICES[currentCountry].forEach(idx => {
+    (INDICES[currentCountry] || []).forEach(idx => {
       const btn = document.createElement('button');
       btn.className = `btn ${idx.id === currentIndex ? 'active' : ''}`;
       btn.setAttribute('data-id', idx.id);
@@ -394,7 +385,7 @@
   function renderDashboard() {
     if (!globalData) return;
 
-    const idxReturn = globalData.indexReturns ? (globalData.indexReturns[currentIndex] || 0) : 0;
+    const idxReturn = globalData.indexReturns ? (globalData.indexReturns[currentIndex] ?? 0) : 0;
     const badge = document.getElementById('index-return-badge');
     badge.innerText = `Index YTD Return: ${idxReturn >= 0 ? '+' : ''}${idxReturn}%`;
     badge.style.backgroundColor = idxReturn >= 0 ? '#dcfce7' : '#ffe4e6';
@@ -402,7 +393,6 @@
 
     const constituents = [...(globalData[currentIndex] || [])];
     
-    // Inject off-grid custom stocks if relevant
     customSearchedStocks.forEach((item) => {
       if (!constituents.some(c => c.ticker === item.ticker)) {
         constituents.push(item);
@@ -417,6 +407,7 @@
 
     BUCKETS.forEach(b => {
       const filtered = constituents.filter(item => {
+        if (typeof item.ytd !== 'number') return false;
         if (b.min === -Infinity) return item.ytd < b.max;
         if (b.max === Infinity) return item.ytd >= b.min;
         return item.ytd >= b.min && item.ytd < b.max;
@@ -471,13 +462,13 @@
     let benchmarkName = 'N/A';
     let benchmarkReturn = 0;
 
-    if (!isCustom) {
+    if (!isCustom && globalData) {
       for (const countryKey in INDICES) {
         for (const idxObj of INDICES[countryKey]) {
           const list = globalData[idxObj.id] || [];
           if (list.some(i => i.ticker === ticker)) {
             benchmarkName = idxObj.name;
-            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] || 0) : 0;
+            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] ?? 0) : 0;
             break;
           }
         }
@@ -503,7 +494,7 @@
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.trim().toUpperCase();
 
-      if (!query) {
+      if (!query || !globalData) {
         dropdown.style.display = 'none';
         return;
       }
@@ -511,7 +502,6 @@
       const matches = [];
       const seenTickers = new Set();
 
-      // Search across ALL indices in globalData
       for (const countryKey in INDICES) {
         INDICES[countryKey].forEach(idxObj => {
           const list = globalData[idxObj.id] || [];
@@ -531,7 +521,6 @@
 
       dropdown.innerHTML = '';
 
-      // Render matching dataset results
       matches.slice(0, 8).forEach(item => {
         const div = document.createElement('div');
         div.className = 'suggestion-item';
@@ -545,7 +534,6 @@
         dropdown.appendChild(div);
       });
 
-      // Always append off-grid fallback option
       if (!seenTickers.has(query)) {
         const customDiv = document.createElement('div');
         customDiv.className = 'suggestion-item suggestion-add-custom';
@@ -589,7 +577,7 @@
     const container = document.getElementById('portfolio-tags-container');
     container.innerHTML = '';
     
-    const activeConstituents = (globalData[currentIndex] || []).map(c => c.ticker);
+    const activeConstituents = (globalData && globalData[currentIndex] ? globalData[currentIndex] : []).map(c => c.ticker);
 
     selectedPortfolio.forEach((item, ticker) => {
       const isInCurrent = activeConstituents.includes(ticker);

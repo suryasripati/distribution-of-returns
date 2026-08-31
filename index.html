@@ -128,7 +128,7 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      max-height: 220px;
+      max-height: 260px;
       overflow-y: auto;
       z-index: 100;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -152,6 +152,16 @@
     .suggestion-meta {
       font-size: 11px;
       color: var(--text-muted);
+    }
+
+    .suggestion-source {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: #475569;
+      margin-left: 6px;
     }
 
     .portfolio-tags {
@@ -179,6 +189,11 @@
       color: #92400e;
     }
 
+    .tag.custom-search {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
     .tag-remove {
       cursor: pointer;
       font-weight: 700;
@@ -187,6 +202,9 @@
     }
     .tag.off-screen .tag-remove {
       color: #b45309;
+    }
+    .tag.custom-search .tag-remove {
+      color: #0284c7;
     }
 
     .grid-container {
@@ -220,7 +238,6 @@
       transition: all 0.2s ease;
     }
 
-    /* Highlight & Dim styles for search matches */
     .tile.dimmed {
       opacity: 0.25;
     }
@@ -231,6 +248,10 @@
       z-index: 10;
       box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
       opacity: 1 !important;
+    }
+
+    .tile.custom-tile {
+      border: 2px dashed #38bdf8;
     }
 
     @media (max-width: 1200px) {
@@ -271,7 +292,7 @@
     <div class="control-row">
       <span class="control-label">Spot Stocks</span>
       <div class="search-container">
-        <input type="text" id="ticker-search" class="search-input" placeholder="Spot your stocks: Enter tickers to highlight where they land..." autocomplete="off" />
+        <input type="text" id="ticker-search" class="search-input" placeholder="Spot your stocks: Type ticker or company (e.g. IONQ, Cyient)..." autocomplete="off" />
         <div id="suggestions" class="suggestions-dropdown"></div>
       </div>
       <button class="btn-export" onclick="exportPortfolioCSV()">Export Portfolio to CSV</button>
@@ -286,7 +307,15 @@
   let globalData = null;
   let currentCountry = 'US';
   let currentIndex = 'NASDAQ100';
-  let selectedTickers = new Set();
+
+  // State maps storing all user selections
+  // Map key: ticker -> Value: { ticker, ytd, benchmarkName, benchmarkReturn, isCustom }
+  const selectedPortfolio = new Map();
+  // Off-grid custom fetched tickers map
+  const customSearchedStocks = new Map();
+
+  let debounceTimer = null;
+  const CORS_PROXY = "https://corsproxy.io/?";
 
   const INDICES = {
     US: [
@@ -399,12 +428,20 @@
     badge.style.backgroundColor = idxReturn >= 0 ? '#dcfce7' : '#ffe4e6';
     badge.style.color = idxReturn >= 0 ? '#15803d' : '#e11d48';
 
-    const constituents = globalData[currentIndex] || [];
+    const constituents = [...(globalData[currentIndex] || [])];
+    
+    // Inject custom searched stocks if present
+    customSearchedStocks.forEach((item) => {
+      if (!constituents.some(c => c.ticker === item.ticker)) {
+        constituents.push(item);
+      }
+    });
+
     const grid = document.getElementById('buckets-grid');
     grid.innerHTML = '';
 
     const activeIndexTickers = new Set(constituents.map(c => c.ticker));
-    const hasSelectionInCurrentIndex = Array.from(selectedTickers).some(t => activeIndexTickers.has(t));
+    const hasSelectionInCurrentIndex = Array.from(selectedPortfolio.keys()).some(t => activeIndexTickers.has(t));
 
     BUCKETS.forEach(b => {
       const filtered = constituents.filter(item => {
@@ -426,9 +463,10 @@
 
       filtered.forEach(item => {
         const tile = document.createElement('div');
-        const isMatched = selectedTickers.has(item.ticker);
+        const isMatched = selectedPortfolio.has(item.ticker);
 
         let tileClass = 'tile';
+        if (item.isCustom) tileClass += ' custom-tile';
         if (hasSelectionInCurrentIndex) {
           tileClass += isMatched ? ' highlighted' : ' dimmed';
         }
@@ -436,7 +474,10 @@
         tile.className = tileClass;
         tile.style.backgroundColor = b.tileColor;
         tile.innerText = item.ticker;
-        tile.title = `${item.ticker}: ${item.ytd}%`;
+        tile.title = `${item.ticker}: ${item.ytd}% ${item.isCustom ? '(Custom Search)' : ''}`;
+        
+        tile.onclick = () => toggleTileSelection(item);
+
         col.appendChild(tile);
       });
 
@@ -446,55 +487,88 @@
     renderTags();
   }
 
+  function toggleTileSelection(stockItem) {
+    if (selectedPortfolio.has(stockItem.ticker)) {
+      selectedPortfolio.delete(stockItem.ticker);
+    } else {
+      addStockToPortfolio(stockItem.ticker, stockItem.ytd, stockItem.isCustom);
+    }
+    renderDashboard();
+  }
+
+  function addStockToPortfolio(ticker, ytd, isCustom = false) {
+    let benchmarkName = 'N/A';
+    let benchmarkReturn = 0;
+
+    if (!isCustom) {
+      for (const countryKey in INDICES) {
+        for (const idxObj of INDICES[countryKey]) {
+          const list = globalData[idxObj.id] || [];
+          if (list.some(i => i.ticker === ticker)) {
+            benchmarkName = idxObj.name;
+            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] || 0) : 0;
+            break;
+          }
+        }
+        if (benchmarkName !== 'N/A') break;
+      }
+    } else {
+      benchmarkName = 'Custom Search';
+    }
+
+    selectedPortfolio.set(ticker, {
+      ticker,
+      ytd,
+      benchmarkName,
+      benchmarkReturn,
+      isCustom
+    });
+  }
+
   function setupSearch() {
     const searchInput = document.getElementById('ticker-search');
     const dropdown = document.getElementById('suggestions');
 
     searchInput.addEventListener('input', () => {
-      const query = searchInput.value.trim().toUpperCase();
+      clearTimeout(debounceTimer);
+      const query = searchInput.value.trim();
+
       if (!query) {
         dropdown.style.display = 'none';
         return;
       }
 
-      const allMatches = [];
+      // 1. Local Search In Pre-Loaded JSON Data
+      const localMatches = [];
       const seenTickers = new Set();
+      const upperQuery = query.toUpperCase();
 
       for (const countryKey in INDICES) {
         INDICES[countryKey].forEach(idxObj => {
           const list = globalData[idxObj.id] || [];
           list.forEach(item => {
-            if (item.ticker.includes(query) && !selectedTickers.has(item.ticker) && !seenTickers.has(item.ticker)) {
+            if (item.ticker.includes(upperQuery) && !seenTickers.has(item.ticker)) {
               seenTickers.add(item.ticker);
-              allMatches.push({
+              localMatches.push({
                 ticker: item.ticker,
+                name: item.ticker,
                 ytd: item.ytd,
                 indexName: idxObj.name,
-                indexId: idxObj.id
+                isLive: false
               });
             }
           });
         });
       }
 
-      if (allMatches.length === 0) {
-        dropdown.style.display = 'none';
-        return;
-      }
+      renderSuggestions(localMatches.slice(0, 5), true);
 
-      dropdown.innerHTML = '';
-      allMatches.slice(0, 10).forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'suggestion-item';
-        div.innerHTML = `<span><strong>${item.ticker}</strong> (${item.ytd}%)</span> <span class="suggestion-meta">${item.indexName}</span>`;
-        div.onclick = () => {
-          addTicker(item.ticker);
-          searchInput.value = '';
-          dropdown.style.display = 'none';
-        };
-        dropdown.appendChild(div);
-      });
-      dropdown.style.display = 'block';
+      // 2. Live Yahoo Search Autocomplete with 300ms Debounce
+      if (query.length >= 2) {
+        debounceTimer = setTimeout(() => {
+          fetchLiveYahooSuggestions(query, localMatches);
+        }, 300);
+      }
     });
 
     document.addEventListener('click', (e) => {
@@ -504,13 +578,104 @@
     });
   }
 
-  function addTicker(ticker) {
-    selectedTickers.add(ticker);
-    renderDashboard();
+  async function fetchLiveYahooSuggestions(query, localMatches) {
+    const dropdown = document.getElementById('suggestions');
+    try {
+      const searchUrl = `${CORS_PROXY}${encodeURIComponent(`https://query1.finance.yahoo.com/v1/finance/search?q=${query}&quotesCount=10`)}`;
+      const res = await fetch(searchUrl);
+      const data = await res.json();
+      
+      const yahooQuotes = data.quotes || [];
+      const combined = [...localMatches];
+
+      yahooQuotes.forEach(q => {
+        if (q.symbol && !combined.some(item => item.ticker === q.symbol)) {
+          combined.push({
+            ticker: q.symbol,
+            name: q.shortname || q.longname || q.symbol,
+            ytd: null,
+            indexName: q.exchDisp || 'Global',
+            isLive: true
+          });
+        }
+      });
+
+      renderSuggestions(combined.slice(0, 10));
+    } catch (e) {
+      console.warn('Live Yahoo search fallback active:', e);
+    }
+  }
+
+  function renderSuggestions(matches) {
+    const dropdown = document.getElementById('suggestions');
+    if (matches.length === 0) {
+      dropdown.style.display = 'none';
+      return;
+    }
+
+    dropdown.innerHTML = '';
+    matches.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'suggestion-item';
+      
+      const ytdStr = item.ytd !== null ? `(${item.ytd}%)` : '';
+      const sourceBadge = item.isLive ? '<span class="suggestion-source">Yahoo Live</span>' : `<span class="suggestion-meta">${item.indexName}</span>`;
+
+      div.innerHTML = `<span><strong>${item.ticker}</strong> ${item.name !== item.ticker ? item.name : ''} ${ytdStr}</span> ${sourceBadge}`;
+      div.onclick = () => selectSearchResult(item);
+      dropdown.appendChild(div);
+    });
+
+    dropdown.style.display = 'block';
+  }
+
+  async function selectSearchResult(item) {
+    const dropdown = document.getElementById('suggestions');
+    const searchInput = document.getElementById('ticker-search');
+    dropdown.style.display = 'none';
+    searchInput.value = '';
+
+    if (!item.isLive && item.ytd !== null) {
+      // Stock exists in local JSON data
+      addStockToPortfolio(item.ticker, item.ytd, false);
+      switchIndexToTicker(item.ticker);
+    } else {
+      // Stock is off-grid -> Fetch YTD dynamically from Yahoo Finance Chart API
+      await fetchAndAddOffGridStock(item.ticker);
+    }
+  }
+
+  async function fetchAndAddOffGridStock(ticker) {
+    try {
+      const chartUrl = `${CORS_PROXY}${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=ytd&interval=1d`)}`;
+      const res = await fetch(chartUrl);
+      const data = await res.json();
+      
+      const result = data.chart.result[0];
+      const closePrices = result.indicators.quote[0].close.filter(p => p !== null);
+
+      if (closePrices.length < 2) {
+        alert(`Insufficient data to calculate YTD for ${ticker}`);
+        return;
+      }
+
+      const startPrice = closePrices[0];
+      const latestPrice = closePrices[closePrices.length - 1];
+      const ytd = parseFloat((((latestPrice - startPrice) / startPrice) * 100).toFixed(2));
+
+      const customObj = { ticker, ytd, isCustom: true };
+      customSearchedStocks.set(ticker, customObj);
+      addStockToPortfolio(ticker, ytd, true);
+      renderDashboard();
+    } catch (e) {
+      alert(`Could not fetch YTD return for ${ticker}`);
+      console.error(e);
+    }
   }
 
   function removeTicker(ticker) {
-    selectedTickers.delete(ticker);
+    selectedPortfolio.delete(ticker);
+    customSearchedStocks.delete(ticker);
     renderDashboard();
   }
 
@@ -520,50 +685,43 @@
     
     const activeConstituents = (globalData[currentIndex] || []).map(c => c.ticker);
 
-    selectedTickers.forEach(ticker => {
+    selectedPortfolio.forEach((item, ticker) => {
       const isInCurrent = activeConstituents.includes(ticker);
       const tag = document.createElement('div');
-      tag.className = `tag ${isInCurrent ? '' : 'off-screen'}`;
-      tag.title = isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view its index.';
       
-      tag.innerHTML = `${ticker} ${isInCurrent ? '' : '↗'} <span class="tag-remove" onclick="event.stopPropagation(); removeTicker('${ticker}')">&times;</span>`;
-      tag.onclick = () => switchIndexToTicker(ticker);
+      let tagClass = 'tag';
+      if (item.isCustom) {
+        tagClass += ' custom-search';
+      } else if (!isInCurrent) {
+        tagClass += ' off-screen';
+      }
+
+      tag.className = tagClass;
+      tag.title = item.isCustom ? 'Custom Searched Stock' : (isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view.');
+      
+      tag.innerHTML = `${ticker} <span class="tag-remove" onclick="event.stopPropagation(); removeTicker('${ticker}')">&times;</span>`;
+      tag.onclick = () => {
+        if (!item.isCustom) switchIndexToTicker(ticker);
+      };
       
       container.appendChild(tag);
     });
   }
 
   function exportPortfolioCSV() {
-    if (selectedTickers.size === 0) {
-      alert('Please add at least one stock to export.');
+    if (selectedPortfolio.size === 0) {
+      alert('Please select or search at least one stock to export.');
       return;
     }
 
     let csvContent = "data:text/csv;charset=utf-8,Stock Ticker,Stock YTD Return (%),Benchmark Index,Benchmark YTD Return (%),Outperformance (%)\n";
 
-    selectedTickers.forEach(ticker => {
-      let foundItem = null;
-      let benchmarkName = '';
-      let benchmarkReturn = 0;
-
-      for (const countryKey in INDICES) {
-        for (const idxObj of INDICES[countryKey]) {
-          const list = globalData[idxObj.id] || [];
-          const match = list.find(i => i.ticker === ticker);
-          if (match) {
-            foundItem = match;
-            benchmarkName = idxObj.name;
-            benchmarkReturn = globalData.indexReturns ? (globalData.indexReturns[idxObj.id] || 0) : 0;
-            break;
-          }
-        }
-        if (foundItem) break;
-      }
-
-      if (foundItem) {
-        const alpha = (foundItem.ytd - benchmarkReturn).toFixed(2);
-        csvContent += `${ticker},${foundItem.ytd},${benchmarkName},${benchmarkReturn},${alpha}\n`;
-      }
+    selectedPortfolio.forEach(item => {
+      const alpha = item.benchmarkName !== 'Custom Search' 
+        ? (item.ytd - item.benchmarkReturn).toFixed(2) 
+        : 'N/A';
+        
+      csvContent += `${item.ticker},${item.ytd},${item.benchmarkName},${item.benchmarkReturn},${alpha}\n`;
     });
 
     const encodedUri = encodeURI(csvContent);

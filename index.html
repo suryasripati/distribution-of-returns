@@ -62,6 +62,7 @@
       letter-spacing: 0.5px;
       color: var(--text-muted);
       width: 70px;
+      flex-shrink: 0;
     }
 
     .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -82,6 +83,92 @@
       background: var(--primary-blue);
       color: #ffffff;
       border-color: var(--primary-blue);
+    }
+
+    .btn-export {
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: auto;
+      transition: background 0.2s ease;
+    }
+    .btn-export:hover { background: #059669; }
+
+    /* Search & Portfolio Section */
+    .search-container {
+      position: relative;
+      flex-grow: 1;
+      max-width: 450px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-blue);
+    }
+
+    .suggestions-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      display: none;
+      margin-top: 4px;
+    }
+
+    .suggestion-item {
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .suggestion-item:hover {
+      background: var(--bg-color);
+    }
+
+    .portfolio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-remove {
+      cursor: pointer;
+      font-weight: 700;
+      color: #4338ca;
     }
 
     .grid-container {
@@ -112,6 +199,20 @@
       cursor: pointer;
       word-break: break-word;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+    }
+
+    /* Highlight & Dim styles for search matches */
+    .tile.dimmed {
+      opacity: 0.25;
+    }
+
+    .tile.highlighted {
+      outline: 3px solid #f59e0b;
+      transform: scale(1.08);
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+      opacity: 1 !important;
     }
 
     @media (max-width: 1200px) {
@@ -119,6 +220,8 @@
     }
     @media (max-width: 600px) {
       .grid-container { grid-template-columns: repeat(2, 1fr); }
+      .control-row { flex-direction: column; align-items: flex-start; }
+      .btn-export { margin-left: 0; }
     }
   </style>
 </head>
@@ -145,6 +248,17 @@
       <span class="control-label">Index</span>
       <div class="btn-group" id="index-buttons"></div>
     </div>
+    
+    <!-- Portfolio Search Row -->
+    <div class="control-row">
+      <span class="control-label">Spot Stocks</span>
+      <div class="search-container">
+        <input type="text" id="ticker-search" class="search-input" placeholder="Spot your stocks: Enter tickers to highlight where they land..." autocomplete="off" />
+        <div id="suggestions" class="suggestions-dropdown"></div>
+      </div>
+      <button class="btn-export" onclick="exportPortfolioCSV()">Export Portfolio to CSV</button>
+    </div>
+    <div id="portfolio-tags-container" class="portfolio-tags"></div>
   </div>
 
   <div class="grid-container" id="buckets-grid"></div>
@@ -154,6 +268,7 @@
   let globalData = null;
   let currentCountry = 'US';
   let currentIndex = 'NASDAQ100';
+  let selectedTickers = new Set();
 
   const INDICES = {
     US: [
@@ -196,6 +311,7 @@
       document.getElementById('date-label').innerText = `Individual companies' YTD Returns as on ${globalData.lastUpdated}`;
       renderIndexButtons();
       renderDashboard();
+      setupSearch();
     } catch (e) {
       console.error('Error loading JSON data:', e);
     }
@@ -247,6 +363,8 @@
     const grid = document.getElementById('buckets-grid');
     grid.innerHTML = '';
 
+    const hasSelection = selectedTickers.size > 0;
+
     BUCKETS.forEach(b => {
       const filtered = constituents.filter(item => {
         if (b.min === -Infinity) return item.ytd < b.max;
@@ -254,7 +372,6 @@
         return item.ytd >= b.min && item.ytd < b.max;
       });
 
-      // Sort companies inside each bucket by YTD return (highest performance first)
       filtered.sort((a, b) => b.ytd - a.ytd);
 
       const col = document.createElement('div');
@@ -268,7 +385,14 @@
 
       filtered.forEach(item => {
         const tile = document.createElement('div');
-        tile.className = 'tile';
+        const isMatched = selectedTickers.has(item.ticker);
+
+        let tileClass = 'tile';
+        if (hasSelection) {
+          tileClass += isMatched ? ' highlighted' : ' dimmed';
+        }
+
+        tile.className = tileClass;
         tile.style.backgroundColor = b.tileColor;
         tile.innerText = item.ticker;
         tile.title = `${item.ticker}: ${item.ytd}%`;
@@ -277,6 +401,108 @@
 
       grid.appendChild(col);
     });
+
+    renderTags();
+  }
+
+  function setupSearch() {
+    const searchInput = document.getElementById('ticker-search');
+    const dropdown = document.getElementById('suggestions');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toUpperCase();
+      if (!query) {
+        dropdown.style.display = 'none';
+        return;
+      }
+
+      const constituents = globalData[currentIndex] || [];
+      const matches = constituents.filter(c => c.ticker.includes(query) && !selectedTickers.has(c.ticker));
+
+      if (matches.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+      }
+
+      dropdown.innerHTML = '';
+      matches.slice(0, 8).forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'suggestion-item';
+        div.innerText = `${item.ticker} (${item.ytd}%)`;
+        div.onclick = () => {
+          addTicker(item.ticker);
+          searchInput.value = '';
+          dropdown.style.display = 'none';
+        };
+        dropdown.appendChild(div);
+      });
+      dropdown.style.display = 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        dropdown.style.display = 'none';
+      }
+    });
+  }
+
+  function addTicker(ticker) {
+    selectedTickers.add(ticker);
+    renderDashboard();
+  }
+
+  function removeTicker(ticker) {
+    selectedTickers.delete(ticker);
+    renderDashboard();
+  }
+
+  function renderTags() {
+    const container = document.getElementById('portfolio-tags-container');
+    container.innerHTML = '';
+    selectedTickers.forEach(ticker => {
+      const tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.innerHTML = `${ticker} <span class="tag-remove" onclick="removeTicker('${ticker}')">&times;</span>`;
+      container.appendChild(tag);
+    });
+  }
+
+  function exportPortfolioCSV() {
+    if (selectedTickers.size === 0) {
+      alert('Please add at least one stock to export.');
+      return;
+    }
+
+    const indexReturn = globalData.indexReturns ? globalData.indexReturns[currentIndex] : 0;
+    const indexName = INDICES[currentCountry].find(i => i.id === currentIndex)?.name || currentIndex;
+
+    let csvContent = "data:text/csv;charset=utf-8,Stock Ticker,Stock YTD Return (%),Benchmark Index,Benchmark YTD Return (%),Outperformance (%)\n";
+
+    selectedTickers.forEach(ticker => {
+      let foundItem = null;
+      for (const idxKey in globalData) {
+        if (Array.isArray(globalData[idxKey])) {
+          const match = globalData[idxKey].find(i => i.ticker === ticker);
+          if (match) {
+            foundItem = match;
+            break;
+          }
+        }
+      }
+
+      if (foundItem) {
+        const alpha = (foundItem.ytd - indexReturn).toFixed(2);
+        csvContent += `${ticker},${foundItem.ytd},${indexName},${indexReturn},${alpha}\n`;
+      }
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `portfolio_returns_${currentIndex}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   loadData();

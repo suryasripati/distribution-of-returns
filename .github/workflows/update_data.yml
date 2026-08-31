@@ -18,80 +18,160 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install yfinance pandas requests lxml html5lib concurrent-log-handler
+        run: pip install yfinance pandas requests lxml html5lib
 
       - name: Fetch Prices & Update JSON
         run: |
           python - << 'EOF'
           import datetime
           import json
+          import pandas as pd
           import yfinance as yf
-          from concurrent.futures import ThreadPoolExecutor, as_completed
-          from constituents import (
-              NASDAQ100_TICKERS, SP500_TICKERS, RUSSELL_2000_TICKERS,
-              NIFTY_50_TICKERS, NIFTY_NEXT50_TICKERS, NSE_500_TICKERS,
-              NIFTY_MIDCAP100_TICKERS, NIFTY_IT_TICKERS, NIFTY_BANK_TICKERS,
-              NIFTY_FINSRV_TICKERS
-          )
+          import time
+          import requests
 
-          indices_config = {
-              "NASDAQ100": NASDAQ100_TICKERS,
-              "SP500": SP500_TICKERS,
-              "RUSSELL2000": RUSSELL_2000_TICKERS,
-              "NIFTY50": NIFTY_50_TICKERS,
-              "NIFTYNEXT50": NIFTY_NEXT50_TICKERS,
-              "NIFTY500": NSE_500_TICKERS,
-              "NIFTYMIDCAP100": NIFTY_MIDCAP100_TICKERS,
-              "NIFTYIT": NIFTY_IT_TICKERS,
-              "NIFTYBANK": NIFTY_BANK_TICKERS,
-              "NIFTYFINSRV": NIFTY_FINSRV_TICKERS
-          }
+          HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
-          BENCHMARK_TICKERS = {
-              "NASDAQ100": "^NDX", "SP500": "^GSPC", "RUSSELL2000": "^RUT",
-              "NIFTY50": "^NSEI", "NIFTYNEXT50": "^NSMIDCP", "NIFTY500": "^CRSLDX",
-              "NIFTYMIDCAP100": "^NSEMDCP100", "NIFTYIT": "^CNXIT",
-              "NIFTYBANK": "^NSEBANK", "NIFTYFINSRV": "NIFTY_FIN_SERVICE.NS"
-          }
+          # --- HARDCODED BASE LISTS ---
+          HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
-          def download_chunk(batch):
-              chunk_results = {}
-              start_date = f"{datetime.date.today().year}-01-01"
+          HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
+
+          HARDCODED_NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","OFSS"]
+
+          HARDCODED_NIFTY_BANK = ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]
+
+          HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
+
+          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE","AIAENG","ASTRAZEN","ATUL","AUTOMBDNM","BBNL","BCG","BEML","BLSTARLTD","CARBORUNIV","CASTROLIND","CEATLTD","CENTURYTEX","CERA","CESC","CHALET","CHEMCON","CITYUNIONB","CREDITACC","CYIENT","DCMSHRIRAM","DEEPAKFERT","DEVYANI","EIDPARRY","EQUITASBNK","ERIS","FORTIS","GESHIP","GLS","GODREJIND","HAPPSTMNDS"]
+
+          HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
+
+          HARDCODED_NIFTY_500 = [
+              "360ONE","3MINDIA","ABB","ACC","ACLGATI","AARTIIND","AAVAS","ABBOTINDIA","ABCAPITAL","ABFRL","ACE","ADANIENSOL","ADANIENT","ADANIGREEN","ADANIPORTS","ADANIPOVR","ADECO","AETHER","AFFLE","AFCONS","AGI","AIAENG","AJANTPHARM","AKZOINDIA","ALAMBICLTD","ALKEM","ALKYLAMINE","ALLCARGO","ALLSEC","ALOKINDS","ALTY","AMBER","AMBUJACEM","ANANDRATHI","ANANTRAJ","ANGELONE","ANURAS","APAPL","APARINDS","APEX","APLTD","APOLLOHOSP","APOLLOTYRE","APTUS","ARCHIDPLY","ARE&M","ASHOKLEY","ASHOKA","ASIANPAINT","ASTERDM","ASTRAL","ASTRAZEN","ATALREAL","ATGL","ATUL","AUBANK","AUROPHARMA","AVANTIFEED","AWL","AXISBANK","BARTRA","BAJAJ-AUTO","BAJAJHCARE","BAJAJHLDNG","BAJAJFINSV","BAJFINANCE","BALAMINES","BALKRISIND","BALMLAWRIE","BALRAMCHIN","BANDHANBNK","BANKBARODA","BANKINDIA","MAHABANK","BATAINDIA","BAYERCROP","BBL","BDL","BEL","BEML","BEPL","BERGEPAINT","BFUTILITIE","BGRENERGY","BHAGCHEM","BHARATFORG","BHARATGEAR","BHARATRAS","BHARTIARTL","BHEL","BIOCON","BIRLACORPN","BIRLAMONEY","BLISSGVS","BLS","BLSTARLTD","BLUEJET","BLUESTARCO","BOMDYEING","BOSCHLTD","BPCL","BRIGADE","BRITANNIA","BSE","BSOFT","CAMPUS","CANBK","CANFINHOME","CAPLIPOINT","CGPOWER","CARBORUNIV","CAREERP","CASTROLIND","CCL","CEATLTD","CENTRALBK","CDSL","CENTURYPLY","CENTURYTEX","CERA","CESC","CGCL","CHALET","CHAMBLFERT","CHEMCON","CHEMFAB","CHAMBLFERT","CHENAIPETRO","CHOLAFIN","CHOLAHLDNG","CIPLA","CLEAN","CLSEL","COALINDIA","COCHINSHIP","COFORGE","COLPAL","CIPOLL","CONCOR","COROMANDEL","CRAFTSMAN","CREDITACC","CROMPTON","CSBBANK","CUMMINSIND","CYIENT","DCAL","DCBBANK","DCM","DCMSHRIRAM","DEEPAKFERT","DEEPAKNTR","DELHIVERY","DELTACORP","DEN","DEVYANI","DIVISLAB","DIXON","DLF","DMART","DOCKYARD","DODLA","DOLATALG","DOLLAR","DRREDDY","ECLERX","EDELWEISS","EICHERMOT","EIDPARRY","EIHOTEL","ELGIEQUIP","EMAMILTD","EMIL","EMKARE","EMMBI","ENDURANCE","ENGINEERSIN","EPL","EQUITASBNK","ERIS","ESCORTS","EXIDEIND","FDC","FEDERALBNK","FACT","FINCABLES","FINPIPE","FINOPB","FLAIR","FSL","FORTIS","FOUNDRY","GABRIEL","GAIL","GALAXYSURF","GANESHBE","GARFIBRES","GATEWAY","GICRE","GILLETTE","GLAND","GLAXO","GLENMARK","GLS","GMDCLTD","GODREJAGRO","GODREJCP","GODREJIND","GODREJPROP","GOKEX","GOKULDAS","GOLDAM","GPIL","GPPL","GRANULES","GRAPHTITE","GRASIM","GRAVITA","GREAVESCOT","GRINDWELL","GSFC","GSPL","GTPL","GUJGASLTD","GMDCLTD","GNFC","GVKPIL","HAL","HAPPSTMNDS","HATHWAY","HAVELLS","HCLTECH","HDFCAMC","HDFCBANK","HDFCLIFE","HEG","HERITGFOOD","HEROMOTOCO","HFCL","HGS","HIKAL","HIL","HIMATSEIDE","HINDALCO","HINDCOPPER","HINDOILEX","HINDPETRO","HINDUNILVR","HINDZINC","HITACHI","HOMEFIRST","HONAUT","HUDCO","HYUNDAI","IBREALEST","IBULHSGFIN","ICICIBANK","ICICIGI","ICICIPRULI","ICIL","ICRA","IDBI","IDFCFIRSTB","IEX","IFCI","IIFL","IIFLSEC","IMAGICAA","INDHOTEL","INDIACEM","INDIAGLYCO","INDIAMART","INDIANB","INDIANHOSP","INDIGO","INDIGOPNTS","INDUSINDBK","INDUSTOWER","INFIBEAM","NAUKRI","INFY","INGERRAND","INOXGREEN","INOXINDIA","INOXWIND","INTELLECT","IOC","IOB","IPCALAB","IRCB","IRCTC","IRFC","IREDA","IRON","ISEC","ITC","ITDC","ITDCEM","ITI","J&KBANK","JAGRAN","JAIBALAJI","JAICORPLTD","JAMNAAUTO","JBCHEPHARM","JINDALSAW","JINDALSTEL","JINDALWORLD","JIOFIN","JKCEMENT","JKPAPER","JKTYRE","JMFINANCIL","JSWENERGY","JSWHL","JSWINFRA","JSWSTEEL","JTEKTINDIA","JUBLFOOD","JUBLINGREA","JUBLPHARMA","JUSTDIAL","JYOTHYLAB","KABRAEXTRU","KAJARIACER","KPITTECH","KALYANKJIL","KANSAINER","KARURVYSYA","KEC","KEI","KENNAMET","KFINTECH","KIKI","KIRLOSENG","KIRLOSIND","KMS","KNRCON","KOLTEPATIL","KOTAKBANK","KPITTECH","KPRMILL","KRBL","KSB","KSCL","KTC","L&TFH","LAOPALA","LAURUSLABS","LXCHEM","LEMONTREE","LICHSGFIN","LICOFI","LINDEINDIA","LLOYDSME","LODHA","LTIM","LT","LTTS","LUPIN","LUXIND","M&M","M&MFIN","MAFAB","MAGADSUGAR","MAGNUM","MAHABANK","MAHINDCIE","MAHLIFE","MAHLOG","MANALIPETC","MANAPPURAM","MANKIND","MAPMYINDIA","MARICO","MARKSANS","MARUTI","MASTEK","MATRIMONY","MAXHEALTH","MAZDOCK","MEDANTA","MEDPLUS","METROPOLIS","MFSL","MGL","MHAR","MHRIL","MICROLTD","MIDHANI","MINDACORP","MSUMI","MOIL","MOTILALOFS","MOTHERSON","MPHASIS","MPSLTD","MRF","MRPL","MSTCLTD","MTARTECH","MTNL","MUTHOOTFIN","NAM-INDIA","NATCOPHARM","NATIONALUM","NAVINFLUOR","NAZARA","NBCC","NCC","NEOGEN","NESCO","NESTLEIND","NETWEB","NETWORK18","NEULANDLAB","NEWGEN","NH","NHPC","NIITLTD","NIITMTS","NIPPON","NLCINDIA","NMDC","NOCIL","NOVA","NTPC","NUVAMA","NUVOCO","OBEROIRLTY","OFSS","OIL","OLECTRA","OMAXE","ONGC","ORIENTCEM","ORIENTELEC","ORIENTPAPER","PAISALO","PALRED","PARAGMILK","PARAS","PATANJALI","PATELENG","PAYTM","PCJEWELLER","PFC","PFIZER","PGHL","PGHH","PHOENIXLTD","PIDILITIND","PIIND","PNB","PNBHOUSING","PNCINFRA","POLICYBZR","POLYCAB","POLYMED","POLYPLEX","POONAWALLA","POWERGRID","POWMECH","PRAJIND","PRESTIGE","PRINCEPIPE","PRICOLLTD","PRSMJOHNSN","PNCINFRA","PTC","PVRINOX","RAMCOCEAT","RAMCOCEM","RANASUG","RBLBANK","RCF","RECLTD","REDINGTON","RELIANCE","RELIGARE","RITES","RKFORGE","ROSSARI","ROUTE","RPSG","RSYSTEMS","RTL","RITES","RVNL","SAIL","SANOFI","SANSERA","SAPPHIRE","SARDAEN","SAREGAMA","SBICARD","SBILIFE","SBIN","SCHAEFFLER","SCHNEIDER","SCI","SDF","SEAMECLTD","SELAM","SHAKTIPUMP","SHARDACROP","SHARDAMOTR","SHAREINDIA","SHEL","SHK","SHOPERSTOP","SHREDIGCEM","SHREECEM","RENUKA","SHRIRAMFIN","SHRIRAMPST","SHYAMMETL","SIEMENS","SIGNATURE","SJS","SKFINDIA","SKIPPER","SOBHA","SOLARINDS","SONACOMS","SONATSOFTW","SOUTHBANK","SPARC","SRF","SRHHYPOLTD","STARHEALTH","STARCEMENT","STLTECH","SUMICHEM","SUNDARMFIN","SUNDRMFAST","SUNPHARMA","SUNTV","SUNTECK","SUPERIOR","SUPRAJIT","SUPREMEIND","SUZLON","SWANENERGY","SYNGENE","SYRMA","TATACOMM","TATACONSUM","TATAELXSI","TATAMOTORS","TATAPOWER","TATASTEEL","TATATECH","TTML","TCS","TECHM","TECHNOE","TEJASNET","TEXRAIL","NIACL","THERMAX","THOMASCOOK","THYROCARE","TIDEWATER","TIIL","TIINDIA","TIMKEN","TIPSMUSIC","TITAN","TNPL","TORNTPHARM","TORNTPOWER","TRENT","TRIDENT","TRIVENI","TRITURBINE","TI","TVSMOTOR","TVSSCS","TVTODAY","UBL","UCOBANK","UFLEX","UGRASEN","ULTRACEMCO","UNIONBANK","UNIPARTS","UNITDSPR","UNOMINDA","UPL","UTIAMC","VAIBHAVGBL","VAKRANGEE","VALIANTORG","VGUARD","VBL","VEDL","VENKEYS","VESUVIUS","VIJAYA","VINATIORGA","VIPIND","VOLTAS","VRLLOG","VSTIND","VSTTILLERS","VTL","WABAG","WELCORP","WELSPUNLIV","WESTLIFE","WHIRLPOOL","WILLAMAGOR","WIPRO","WOCKPHARM","WONDERLA","YATHARTH","YESBANK","ZEEL","ZENTEC","ZENSARTECH","ZOMATO","ZUARI","ZYDUSLIFE"
+          ]
+
+          def get_nasdaq100():
               try:
-                  df = yf.download(batch, start=start_date, progress=False, threads=False)
-                  closes = df['Close'] if 'Close' in df else df
-                  for t in batch:
-                      try:
-                          series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
-                          if len(series) > 1:
-                              start_p = float(series.iloc[0])
-                              curr_p = float(series.iloc[-1])
-                              if start_p > 0:
-                                  ytd = ((curr_p - start_p) / start_p) * 100
-                                  clean_name = t.replace('.NS', '')
-                                  chunk_results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
-                      except Exception:
-                          pass
+                  url = 'https://en.wikipedia.org/wiki/NASDAQ-100'
+                  r = requests.get(url, headers=HEADERS, timeout=10)
+                  tables = pd.read_html(r.text)
+                  for t in tables:
+                      if 'Ticker' in t.columns or 'Symbol' in t.columns:
+                          col = 'Ticker' if 'Ticker' in t.columns else 'Symbol'
+                          syms = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
+                          if len(syms) >= 95:
+                              return syms
               except Exception:
                   pass
-              return chunk_results
+              return HARDCODED_NASDAQ100
 
-          def fetch_robust_list(ticker_list, batch_size=20):
-              ticker_list = list(dict.fromkeys(ticker_list))
+          def get_sp500_data():
+              sp500_list = []
+              gics_map = {
+                  "SP500_IT": [],
+                  "SP500_FIN": [],
+                  "SP500_HEALTH": [],
+                  "SP500_CONS_DISC": [],
+                  "SP500_ENERGY": []
+              }
+              try:
+                  url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+                  r = requests.get(url, headers=HEADERS, timeout=10)
+                  tables = pd.read_html(r.text)
+                  df = tables[0]
+                  
+                  symbol_col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
+                  sector_col = 'GICS Sector' if 'GICS Sector' in df.columns else df.columns[3]
+                  
+                  for _, row in df.iterrows():
+                      sym = str(row[symbol_col]).replace('.', '-')
+                      sec = str(row[sector_col]).strip()
+                      sp500_list.append(sym)
+                      
+                      if sec == 'Information Technology':
+                          gics_map["SP500_IT"].append(sym)
+                      elif sec == 'Financials':
+                          gics_map["SP500_FIN"].append(sym)
+                      elif sec == 'Health Care':
+                          gics_map["SP500_HEALTH"].append(sym)
+                      elif sec == 'Consumer Discretionary':
+                          gics_map["SP500_CONS_DISC"].append(sym)
+                      elif sec == 'Energy':
+                          gics_map["SP500_ENERGY"].append(sym)
+              except Exception as e:
+                  print(f"Error scraping S&P 500 GICS sectors: {e}")
+              return sp500_list, gics_map
+
+          def fetch_robust_list(ticker_list, batch_size=50):
               results = {}
-              chunks = [ticker_list[i:i + batch_size] for i in range(0, len(ticker_list), batch_size)]
+              start_date = f"{datetime.date.today().year}-01-01"
               
-              with ThreadPoolExecutor(max_workers=4) as executor:
-                  future_to_chunk = {executor.submit(download_chunk, chunk): chunk for chunk in chunks}
-                  for future in as_completed(future_to_chunk):
-                      res = future.result()
-                      results.update(res)
+              for i in range(0, len(ticker_list), batch_size):
+                  batch = ticker_list[i:i + batch_size]
+                  try:
+                      df = yf.download(batch, start=start_date, progress=False)
+                      closes = df['Close'] if 'Close' in df else df
+                      
+                      for t in batch:
+                          try:
+                              series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
+                              if len(series) > 0:
+                                  start_p = float(series.iloc[0])
+                                  curr_p = float(series.iloc[-1])
+                                  ytd = ((curr_p - start_p) / start_p) * 100
+                                  clean_name = t.replace('.NS', '')
+                                  results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
+                          except Exception:
+                              pass
+                  except Exception:
+                      pass
+                  time.sleep(0.05)
 
               out = []
               for t in ticker_list:
+                  clean_name = t.replace('.NS', '')
                   if t in results:
                       out.append(results[t])
+                  else:
+                      out.append({"ticker": clean_name, "ytd": 0.0})
+
               return out
+
+          sp500_all, gics_sectors = get_sp500_data()
+
+          indices_config = {
+              "NASDAQ100": get_nasdaq100(),
+              "SP500": sp500_all,
+              "SP500_IT": gics_sectors["SP500_IT"],
+              "SP500_FIN": gics_sectors["SP500_FIN"],
+              "SP500_HEALTH": gics_sectors["SP500_HEALTH"],
+              "SP500_CONS_DISC": gics_sectors["SP500_CONS_DISC"],
+              "SP500_ENERGY": gics_sectors["SP500_ENERGY"],
+              "NIFTY50": [f"{t}.NS" for t in HARDCODED_NIFTY_50],
+              "NIFTYNEXT50": [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50],
+              "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
+              "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
+              "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
+              "NIFTYMIDCAP100": [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100],
+              "NIFTY500": [f"{t}.NS" for t in list(dict.fromkeys(HARDCODED_NIFTY_500))]
+          }
+
+          BENCHMARK_TICKERS = {
+              "NASDAQ100": "^NDX",
+              "SP500": "^GSPC",
+              "SP500_IT": "XLK",
+              "SP500_FIN": "XLF",
+              "SP500_HEALTH": "XLV",
+              "SP500_CONS_DISC": "XLY",
+              "SP500_ENERGY": "XLE",
+              "NIFTY50": "^NSEI",
+              "NIFTYNEXT50": "^NSMIDCP",
+              "NIFTYIT": "^CNXIT",
+              "NIFTYBANK": "^NSEBANK",
+              "NIFTYMIDCAP100": "^NSEMDCP100",
+              "NIFTY500": "^CRSLDX"
+          }
 
           output = {
               "lastUpdated": datetime.date.today().strftime("%b %d, %Y"),
@@ -100,29 +180,27 @@ jobs:
 
           parsed_data = {}
           for name, tickers in indices_config.items():
-              print(f"Fetching {name} ({len(tickers)} tickers)...")
+              print(f"Fetching constituents for {name} ({len(tickers)} tickers)...")
               parsed_data[name] = fetch_robust_list(tickers)
               output[name] = parsed_data[name]
 
           for idx_name in indices_config.keys():
-              benchmark_fetched = False
               if idx_name in BENCHMARK_TICKERS:
                   try:
                       t = yf.Ticker(BENCHMARK_TICKERS[idx_name])
                       hist = t.history(start=f"{datetime.date.today().year}-01-01")
                       if not hist.empty and 'Close' in hist:
                           s = hist['Close'].dropna()
-                          if len(s) > 1:
+                          if len(s) > 0:
                               ytd = round(((float(s.iloc[-1]) - float(s.iloc[0])) / float(s.iloc[0])) * 100, 2)
                               output["indexReturns"][idx_name] = ytd
-                              benchmark_fetched = True
+                              continue
                   except Exception:
                       pass
 
-              if not benchmark_fetched:
-                  constituents = parsed_data.get(idx_name, [])
-                  valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
-                  output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2) if valid_ytds else 0.0
+              constituents = parsed_data.get(idx_name, [])
+              valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
+              output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2) if valid_ytds else 0.0
 
           with open('data.json', 'w') as f:
               json.dump(output, f, indent=2)
@@ -132,6 +210,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-          git add data.json constituents.py
-          git commit -m "Standardize index keys and update constituent data [skip ci]" || exit 0
+          git add data.json
+          git commit -m "Fix YAML syntax [skip ci]" || exit 0
           git push

@@ -99,7 +99,7 @@
     }
     .btn-export:hover { background: #059669; }
 
-    /* Search Container */
+    /* Search & Dynamic Suggestions */
     .search-container {
       position: relative;
       flex-grow: 1;
@@ -116,9 +116,7 @@
       transition: border-color 0.2s;
     }
 
-    .search-input:focus {
-      border-color: var(--primary-blue);
-    }
+    .search-input:focus { border-color: var(--primary-blue); }
 
     .suggestions-dropdown {
       position: absolute;
@@ -128,10 +126,10 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      max-height: 280px;
+      max-height: 260px;
       overflow-y: auto;
       z-index: 100;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
       display: none;
       margin-top: 4px;
     }
@@ -145,28 +143,17 @@
       align-items: center;
       border-bottom: 1px solid var(--border-color);
     }
+    .suggestion-item:last-child { border-bottom: none; }
+    .suggestion-item:hover { background: var(--bg-color); }
 
-    .suggestion-item:last-child {
-      border-bottom: none;
-    }
+    .suggestion-meta { font-size: 11px; color: var(--text-muted); }
 
-    .suggestion-item:hover {
-      background: var(--bg-color);
+    .suggestion-add-custom {
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 600;
     }
-
-    .suggestion-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .badge-source {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: #e2e8f0;
-      color: #475569;
-    }
+    .suggestion-add-custom:hover { background: #dbeafe; }
 
     .portfolio-tags {
       display: flex;
@@ -188,15 +175,8 @@
       cursor: pointer;
     }
 
-    .tag.off-screen {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .tag.custom-search {
-      background: #e0f2fe;
-      color: #0369a1;
-    }
+    .tag.off-screen { background: #fef3c7; color: #92400e; }
+    .tag.custom-tag { background: #e0f2fe; color: #0369a1; }
 
     .tag-remove {
       cursor: pointer;
@@ -205,7 +185,7 @@
       margin-left: 2px;
     }
     .tag.off-screen .tag-remove { color: #b45309; }
-    .tag.custom-search .tag-remove { color: #0284c7; }
+    .tag.custom-tag .tag-remove { color: #0284c7; }
 
     .grid-container {
       display: grid;
@@ -248,9 +228,7 @@
       opacity: 1 !important;
     }
 
-    .tile.custom-tile {
-      border: 2px dashed #0284c7;
-    }
+    .tile.custom-tile { border: 2px dashed #0284c7; }
 
     @media (max-width: 1200px) {
       .grid-container { grid-template-columns: repeat(5, 1fr); }
@@ -290,7 +268,7 @@
     <div class="control-row">
       <span class="control-label">Spot Stocks</span>
       <div class="search-container">
-        <input type="text" id="ticker-search" class="search-input" placeholder="Search any stock worldwide (e.g. IONQ, Cyient, SOUN)..." autocomplete="off" />
+        <input type="text" id="ticker-search" class="search-input" placeholder="Search any stock ticker (e.g. TSLA, IONQ, CYIENT)..." autocomplete="off" />
         <div id="suggestions" class="suggestions-dropdown"></div>
       </div>
       <button class="btn-export" onclick="exportPortfolioCSV()">Export Portfolio to CSV</button>
@@ -306,16 +284,22 @@
   let currentCountry = 'US';
   let currentIndex = 'NASDAQ100';
 
-  // Portfolio tracking
+  // Portfolio tracking structures
   const selectedPortfolio = new Map();
   const customSearchedStocks = new Map();
-  let debounceTimer = null;
 
-  // Matching backend keys directly to prevent empty grids
+  // Full Index Configurations Restored
   const INDICES = {
     US: [
       { id: 'NASDAQ100', name: 'NASDAQ 100' },
-      { id: 'RUSSELL2000', name: 'RUSSELL 2000' }
+      { id: 'SP500', name: 'S&P 500' },
+      { id: 'RUSSELL2000', name: 'RUSSELL 2000' },
+      { id: 'SP400', name: 'S&P 400 MIDCAP' },
+      { id: 'SP500_IT', name: 'S&P IT' },
+      { id: 'SP500_FIN', name: 'S&P FINANCIALS' },
+      { id: 'SP500_HEALTH', name: 'S&P HEALTHCARE' },
+      { id: 'SP500_CONS_DISC', name: 'S&P CONS DISCR' },
+      { id: 'SP500_ENERGY', name: 'S&P ENERGY' }
     ],
     INDIA: [
       { id: 'NIFTY50', name: 'NIFTY 50' },
@@ -418,7 +402,7 @@
 
     const constituents = [...(globalData[currentIndex] || [])];
     
-    // Inject off-grid custom searched stocks dynamically into matching grid
+    // Inject off-grid custom stocks if relevant
     customSearchedStocks.forEach((item) => {
       if (!constituents.some(c => c.ticker === item.ticker)) {
         constituents.push(item);
@@ -462,10 +446,9 @@
         tile.className = tileClass;
         tile.style.backgroundColor = b.tileColor;
         tile.innerText = item.ticker;
-        tile.title = `${item.ticker}: ${item.ytd}% ${item.isCustom ? '(Custom Search)' : ''}`;
+        tile.title = `${item.ticker}: ${item.ytd}% ${item.isCustom ? '(Custom Added)' : ''}`;
         
         tile.onclick = () => toggleTileSelection(item);
-
         col.appendChild(tile);
       });
 
@@ -518,45 +501,64 @@
     const dropdown = document.getElementById('suggestions');
 
     searchInput.addEventListener('input', () => {
-      clearTimeout(debounceTimer);
-      const query = searchInput.value.trim();
+      const query = searchInput.value.trim().toUpperCase();
 
       if (!query) {
         dropdown.style.display = 'none';
         return;
       }
 
-      // 1. Instant local index lookup across all JSON lists
-      const localMatches = [];
+      const matches = [];
       const seenTickers = new Set();
-      const upperQuery = query.toUpperCase();
 
+      // Search across ALL indices in globalData
       for (const countryKey in INDICES) {
         INDICES[countryKey].forEach(idxObj => {
           const list = globalData[idxObj.id] || [];
           list.forEach(item => {
-            if (item.ticker.includes(upperQuery) && !seenTickers.has(item.ticker)) {
+            if (item.ticker.includes(query) && !seenTickers.has(item.ticker)) {
               seenTickers.add(item.ticker);
-              localMatches.push({
+              matches.push({
                 ticker: item.ticker,
-                name: item.ticker,
                 ytd: item.ytd,
                 indexName: idxObj.name,
-                isLive: false
+                isCustom: false
               });
             }
           });
         });
       }
 
-      renderSuggestions(localMatches.slice(0, 5));
+      dropdown.innerHTML = '';
 
-      // 2. Query Live Yahoo Autocomplete Engine
-      if (query.length >= 2) {
-        debounceTimer = setTimeout(() => {
-          fetchYahooSearchAPI(query, localMatches);
-        }, 250);
+      // Render matching dataset results
+      matches.slice(0, 8).forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'suggestion-item';
+        div.innerHTML = `<span><strong>${item.ticker}</strong> (${item.ytd}%)</span> <span class="suggestion-meta">${item.indexName}</span>`;
+        div.onclick = () => {
+          addStockToPortfolio(item.ticker, item.ytd, false);
+          switchIndexToTicker(item.ticker);
+          searchInput.value = '';
+          dropdown.style.display = 'none';
+        };
+        dropdown.appendChild(div);
+      });
+
+      // Always append off-grid fallback option
+      if (!seenTickers.has(query)) {
+        const customDiv = document.createElement('div');
+        customDiv.className = 'suggestion-item suggestion-add-custom';
+        customDiv.innerHTML = `<span>+ Add "<strong>${query}</strong>" as Off-Grid Stock</span> <span class="suggestion-meta">Manual YTD</span>`;
+        customDiv.onclick = () => {
+          promptAndAddCustomStock(query);
+          searchInput.value = '';
+          dropdown.style.display = 'none';
+        };
+        dropdown.appendChild(customDiv);
       }
+
+      dropdown.style.display = 'block';
     });
 
     document.addEventListener('click', (e) => {
@@ -566,109 +568,14 @@
     });
   }
 
-  function fetchYahooSearchAPI(query, localMatches) {
-    const script = document.createElement('script');
-    const callbackName = 'yahooSearchCB_' + Math.random().toString(36).substr(2, 9);
-    
-    window[callbackName] = function(data) {
-      delete window[callbackName];
-      document.body.removeChild(script);
-      
-      const yahooQuotes = (data && data.ResultSet && data.ResultSet.Result) ? data.ResultSet.Result : [];
-      const combined = [...localMatches];
-
-      yahooQuotes.forEach(q => {
-        if (q.symbol && !combined.some(item => item.ticker === q.symbol)) {
-          combined.push({
-            ticker: q.symbol,
-            name: q.name || q.symbol,
-            ytd: null,
-            indexName: q.exchDisp || 'Global',
-            isLive: true
-          });
-        }
-      });
-
-      renderSuggestions(combined.slice(0, 10));
-    };
-
-    script.src = `https://autoc.finance.yahoo.com/autoc?query=${encodeURIComponent(query)}&region=1&lang=en&callback=${callbackName}`;
-    script.onerror = () => {
-      delete window[callbackName];
-      if (script.parentNode) document.body.removeChild(script);
-    };
-    document.body.appendChild(script);
-  }
-
-  function renderSuggestions(matches) {
-    const dropdown = document.getElementById('suggestions');
-    if (matches.length === 0) {
-      dropdown.style.display = 'none';
-      return;
-    }
-
-    dropdown.innerHTML = '';
-    matches.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'suggestion-item';
-      
-      const ytdStr = item.ytd !== null ? `(${item.ytd}%)` : '';
-      const sourceBadge = item.isLive ? '<span class="badge-source">Global Yahoo</span>' : `<span class="suggestion-meta">${item.indexName}</span>`;
-
-      div.innerHTML = `<span><strong>${item.ticker}</strong> ${item.name !== item.ticker ? item.name : ''} ${ytdStr}</span> ${sourceBadge}`;
-      div.onclick = () => selectSearchResult(item);
-      dropdown.appendChild(div);
-    });
-
-    dropdown.style.display = 'block';
-  }
-
-  async function selectSearchResult(item) {
-    const dropdown = document.getElementById('suggestions');
-    const searchInput = document.getElementById('ticker-search');
-    dropdown.style.display = 'none';
-    searchInput.value = '';
-
-    if (!item.isLive && item.ytd !== null) {
-      addStockToPortfolio(item.ticker, item.ytd, false);
-      switchIndexToTicker(item.ticker);
-    } else {
-      await fetchAndAddOffGridStock(item.ticker);
-    }
-  }
-
-  async function fetchAndAddOffGridStock(ticker) {
-    try {
-      // Direct YTD fetch using query2 endpoint
-      const res = await fetch(`https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=ytd&interval=1d`);
-      const data = await res.json();
-      
-      const result = data.chart.result[0];
-      const closePrices = result.indicators.quote[0].close.filter(p => p !== null && p !== undefined);
-
-      if (closePrices.length < 2) {
-        alert(`Insufficient price history to calculate YTD return for ${ticker}`);
-        return;
-      }
-
-      const startPrice = closePrices[0];
-      const latestPrice = closePrices[closePrices.length - 1];
-      const ytd = parseFloat((((latestPrice - startPrice) / startPrice) * 100).toFixed(2));
-
+  function promptAndAddCustomStock(ticker) {
+    const val = prompt(`Enter YTD % return for custom stock "${ticker}":`, "0.0");
+    if (val !== null && !isNaN(parseFloat(val))) {
+      const ytd = parseFloat(val);
       const customObj = { ticker, ytd, isCustom: true };
       customSearchedStocks.set(ticker, customObj);
       addStockToPortfolio(ticker, ytd, true);
       renderDashboard();
-    } catch (e) {
-      // Fallback prompt allowing manual input if network policy blocks external API calls
-      const manualYtd = prompt(`Unable to auto-fetch YTD for "${ticker}". Enter YTD % return manually (e.g. 15.5):`);
-      if (manualYtd !== null && !isNaN(parseFloat(manualYtd))) {
-        const ytd = parseFloat(manualYtd);
-        const customObj = { ticker, ytd, isCustom: true };
-        customSearchedStocks.set(ticker, customObj);
-        addStockToPortfolio(ticker, ytd, true);
-        renderDashboard();
-      }
     }
   }
 
@@ -690,13 +597,13 @@
       
       let tagClass = 'tag';
       if (item.isCustom) {
-        tagClass += ' custom-search';
+        tagClass += ' custom-tag';
       } else if (!isInCurrent) {
         tagClass += ' off-screen';
       }
 
       tag.className = tagClass;
-      tag.title = item.isCustom ? 'Custom Searched Stock' : (isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view.');
+      tag.title = item.isCustom ? 'Custom Off-Grid Stock' : (isInCurrent ? 'Click to highlight' : 'Belongs to another index. Click to view.');
       
       tag.innerHTML = `${ticker} <span class="tag-remove" onclick="event.stopPropagation(); removeTicker('${ticker}')">&times;</span>`;
       tag.onclick = () => {

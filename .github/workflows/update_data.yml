@@ -29,10 +29,12 @@ jobs:
           import yfinance as yf
           import time
           import requests
+          import io
 
-          HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+          HEADERS = {
+              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          }
 
-          # --- HARDCODED BASE LISTS ---
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
 
           HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
@@ -43,7 +45,7 @@ jobs:
 
           HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
 
-          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE","AIAENG","ASTRAZEN","ATUL","AUTOMBDNM","BBNL","BCG","BEML","BLSTARLTD","CARBORUNIV","CASTROLIND","CEATLTD","CENTURYTEX","CERA","CESC","CHALET","CHEMCON","CITYUNIONB","CREDITACC","CYIENT","DCMSHRIRAM","DEEPAKFERT","DEVYANI","EIDPARRY","EQUITASBNK","ERIS","FORTIS","GESHIP","GLS","GODREJIND","HAPPSTMNDS"]
+          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE"]
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
@@ -63,17 +65,17 @@ jobs:
               return HARDCODED_NASDAQ100
 
           def get_sp400():
-              """Fetch constituents directly from iShares S&P MidCap ETF (IJH)."""
               try:
                   url = "https://www.ishares.com/us/products/239724/ishares-core-sp-midcap-etf/1467271812596.ajax?fileType=csv&fileName=IJH_holdings&dataType=fund"
-                  df = pd.read_csv(url, skiprows=9)
+                  r = requests.get(url, headers=HEADERS, timeout=10)
+                  df = pd.read_csv(io.StringIO(r.text), skiprows=9)
                   if 'Ticker' in df.columns:
                       tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
-                      tickers = [t.replace('.', '-') for t in tickers if len(t) <= 5 and t not in ['USD', '-']]
+                      tickers = [t.replace('.', '-') for t in tickers if len(t) <= 5 and t.isalnum()]
                       if len(tickers) >= 300:
                           return tickers
               except Exception as e:
-                  print(f"iShares IJH fetch failed: {e}")
+                  print(f"iShares IJH error: {e}")
 
               try:
                   url = 'https://en.wikipedia.org/wiki/List_of_S%26P_400_companies'
@@ -85,37 +87,46 @@ jobs:
                           return [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
               except Exception:
                   pass
-
               return []
 
           def get_russell2000():
-              """Fetch full ~2000 constituents directly from iShares Russell 2000 ETF (IWM)."""
+              # Method 1: Fetch via iShares with explicit User-Agent
               try:
                   url = "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund"
-                  df = pd.read_csv(url, skiprows=9)
-                  if 'Ticker' in df.columns:
-                      tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
-                      # Filter valid tickers (ignore cash/currency rows)
-                      tickers = [t.replace('.', '-') for t in tickers if t.isalnum() or '-' in t]
-                      tickers = [t for t in tickers if len(t) <= 5 and t not in ['USD', 'XTSLA', '-']]
-                      if len(tickers) > 1000:
-                          return tickers
+                  r = requests.get(url, headers=HEADERS, timeout=15)
+                  if r.status_code == 200:
+                      df = pd.read_csv(io.StringIO(r.text), skiprows=9)
+                      if 'Ticker' in df.columns:
+                          tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
+                          tickers = [t.replace('.', '-') for t in tickers if len(t) <= 5 and t.isalnum()]
+                          if len(tickers) > 1000:
+                              return tickers
               except Exception as e:
-                  print(f"iShares IWM fetch failed: {e}")
+                  print(f"iShares IWM fetch error: {e}")
 
-              # Secondary backup if iShares changes CSV layout
+              # Method 2: Public US stock dataset fallback (~2000 symbols)
               try:
                   url = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
                   df = pd.read_csv(url)
-                  cols = [c for c in df.columns if 'symbol' in c.lower() or 'ticker' in c.lower()]
-                  if cols:
-                      syms = [str(x).replace('.', '-') for x in df[cols[0]].dropna().tolist() if len(str(x)) <= 5]
-                      if len(syms) > 500:
-                          return syms[:1800]
+                  col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
+                  syms = [str(x).replace('.', '-') for x in df[col].dropna().tolist() if len(str(x)) <= 5 and str(x).isalnum()]
+                  if len(syms) > 1000:
+                      return syms[100:1900]
               except Exception as e:
-                  print(f"Secondary Russell fallback failed: {e}")
+                  print(f"GitHub fallback error: {e}")
 
               return []
+
+          def get_nifty500():
+              # Aggregated list combining Nifty 50, Next 50, Midcap 100, and additional Indian constituents
+              nifty_combined = list(set(HARDCODED_NIFTY_50 + HARDCODED_NIFTY_NEXT50 + HARDCODED_NIFTY_MIDCAP100))
+              try:
+                  url = "https://raw.githubusercontent.com/indian-stock-market/nifty-500/main/nifty500.csv"
+                  df = pd.read_csv(url)
+                  col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
+                  return [f"{str(x).strip()}.NS" for x in df[col].dropna().tolist()]
+              except Exception:
+                  return [f"{t}.NS" for t in nifty_combined]
 
           def get_sp500_data():
               sp500_list = []
@@ -154,7 +165,7 @@ jobs:
                   print(f"Error scraping S&P 500 GICS sectors: {e}")
               return sp500_list, gics_map
 
-          def fetch_robust_list(ticker_list, batch_size=50):
+          def fetch_robust_list(ticker_list, batch_size=40):
               results = {}
               start_date = f"{datetime.date.today().year}-01-01"
               
@@ -201,6 +212,7 @@ jobs:
               "SP500_ENERGY": gics_sectors["SP500_ENERGY"],
               "NIFTY50": [f"{t}.NS" for t in HARDCODED_NIFTY_50],
               "NIFTYNEXT50": [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50],
+              "NIFTY500": get_nifty500(),
               "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
               "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
               "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
@@ -219,6 +231,7 @@ jobs:
               "SP500_ENERGY": "XLE",
               "NIFTY50": "^NSEI",
               "NIFTYNEXT50": "^NSMIDCP",
+              "NIFTY500": "^CRSLDX",
               "NIFTYIT": "^CNXIT",
               "NIFTYBANK": "^NSEBANK",
               "NIFTYMIDCAP100": "^NSEMDCP100"
@@ -262,5 +275,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fix Russell 2000 holding list source [skip ci]" || exit 0
+          git commit -m "Fix NIFTY500 mapping and iShares HTTP header download [skip ci]" || exit 0
           git push

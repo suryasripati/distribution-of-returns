@@ -47,14 +47,6 @@ jobs:
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
-          HARDCODED_SP400 = ["ALAB","INOD","IONQ","NBIS","TTMI","AOS","AA","ACM","AMED","AMKR","APOG","ARWR","AXTA","BC","BIG","BOC","BWXT","CACI","CBOE","CELH","CHES","CHDN","CFG","CR","CW","DAR","DKS","EPR","ESAB","FAF","FLOW","FWRD","GNTX","HALO","HAE","HWC","HUBB","INGR","ITGR","JBL","JLL","LSTR","LNW","MASI","MEDP","MMS","MTDR","MSA","MOH","MSA","MSI","MUSA","NEU","NJR","NVR","OGE","OLLI","OSK","PARK","PEN","PII","POOL","POST","PNTG","RH","RHI","RRC","RPM","RBC","SAIC","SEIC","SF","SM","SXI","THG","TOL","TTC","THO","TXRH","UGI","UNVR","VMI","WNC","WTRG","WSO","WCC","WING","WWD","YETI"]
-
-          HARDCODED_RUSSELL2000 = ["ALAB","INOD","IONQ","NBIS","TTMI","ACHR","ACLX","ADTN","ADPT","AGTI","AUPH","ASTS","BXRX","BLZE","CMAX","CLDX","COUR","CVRX","DNA","ENFN","EVGO","FLNC","FSLY","FATE","GIII","HYLN","JOBY","LUNR","LCID","MAXN","ME","MYTE","NMTC","NVVE","OKLO","OPK","PACB","PLUG","QS","QUBT","RGTI","RKLB","RUN","SAVA","SKYX","SLDP","SOUN","SPIR","SPCE","STEM","VERI","VLD","WKHS","XOS","ZEUS","ZI"]
-
-          HARDCODED_NIFTY_500 = [
-              "360ONE","3MINDIA","ABB","ACC","ACLGATI","AARTIIND","AAVAS","ABBOTINDIA","ABCAPITAL","ABFRL","ACE","ADANIENSOL","ADANIENT","ADANIGREEN","ADANIPORTS","ADANIPOVR","ADECO","AETHER","AFFLE","AFCONS","AGI","AIAENG","AJANTPHARM","AKZOINDIA","ALAMBICLTD","ALKEM","ALKYLAMINE","ALLCARGO","ALLSEC","ALOKINDS","ALTY","AMBER","AMBUJACEM","ANANDRATHI","ANANTRAJ","ANGELONE","ANURAS","APAPL","APARINDS","APEX","APLTD","APOLLOHOSP","APOLLOTYRE","APTUS","ARCHIDPLY","ARE&M","ASHOKLEY","ASHOKA","ASIANPAINT","ASTERDM","ASTRAL","ASTRAZEN","ATALREAL","ATGL","ATUL","AUBANK","AUROPHARMA","AVANTIFEED","AWL","AXISBANK","BARTRA","BAJAJ-AUTO","BAJAJHCARE","BAJAJHLDNG","BAJAJFINSV","BAJFINANCE","BALAMINES","BALKRISIND","BALMLAWRIE","BALRAMCHIN","BANDHANBNK","BANKBARODA","BANKINDIA","MAHABANK","BATAINDIA","BAYERCROP","BBL","BDL","BEL","BEML","BEPL","BERGEPAINT","BFUTILITIE","BGRENERGY","BHAGCHEM","BHARATFORG","BHARATGEAR","BHARATRAS","BHARTIARTL","BHEL","BIOCON","BIRLACORPN","BIRLAMONEY","BLISSGVS","BLS","BLSTARLTD","BLUEJET","BLUESTARCO","BOMDYEING","BOSCHLTD","BPCL","BRIGADE","BRITANNIA","BSE","BSOFT","CAMPUS","CANBK","CANFINHOME","CAPLIPOINT","CGPOWER","CARBORUNIV","CAREERP","CASTROLIND","CCL","CEATLTD","CENTRALBK","CDSL","CENTURYPLY","CENTURYTEX","CERA","CESC","CGCL","CHALET","CHAMBLFERT","CHEMCON","CHEMFAB","CHAMBLFERT","CHENAIPETRO","CHOLAFIN","CHOLAHLDNG","CIPLA","CLEAN","CLSEL","COALINDIA","COCHINSHIP","COFORGE","COLPAL","CIPOLL","CONCOR","COROMANDEL","CRAFTSMAN","CREDITACC","CROMPTON","CSBBANK","CUMMINSIND","CYIENT","DCAL","DCBBANK","DCM","DCMSHRIRAM","DEEPAKFERT","DEEPAKNTR","DELHIVERY","DELTACORP","DEN","DEVYANI","DIVISLAB","DIXON","DLF","DMART","DOCKYARD","DODLA","DOLATALG","DOLLAR","DRREDDY","ECLERX","EDELWEISS","EICHERMOT","EIDPARRY","EIHOTEL","ELGIEQUIP","EMAMILTD","EMIL","EMKARE","EMMBI","ENDURANCE","ENGINEERSIN","EPL","EQUITASBNK","ERIS","ESCORTS","EXIDEIND","FDC","FEDERALBNK","FACT","FINCABLES","FINPIPE","FINOPB","FLAIR","FSL","FORTIS","FOUNDRY","GABRIEL","GAIL","GALAXYSURF","GANESHBE","GARFIBRES","GATEWAY","GICRE","GILLETTE","GLAND","GLAXO","GLENMARK","GLS","GMDCLTD","GODREJAGRO","GODREJCP","GODREJIND","GODREJPROP","GOKEX","GOKULDAS","GOLDAM","GPIL","GPPL","GRANULES","GRAPHTITE","GRASIM","GRAVITA","GREAVESCOT","GRINDWELL","GSFC","GSPL","GTPL","GUJGASLTD","GMDCLTD","GNFC","GVKPIL","HAL","HAPPSTMNDS","HATHWAY","HAVELLS","HCLTECH","HDFCAMC","HDFCBANK","HDFCLIFE","HEG","HERITGFOOD","HEROMOTOCO","HFCL","HGS","HIKAL","HIL","HIMATSEIDE","HINDALCO","HINDCOPPER","HINDOILEX","HINDPETRO","HINDUNILVR","HINDZINC","HITACHI","HOMEFIRST","HONAUT","HUDCO","HYUNDAI","IBREALEST","IBULHSGFIN","ICICIBANK","ICICIGI","ICICIPRULI","ICIL","ICRA","IDBI","IDFCFIRSTB","IEX","IFCI","IIFL","IIFLSEC","IMAGICAA","INDHOTEL","INDIACEM","INDIAGLYCO","INDIAMART","INDIANB","INDIANHOSP","INDIGO","INDIGOPNTS","INDUSINDBK","INDUSTOWER","INFIBEAM","NAUKRI","INFY","INGERRAND","INOXGREEN","INOXINDIA","INOXWIND","INTELLECT","IOC","IOB","IPCALAB","IRCB","IRCTC","IRFC","IREDA","IRON","ISEC","ITC","ITDC","ITDCEM","ITI","J&KBANK","JAGRAN","JAIBALAJI","JAICORPLTD","JAMNAAUTO","JBCHEPHARM","JINDALSAW","JINDALSTEL","JINDALWORLD","JIOFIN","JKCEMENT","JKPAPER","JKTYRE","JMFINANCIL","JSWENERGY","JSWHL","JSWINFRA","JSWSTEEL","JTEKTINDIA","JUBLFOOD","JUBLINGREA","JUBLPHARMA","JUSTDIAL","JYOTHYLAB","KABRAEXTRU","KAJARIACER","KPITTECH","KALYANKJIL","KANSAINER","KARURVYSYA","KEC","KEI","KENNAMET","KFINTECH","KIKI","KIRLOSENG","KIRLOSIND","KMS","KNRCON","KOLTEPATIL","KOTAKBANK","KPITTECH","KPRMILL","KRBL","KSB","KSCL","KTC","L&TFH","LAOPALA","LAURUSLABS","LXCHEM","LEMONTREE","LICHSGFIN","LICOFI","LINDEINDIA","LLOYDSME","LODHA","LTIM","LT","LTTS","LUPIN","LUXIND","M&M","M&MFIN","MAFAB","MAGADSUGAR","MAGNUM","MAHABANK","MAHINDCIE","MAHLIFE","MAHLOG","MANALIPETC","MANAPPURAM","MANKIND","MAPMYINDIA","MARICO","MARKSANS","MARUTI","MASTEK","MATRIMONY","MAXHEALTH","MAZDOCK","MEDANTA","MEDPLUS","METROPOLIS","MFSL","MGL","MHAR","MHRIL","MICROLTD","MIDHANI","MINDACORP","MSUMI","MOIL","MOTILALOFS","MOTHERSON","MPHASIS","MPSLTD","MRF","MRPL","MSTCLTD","MTARTECH","MTNL","MUTHOOTFIN","NAM-INDIA","NATCOPHARM","NATIONALUM","NAVINFLUOR","NAZARA","NBCC","NCC","NEOGEN","NESCO","NESTLEIND","NETWEB","NETWORK18","NEULANDLAB","NEWGEN","NH","NHPC","NIITLTD","NIITMTS","NIPPON","NLCINDIA","NMDC","NOCIL","NOVA","NTPC","NUVAMA","NUVOCO","OBEROIRLTY","OFSS","OIL","OLECTRA","OMAXE","ONGC","ORIENTCEM","ORIENTELEC","ORIENTPAPER","PAISALO","PALRED","PARAGMILK","PARAS","PATANJALI","PATELENG","PAYTM","PCJEWELLER","PFC","PFIZER","PGHL","PGHH","PHOENIXLTD","PIDILITIND","PIIND","PNB","PNBHOUSING","PNCINFRA","POLICYBZR","POLYCAB","POLYMED","POLYPLEX","POONAWALLA","POWERGRID","POWMECH","PRAJIND","PRESTIGE","PRINCEPIPE","PRICOLLTD","PRSMJOHNSN","PNCINFRA","PTC","PVRINOX","RAMCOCEAT","RAMCOCEM","RANASUG","RBLBANK","RCF","RECLTD","REDINGTON","RELIANCE","RELIGARE","RITES","RKFORGE","ROSSARI","ROUTE","RPSG","RSYSTEMS","RTL","RITES","RVNL","SAIL","SANOFI","SANSERA","SAPPHIRE","SARDAEN","SAREGAMA","SBICARD","SBILIFE","SBIN","SCHAEFFLER","SCHNEIDER","SCI","SDF","SEAMECLTD","SELAM","SHAKTIPUMP","SHARDACROP","SHARDAMOTR","SHAREINDIA","SHEL","SHK","SHOPERSTOP","SHREDIGCEM","SHREECEM","RENUKA","SHRIRAMFIN","SHRIRAMPST","SHYAMMETL","SIEMENS","SIGNATURE","SJS","SKFINDIA","SKIPPER","SOBHA","SOLARINDS","SONACOMS","SONATSOFTW","SOUTHBANK","SPARC","SRF","SRHHYPOLTD","STARHEALTH","STARCEMENT","STLTECH","SUMICHEM","SUNDARMFIN","SUNDRMFAST","SUNPHARMA","SUNTV","SUNTECK","SUPERIOR","SUPRAJIT","SUPREMEIND","SUZLON","SWANENERGY","SYNGENE","SYRMA","TATACOMM","TATACONSUM","TATAELXSI","TATAMOTORS","TATAPOWER","TATASTEEL","TATATECH","TTML","TCS","TECHM","TECHNOE","TEJASNET","TEXRAIL","NIACL","THERMAX","THOMASCOOK","THYROCARE","TIDEWATER","TIIL","TIINDIA","TIMKEN","TIPSMUSIC","TITAN","TNPL","TORNTPHARM","TORNTPOWER","TRENT","TRIDENT","TRIVENI","TRITURBINE","TI","TVSMOTOR","TVSSCS","TVTODAY","UBL","UCOBANK","UFLEX","UGRASEN","ULTRACEMCO","UNIONBANK","UNIPARTS","UNITDSPR","UNOMINDA","UPL","UTIAMC","VAIBHAVGBL","VAKRANGEE","VALIANTORG","VGUARD","VBL","VEDL","VENKEYS","VESUVIUS","VIJAYA","VINATIORGA","VIPIND","VOLTAS","VRLLOG","VSTIND","VSTTILLERS","VTL","WABAG","WELCORP","WELSPUNLIV","WESTLIFE","WHIRLPOOL","WILLAMAGOR","WIPRO","WOCKPHARM","WONDERLA","YATHARTH","YESBANK","ZEEL","ZENTEC","ZENSARTECH","ZOMATO","ZUARI","ZYDUSLIFE"
-          ]
-
           def get_nasdaq100():
               try:
                   url = 'https://en.wikipedia.org/wiki/NASDAQ-100'
@@ -79,26 +71,29 @@ jobs:
                       if 'Symbol' in t.columns or 'Ticker' in t.columns:
                           col = 'Symbol' if 'Symbol' in t.columns else 'Ticker'
                           syms = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
-                          if len(syms) >= 100:
-                              return list(set(syms + HARDCODED_SP400))
+                          if len(syms) >= 300:
+                              return syms
               except Exception:
                   pass
-              return HARDCODED_SP400
+              # Fallback: GitHub raw CSV listing of S&P 400 constituents
+              try:
+                  url = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
+                  df = pd.read_csv(url)
+                  return [str(x).replace('.', '-') for x in df['Symbol'].dropna().tolist()]
+              except Exception:
+                  return HARDCODED_NASDAQ100
 
           def get_russell2000():
+              # Fetch broad US small-cap listings via public GitHub datasets
               try:
-                  url = 'https://en.wikipedia.org/wiki/Russell_2000_Index'
-                  r = requests.get(url, headers=HEADERS, timeout=10)
-                  tables = pd.read_html(r.text)
-                  for t in tables:
-                      if 'Ticker' in t.columns or 'Symbol' in t.columns:
-                          col = 'Ticker' if 'Ticker' in t.columns else 'Symbol'
-                          syms = [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
-                          if len(syms) >= 50:
-                              return list(set(syms + HARDCODED_RUSSELL2000))
+                  url = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
+                  df = pd.read_csv(url)
+                  syms = [str(x).replace('.', '-') for x in df['Symbol'].dropna().tolist() if len(str(x)) <= 5]
+                  if len(syms) > 500:
+                      return syms[:1500]  # Cap at 1500 to keep GitHub action runtime under limits
               except Exception:
                   pass
-              return HARDCODED_RUSSELL2000
+              return ["ALAB","INOD","IONQ","NBIS","TTMI","ACHR","ACLX","ADTN","ADPT","AGTI","AUPH","ASTS","EVGO","FLNC","FSLY","JOBY","LUNR","LCID","OKLO","PLUG","QS","QUBT","RGTI","RKLB","RUN","SOUN","SPCE","STEM"]
 
           def get_sp500_data():
               sp500_list = []
@@ -137,7 +132,7 @@ jobs:
                   print(f"Error scraping S&P 500 GICS sectors: {e}")
               return sp500_list, gics_map
 
-          def fetch_robust_list(ticker_list, batch_size=50):
+          def fetch_robust_list(ticker_list, batch_size=35):
               results = {}
               start_date = f"{datetime.date.today().year}-01-01"
               
@@ -150,25 +145,23 @@ jobs:
                       for t in batch:
                           try:
                               series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
-                              if len(series) > 0:
+                              if len(series) > 1:
                                   start_p = float(series.iloc[0])
                                   curr_p = float(series.iloc[-1])
-                                  ytd = ((curr_p - start_p) / start_p) * 100
-                                  clean_name = t.replace('.NS', '')
-                                  results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
+                                  if start_p > 0:
+                                      ytd = ((curr_p - start_p) / start_p) * 100
+                                      clean_name = t.replace('.NS', '')
+                                      results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
                           except Exception:
                               pass
                   except Exception:
                       pass
-                  time.sleep(0.05)
+                  time.sleep(0.1)
 
               out = []
               for t in ticker_list:
-                  clean_name = t.replace('.NS', '')
                   if t in results:
                       out.append(results[t])
-                  else:
-                      out.append({"ticker": clean_name, "ytd": 0.0})
 
               return out
 
@@ -189,8 +182,7 @@ jobs:
               "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
               "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
               "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
-              "NIFTYMIDCAP100": [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100],
-              "NIFTY500": [f"{t}.NS" for t in list(dict.fromkeys(HARDCODED_NIFTY_500))]
+              "NIFTYMIDCAP100": [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100]
           }
 
           BENCHMARK_TICKERS = {
@@ -207,8 +199,7 @@ jobs:
               "NIFTYNEXT50": "^NSMIDCP",
               "NIFTYIT": "^CNXIT",
               "NIFTYBANK": "^NSEBANK",
-              "NIFTYMIDCAP100": "^NSEMDCP100",
-              "NIFTY500": "^CRSLDX"
+              "NIFTYMIDCAP100": "^NSEMDCP100"
           }
 
           output = {
@@ -249,5 +240,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Add Russell 2000 and S&P 400 support [skip ci]" || exit 0
+          git commit -m "Optimize broad index fetching & rate limits [skip ci]" || exit 0
           git push

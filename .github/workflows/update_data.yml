@@ -25,19 +25,34 @@ jobs:
           python - << 'EOF'
           import datetime
           import json
-          import pandas as pd
           import yfinance as yf
-          import time
           from concurrent.futures import ThreadPoolExecutor, as_completed
-          from constituents import NSE_500_TICKERS, RUSSELL_2000_TICKERS
+          from constituents import (
+              NASDAQ100_TICKERS, SP500_TICKERS, RUSSELL_2000_TICKERS,
+              NIFTY_50_TICKERS, NIFTY_NEXT50_TICKERS, NSE_500_TICKERS,
+              NIFTY_MIDCAP100_TICKERS, NIFTY_IT_TICKERS, NIFTY_BANK_TICKERS,
+              NIFTY_FINSRV_TICKERS
+          )
 
-          HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
-          HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
-          HARDCODED_NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","OFSS"]
-          HARDCODED_NIFTY_BANK = ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]
-          HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
-          HARDCODED_NIFTY_MIDCAP100 = ["3MINDIA","ABB","ACC","AAVAS","AARTIIND","ABBOTINDIA","ABCAPITAL","ABFRL","ADANIENSOL","ADANIPOWER","ALKYLAMINE","ALKEM","AMBUJACEM","APLLTD","APOLLOTYRE","ASHOKLEY","ASTRAL","ATUL","AUBANK","AUROPHARMA","BALKRISIND","BANDHANBNK","BANKBARODA","BANKINDIA","BATAINDIA","BEL","BHARATFORG","BHEL","BIOCON","BIRLACORPN","BSOFT","CANBK","CANFINHOME","CGPOWER","CHAMBLFERT","CHOLAFIN","COFORGE","COLPAL","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","DLF","ESCORTS","EXIDEIND","FEDERALBNK","FORTIS","GAIL","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HAPPIESTM","HAVELLS","HDFCAMC","HINDPETRO","HONAUT","IDFCFIRSTB","INDIAMART","INDHOTEL","INDIANB","INDUSINDBK","INDUSTOWER","IPCALAB","IRCTC","IRFC","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","L&TFH","LAURUSLABS","LICHSGFIN","LUPIN","MAXHEALTH","MFSL","MGL","MPHASIS","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","OFSS","OIL","PAGEIND","PERSISTENT","PETRONET","PFC","POLYCAB","PNB","POONAWALLA","RBLBANK","REC","RELAXO","SAIL","SHRIRAMFIN","SUZLON","TATACOMM","TATAELXSI","TATAPOWER","TIINDIA","TORNTPOWER","TRENT","TVSMOTOR","UBL","UNIONBANK","UPL","VBL","IDEA","VOLTAS","YESBANK","ZEEL","ZYDUSLIFE"]
-          HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
+          indices_config = {
+              "NASDAQ100": NASDAQ100_TICKERS,
+              "SP500": SP500_TICKERS,
+              "RUSSELL2000": RUSSELL_2000_TICKERS,
+              "NIFTY50": NIFTY_50_TICKERS,
+              "NIFTYNEXT50": NIFTY_NEXT50_TICKERS,
+              "NIFTY500": NSE_500_TICKERS,
+              "NIFTYMIDCAP100": NIFTY_MIDCAP100_TICKERS,
+              "NIFTYIT": NIFTY_IT_TICKERS,
+              "NIFTYBANK": NIFTY_BANK_TICKERS,
+              "NIFTYFINSRV": NIFTY_FINSRV_TICKERS
+          }
+
+          BENCHMARK_TICKERS = {
+              "NASDAQ100": "^NDX", "SP500": "^GSPC", "RUSSELL2000": "^RUT",
+              "NIFTY50": "^NSEI", "NIFTYNEXT50": "^NSMIDCP", "NIFTY500": "^CRSLDX",
+              "NIFTYMIDCAP100": "^NSEMDCP100", "NIFTYIT": "^CNXIT",
+              "NIFTYBANK": "^NSEBANK", "NIFTYFINSRV": "NIFTY_FIN_SERVICE.NS"
+          }
 
           def download_chunk(batch):
               chunk_results = {}
@@ -61,12 +76,12 @@ jobs:
                   pass
               return chunk_results
 
-          def fetch_robust_list(ticker_list, batch_size=25):
+          def fetch_robust_list(ticker_list, batch_size=20):
               ticker_list = list(dict.fromkeys(ticker_list))
               results = {}
               chunks = [ticker_list[i:i + batch_size] for i in range(0, len(ticker_list), batch_size)]
               
-              with ThreadPoolExecutor(max_workers=3) as executor:
+              with ThreadPoolExecutor(max_workers=4) as executor:
                   future_to_chunk = {executor.submit(download_chunk, chunk): chunk for chunk in chunks}
                   for future in as_completed(future_to_chunk):
                       res = future.result()
@@ -77,24 +92,6 @@ jobs:
                   if t in results:
                       out.append(results[t])
               return out
-
-          indices_config = {
-              "NASDAQ100": HARDCODED_NASDAQ100,
-              "RUSSELL2000": RUSSELL_2000_TICKERS,
-              "NIFTY50": [f"{t}.NS" for t in HARDCODED_NIFTY_50],
-              "NIFTYNEXT50": [f"{t}.NS" for t in HARDCODED_NIFTY_NEXT50],
-              "NIFTY500": NSE_500_TICKERS,
-              "NIFTYIT": [f"{t}.NS" for t in HARDCODED_NIFTY_IT],
-              "NIFTYBANK": [f"{t}.NS" for t in HARDCODED_NIFTY_BANK],
-              "NIFTYFINSRV": [f"{t}.NS" for t in HARDCODED_NIFTY_FINSRV],
-              "NIFTYMIDCAP100": [f"{t}.NS" for t in HARDCODED_NIFTY_MIDCAP100]
-          }
-
-          BENCHMARK_TICKERS = {
-              "NASDAQ100": "^NDX", "RUSSELL2000": "^RUT", "NIFTY50": "^NSEI", 
-              "NIFTYNEXT50": "^NSMIDCP", "NIFTY500": "^CRSLDX", "NIFTYIT": "^CNXIT",
-              "NIFTYBANK": "^NSEBANK", "NIFTYMIDCAP100": "^NSEMDCP100"
-          }
 
           output = {
               "lastUpdated": datetime.date.today().strftime("%b %d, %Y"),
@@ -108,22 +105,24 @@ jobs:
               output[name] = parsed_data[name]
 
           for idx_name in indices_config.keys():
+              benchmark_fetched = False
               if idx_name in BENCHMARK_TICKERS:
                   try:
                       t = yf.Ticker(BENCHMARK_TICKERS[idx_name])
                       hist = t.history(start=f"{datetime.date.today().year}-01-01")
                       if not hist.empty and 'Close' in hist:
                           s = hist['Close'].dropna()
-                          if len(s) > 0:
+                          if len(s) > 1:
                               ytd = round(((float(s.iloc[-1]) - float(s.iloc[0])) / float(s.iloc[0])) * 100, 2)
                               output["indexReturns"][idx_name] = ytd
-                              continue
+                              benchmark_fetched = True
                   except Exception:
                       pass
 
-              constituents = parsed_data.get(idx_name, [])
-              valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
-              output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2) if valid_ytds else 0.0
+              if not benchmark_fetched:
+                  constituents = parsed_data.get(idx_name, [])
+                  valid_ytds = [item['ytd'] for item in constituents if item.get('ytd') is not None]
+                  output["indexReturns"][idx_name] = round(sum(valid_ytds) / len(valid_ytds), 2) if valid_ytds else 0.0
 
           with open('data.json', 'w') as f:
               json.dump(output, f, indent=2)
@@ -134,5 +133,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json constituents.py
-          git commit -m "Decouple index fetching using static constituents list [skip ci]" || exit 0
+          git commit -m "Standardize index keys and update constituent data [skip ci]" || exit 0
           git push

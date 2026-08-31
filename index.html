@@ -99,7 +99,7 @@
     }
     .btn-export:hover { background: #059669; }
 
-    /* Search & Portfolio Section */
+    /* Search Container */
     .search-container {
       position: relative;
       flex-grow: 1;
@@ -128,21 +128,26 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      max-height: 260px;
+      max-height: 280px;
       overflow-y: auto;
       z-index: 100;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: none;
       margin-top: 4px;
     }
 
     .suggestion-item {
-      padding: 8px 14px;
+      padding: 10px 14px;
       font-size: 13px;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .suggestion-item:last-child {
+      border-bottom: none;
     }
 
     .suggestion-item:hover {
@@ -154,14 +159,13 @@
       color: var(--text-muted);
     }
 
-    .suggestion-source {
+    .badge-source {
       font-size: 10px;
       font-weight: 700;
       padding: 2px 6px;
       border-radius: 4px;
       background: #e2e8f0;
       color: #475569;
-      margin-left: 6px;
     }
 
     .portfolio-tags {
@@ -200,12 +204,8 @@
       color: #4338ca;
       margin-left: 2px;
     }
-    .tag.off-screen .tag-remove {
-      color: #b45309;
-    }
-    .tag.custom-search .tag-remove {
-      color: #0284c7;
-    }
+    .tag.off-screen .tag-remove { color: #b45309; }
+    .tag.custom-search .tag-remove { color: #0284c7; }
 
     .grid-container {
       display: grid;
@@ -238,9 +238,7 @@
       transition: all 0.2s ease;
     }
 
-    .tile.dimmed {
-      opacity: 0.25;
-    }
+    .tile.dimmed { opacity: 0.25; }
 
     .tile.highlighted {
       outline: 3px solid #f59e0b;
@@ -251,7 +249,7 @@
     }
 
     .tile.custom-tile {
-      border: 2px dashed #38bdf8;
+      border: 2px dashed #0284c7;
     }
 
     @media (max-width: 1200px) {
@@ -292,7 +290,7 @@
     <div class="control-row">
       <span class="control-label">Spot Stocks</span>
       <div class="search-container">
-        <input type="text" id="ticker-search" class="search-input" placeholder="Spot your stocks: Type ticker or company (e.g. IONQ, Cyient)..." autocomplete="off" />
+        <input type="text" id="ticker-search" class="search-input" placeholder="Search any stock worldwide (e.g. IONQ, Cyient, SOUN)..." autocomplete="off" />
         <div id="suggestions" class="suggestions-dropdown"></div>
       </div>
       <button class="btn-export" onclick="exportPortfolioCSV()">Export Portfolio to CSV</button>
@@ -308,26 +306,16 @@
   let currentCountry = 'US';
   let currentIndex = 'NASDAQ100';
 
-  // State maps storing all user selections
-  // Map key: ticker -> Value: { ticker, ytd, benchmarkName, benchmarkReturn, isCustom }
+  // Portfolio tracking
   const selectedPortfolio = new Map();
-  // Off-grid custom fetched tickers map
   const customSearchedStocks = new Map();
-
   let debounceTimer = null;
-  const CORS_PROXY = "https://corsproxy.io/?";
 
+  // Matching backend keys directly to prevent empty grids
   const INDICES = {
     US: [
       { id: 'NASDAQ100', name: 'NASDAQ 100' },
-      { id: 'SP500', name: 'S&P 500' },
-      { id: 'RUSSELL2000', name: 'RUSSELL 2000' },
-      { id: 'SP400', name: 'S&P 400 MIDCAP' },
-      { id: 'SP500_IT', name: 'S&P IT' },
-      { id: 'SP500_FIN', name: 'S&P FINANCIALS' },
-      { id: 'SP500_HEALTH', name: 'S&P HEALTHCARE' },
-      { id: 'SP500_CONS_DISC', name: 'S&P CONS DISCR' },
-      { id: 'SP500_ENERGY', name: 'S&P ENERGY' }
+      { id: 'RUSSELL2000', name: 'RUSSELL 2000' }
     ],
     INDIA: [
       { id: 'NIFTY50', name: 'NIFTY 50' },
@@ -357,7 +345,7 @@
     try {
       const res = await fetch('data.json');
       globalData = await res.json();
-      document.getElementById('date-label').innerText = `Individual companies' YTD Returns as on ${globalData.lastUpdated}`;
+      document.getElementById('date-label').innerText = `Individual companies' YTD Returns as on ${globalData.lastUpdated || '--'}`;
       renderIndexButtons();
       renderDashboard();
       setupSearch();
@@ -422,7 +410,7 @@
   function renderDashboard() {
     if (!globalData) return;
 
-    const idxReturn = globalData.indexReturns ? globalData.indexReturns[currentIndex] : 0;
+    const idxReturn = globalData.indexReturns ? (globalData.indexReturns[currentIndex] || 0) : 0;
     const badge = document.getElementById('index-return-badge');
     badge.innerText = `Index YTD Return: ${idxReturn >= 0 ? '+' : ''}${idxReturn}%`;
     badge.style.backgroundColor = idxReturn >= 0 ? '#dcfce7' : '#ffe4e6';
@@ -430,7 +418,7 @@
 
     const constituents = [...(globalData[currentIndex] || [])];
     
-    // Inject custom searched stocks if present
+    // Inject off-grid custom searched stocks dynamically into matching grid
     customSearchedStocks.forEach((item) => {
       if (!constituents.some(c => c.ticker === item.ticker)) {
         constituents.push(item);
@@ -538,7 +526,7 @@
         return;
       }
 
-      // 1. Local Search In Pre-Loaded JSON Data
+      // 1. Instant local index lookup across all JSON lists
       const localMatches = [];
       const seenTickers = new Set();
       const upperQuery = query.toUpperCase();
@@ -561,13 +549,13 @@
         });
       }
 
-      renderSuggestions(localMatches.slice(0, 5), true);
+      renderSuggestions(localMatches.slice(0, 5));
 
-      // 2. Live Yahoo Search Autocomplete with 300ms Debounce
+      // 2. Query Live Yahoo Autocomplete Engine
       if (query.length >= 2) {
         debounceTimer = setTimeout(() => {
-          fetchLiveYahooSuggestions(query, localMatches);
-        }, 300);
+          fetchYahooSearchAPI(query, localMatches);
+        }, 250);
       }
     });
 
@@ -578,21 +566,22 @@
     });
   }
 
-  async function fetchLiveYahooSuggestions(query, localMatches) {
-    const dropdown = document.getElementById('suggestions');
-    try {
-      const searchUrl = `${CORS_PROXY}${encodeURIComponent(`https://query1.finance.yahoo.com/v1/finance/search?q=${query}&quotesCount=10`)}`;
-      const res = await fetch(searchUrl);
-      const data = await res.json();
+  function fetchYahooSearchAPI(query, localMatches) {
+    const script = document.createElement('script');
+    const callbackName = 'yahooSearchCB_' + Math.random().toString(36).substr(2, 9);
+    
+    window[callbackName] = function(data) {
+      delete window[callbackName];
+      document.body.removeChild(script);
       
-      const yahooQuotes = data.quotes || [];
+      const yahooQuotes = (data && data.ResultSet && data.ResultSet.Result) ? data.ResultSet.Result : [];
       const combined = [...localMatches];
 
       yahooQuotes.forEach(q => {
         if (q.symbol && !combined.some(item => item.ticker === q.symbol)) {
           combined.push({
             ticker: q.symbol,
-            name: q.shortname || q.longname || q.symbol,
+            name: q.name || q.symbol,
             ytd: null,
             indexName: q.exchDisp || 'Global',
             isLive: true
@@ -601,9 +590,14 @@
       });
 
       renderSuggestions(combined.slice(0, 10));
-    } catch (e) {
-      console.warn('Live Yahoo search fallback active:', e);
-    }
+    };
+
+    script.src = `https://autoc.finance.yahoo.com/autoc?query=${encodeURIComponent(query)}&region=1&lang=en&callback=${callbackName}`;
+    script.onerror = () => {
+      delete window[callbackName];
+      if (script.parentNode) document.body.removeChild(script);
+    };
+    document.body.appendChild(script);
   }
 
   function renderSuggestions(matches) {
@@ -619,7 +613,7 @@
       div.className = 'suggestion-item';
       
       const ytdStr = item.ytd !== null ? `(${item.ytd}%)` : '';
-      const sourceBadge = item.isLive ? '<span class="suggestion-source">Yahoo Live</span>' : `<span class="suggestion-meta">${item.indexName}</span>`;
+      const sourceBadge = item.isLive ? '<span class="badge-source">Global Yahoo</span>' : `<span class="suggestion-meta">${item.indexName}</span>`;
 
       div.innerHTML = `<span><strong>${item.ticker}</strong> ${item.name !== item.ticker ? item.name : ''} ${ytdStr}</span> ${sourceBadge}`;
       div.onclick = () => selectSearchResult(item);
@@ -636,26 +630,24 @@
     searchInput.value = '';
 
     if (!item.isLive && item.ytd !== null) {
-      // Stock exists in local JSON data
       addStockToPortfolio(item.ticker, item.ytd, false);
       switchIndexToTicker(item.ticker);
     } else {
-      // Stock is off-grid -> Fetch YTD dynamically from Yahoo Finance Chart API
       await fetchAndAddOffGridStock(item.ticker);
     }
   }
 
   async function fetchAndAddOffGridStock(ticker) {
     try {
-      const chartUrl = `${CORS_PROXY}${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=ytd&interval=1d`)}`;
-      const res = await fetch(chartUrl);
+      // Direct YTD fetch using query2 endpoint
+      const res = await fetch(`https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=ytd&interval=1d`);
       const data = await res.json();
       
       const result = data.chart.result[0];
-      const closePrices = result.indicators.quote[0].close.filter(p => p !== null);
+      const closePrices = result.indicators.quote[0].close.filter(p => p !== null && p !== undefined);
 
       if (closePrices.length < 2) {
-        alert(`Insufficient data to calculate YTD for ${ticker}`);
+        alert(`Insufficient price history to calculate YTD return for ${ticker}`);
         return;
       }
 
@@ -668,8 +660,15 @@
       addStockToPortfolio(ticker, ytd, true);
       renderDashboard();
     } catch (e) {
-      alert(`Could not fetch YTD return for ${ticker}`);
-      console.error(e);
+      // Fallback prompt allowing manual input if network policy blocks external API calls
+      const manualYtd = prompt(`Unable to auto-fetch YTD for "${ticker}". Enter YTD % return manually (e.g. 15.5):`);
+      if (manualYtd !== null && !isNaN(parseFloat(manualYtd))) {
+        const ytd = parseFloat(manualYtd);
+        const customObj = { ticker, ytd, isCustom: true };
+        customSearchedStocks.set(ticker, customObj);
+        addStockToPortfolio(ticker, ytd, true);
+        renderDashboard();
+      }
     }
   }
 

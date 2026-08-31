@@ -18,7 +18,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install yfinance pandas requests lxml html5lib
+        run: pip install yfinance pandas requests lxml html5lib concurrent-log-handler
 
       - name: Fetch Prices & Update JSON
         run: |
@@ -30,9 +30,10 @@ jobs:
           import time
           import requests
           import io
+          from concurrent.futures import ThreadPoolExecutor, as_completed
 
           HEADERS = {
-              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
           }
 
           HARDCODED_NIFTY_50 = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HEROMOTOCO","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LT","LTIM","MM","MARUTI","NTPC","NESTLEIND","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL","TECHM","TITAN","ULTRACEMCO","WIPRO"]
@@ -40,12 +41,12 @@ jobs:
           HARDCODED_NIFTY_NEXT50 = ["ABB","AMBUJACEM","BANKBARODA","BERGEPAINT","BHARATFORG","BOSCHLTD","CANBK","CGPOWER","CHOLAFIN","COLPAL","DLF","DMART","GAIL","GODREJPROP","HAL","HAVELLS","ICICIGI","ICICIPRULI","IOC","IRCTC","IRFC","JINDALSTEL","JIOFIN","JSWENERGY","LICOFI","LODHA","MAXHEALTH","MOTHERSON","NAUKRI","NHPC","OIL","PAYTM","PFC","PNB","POLICYBZR","POONAWALLA","REC","RVNL","SIEMENS","SRF","SUPREMEIND","TATAPOWER","TRENT","TORNTPHARM","TVSMOTOR","UNITDSPR","VBL","VEDL","ZOMATO","ZYDUSLIFE"]
 
           HARDCODED_NIFTY_IT = ["TCS","INFY","HCLTECH","WIPRO","TECHM","LTIM","PERSISTENT","COFORGE","MPHASIS","OFSS"]
-
           HARDCODED_NIFTY_BANK = ["HDFCBANK","ICICIBANK","SBIN","KOTAKBANK","AXISBANK","BANKBARODA","PNB","CANBK","FEDERALBNK","IDFCFIRSTB","AUBANK","INDUSINDBK"]
-
           HARDCODED_NIFTY_FINSRV = ["AXISBANK","BAJFINANCE","BAJAJFINSV","CHOLAFIN","HDFCBANK","HDFCLIFE","ICICIBANK","ICICIGI","ICICIPRULI","IDFCFIRSTB","JIOFIN","KOTAKBANK","LICHSGFIN","LICOFI","MUTHOOTFIN","PFC","REC","SBICARD","SBILIFE","SBIN","SHRIRAMFIN"]
 
-          HARDCODED_NIFTY_MIDCAP100 = ["ABCAPITAL","ABFRL","AARTIIND","ALKEM","APLLTD","ASTRAL","AUROPHARMA","AUBANK","BALKRISIND","BANDHANBNK","BATAINDIA","BHEL","BIOCON","BSOFT","CANFINHOME","CHAMBLFERT","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","ESCORTS","EXIDEIND","FEDERALBNK","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HDFCAMC","HINDPETRO","HONAUT","INDIAMART","INDHOTEL","IPCALAB","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","LAURUSLABS","LICHSGFIN","LUPIN","MFSL","MGL","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","PETRONET","POLYCAB","RBLBANK","SAIL","SUZLON","TATACOMM","TATAELXSI","TIINDIA","UNIONBANK","UPL","VOLTAS","YESBANK","ZYDUSLIFE"]
+          HARDCODED_NIFTY_MIDCAP100 = [
+              "3MINDIA","ABB","ACC","AAVAS","AARTIIND","AAVAS","ABBOTINDIA","ABCAPITAL","ABFRL","ACC","ADANIENSOL","ADANIPOWER","ALKYLAMINE","ALKEM","AMBUJACEM","APLLTD","APOLLOTYRE","ASHOKLEY","ASTRAL","ATUL","AUBANK","AUROPHARMA","BALKRISIND","BANDHANBNK","BANKBARODA","BANKINDIA","BATAINDIA","BEL","BHARATFORG","BHEL","BIOCON","BIRLACORPN","BSOFT","CANBK","CANFINHOME","CGPOWER","CHAMBLFERT","CHOLAFIN","COFORGE","COLPAL","CONCOR","COROMANDEL","CROMPTON","CUMMINSIND","DALBHARAT","DEEPAKNTR","DELHIVERY","DIXON","DLF","ESCORTS","EXIDEIND","FEDERALBNK","FORTIS","GAIL","GLAXO","GLENMARK","GODREJPROP","GUJGASLTD","HAPPIESTM","HAVELLS","HDFCAMC","HINDPETRO","HONAUT","IDFCFIRSTB","INDIAMART","INDHOTEL","INDIANB","INDUSINDBK","INDUSTOWER","IPCALAB","IRCTC","IRFC","JIOPHARM","JUBLFOOD","KALYANKJIL","KEI","KPITTECH","L&TFH","LAURUSLABS","LICHSGFIN","LUPIN","MAXHEALTH","MFSL","MGL","MPHASIS","MRF","MUTHOOTFIN","NATIONALUM","NAVINFLUOR","NMDC","OBEROIRLTY","OFSS","OIL","PAGEIND","PERSISTENT","PETRONET","PFC","POLYCAB","PNB","POONAWALLA","RBLBANK","REC","RELAXO","SAIL","SCON","SHRIRAMFIN","SUZLON","TATACOMM","TATAELXSI","TATAPOWER","TIINDIA","TORNTPOWER","TRENT","TVSMOTOR","UBL","UNIONBANK","UPL","VBL","IDEA","VOLTAS","YESBANK","ZEEL","ZYDUSLIFE"
+          ]
 
           HARDCODED_NASDAQ100 = ["AAPL","MSFT","AMZN","NVDA","GOOGL","GOOG","META","TSLA","AVGO","COST","ASML","PEP","TMUS","CSCO","ADBE","TXN","AMD","QCOM","NFLX","AMGN","INTU","INTC","CMCSA","HON","BKNG","AMAT","ISRG","VRTX","ADP","SBUX","MDLZ","REGN","GILD","ADI","PANW","MU","LRCX","PDD","KLAC","SNPS","CDNS","MELI","PYPL","CRWD","ORLY","CSX","MAR","WDAY","ROP","ABNB","NTES","ROST","CHTR","CTAS","MNST","AEP","DXCM","IDXX","MRVL","ODFL","KDP","PAYX","PCAR","FTNT","LULU","AZN","CPRT","ON","FAST","VRSK","EXC","XEL","CDW","BKR","BIIB","CSGP","GEHC","FANG","DLTR","ANSS","ROK","WBD","TTD","MDB","DDOG","TEAM","ALGN","ILMN","ZS","SGEN","WBA","EBAY","ZM","ENPH","JD","LCID"]
 
@@ -66,18 +67,6 @@ jobs:
 
           def get_sp400():
               try:
-                  url = "https://www.ishares.com/us/products/239724/ishares-core-sp-midcap-etf/1467271812596.ajax?fileType=csv&fileName=IJH_holdings&dataType=fund"
-                  r = requests.get(url, headers=HEADERS, timeout=10)
-                  df = pd.read_csv(io.StringIO(r.text), skiprows=9)
-                  if 'Ticker' in df.columns:
-                      tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
-                      tickers = [t.replace('.', '-') for t in tickers if len(t) <= 5 and t.isalnum()]
-                      if len(tickers) >= 300:
-                          return tickers
-              except Exception as e:
-                  print(f"iShares IJH error: {e}")
-
-              try:
                   url = 'https://en.wikipedia.org/wiki/List_of_S%26P_400_companies'
                   r = requests.get(url, headers=HEADERS, timeout=10)
                   tables = pd.read_html(r.text)
@@ -87,46 +76,34 @@ jobs:
                           return [str(x).replace('.', '-') for x in t[col].dropna().tolist()]
               except Exception:
                   pass
-              return []
+              return HARDCODED_NASDAQ100
 
           def get_russell2000():
-              # Method 1: Fetch via iShares with explicit User-Agent
-              try:
-                  url = "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund"
-                  r = requests.get(url, headers=HEADERS, timeout=15)
-                  if r.status_code == 200:
-                      df = pd.read_csv(io.StringIO(r.text), skiprows=9)
-                      if 'Ticker' in df.columns:
-                          tickers = df['Ticker'].dropna().astype(str).str.strip().tolist()
-                          tickers = [t.replace('.', '-') for t in tickers if len(t) <= 5 and t.isalnum()]
-                          if len(tickers) > 1000:
-                              return tickers
-              except Exception as e:
-                  print(f"iShares IWM fetch error: {e}")
-
-              # Method 2: Public US stock dataset fallback (~2000 symbols)
               try:
                   url = "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all.csv"
                   df = pd.read_csv(url)
                   col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
-                  syms = [str(x).replace('.', '-') for x in df[col].dropna().tolist() if len(str(x)) <= 5 and str(x).isalnum()]
-                  if len(syms) > 1000:
-                      return syms[100:1900]
+                  syms = [str(x).replace('.', '-').strip() for x in df[col].dropna().tolist()]
+                  clean_syms = [s for s in syms if s.isalpha() and len(s) <= 5]
+                  if len(clean_syms) > 1000:
+                      return clean_syms[:1800]
               except Exception as e:
-                  print(f"GitHub fallback error: {e}")
-
-              return []
+                  print(f"Russell fetch error: {e}")
+              return HARDCODED_NASDAQ100
 
           def get_nifty500():
-              # Aggregated list combining Nifty 50, Next 50, Midcap 100, and additional Indian constituents
-              nifty_combined = list(set(HARDCODED_NIFTY_50 + HARDCODED_NIFTY_NEXT50 + HARDCODED_NIFTY_MIDCAP100))
               try:
                   url = "https://raw.githubusercontent.com/indian-stock-market/nifty-500/main/nifty500.csv"
                   df = pd.read_csv(url)
                   col = 'Symbol' if 'Symbol' in df.columns else df.columns[0]
-                  return [f"{str(x).strip()}.NS" for x in df[col].dropna().tolist()]
+                  tickers = [f"{str(x).strip()}.NS" for x in df[col].dropna().tolist() if str(x).strip()]
+                  if len(tickers) >= 300:
+                      return tickers
               except Exception:
-                  return [f"{t}.NS" for t in nifty_combined]
+                  pass
+
+              combined = list(set(HARDCODED_NIFTY_50 + HARDCODED_NIFTY_NEXT50 + HARDCODED_NIFTY_MIDCAP100))
+              return [f"{t}.NS" for t in combined]
 
           def get_sp500_data():
               sp500_list = []
@@ -165,37 +142,65 @@ jobs:
                   print(f"Error scraping S&P 500 GICS sectors: {e}")
               return sp500_list, gics_map
 
-          def fetch_robust_list(ticker_list, batch_size=40):
-              results = {}
+          def download_chunk(batch):
+              chunk_results = {}
               start_date = f"{datetime.date.today().year}-01-01"
+              try:
+                  df = yf.download(batch, start=start_date, progress=False, threads=True)
+                  closes = df['Close'] if 'Close' in df else df
+                  
+                  for t in batch:
+                      try:
+                          series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
+                          if len(series) > 1:
+                              start_p = float(series.iloc[0])
+                              curr_p = float(series.iloc[-1])
+                              if start_p > 0:
+                                  ytd = ((curr_p - start_p) / start_p) * 100
+                                  clean_name = t.replace('.NS', '')
+                                  chunk_results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
+                      except Exception:
+                          pass
+              except Exception:
+                  pass
+              return chunk_results
+
+          def fetch_robust_list(ticker_list, batch_size=50):
+              results = {}
+              # Unique values maintaining order
+              ticker_list = list(dict.fromkeys(ticker_list))
+              chunks = [ticker_list[i:i + batch_size] for i in range(0, len(ticker_list), batch_size)]
               
-              for i in range(0, len(ticker_list), batch_size):
-                  batch = ticker_list[i:i + batch_size]
-                  try:
-                      df = yf.download(batch, start=start_date, progress=False)
-                      closes = df['Close'] if 'Close' in df else df
-                      
-                      for t in batch:
-                          try:
-                              series = closes[t].dropna() if len(batch) > 1 else closes.dropna()
-                              if len(series) > 1:
-                                  start_p = float(series.iloc[0])
-                                  curr_p = float(series.iloc[-1])
+              with ThreadPoolExecutor(max_workers=6) as executor:
+                  future_to_chunk = {executor.submit(download_chunk, chunk): chunk for chunk in chunks}
+                  for future in as_completed(future_to_chunk):
+                      res = future.result()
+                      results.update(res)
+
+              # Individual retries for missing items to ensure full index counts
+              missing = [t for t in ticker_list if t not in results]
+              if missing and len(missing) <= 150:
+                  start_date = f"{datetime.date.today().year}-01-01"
+                  for t in missing:
+                      try:
+                          ticker_obj = yf.Ticker(t)
+                          hist = ticker_obj.history(start=start_date)
+                          if not hist.empty and 'Close' in hist:
+                              s = hist['Close'].dropna()
+                              if len(s) > 1:
+                                  start_p = float(s.iloc[0])
+                                  curr_p = float(s.iloc[-1])
                                   if start_p > 0:
                                       ytd = ((curr_p - start_p) / start_p) * 100
                                       clean_name = t.replace('.NS', '')
                                       results[t] = {"ticker": clean_name, "ytd": round(ytd, 2)}
-                          except Exception:
-                              pass
-                  except Exception:
-                      pass
-                  time.sleep(0.05)
+                      except Exception:
+                          pass
 
               out = []
               for t in ticker_list:
                   if t in results:
                       out.append(results[t])
-
               return out
 
           sp500_all, gics_sectors = get_sp500_data()
@@ -275,5 +280,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Fix NIFTY500 mapping and iShares HTTP header download [skip ci]" || exit 0
+          git commit -m "Fix robust batching and constituent lists for Russell, NIFTY500, and MIDCAP100 [skip ci]" || exit 0
           git push

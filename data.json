@@ -1,337 +1,337 @@
 {
-  "lastUpdated": "Nov 11, 2026",
+  "lastUpdated": "Nov 12, 2026",
   "indexReturns": {
-    "NASDAQ100": 10.06,
-    "SP500": 9.66,
-    "SP500_IT": 17.48,
-    "SP500_FIN": 7.41,
-    "SP500_HEALTH": 22.96,
-    "SP500_CONS_DISC": 2.92,
-    "SP500_ENERGY": 38.98,
-    "NIFTY50": -4.21,
-    "NIFTYNEXT50": 4.47,
-    "NIFTYIT": -14.94,
-    "NIFTYBANK": 0.05,
-    "NIFTYFINSRV": -6.07,
-    "NIFTYMIDCAP100": -2.23,
-    "NIFTY500": -2.21
+    "NASDAQ100": 12.57,
+    "SP500": 11.09,
+    "SP500_IT": 21.27,
+    "SP500_FIN": 8.04,
+    "SP500_HEALTH": 23.01,
+    "SP500_CONS_DISC": 2.87,
+    "SP500_ENERGY": 41.57,
+    "NIFTY50": -3.41,
+    "NIFTYNEXT50": 5.47,
+    "NIFTYIT": -15.39,
+    "NIFTYBANK": 1.81,
+    "NIFTYFINSRV": -5.45,
+    "NIFTYMIDCAP100": -1.34,
+    "NIFTY500": -1.33
   },
   "NASDAQ100": [
     {
       "ticker": "AAPL",
-      "ytd": 28.95
+      "ytd": 31.58
     },
     {
       "ticker": "MSFT",
-      "ytd": 13.45
+      "ytd": 10.89
     },
     {
       "ticker": "AMZN",
-      "ytd": 19.59
+      "ytd": 17.51
     },
     {
       "ticker": "NVDA",
-      "ytd": -10.36
+      "ytd": -7.79
     },
     {
       "ticker": "GOOGL",
-      "ytd": -8.63
+      "ytd": -6.7
     },
     {
       "ticker": "GOOG",
-      "ytd": -9.12
+      "ytd": -7.65
     },
     {
       "ticker": "META",
-      "ytd": -1.14
+      "ytd": -3.08
     },
     {
       "ticker": "TSLA",
-      "ytd": -13.31
+      "ytd": -10.78
     },
     {
       "ticker": "AVGO",
-      "ytd": -3.97
+      "ytd": -0.14
     },
     {
       "ticker": "COST",
-      "ytd": 25.5
+      "ytd": 28.03
     },
     {
       "ticker": "ASML",
-      "ytd": 30.36
+      "ytd": 32.66
     },
     {
       "ticker": "PEP",
-      "ytd": 4.04
+      "ytd": 4.28
     },
     {
       "ticker": "TMUS",
-      "ytd": -13.92
+      "ytd": -12.35
     },
     {
       "ticker": "CSCO",
-      "ytd": 30.77
+      "ytd": 34.24
     },
     {
       "ticker": "ADBE",
-      "ytd": -28.98
+      "ytd": -28.71
     },
     {
       "ticker": "TXN",
-      "ytd": 72.98
+      "ytd": 78.32
     },
     {
       "ticker": "AMD",
-      "ytd": 130.55
+      "ytd": 147.42
     },
     {
       "ticker": "QCOM",
-      "ytd": 1.89
+      "ytd": 3.67
     },
     {
       "ticker": "NFLX",
-      "ytd": -30.48
+      "ytd": -29.07
     },
     {
       "ticker": "AMGN",
-      "ytd": 44.9
+      "ytd": 45.8
     },
     {
       "ticker": "INTU",
-      "ytd": -45.15
+      "ytd": -44.8
     },
     {
       "ticker": "INTC",
-      "ytd": 47.61
+      "ytd": 58.71
     },
     {
       "ticker": "CMCSA",
-      "ytd": -5.81
+      "ytd": -4.79
     },
     {
       "ticker": "HON",
-      "ytd": 12.59
+      "ytd": 12.31
     },
     {
       "ticker": "BKNG",
-      "ytd": -24.66
+      "ytd": -24.21
     },
     {
       "ticker": "AMAT",
-      "ytd": 39.05
+      "ytd": 47.46
     },
     {
       "ticker": "ISRG",
-      "ytd": -19.92
+      "ytd": -20.01
     },
     {
       "ticker": "VRTX",
-      "ytd": 21.18
+      "ytd": 20.99
     },
     {
       "ticker": "ADP",
-      "ytd": 23.49
+      "ytd": 23.86
     },
     {
       "ticker": "SBUX",
-      "ytd": 33.32
+      "ytd": 33.25
     },
     {
       "ticker": "MDLZ",
-      "ytd": 27.26
+      "ytd": 27.57
     },
     {
       "ticker": "REGN",
-      "ytd": 18.46
+      "ytd": 24.06
     },
     {
       "ticker": "GILD",
-      "ytd": 43.05
+      "ytd": 42.09
     },
     {
       "ticker": "ADI",
-      "ytd": 44.96
+      "ytd": 50.78
     },
     {
       "ticker": "PANW",
-      "ytd": 84.47
+      "ytd": 86.47
     },
     {
       "ticker": "MU",
-      "ytd": 130.06
+      "ytd": 157.4
     },
     {
       "ticker": "LRCX",
-      "ytd": 20.53
+      "ytd": 27.84
     },
     {
       "ticker": "PDD",
-      "ytd": -30.45
+      "ytd": -31.74
     },
     {
       "ticker": "KLAC",
-      "ytd": 20.49
+      "ytd": 26.8
     },
     {
       "ticker": "SNPS",
-      "ytd": -4.26
+      "ytd": -3.81
     },
     {
       "ticker": "CDNS",
-      "ytd": 6.84
+      "ytd": 6.08
     },
     {
       "ticker": "MELI",
-      "ytd": -24.5
+      "ytd": -23.39
     },
     {
       "ticker": "PYPL",
-      "ytd": 4.2
+      "ytd": 3.21
     },
     {
       "ticker": "CRWD",
-      "ytd": 101.58
+      "ytd": 102.0
     },
     {
       "ticker": "ORLY",
-      "ytd": -1.05
+      "ytd": 0.22
     },
     {
       "ticker": "CSX",
-      "ytd": 42.12
+      "ytd": 44.4
     },
     {
       "ticker": "MAR",
-      "ytd": 37.46
+      "ytd": 37.75
     },
     {
       "ticker": "WDAY",
-      "ytd": -7.57
+      "ytd": -7.11
     },
     {
       "ticker": "ROP",
-      "ytd": 10.02
+      "ytd": 10.77
     },
     {
       "ticker": "ABNB",
-      "ytd": 43.06
+      "ytd": 36.18
     },
     {
       "ticker": "NTES",
-      "ytd": -11.5
+      "ytd": -15.58
     },
     {
       "ticker": "ROST",
-      "ytd": 31.55
+      "ytd": 32.83
     },
     {
       "ticker": "CHTR",
-      "ytd": -35.94
+      "ytd": -34.87
     },
     {
       "ticker": "CTAS",
-      "ytd": 22.78
+      "ytd": 23.86
     },
     {
       "ticker": "MNST",
-      "ytd": 19.07
+      "ytd": 19.22
     },
     {
       "ticker": "AEP",
-      "ytd": 13.78
+      "ytd": 15.0
     },
     {
       "ticker": "DXCM",
-      "ytd": 20.11
+      "ytd": 20.75
     },
     {
       "ticker": "IDXX",
-      "ytd": 3.98
+      "ytd": 4.87
     },
     {
       "ticker": "MRVL",
-      "ytd": 73.01
+      "ytd": 89.15
     },
     {
       "ticker": "ODFL",
-      "ytd": 5.99
+      "ytd": 7.56
     },
     {
       "ticker": "KDP",
-      "ytd": 38.73
+      "ytd": 41.16
     },
     {
       "ticker": "PAYX",
-      "ytd": 11.77
+      "ytd": 10.97
     },
     {
       "ticker": "PCAR",
-      "ytd": -4.26
+      "ytd": -1.94
     },
     {
       "ticker": "FTNT",
-      "ytd": 58.67
+      "ytd": 64.48
     },
     {
       "ticker": "LULU",
-      "ytd": -47.64
+      "ytd": -49.03
     },
     {
       "ticker": "AZN",
-      "ytd": 3.04
+      "ytd": 2.33
     },
     {
       "ticker": "CPRT",
-      "ytd": -14.48
+      "ytd": -14.83
     },
     {
       "ticker": "ON",
-      "ytd": 22.77
+      "ytd": 29.84
     },
     {
       "ticker": "FAST",
-      "ytd": 38.54
+      "ytd": 40.18
     },
     {
       "ticker": "VRSK",
-      "ytd": -6.96
+      "ytd": -6.06
     },
     {
       "ticker": "EXC",
-      "ytd": 6.54
+      "ytd": 6.73
     },
     {
       "ticker": "XEL",
-      "ytd": 9.77
+      "ytd": 11.11
     },
     {
       "ticker": "CDW",
-      "ytd": 25.58
+      "ytd": 32.04
     },
     {
       "ticker": "BKR",
-      "ytd": 2.92
+      "ytd": 6.46
     },
     {
       "ticker": "BIIB",
-      "ytd": 42.42
+      "ytd": 42.5
     },
     {
       "ticker": "CSGP",
-      "ytd": -53.83
+      "ytd": -53.92
     },
     {
       "ticker": "GEHC",
-      "ytd": 1.66
+      "ytd": -0.07
     },
     {
       "ticker": "FANG",
-      "ytd": 18.95
+      "ytd": 20.83
     },
     {
       "ticker": "DLTR",
-      "ytd": 10.28
+      "ytd": 11.9
     },
     {
       "ticker": "ANSS",
@@ -339,7 +339,7 @@
     },
     {
       "ticker": "ROK",
-      "ytd": 0.61
+      "ytd": 2.9
     },
     {
       "ticker": "WBD",
@@ -347,31 +347,31 @@
     },
     {
       "ticker": "TTD",
-      "ytd": -60.38
+      "ytd": -57.59
     },
     {
       "ticker": "MDB",
-      "ytd": -18.09
+      "ytd": -15.4
     },
     {
       "ticker": "DDOG",
-      "ytd": 34.28
+      "ytd": 37.83
     },
     {
       "ticker": "TEAM",
-      "ytd": 0.09
+      "ytd": -1.5
     },
     {
       "ticker": "ALGN",
-      "ytd": 11.68
+      "ytd": 10.29
     },
     {
       "ticker": "ILMN",
-      "ytd": 59.96
+      "ytd": 58.49
     },
     {
       "ticker": "ZS",
-      "ytd": -9.76
+      "ytd": -12.14
     },
     {
       "ticker": "SGEN",
@@ -383,53 +383,53 @@
     },
     {
       "ticker": "EBAY",
-      "ytd": 43.18
+      "ytd": 42.21
     },
     {
       "ticker": "ZM",
-      "ytd": 10.07
+      "ytd": 17.71
     },
     {
       "ticker": "ENPH",
-      "ytd": -13.84
+      "ytd": -16.15
     },
     {
       "ticker": "JD",
-      "ytd": -0.47
+      "ytd": -2.33
     },
     {
       "ticker": "LCID",
-      "ytd": -67.71
+      "ytd": -67.09
     }
   ],
   "SP500": [
     {
       "ticker": "MMM",
-      "ytd": 18.68
+      "ytd": 18.37
     },
     {
       "ticker": "AOS",
-      "ytd": -3.64
+      "ytd": -3.26
     },
     {
       "ticker": "ABT",
-      "ytd": -8.84
+      "ytd": -9.81
     },
     {
       "ticker": "ABBV",
-      "ytd": 31.73
+      "ytd": 32.49
     },
     {
       "ticker": "ACN",
-      "ytd": 2.31
+      "ytd": 0.39
     },
     {
       "ticker": "ADBE",
-      "ytd": -28.98
+      "ytd": -28.71
     },
     {
       "ticker": "AMD",
-      "ytd": 130.55
+      "ytd": 147.42
     },
     {
       "ticker": "AES",
@@ -437,1599 +437,1599 @@
     },
     {
       "ticker": "AFL",
-      "ytd": 16.67
+      "ytd": 17.1
     },
     {
       "ticker": "A",
-      "ytd": 29.91
+      "ytd": 29.23
     },
     {
       "ticker": "APD",
-      "ytd": 27.05
+      "ytd": 28.25
     },
     {
       "ticker": "ABNB",
-      "ytd": 43.06
+      "ytd": 36.18
     },
     {
       "ticker": "AKAM",
-      "ytd": -1.63
-    },
-    {
-      "ticker": "ALB",
-      "ytd": -33.49
-    },
-    {
-      "ticker": "ARE",
-      "ytd": -4.64
-    },
-    {
-      "ticker": "ALGN",
-      "ytd": 11.68
-    },
-    {
-      "ticker": "ALLE",
-      "ytd": 19.76
-    },
-    {
-      "ticker": "LNT",
-      "ytd": 15.15
-    },
-    {
-      "ticker": "ALL",
-      "ytd": 29.98
-    },
-    {
-      "ticker": "GOOGL",
-      "ytd": -8.63
-    },
-    {
-      "ticker": "GOOG",
-      "ytd": -9.12
-    },
-    {
-      "ticker": "MO",
-      "ytd": 39.66
-    },
-    {
-      "ticker": "AMZN",
-      "ytd": 19.59
-    },
-    {
-      "ticker": "AMCR",
-      "ytd": 12.16
-    },
-    {
-      "ticker": "AEE",
-      "ytd": 15.09
-    },
-    {
-      "ticker": "AEP",
-      "ytd": 13.78
-    },
-    {
-      "ticker": "AXP",
-      "ytd": -12.44
-    },
-    {
-      "ticker": "AIG",
-      "ytd": -0.43
-    },
-    {
-      "ticker": "AMT",
-      "ytd": 12.25
-    },
-    {
-      "ticker": "AWK",
-      "ytd": 17.77
-    },
-    {
-      "ticker": "AMP",
-      "ytd": 6.69
-    },
-    {
-      "ticker": "AME",
-      "ytd": 14.47
-    },
-    {
-      "ticker": "AMGN",
-      "ytd": 44.9
-    },
-    {
-      "ticker": "APH",
-      "ytd": 15.03
-    },
-    {
-      "ticker": "ADI",
-      "ytd": 44.96
-    },
-    {
-      "ticker": "AON",
-      "ytd": -1.57
-    },
-    {
-      "ticker": "APA",
-      "ytd": 83.01
-    },
-    {
-      "ticker": "APO",
-      "ytd": -15.23
-    },
-    {
-      "ticker": "AAPL",
-      "ytd": 28.95
-    },
-    {
-      "ticker": "AMAT",
-      "ytd": 39.05
-    },
-    {
-      "ticker": "APP",
-      "ytd": -33.69
-    },
-    {
-      "ticker": "APTV",
-      "ytd": -49.55
-    },
-    {
-      "ticker": "ACGL",
-      "ytd": 16.28
-    },
-    {
-      "ticker": "ADM",
-      "ytd": 19.78
-    },
-    {
-      "ticker": "ARES",
-      "ytd": -13.18
-    },
-    {
-      "ticker": "ANET",
-      "ytd": 39.35
-    },
-    {
-      "ticker": "AJG",
-      "ytd": 11.41
-    },
-    {
-      "ticker": "AIZ",
-      "ytd": 36.96
-    },
-    {
-      "ticker": "T",
-      "ytd": -6.41
-    },
-    {
-      "ticker": "ATO",
-      "ytd": 5.34
-    },
-    {
-      "ticker": "ADSK",
-      "ytd": -9.28
-    },
-    {
-      "ticker": "ADP",
-      "ytd": 23.49
-    },
-    {
-      "ticker": "AZO",
-      "ytd": -2.61
-    },
-    {
-      "ticker": "AVY",
-      "ytd": 5.41
-    },
-    {
-      "ticker": "AXON",
-      "ytd": -46.31
-    },
-    {
-      "ticker": "BKR",
-      "ytd": 2.92
-    },
-    {
-      "ticker": "BALL",
-      "ytd": 26.43
-    },
-    {
-      "ticker": "BAC",
-      "ytd": -7.97
-    },
-    {
-      "ticker": "BAX",
-      "ytd": 35.68
-    },
-    {
-      "ticker": "BDX",
-      "ytd": 41.43
-    },
-    {
-      "ticker": "BRK-B",
-      "ytd": 17.41
-    },
-    {
-      "ticker": "BBY",
-      "ytd": 56.43
-    },
-    {
-      "ticker": "TECH",
-      "ytd": 22.6
-    },
-    {
-      "ticker": "BIIB",
-      "ytd": 42.42
-    },
-    {
-      "ticker": "BLK",
-      "ytd": 14.48
-    },
-    {
-      "ticker": "BX",
-      "ytd": -19.66
-    },
-    {
-      "ticker": "XYZ",
-      "ytd": 35.93
-    },
-    {
-      "ticker": "BE",
-      "ytd": 96.45
-    },
-    {
-      "ticker": "BNY",
-      "ytd": 31.42
-    },
-    {
-      "ticker": "BA",
-      "ytd": -23.88
-    },
-    {
-      "ticker": "BKNG",
-      "ytd": -24.66
-    },
-    {
-      "ticker": "BSX",
-      "ytd": -52.8
-    },
-    {
-      "ticker": "BMY",
-      "ytd": 21.27
-    },
-    {
-      "ticker": "AVGO",
-      "ytd": -3.97
-    },
-    {
-      "ticker": "BR",
-      "ytd": -10.85
-    },
-    {
-      "ticker": "BRO",
-      "ytd": -6.44
-    },
-    {
-      "ticker": "BF-B",
-      "ytd": 21.05
-    },
-    {
-      "ticker": "BG",
-      "ytd": 9.27
-    },
-    {
-      "ticker": "BXP",
-      "ytd": -2.93
-    },
-    {
-      "ticker": "CHRW",
-      "ytd": -20.33
-    },
-    {
-      "ticker": "CDNS",
-      "ytd": 6.84
-    },
-    {
-      "ticker": "CPT",
-      "ytd": -6.49
-    },
-    {
-      "ticker": "COF",
-      "ytd": -20.09
-    },
-    {
-      "ticker": "CAH",
-      "ytd": 35.48
-    },
-    {
-      "ticker": "CCL",
-      "ytd": 1.53
-    },
-    {
-      "ticker": "CARR",
-      "ytd": 1.22
-    },
-    {
-      "ticker": "CVNA",
-      "ytd": -4.73
-    },
-    {
-      "ticker": "CASY",
-      "ytd": 25.99
-    },
-    {
-      "ticker": "CAT",
-      "ytd": -1.48
-    },
-    {
-      "ticker": "CBOE",
-      "ytd": 48.12
-    },
-    {
-      "ticker": "CBRE",
-      "ytd": -15.86
-    },
-    {
-      "ticker": "CDW",
-      "ytd": 25.58
-    },
-    {
-      "ticker": "COR",
-      "ytd": 3.52
-    },
-    {
-      "ticker": "CNC",
-      "ytd": 68.0
-    },
-    {
-      "ticker": "CNP",
-      "ytd": 8.3
-    },
-    {
-      "ticker": "CF",
-      "ytd": 54.94
-    },
-    {
-      "ticker": "CRL",
-      "ytd": 70.83
-    },
-    {
-      "ticker": "SCHW",
-      "ytd": -7.5
-    },
-    {
-      "ticker": "CHTR",
-      "ytd": -35.94
-    },
-    {
-      "ticker": "CVX",
-      "ytd": 39.27
-    },
-    {
-      "ticker": "CMG",
-      "ytd": -4.19
-    },
-    {
-      "ticker": "CB",
-      "ytd": 20.13
-    },
-    {
-      "ticker": "CHD",
-      "ytd": 36.51
-    },
-    {
-      "ticker": "CIEN",
-      "ytd": 10.58
-    },
-    {
-      "ticker": "CI",
-      "ytd": 10.44
-    },
-    {
-      "ticker": "CINF",
-      "ytd": 19.61
-    },
-    {
-      "ticker": "CTAS",
-      "ytd": 22.78
-    },
-    {
-      "ticker": "CSCO",
-      "ytd": 30.77
-    },
-    {
-      "ticker": "C",
-      "ytd": 5.14
-    },
-    {
-      "ticker": "CFG",
-      "ytd": 12.79
-    },
-    {
-      "ticker": "CLX",
-      "ytd": 11.07
-    },
-    {
-      "ticker": "CME",
-      "ytd": 18.52
-    },
-    {
-      "ticker": "CMS",
-      "ytd": 2.24
-    },
-    {
-      "ticker": "KO",
-      "ytd": 42.93
-    },
-    {
-      "ticker": "CTSH",
-      "ytd": -18.58
-    },
-    {
-      "ticker": "COHR",
-      "ytd": 10.46
-    },
-    {
-      "ticker": "COIN",
-      "ytd": -42.46
-    },
-    {
-      "ticker": "CL",
-      "ytd": 29.29
-    },
-    {
-      "ticker": "CMCSA",
-      "ytd": -5.81
-    },
-    {
-      "ticker": "FIX",
-      "ytd": 10.35
-    },
-    {
-      "ticker": "COP",
-      "ytd": 43.31
-    },
-    {
-      "ticker": "ED",
-      "ytd": 22.23
-    },
-    {
-      "ticker": "STZ",
-      "ytd": 6.1
-    },
-    {
-      "ticker": "CEG",
-      "ytd": -24.28
-    },
-    {
-      "ticker": "COO",
-      "ytd": -21.62
-    },
-    {
-      "ticker": "CPRT",
-      "ytd": -14.48
-    },
-    {
-      "ticker": "GLW",
-      "ytd": 24.32
-    },
-    {
-      "ticker": "CPAY",
-      "ytd": 52.91
-    },
-    {
-      "ticker": "CSGP",
-      "ytd": -53.83
-    },
-    {
-      "ticker": "COST",
-      "ytd": 25.5
-    },
-    {
-      "ticker": "CRH",
-      "ytd": -22.54
-    },
-    {
-      "ticker": "CRWD",
-      "ytd": 101.58
-    },
-    {
-      "ticker": "CCI",
-      "ytd": 4.68
-    },
-    {
-      "ticker": "CSX",
-      "ytd": 42.12
-    },
-    {
-      "ticker": "CMI",
-      "ytd": -12.1
-    },
-    {
-      "ticker": "CVS",
-      "ytd": 14.49
-    },
-    {
-      "ticker": "DHR",
-      "ytd": 3.09
-    },
-    {
-      "ticker": "DRI",
-      "ytd": 26.02
-    },
-    {
-      "ticker": "DDOG",
-      "ytd": 34.28
-    },
-    {
-      "ticker": "DVA",
-      "ytd": 56.56
-    },
-    {
-      "ticker": "DECK",
-      "ytd": -15.92
-    },
-    {
-      "ticker": "DE",
-      "ytd": 48.48
-    },
-    {
-      "ticker": "DELL",
-      "ytd": 173.84
-    },
-    {
-      "ticker": "DAL",
-      "ytd": 34.93
-    },
-    {
-      "ticker": "DVN",
-      "ytd": 16.8
-    },
-    {
-      "ticker": "DXCM",
-      "ytd": 20.11
-    },
-    {
-      "ticker": "FANG",
-      "ytd": 18.95
-    },
-    {
-      "ticker": "DLR",
-      "ytd": 19.06
-    },
-    {
-      "ticker": "DG",
-      "ytd": 2.29
-    },
-    {
-      "ticker": "DLTR",
-      "ytd": 10.28
-    },
-    {
-      "ticker": "D",
-      "ytd": 19.0
-    },
-    {
-      "ticker": "DPZ",
-      "ytd": -21.03
-    },
-    {
-      "ticker": "DASH",
-      "ytd": -17.67
-    },
-    {
-      "ticker": "DOV",
-      "ytd": 9.1
-    },
-    {
-      "ticker": "DOW",
-      "ytd": 31.9
-    },
-    {
-      "ticker": "DHI",
-      "ytd": 3.64
-    },
-    {
-      "ticker": "DTE",
-      "ytd": 9.3
-    },
-    {
-      "ticker": "DUK",
-      "ytd": 12.67
-    },
-    {
-      "ticker": "DD",
-      "ytd": 29.54
-    },
-    {
-      "ticker": "ETN",
-      "ytd": 9.46
-    },
-    {
-      "ticker": "EBAY",
-      "ytd": 43.18
-    },
-    {
-      "ticker": "ECHO",
-      "ytd": -7.15
-    },
-    {
-      "ticker": "ECL",
-      "ytd": 17.46
-    },
-    {
-      "ticker": "EIX",
-      "ytd": 4.36
-    },
-    {
-      "ticker": "EW",
-      "ytd": 21.89
-    },
-    {
-      "ticker": "ELV",
-      "ytd": 23.06
-    },
-    {
-      "ticker": "EME",
-      "ytd": 1.27
-    },
-    {
-      "ticker": "EMR",
-      "ytd": 24.75
-    },
-    {
-      "ticker": "ETR",
-      "ytd": 21.17
-    },
-    {
-      "ticker": "EOG",
-      "ytd": 45.74
-    },
-    {
-      "ticker": "EQT",
-      "ytd": -1.57
-    },
-    {
-      "ticker": "EFX",
-      "ytd": -11.26
-    },
-    {
-      "ticker": "EQIX",
-      "ytd": 39.51
-    },
-    {
-      "ticker": "ERIE",
-      "ytd": 0.25
-    },
-    {
-      "ticker": "ESS",
-      "ytd": 10.5
-    },
-    {
-      "ticker": "EL",
-      "ytd": 7.36
-    },
-    {
-      "ticker": "EG",
-      "ytd": 28.51
-    },
-    {
-      "ticker": "EVRG",
-      "ytd": 24.09
-    },
-    {
-      "ticker": "P",
-      "ytd": 49.02
-    },
-    {
-      "ticker": "ES",
-      "ytd": 5.83
-    },
-    {
-      "ticker": "EXC",
-      "ytd": 6.54
-    },
-    {
-      "ticker": "EXE",
-      "ytd": -20.31
-    },
-    {
-      "ticker": "EXPE",
-      "ytd": -9.79
-    },
-    {
-      "ticker": "EXPD",
-      "ytd": 25.22
-    },
-    {
-      "ticker": "EXR",
-      "ytd": 25.56
-    },
-    {
-      "ticker": "XOM",
-      "ytd": 36.79
-    },
-    {
-      "ticker": "FFIV",
-      "ytd": 23.64
-    },
-    {
-      "ticker": "FDS",
-      "ytd": 16.01
-    },
-    {
-      "ticker": "FICO",
-      "ytd": -55.54
-    },
-    {
-      "ticker": "FAST",
-      "ytd": 38.54
-    },
-    {
-      "ticker": "FRT",
-      "ytd": 18.46
-    },
-    {
-      "ticker": "FDX",
-      "ytd": 36.85
-    },
-    {
-      "ticker": "FDXF",
-      "ytd": -14.54
-    },
-    {
-      "ticker": "FERG",
-      "ytd": 16.6
-    },
-    {
-      "ticker": "FIS",
-      "ytd": -55.48
-    },
-    {
-      "ticker": "FITB",
-      "ytd": 16.38
-    },
-    {
-      "ticker": "FSLR",
-      "ytd": -34.03
-    },
-    {
-      "ticker": "FE",
-      "ytd": 6.84
-    },
-    {
-      "ticker": "FISV",
-      "ytd": -3.46
-    },
-    {
-      "ticker": "FLEX",
-      "ytd": 19.49
-    },
-    {
-      "ticker": "F",
-      "ytd": -3.6
-    },
-    {
-      "ticker": "FTNT",
-      "ytd": 58.67
-    },
-    {
-      "ticker": "FTV",
-      "ytd": 21.54
-    },
-    {
-      "ticker": "FOXA",
-      "ytd": -7.37
-    },
-    {
-      "ticker": "FOX",
-      "ytd": -7.31
-    },
-    {
-      "ticker": "BEN",
-      "ytd": 57.85
-    },
-    {
-      "ticker": "FCX",
-      "ytd": 17.22
-    },
-    {
-      "ticker": "GRMN",
-      "ytd": 44.33
-    },
-    {
-      "ticker": "IT",
-      "ytd": -20.3
-    },
-    {
-      "ticker": "GE",
-      "ytd": 5.8
-    },
-    {
-      "ticker": "GEHC",
-      "ytd": 1.66
-    },
-    {
-      "ticker": "GEV",
-      "ytd": 22.34
-    },
-    {
-      "ticker": "GEN",
-      "ytd": 16.86
-    },
-    {
-      "ticker": "GNRC",
-      "ytd": 28.83
-    },
-    {
-      "ticker": "GD",
-      "ytd": 8.94
-    },
-    {
-      "ticker": "GIS",
-      "ytd": -19.1
-    },
-    {
-      "ticker": "GM",
-      "ytd": 10.25
-    },
-    {
-      "ticker": "GPC",
-      "ytd": 3.4
-    },
-    {
-      "ticker": "GILD",
-      "ytd": 43.05
-    },
-    {
-      "ticker": "GPN",
-      "ytd": 35.85
-    },
-    {
-      "ticker": "GL",
-      "ytd": 19.05
-    },
-    {
-      "ticker": "GDDY",
-      "ytd": -5.75
-    },
-    {
-      "ticker": "GS",
-      "ytd": 1.0
-    },
-    {
-      "ticker": "HAL",
-      "ytd": 9.12
-    },
-    {
-      "ticker": "HIG",
       "ytd": 1.86
     },
     {
-      "ticker": "HAS",
-      "ytd": 50.17
+      "ticker": "ALB",
+      "ytd": -32.76
     },
     {
-      "ticker": "HCA",
-      "ytd": 7.81
+      "ticker": "ARE",
+      "ytd": -3.83
     },
     {
-      "ticker": "DOC",
-      "ytd": 32.99
+      "ticker": "ALGN",
+      "ytd": 10.29
     },
     {
-      "ticker": "HSIC",
-      "ytd": 15.52
+      "ticker": "ALLE",
+      "ytd": 20.12
     },
     {
-      "ticker": "HSY",
-      "ytd": -2.51
+      "ticker": "LNT",
+      "ytd": 15.75
     },
     {
-      "ticker": "HPE",
-      "ytd": 99.04
+      "ticker": "ALL",
+      "ytd": 30.51
     },
     {
-      "ticker": "HLT",
-      "ytd": 27.57
+      "ticker": "GOOGL",
+      "ytd": -6.7
     },
     {
-      "ticker": "HD",
-      "ytd": 3.7
+      "ticker": "GOOG",
+      "ytd": -7.65
     },
     {
-      "ticker": "HONA",
-      "ytd": -17.61
+      "ticker": "MO",
+      "ytd": 41.58
     },
     {
-      "ticker": "HON",
-      "ytd": 12.59
-    },
-    {
-      "ticker": "HRL",
-      "ytd": 0.23
-    },
-    {
-      "ticker": "HST",
-      "ytd": 51.19
-    },
-    {
-      "ticker": "HWM",
-      "ytd": 3.69
-    },
-    {
-      "ticker": "HPQ",
-      "ytd": 33.44
-    },
-    {
-      "ticker": "HUBB",
-      "ytd": -3.79
-    },
-    {
-      "ticker": "HUM",
-      "ytd": 67.22
-    },
-    {
-      "ticker": "HBAN",
-      "ytd": -6.72
-    },
-    {
-      "ticker": "HII",
-      "ytd": -9.25
-    },
-    {
-      "ticker": "IBM",
-      "ytd": -13.81
-    },
-    {
-      "ticker": "IEX",
-      "ytd": 34.12
-    },
-    {
-      "ticker": "IDXX",
-      "ytd": 3.98
-    },
-    {
-      "ticker": "ITW",
-      "ytd": 17.64
-    },
-    {
-      "ticker": "ILMN",
-      "ytd": 59.96
-    },
-    {
-      "ticker": "INCY",
-      "ytd": 18.62
-    },
-    {
-      "ticker": "IR",
-      "ytd": 9.01
-    },
-    {
-      "ticker": "PODD",
-      "ytd": -47.67
-    },
-    {
-      "ticker": "INTC",
-      "ytd": 47.61
-    },
-    {
-      "ticker": "IBKR",
-      "ytd": 15.76
-    },
-    {
-      "ticker": "ICE",
-      "ytd": 11.37
-    },
-    {
-      "ticker": "IFF",
-      "ytd": 24.21
-    },
-    {
-      "ticker": "IP",
-      "ytd": -9.52
-    },
-    {
-      "ticker": "INTU",
-      "ytd": -45.15
-    },
-    {
-      "ticker": "ISRG",
-      "ytd": -19.92
-    },
-    {
-      "ticker": "IVZ",
-      "ytd": 9.6
-    },
-    {
-      "ticker": "INVH",
-      "ytd": 1.47
-    },
-    {
-      "ticker": "IQV",
-      "ytd": 23.73
-    },
-    {
-      "ticker": "IRM",
-      "ytd": 36.14
-    },
-    {
-      "ticker": "JBHT",
-      "ytd": 15.86
-    },
-    {
-      "ticker": "JBL",
-      "ytd": 4.0
-    },
-    {
-      "ticker": "JKHY",
-      "ytd": -0.61
-    },
-    {
-      "ticker": "J",
-      "ytd": 17.03
-    },
-    {
-      "ticker": "JNJ",
-      "ytd": 37.59
-    },
-    {
-      "ticker": "JCI",
-      "ytd": 16.38
-    },
-    {
-      "ticker": "JPM",
-      "ytd": 7.12
-    },
-    {
-      "ticker": "KDP",
-      "ytd": 38.73
-    },
-    {
-      "ticker": "KEY",
-      "ytd": 4.73
-    },
-    {
-      "ticker": "KEYS",
-      "ytd": 39.88
-    },
-    {
-      "ticker": "KMB",
-      "ytd": 13.44
-    },
-    {
-      "ticker": "KIM",
-      "ytd": 32.41
-    },
-    {
-      "ticker": "KMI",
-      "ytd": 16.8
-    },
-    {
-      "ticker": "KKR",
-      "ytd": -21.32
-    },
-    {
-      "ticker": "KLAC",
-      "ytd": 20.49
-    },
-    {
-      "ticker": "KHC",
-      "ytd": 5.31
-    },
-    {
-      "ticker": "KR",
-      "ytd": 10.84
-    },
-    {
-      "ticker": "LHX",
-      "ytd": -8.25
-    },
-    {
-      "ticker": "LH",
-      "ytd": 48.47
-    },
-    {
-      "ticker": "LRCX",
-      "ytd": 20.53
-    },
-    {
-      "ticker": "LVS",
-      "ytd": -35.78
-    },
-    {
-      "ticker": "LDOS",
-      "ytd": -24.5
-    },
-    {
-      "ticker": "LEN",
-      "ytd": -14.99
-    },
-    {
-      "ticker": "LII",
-      "ytd": -29.62
-    },
-    {
-      "ticker": "LLY",
-      "ytd": 33.22
-    },
-    {
-      "ticker": "LIN",
-      "ytd": 22.79
-    },
-    {
-      "ticker": "LYV",
-      "ytd": 22.67
-    },
-    {
-      "ticker": "LMT",
-      "ytd": 23.53
-    },
-    {
-      "ticker": "L",
-      "ytd": 6.17
-    },
-    {
-      "ticker": "LOW",
-      "ytd": -4.02
-    },
-    {
-      "ticker": "LULU",
-      "ytd": -47.64
-    },
-    {
-      "ticker": "LITE",
-      "ytd": 54.4
-    },
-    {
-      "ticker": "LYB",
-      "ytd": 41.06
-    },
-    {
-      "ticker": "MTB",
-      "ytd": 10.34
-    },
-    {
-      "ticker": "MPC",
-      "ytd": 138.63
-    },
-    {
-      "ticker": "MAR",
-      "ytd": 37.46
-    },
-    {
-      "ticker": "MRSH",
-      "ytd": 15.89
-    },
-    {
-      "ticker": "MLM",
-      "ytd": -16.39
-    },
-    {
-      "ticker": "MRVL",
-      "ytd": 73.01
-    },
-    {
-      "ticker": "MAS",
-      "ytd": 33.82
-    },
-    {
-      "ticker": "MA",
-      "ytd": 17.75
-    },
-    {
-      "ticker": "MKC",
-      "ytd": -28.55
-    },
-    {
-      "ticker": "MCD",
-      "ytd": -5.13
-    },
-    {
-      "ticker": "MCK",
-      "ytd": 31.87
-    },
-    {
-      "ticker": "MDT",
-      "ytd": 8.48
-    },
-    {
-      "ticker": "MRK",
-      "ytd": 41.95
-    },
-    {
-      "ticker": "META",
-      "ytd": -1.14
-    },
-    {
-      "ticker": "MET",
-      "ytd": 31.01
-    },
-    {
-      "ticker": "MTD",
-      "ytd": 24.09
-    },
-    {
-      "ticker": "MGM",
-      "ytd": -9.4
-    },
-    {
-      "ticker": "MCHP",
-      "ytd": -5.65
-    },
-    {
-      "ticker": "MU",
-      "ytd": 130.06
-    },
-    {
-      "ticker": "MSFT",
-      "ytd": 13.45
-    },
-    {
-      "ticker": "MAA",
-      "ytd": -10.34
-    },
-    {
-      "ticker": "MRNA",
-      "ytd": 771.68
-    },
-    {
-      "ticker": "MDLZ",
-      "ytd": 27.26
-    },
-    {
-      "ticker": "MPWR",
-      "ytd": 45.72
-    },
-    {
-      "ticker": "MNST",
-      "ytd": 19.07
-    },
-    {
-      "ticker": "MCO",
-      "ytd": 3.03
-    },
-    {
-      "ticker": "MS",
-      "ytd": 5.45
-    },
-    {
-      "ticker": "MOS",
-      "ytd": -5.6
-    },
-    {
-      "ticker": "MSI",
-      "ytd": 39.55
-    },
-    {
-      "ticker": "MSCI",
+      "ticker": "AMZN",
       "ytd": 17.51
     },
     {
-      "ticker": "NDAQ",
-      "ytd": 14.98
+      "ticker": "AMCR",
+      "ytd": 10.29
     },
     {
-      "ticker": "NTAP",
-      "ytd": 67.02
+      "ticker": "AEE",
+      "ytd": 14.68
     },
     {
-      "ticker": "NFLX",
-      "ytd": -30.48
+      "ticker": "AEP",
+      "ytd": 15.0
     },
     {
-      "ticker": "NEM",
-      "ytd": 19.28
+      "ticker": "AXP",
+      "ytd": -12.53
     },
     {
-      "ticker": "NWSA",
-      "ytd": 2.22
+      "ticker": "AIG",
+      "ytd": 0.21
     },
     {
-      "ticker": "NWS",
-      "ytd": -0.82
+      "ticker": "AMT",
+      "ytd": 12.17
     },
     {
-      "ticker": "NEE",
-      "ytd": 8.92
+      "ticker": "AWK",
+      "ytd": 17.22
     },
     {
-      "ticker": "NKE",
-      "ytd": -37.28
+      "ticker": "AMP",
+      "ytd": 6.71
     },
     {
-      "ticker": "NI",
-      "ytd": 10.31
+      "ticker": "AME",
+      "ytd": 15.13
     },
     {
-      "ticker": "NDSN",
-      "ytd": 36.08
+      "ticker": "AMGN",
+      "ytd": 45.8
     },
     {
-      "ticker": "NSC",
-      "ytd": 15.86
+      "ticker": "APH",
+      "ytd": 14.11
     },
     {
-      "ticker": "NTRS",
-      "ytd": 29.64
+      "ticker": "ADI",
+      "ytd": 50.78
     },
     {
-      "ticker": "NOC",
-      "ytd": -5.18
+      "ticker": "AON",
+      "ytd": -1.51
     },
     {
-      "ticker": "NCLH",
-      "ytd": -19.1
+      "ticker": "APA",
+      "ytd": 89.58
     },
     {
-      "ticker": "NRG",
-      "ytd": -40.69
+      "ticker": "APO",
+      "ytd": -15.08
     },
     {
-      "ticker": "NUE",
-      "ytd": 52.65
+      "ticker": "AAPL",
+      "ytd": 31.58
     },
     {
-      "ticker": "NVDA",
-      "ytd": -10.36
+      "ticker": "AMAT",
+      "ytd": 47.46
     },
     {
-      "ticker": "NVR",
-      "ytd": -17.07
+      "ticker": "APP",
+      "ytd": -34.54
     },
     {
-      "ticker": "NXPI",
-      "ytd": 19.76
+      "ticker": "APTV",
+      "ytd": -49.76
     },
     {
-      "ticker": "ORLY",
-      "ytd": -1.05
+      "ticker": "ACGL",
+      "ytd": 16.31
     },
     {
-      "ticker": "OXY",
-      "ytd": 36.14
+      "ticker": "ADM",
+      "ytd": 22.58
     },
     {
-      "ticker": "OKTA",
-      "ytd": 112.3
+      "ticker": "ARES",
+      "ytd": -14.23
     },
     {
-      "ticker": "ODFL",
-      "ytd": 5.99
+      "ticker": "ANET",
+      "ytd": 47.22
     },
     {
-      "ticker": "OMC",
-      "ytd": 12.66
+      "ticker": "AJG",
+      "ytd": 11.16
     },
     {
-      "ticker": "ON",
-      "ytd": 22.77
+      "ticker": "AIZ",
+      "ytd": 37.48
     },
     {
-      "ticker": "OKE",
-      "ytd": 23.36
+      "ticker": "T",
+      "ytd": -5.04
     },
     {
-      "ticker": "ORCL",
-      "ytd": -38.91
+      "ticker": "ATO",
+      "ytd": 5.51
     },
     {
-      "ticker": "OTIS",
-      "ytd": -9.33
+      "ticker": "ADSK",
+      "ytd": -9.32
     },
     {
-      "ticker": "PCAR",
-      "ytd": -4.26
+      "ticker": "ADP",
+      "ytd": 23.86
     },
     {
-      "ticker": "PKG",
-      "ytd": 22.72
+      "ticker": "AZO",
+      "ytd": -2.0
     },
     {
-      "ticker": "PLTR",
-      "ytd": 0.8
+      "ticker": "AVY",
+      "ytd": 4.93
     },
     {
-      "ticker": "PANW",
-      "ytd": 84.47
+      "ticker": "AXON",
+      "ytd": -44.02
     },
     {
-      "ticker": "PH",
-      "ytd": 8.63
+      "ticker": "BKR",
+      "ytd": 6.46
     },
     {
-      "ticker": "PAYX",
-      "ytd": 11.77
+      "ticker": "BALL",
+      "ytd": 24.57
     },
     {
-      "ticker": "PYPL",
-      "ytd": 4.2
+      "ticker": "BAC",
+      "ytd": -7.98
     },
     {
-      "ticker": "PNR",
-      "ytd": -33.0
+      "ticker": "BAX",
+      "ytd": 35.27
     },
     {
-      "ticker": "PEP",
-      "ytd": 4.04
+      "ticker": "BDX",
+      "ytd": 42.7
     },
     {
-      "ticker": "PFE",
-      "ytd": 24.41
+      "ticker": "BRK-B",
+      "ytd": 18.39
     },
     {
-      "ticker": "PCG",
-      "ytd": -17.88
+      "ticker": "BBY",
+      "ytd": 58.02
     },
     {
-      "ticker": "PM",
-      "ytd": 24.33
+      "ticker": "TECH",
+      "ytd": 22.57
     },
     {
-      "ticker": "PSX",
-      "ytd": 97.84
+      "ticker": "BIIB",
+      "ytd": 42.5
     },
     {
-      "ticker": "PNW",
-      "ytd": 24.67
+      "ticker": "BLK",
+      "ytd": 14.87
     },
     {
-      "ticker": "PNC",
-      "ytd": 12.98
+      "ticker": "BX",
+      "ytd": -20.0
     },
     {
-      "ticker": "PPG",
-      "ytd": 22.17
+      "ticker": "XYZ",
+      "ytd": 31.57
     },
     {
-      "ticker": "PPL",
-      "ytd": 4.18
+      "ticker": "BE",
+      "ytd": 112.25
     },
     {
-      "ticker": "PFG",
-      "ytd": 32.93
+      "ticker": "BNY",
+      "ytd": 32.77
     },
     {
-      "ticker": "PG",
-      "ytd": 22.4
+      "ticker": "BA",
+      "ytd": -23.37
     },
     {
-      "ticker": "PGR",
-      "ytd": 9.41
+      "ticker": "BKNG",
+      "ytd": -24.21
     },
     {
-      "ticker": "PLD",
-      "ytd": 3.17
+      "ticker": "BSX",
+      "ytd": -52.35
     },
     {
-      "ticker": "PRU",
-      "ytd": 12.53
+      "ticker": "BMY",
+      "ytd": 21.48
     },
     {
-      "ticker": "PTC",
-      "ytd": 15.55
+      "ticker": "AVGO",
+      "ytd": -0.14
     },
     {
-      "ticker": "PEG",
-      "ytd": -5.39
+      "ticker": "BR",
+      "ytd": -10.91
     },
     {
-      "ticker": "PSA",
-      "ytd": 33.89
+      "ticker": "BRO",
+      "ytd": -7.09
     },
     {
-      "ticker": "PHM",
-      "ytd": 10.39
+      "ticker": "BF-B",
+      "ytd": 18.22
     },
     {
-      "ticker": "Q",
-      "ytd": 47.47
+      "ticker": "BG",
+      "ytd": 10.21
     },
     {
-      "ticker": "QCOM",
-      "ytd": 1.89
+      "ticker": "BXP",
+      "ytd": -3.08
     },
     {
-      "ticker": "PWR",
-      "ytd": 32.7
+      "ticker": "CHRW",
+      "ytd": -17.38
     },
     {
-      "ticker": "DGX",
-      "ytd": 51.21
+      "ticker": "CDNS",
+      "ytd": 6.08
     },
     {
-      "ticker": "RL",
-      "ytd": 11.12
+      "ticker": "CPT",
+      "ytd": -7.24
     },
     {
-      "ticker": "RJF",
-      "ytd": 3.86
+      "ticker": "COF",
+      "ytd": -19.57
     },
     {
-      "ticker": "RDDT",
-      "ytd": -58.33
+      "ticker": "CAH",
+      "ytd": 35.8
     },
     {
-      "ticker": "O",
-      "ytd": 8.59
+      "ticker": "CCL",
+      "ytd": 1.33
     },
     {
-      "ticker": "REG",
-      "ytd": 15.96
+      "ticker": "CARR",
+      "ytd": 3.59
     },
     {
-      "ticker": "REGN",
+      "ticker": "CVNA",
+      "ytd": -7.72
+    },
+    {
+      "ticker": "CASY",
+      "ytd": 28.81
+    },
+    {
+      "ticker": "CAT",
+      "ytd": 1.39
+    },
+    {
+      "ticker": "CBOE",
+      "ytd": 49.9
+    },
+    {
+      "ticker": "CBRE",
+      "ytd": -15.99
+    },
+    {
+      "ticker": "CDW",
+      "ytd": 32.04
+    },
+    {
+      "ticker": "COR",
+      "ytd": 3.87
+    },
+    {
+      "ticker": "CNC",
+      "ytd": 68.69
+    },
+    {
+      "ticker": "CNP",
+      "ytd": 7.67
+    },
+    {
+      "ticker": "CF",
+      "ytd": 56.05
+    },
+    {
+      "ticker": "CRL",
+      "ytd": 69.3
+    },
+    {
+      "ticker": "SCHW",
+      "ytd": -7.75
+    },
+    {
+      "ticker": "CHTR",
+      "ytd": -34.87
+    },
+    {
+      "ticker": "CVX",
+      "ytd": 40.63
+    },
+    {
+      "ticker": "CMG",
+      "ytd": -2.27
+    },
+    {
+      "ticker": "CB",
+      "ytd": 20.53
+    },
+    {
+      "ticker": "CHD",
+      "ytd": 36.83
+    },
+    {
+      "ticker": "CIEN",
+      "ytd": 20.31
+    },
+    {
+      "ticker": "CI",
+      "ytd": 9.83
+    },
+    {
+      "ticker": "CINF",
+      "ytd": 19.54
+    },
+    {
+      "ticker": "CTAS",
+      "ytd": 23.86
+    },
+    {
+      "ticker": "CSCO",
+      "ytd": 34.24
+    },
+    {
+      "ticker": "C",
+      "ytd": 6.81
+    },
+    {
+      "ticker": "CFG",
+      "ytd": 13.28
+    },
+    {
+      "ticker": "CLX",
+      "ytd": 11.34
+    },
+    {
+      "ticker": "CME",
+      "ytd": 21.12
+    },
+    {
+      "ticker": "CMS",
+      "ytd": 2.01
+    },
+    {
+      "ticker": "KO",
+      "ytd": 43.9
+    },
+    {
+      "ticker": "CTSH",
+      "ytd": -19.3
+    },
+    {
+      "ticker": "COHR",
+      "ytd": 20.68
+    },
+    {
+      "ticker": "COIN",
+      "ytd": -42.39
+    },
+    {
+      "ticker": "CL",
+      "ytd": 29.17
+    },
+    {
+      "ticker": "CMCSA",
+      "ytd": -4.79
+    },
+    {
+      "ticker": "FIX",
+      "ytd": 15.91
+    },
+    {
+      "ticker": "COP",
+      "ytd": 45.71
+    },
+    {
+      "ticker": "ED",
+      "ytd": 22.14
+    },
+    {
+      "ticker": "STZ",
+      "ytd": 5.09
+    },
+    {
+      "ticker": "CEG",
+      "ytd": -24.66
+    },
+    {
+      "ticker": "COO",
+      "ytd": -22.41
+    },
+    {
+      "ticker": "CPRT",
+      "ytd": -14.83
+    },
+    {
+      "ticker": "GLW",
+      "ytd": 33.56
+    },
+    {
+      "ticker": "CPAY",
+      "ytd": 53.68
+    },
+    {
+      "ticker": "CSGP",
+      "ytd": -53.92
+    },
+    {
+      "ticker": "COST",
+      "ytd": 28.03
+    },
+    {
+      "ticker": "CRH",
+      "ytd": -23.02
+    },
+    {
+      "ticker": "CRWD",
+      "ytd": 102.0
+    },
+    {
+      "ticker": "CCI",
+      "ytd": 4.34
+    },
+    {
+      "ticker": "CSX",
+      "ytd": 44.4
+    },
+    {
+      "ticker": "CMI",
+      "ytd": -10.35
+    },
+    {
+      "ticker": "CVS",
+      "ytd": 15.15
+    },
+    {
+      "ticker": "DHR",
+      "ytd": 2.74
+    },
+    {
+      "ticker": "DRI",
+      "ytd": 26.18
+    },
+    {
+      "ticker": "DDOG",
+      "ytd": 37.83
+    },
+    {
+      "ticker": "DVA",
+      "ytd": 60.25
+    },
+    {
+      "ticker": "DECK",
+      "ytd": -17.24
+    },
+    {
+      "ticker": "DE",
+      "ytd": 49.36
+    },
+    {
+      "ticker": "DELL",
+      "ytd": 195.48
+    },
+    {
+      "ticker": "DAL",
+      "ytd": 33.65
+    },
+    {
+      "ticker": "DVN",
+      "ytd": 20.94
+    },
+    {
+      "ticker": "DXCM",
+      "ytd": 20.75
+    },
+    {
+      "ticker": "FANG",
+      "ytd": 20.83
+    },
+    {
+      "ticker": "DLR",
+      "ytd": 19.23
+    },
+    {
+      "ticker": "DG",
+      "ytd": 2.38
+    },
+    {
+      "ticker": "DLTR",
+      "ytd": 11.9
+    },
+    {
+      "ticker": "D",
       "ytd": 18.46
     },
     {
+      "ticker": "DPZ",
+      "ytd": -21.38
+    },
+    {
+      "ticker": "DASH",
+      "ytd": -18.9
+    },
+    {
+      "ticker": "DOV",
+      "ytd": 9.33
+    },
+    {
+      "ticker": "DOW",
+      "ytd": 38.63
+    },
+    {
+      "ticker": "DHI",
+      "ytd": 2.11
+    },
+    {
+      "ticker": "DTE",
+      "ytd": 9.85
+    },
+    {
+      "ticker": "DUK",
+      "ytd": 12.52
+    },
+    {
+      "ticker": "DD",
+      "ytd": 28.49
+    },
+    {
+      "ticker": "ETN",
+      "ytd": 11.44
+    },
+    {
+      "ticker": "EBAY",
+      "ytd": 42.21
+    },
+    {
+      "ticker": "ECHO",
+      "ytd": -8.9
+    },
+    {
+      "ticker": "ECL",
+      "ytd": 18.17
+    },
+    {
+      "ticker": "EIX",
+      "ytd": 3.88
+    },
+    {
+      "ticker": "EW",
+      "ytd": 24.0
+    },
+    {
+      "ticker": "ELV",
+      "ytd": 23.01
+    },
+    {
+      "ticker": "EME",
+      "ytd": 4.62
+    },
+    {
+      "ticker": "EMR",
+      "ytd": 24.39
+    },
+    {
+      "ticker": "ETR",
+      "ytd": 21.48
+    },
+    {
+      "ticker": "EOG",
+      "ytd": 47.91
+    },
+    {
+      "ticker": "EQT",
+      "ytd": -0.26
+    },
+    {
+      "ticker": "EFX",
+      "ytd": -11.17
+    },
+    {
+      "ticker": "EQIX",
+      "ytd": 41.91
+    },
+    {
+      "ticker": "ERIE",
+      "ytd": 0.28
+    },
+    {
+      "ticker": "ESS",
+      "ytd": 9.8
+    },
+    {
+      "ticker": "EL",
+      "ytd": 6.32
+    },
+    {
+      "ticker": "EG",
+      "ytd": 28.94
+    },
+    {
+      "ticker": "EVRG",
+      "ytd": 23.95
+    },
+    {
+      "ticker": "P",
+      "ytd": 54.33
+    },
+    {
+      "ticker": "ES",
+      "ytd": 7.23
+    },
+    {
+      "ticker": "EXC",
+      "ytd": 6.73
+    },
+    {
+      "ticker": "EXE",
+      "ytd": -17.84
+    },
+    {
+      "ticker": "EXPE",
+      "ytd": -7.65
+    },
+    {
+      "ticker": "EXPD",
+      "ytd": 28.8
+    },
+    {
+      "ticker": "EXR",
+      "ytd": 25.77
+    },
+    {
+      "ticker": "XOM",
+      "ytd": 38.65
+    },
+    {
+      "ticker": "FFIV",
+      "ytd": 24.7
+    },
+    {
+      "ticker": "FDS",
+      "ytd": 19.17
+    },
+    {
+      "ticker": "FICO",
+      "ytd": -55.65
+    },
+    {
+      "ticker": "FAST",
+      "ytd": 40.18
+    },
+    {
+      "ticker": "FRT",
+      "ytd": 17.76
+    },
+    {
+      "ticker": "FDX",
+      "ytd": 38.2
+    },
+    {
+      "ticker": "FDXF",
+      "ytd": -12.16
+    },
+    {
+      "ticker": "FERG",
+      "ytd": 18.88
+    },
+    {
+      "ticker": "FIS",
+      "ytd": -52.49
+    },
+    {
+      "ticker": "FITB",
+      "ytd": 16.83
+    },
+    {
+      "ticker": "FSLR",
+      "ytd": -35.08
+    },
+    {
+      "ticker": "FE",
+      "ytd": 6.95
+    },
+    {
+      "ticker": "FISV",
+      "ytd": -2.58
+    },
+    {
+      "ticker": "FLEX",
+      "ytd": 24.01
+    },
+    {
+      "ticker": "F",
+      "ytd": -3.84
+    },
+    {
+      "ticker": "FTNT",
+      "ytd": 64.48
+    },
+    {
+      "ticker": "FTV",
+      "ytd": 22.97
+    },
+    {
+      "ticker": "FOXA",
+      "ytd": -6.97
+    },
+    {
+      "ticker": "FOX",
+      "ytd": -7.13
+    },
+    {
+      "ticker": "BEN",
+      "ytd": 57.9
+    },
+    {
+      "ticker": "FCX",
+      "ytd": 20.74
+    },
+    {
+      "ticker": "GRMN",
+      "ytd": 46.96
+    },
+    {
+      "ticker": "IT",
+      "ytd": -18.58
+    },
+    {
+      "ticker": "GE",
+      "ytd": 7.31
+    },
+    {
+      "ticker": "GEHC",
+      "ytd": -0.07
+    },
+    {
+      "ticker": "GEV",
+      "ytd": 19.23
+    },
+    {
+      "ticker": "GEN",
+      "ytd": 19.31
+    },
+    {
+      "ticker": "GNRC",
+      "ytd": 37.49
+    },
+    {
+      "ticker": "GD",
+      "ytd": 8.87
+    },
+    {
+      "ticker": "GIS",
+      "ytd": -20.01
+    },
+    {
+      "ticker": "GM",
+      "ytd": 10.51
+    },
+    {
+      "ticker": "GPC",
+      "ytd": 2.6
+    },
+    {
+      "ticker": "GILD",
+      "ytd": 42.09
+    },
+    {
+      "ticker": "GPN",
+      "ytd": 34.03
+    },
+    {
+      "ticker": "GL",
+      "ytd": 17.84
+    },
+    {
+      "ticker": "GDDY",
+      "ytd": -4.2
+    },
+    {
+      "ticker": "GS",
+      "ytd": 2.85
+    },
+    {
+      "ticker": "HAL",
+      "ytd": 12.79
+    },
+    {
+      "ticker": "HIG",
+      "ytd": 1.4
+    },
+    {
+      "ticker": "HAS",
+      "ytd": 52.88
+    },
+    {
+      "ticker": "HCA",
+      "ytd": 8.15
+    },
+    {
+      "ticker": "DOC",
+      "ytd": 32.79
+    },
+    {
+      "ticker": "HSIC",
+      "ytd": 15.1
+    },
+    {
+      "ticker": "HSY",
+      "ytd": -1.12
+    },
+    {
+      "ticker": "HPE",
+      "ytd": 110.39
+    },
+    {
+      "ticker": "HLT",
+      "ytd": 28.83
+    },
+    {
+      "ticker": "HD",
+      "ytd": 3.79
+    },
+    {
+      "ticker": "HONA",
+      "ytd": -15.24
+    },
+    {
+      "ticker": "HON",
+      "ytd": 12.31
+    },
+    {
+      "ticker": "HRL",
+      "ytd": -0.94
+    },
+    {
+      "ticker": "HST",
+      "ytd": 50.31
+    },
+    {
+      "ticker": "HWM",
+      "ytd": 6.04
+    },
+    {
+      "ticker": "HPQ",
+      "ytd": 35.98
+    },
+    {
+      "ticker": "HUBB",
+      "ytd": -3.37
+    },
+    {
+      "ticker": "HUM",
+      "ytd": 70.37
+    },
+    {
+      "ticker": "HBAN",
+      "ytd": -6.48
+    },
+    {
+      "ticker": "HII",
+      "ytd": -9.14
+    },
+    {
+      "ticker": "IBM",
+      "ytd": -12.51
+    },
+    {
+      "ticker": "IEX",
+      "ytd": 35.85
+    },
+    {
+      "ticker": "IDXX",
+      "ytd": 4.87
+    },
+    {
+      "ticker": "ITW",
+      "ytd": 17.92
+    },
+    {
+      "ticker": "ILMN",
+      "ytd": 58.49
+    },
+    {
+      "ticker": "INCY",
+      "ytd": 20.56
+    },
+    {
+      "ticker": "IR",
+      "ytd": 6.75
+    },
+    {
+      "ticker": "PODD",
+      "ytd": -46.97
+    },
+    {
+      "ticker": "INTC",
+      "ytd": 58.71
+    },
+    {
+      "ticker": "IBKR",
+      "ytd": 23.07
+    },
+    {
+      "ticker": "ICE",
+      "ytd": 14.04
+    },
+    {
+      "ticker": "IFF",
+      "ytd": 23.44
+    },
+    {
+      "ticker": "IP",
+      "ytd": -10.73
+    },
+    {
+      "ticker": "INTU",
+      "ytd": -44.8
+    },
+    {
+      "ticker": "ISRG",
+      "ytd": -20.01
+    },
+    {
+      "ticker": "IVZ",
+      "ytd": 8.69
+    },
+    {
+      "ticker": "INVH",
+      "ytd": 0.27
+    },
+    {
+      "ticker": "IQV",
+      "ytd": 21.81
+    },
+    {
+      "ticker": "IRM",
+      "ytd": 38.16
+    },
+    {
+      "ticker": "JBHT",
+      "ytd": 16.58
+    },
+    {
+      "ticker": "JBL",
+      "ytd": 7.78
+    },
+    {
+      "ticker": "JKHY",
+      "ytd": -0.21
+    },
+    {
+      "ticker": "J",
+      "ytd": 17.3
+    },
+    {
+      "ticker": "JNJ",
+      "ytd": 37.41
+    },
+    {
+      "ticker": "JCI",
+      "ytd": 19.26
+    },
+    {
+      "ticker": "JPM",
+      "ytd": 7.53
+    },
+    {
+      "ticker": "KDP",
+      "ytd": 41.16
+    },
+    {
+      "ticker": "KEY",
+      "ytd": 5.22
+    },
+    {
+      "ticker": "KEYS",
+      "ytd": 47.95
+    },
+    {
+      "ticker": "KMB",
+      "ytd": 11.5
+    },
+    {
+      "ticker": "KIM",
+      "ytd": 32.11
+    },
+    {
+      "ticker": "KMI",
+      "ytd": 18.3
+    },
+    {
+      "ticker": "KKR",
+      "ytd": -21.94
+    },
+    {
+      "ticker": "KLAC",
+      "ytd": 26.8
+    },
+    {
+      "ticker": "KHC",
+      "ytd": 4.66
+    },
+    {
+      "ticker": "KR",
+      "ytd": 12.27
+    },
+    {
+      "ticker": "LHX",
+      "ytd": -8.04
+    },
+    {
+      "ticker": "LH",
+      "ytd": 49.01
+    },
+    {
+      "ticker": "LRCX",
+      "ytd": 27.84
+    },
+    {
+      "ticker": "LVS",
+      "ytd": -36.71
+    },
+    {
+      "ticker": "LDOS",
+      "ytd": -26.35
+    },
+    {
+      "ticker": "LEN",
+      "ytd": -15.31
+    },
+    {
+      "ticker": "LII",
+      "ytd": -29.06
+    },
+    {
+      "ticker": "LLY",
+      "ytd": 33.68
+    },
+    {
+      "ticker": "LIN",
+      "ytd": 23.92
+    },
+    {
+      "ticker": "LYV",
+      "ytd": 23.98
+    },
+    {
+      "ticker": "LMT",
+      "ytd": 24.95
+    },
+    {
+      "ticker": "L",
+      "ytd": 6.73
+    },
+    {
+      "ticker": "LOW",
+      "ytd": -4.13
+    },
+    {
+      "ticker": "LULU",
+      "ytd": -49.03
+    },
+    {
+      "ticker": "LITE",
+      "ytd": 67.84
+    },
+    {
+      "ticker": "LYB",
+      "ytd": 45.67
+    },
+    {
+      "ticker": "MTB",
+      "ytd": 10.13
+    },
+    {
+      "ticker": "MPC",
+      "ytd": 146.77
+    },
+    {
+      "ticker": "MAR",
+      "ytd": 37.75
+    },
+    {
+      "ticker": "MRSH",
+      "ytd": 16.22
+    },
+    {
+      "ticker": "MLM",
+      "ytd": -17.03
+    },
+    {
+      "ticker": "MRVL",
+      "ytd": 89.15
+    },
+    {
+      "ticker": "MAS",
+      "ytd": 34.0
+    },
+    {
+      "ticker": "MA",
+      "ytd": 18.09
+    },
+    {
+      "ticker": "MKC",
+      "ytd": -28.22
+    },
+    {
+      "ticker": "MCD",
+      "ytd": -7.61
+    },
+    {
+      "ticker": "MCK",
+      "ytd": 31.53
+    },
+    {
+      "ticker": "MDT",
+      "ytd": 8.5
+    },
+    {
+      "ticker": "MRK",
+      "ytd": 41.12
+    },
+    {
+      "ticker": "META",
+      "ytd": -3.08
+    },
+    {
+      "ticker": "MET",
+      "ytd": 31.65
+    },
+    {
+      "ticker": "MTD",
+      "ytd": 23.92
+    },
+    {
+      "ticker": "MGM",
+      "ytd": -8.28
+    },
+    {
+      "ticker": "MCHP",
+      "ytd": -2.83
+    },
+    {
+      "ticker": "MU",
+      "ytd": 157.4
+    },
+    {
+      "ticker": "MSFT",
+      "ytd": 10.89
+    },
+    {
+      "ticker": "MAA",
+      "ytd": -10.85
+    },
+    {
+      "ticker": "MRNA",
+      "ytd": 705.87
+    },
+    {
+      "ticker": "MDLZ",
+      "ytd": 27.57
+    },
+    {
+      "ticker": "MPWR",
+      "ytd": 58.72
+    },
+    {
+      "ticker": "MNST",
+      "ytd": 19.22
+    },
+    {
+      "ticker": "MCO",
+      "ytd": 3.89
+    },
+    {
+      "ticker": "MS",
+      "ytd": 7.16
+    },
+    {
+      "ticker": "MOS",
+      "ytd": -6.38
+    },
+    {
+      "ticker": "MSI",
+      "ytd": 41.63
+    },
+    {
+      "ticker": "MSCI",
+      "ytd": 18.34
+    },
+    {
+      "ticker": "NDAQ",
+      "ytd": 14.62
+    },
+    {
+      "ticker": "NTAP",
+      "ytd": 73.79
+    },
+    {
+      "ticker": "NFLX",
+      "ytd": -29.07
+    },
+    {
+      "ticker": "NEM",
+      "ytd": 17.8
+    },
+    {
+      "ticker": "NWSA",
+      "ytd": 3.22
+    },
+    {
+      "ticker": "NWS",
+      "ytd": 1.21
+    },
+    {
+      "ticker": "NEE",
+      "ytd": 8.57
+    },
+    {
+      "ticker": "NKE",
+      "ytd": -37.84
+    },
+    {
+      "ticker": "NI",
+      "ytd": 10.94
+    },
+    {
+      "ticker": "NDSN",
+      "ytd": 37.81
+    },
+    {
+      "ticker": "NSC",
+      "ytd": 16.8
+    },
+    {
+      "ticker": "NTRS",
+      "ytd": 30.24
+    },
+    {
+      "ticker": "NOC",
+      "ytd": -4.78
+    },
+    {
+      "ticker": "NCLH",
+      "ytd": -17.38
+    },
+    {
+      "ticker": "NRG",
+      "ytd": -40.45
+    },
+    {
+      "ticker": "NUE",
+      "ytd": 55.58
+    },
+    {
+      "ticker": "NVDA",
+      "ytd": -7.79
+    },
+    {
+      "ticker": "NVR",
+      "ytd": -19.01
+    },
+    {
+      "ticker": "NXPI",
+      "ytd": 23.4
+    },
+    {
+      "ticker": "ORLY",
+      "ytd": 0.22
+    },
+    {
+      "ticker": "OXY",
+      "ytd": 36.96
+    },
+    {
+      "ticker": "OKTA",
+      "ytd": 117.9
+    },
+    {
+      "ticker": "ODFL",
+      "ytd": 7.56
+    },
+    {
+      "ticker": "OMC",
+      "ytd": 12.71
+    },
+    {
+      "ticker": "ON",
+      "ytd": 29.84
+    },
+    {
+      "ticker": "OKE",
+      "ytd": 24.49
+    },
+    {
+      "ticker": "ORCL",
+      "ytd": -33.53
+    },
+    {
+      "ticker": "OTIS",
+      "ytd": -10.8
+    },
+    {
+      "ticker": "PCAR",
+      "ytd": -1.94
+    },
+    {
+      "ticker": "PKG",
+      "ytd": 22.13
+    },
+    {
+      "ticker": "PLTR",
+      "ytd": 2.7
+    },
+    {
+      "ticker": "PANW",
+      "ytd": 86.47
+    },
+    {
+      "ticker": "PH",
+      "ytd": 9.5
+    },
+    {
+      "ticker": "PAYX",
+      "ytd": 10.97
+    },
+    {
+      "ticker": "PYPL",
+      "ytd": 3.21
+    },
+    {
+      "ticker": "PNR",
+      "ytd": -33.29
+    },
+    {
+      "ticker": "PEP",
+      "ytd": 4.28
+    },
+    {
+      "ticker": "PFE",
+      "ytd": 24.79
+    },
+    {
+      "ticker": "PCG",
+      "ytd": -18.68
+    },
+    {
+      "ticker": "PM",
+      "ytd": 25.68
+    },
+    {
+      "ticker": "PSX",
+      "ytd": 102.26
+    },
+    {
+      "ticker": "PNW",
+      "ytd": 26.97
+    },
+    {
+      "ticker": "PNC",
+      "ytd": 13.33
+    },
+    {
+      "ticker": "PPG",
+      "ytd": 22.71
+    },
+    {
+      "ticker": "PPL",
+      "ytd": 3.19
+    },
+    {
+      "ticker": "PFG",
+      "ytd": 31.44
+    },
+    {
+      "ticker": "PG",
+      "ytd": 21.68
+    },
+    {
+      "ticker": "PGR",
+      "ytd": 10.25
+    },
+    {
+      "ticker": "PLD",
+      "ytd": 3.12
+    },
+    {
+      "ticker": "PRU",
+      "ytd": 12.29
+    },
+    {
+      "ticker": "PTC",
+      "ytd": 15.31
+    },
+    {
+      "ticker": "PEG",
+      "ytd": -5.88
+    },
+    {
+      "ticker": "PSA",
+      "ytd": 33.81
+    },
+    {
+      "ticker": "PHM",
+      "ytd": 9.46
+    },
+    {
+      "ticker": "Q",
+      "ytd": 49.21
+    },
+    {
+      "ticker": "QCOM",
+      "ytd": 3.67
+    },
+    {
+      "ticker": "PWR",
+      "ytd": 38.34
+    },
+    {
+      "ticker": "DGX",
+      "ytd": 51.36
+    },
+    {
+      "ticker": "RL",
+      "ytd": 9.57
+    },
+    {
+      "ticker": "RJF",
+      "ytd": 3.26
+    },
+    {
+      "ticker": "RDDT",
+      "ytd": -56.32
+    },
+    {
+      "ticker": "O",
+      "ytd": 8.65
+    },
+    {
+      "ticker": "REG",
+      "ytd": 15.41
+    },
+    {
+      "ticker": "REGN",
+      "ytd": 24.06
+    },
+    {
       "ticker": "RF",
-      "ytd": 7.22
+      "ytd": 6.99
     },
     {
       "ticker": "RSG",
-      "ytd": 18.87
+      "ytd": 19.69
     },
     {
       "ticker": "RMD",
-      "ytd": -3.59
+      "ytd": -1.77
     },
     {
       "ticker": "RVTY",
-      "ytd": 62.5
+      "ytd": 61.63
     },
     {
       "ticker": "HOOD",
-      "ytd": -27.68
+      "ytd": -26.59
     },
     {
       "ticker": "ROK",
-      "ytd": 0.61
+      "ytd": 2.9
     },
     {
       "ticker": "ROL",
-      "ytd": -33.81
+      "ytd": -33.72
     },
     {
       "ticker": "ROP",
-      "ytd": 10.02
+      "ytd": 10.77
     },
     {
       "ticker": "ROST",
-      "ytd": 31.55
+      "ytd": 32.83
     },
     {
       "ticker": "RCL",
-      "ytd": 21.96
+      "ytd": 20.29
     },
     {
       "ticker": "RTX",
-      "ytd": 8.11
+      "ytd": 8.66
     },
     {
       "ticker": "SPGI",
-      "ytd": -1.72
+      "ytd": -1.36
     },
     {
       "ticker": "CRM",
-      "ytd": -15.25
+      "ytd": -13.45
     },
     {
       "ticker": "SNDK",
-      "ytd": 222.09
+      "ytd": 255.21
     },
     {
       "ticker": "SBAC",
-      "ytd": 1.43
+      "ytd": 0.69
     },
     {
       "ticker": "SLB",
-      "ytd": 26.17
+      "ytd": 28.85
     },
     {
       "ticker": "STX",
-      "ytd": 75.02
+      "ytd": 92.5
     },
     {
       "ticker": "SRE",
-      "ytd": -10.65
+      "ytd": -10.83
     },
     {
       "ticker": "NOW",
@@ -2037,167 +2037,167 @@
     },
     {
       "ticker": "SHW",
-      "ytd": 9.16
+      "ytd": 9.29
     },
     {
       "ticker": "SPG",
-      "ytd": 31.74
+      "ytd": 31.89
     },
     {
       "ticker": "SKYD",
-      "ytd": -38.1
+      "ytd": -39.18
     },
     {
       "ticker": "SWKS",
-      "ytd": 31.1
+      "ytd": 38.92
     },
     {
       "ticker": "SJM",
-      "ytd": 42.52
+      "ytd": 0.0
     },
     {
       "ticker": "SW",
-      "ytd": 14.9
+      "ytd": 14.49
     },
     {
       "ticker": "SNA",
-      "ytd": 8.44
+      "ytd": 8.87
     },
     {
       "ticker": "SOLV",
-      "ytd": 14.44
+      "ytd": 12.15
     },
     {
       "ticker": "SO",
-      "ytd": 10.06
+      "ytd": 10.29
     },
     {
       "ticker": "LUV",
-      "ytd": 13.66
+      "ytd": 14.05
     },
     {
       "ticker": "SWK",
-      "ytd": 56.96
+      "ytd": 55.85
     },
     {
       "ticker": "SBUX",
-      "ytd": 33.32
+      "ytd": 33.25
     },
     {
       "ticker": "STT",
-      "ytd": 35.23
+      "ytd": 37.24
     },
     {
       "ticker": "STLD",
-      "ytd": 35.16
+      "ytd": 36.8
     },
     {
       "ticker": "STE",
-      "ytd": 3.72
+      "ytd": 3.37
     },
     {
       "ticker": "SYK",
-      "ytd": -6.06
+      "ytd": -7.66
     },
     {
       "ticker": "SMCI",
-      "ytd": -10.24
+      "ytd": -1.71
     },
     {
       "ticker": "SYF",
-      "ytd": -12.02
+      "ytd": -13.46
     },
     {
       "ticker": "SNPS",
-      "ytd": -4.26
+      "ytd": -3.81
     },
     {
       "ticker": "SYY",
-      "ytd": 9.19
+      "ytd": 8.22
     },
     {
       "ticker": "TMUS",
-      "ytd": -13.92
+      "ytd": -12.35
     },
     {
       "ticker": "TROW",
-      "ytd": 10.22
+      "ytd": 10.01
     },
     {
       "ticker": "TTWO",
-      "ytd": -10.72
+      "ytd": -8.06
     },
     {
       "ticker": "TPR",
-      "ytd": 6.06
+      "ytd": 4.27
     },
     {
       "ticker": "TRGP",
-      "ytd": 53.46
+      "ytd": 59.17
     },
     {
       "ticker": "TGT",
-      "ytd": 66.56
+      "ytd": 67.5
     },
     {
       "ticker": "TEL",
-      "ytd": -5.61
+      "ytd": -4.9
     },
     {
       "ticker": "TDY",
-      "ytd": 24.55
+      "ytd": 25.51
     },
     {
       "ticker": "TER",
-      "ytd": 18.37
+      "ytd": 28.2
     },
     {
       "ticker": "TSLA",
-      "ytd": -13.31
+      "ytd": -10.78
     },
     {
       "ticker": "TXN",
-      "ytd": 72.98
+      "ytd": 78.32
     },
     {
       "ticker": "TPL",
-      "ytd": -7.44
+      "ytd": -5.15
     },
     {
       "ticker": "TXT",
-      "ytd": -0.2
+      "ytd": -1.21
     },
     {
       "ticker": "TMO",
-      "ytd": 21.55
+      "ytd": 21.46
     },
     {
       "ticker": "TJX",
-      "ytd": -10.43
+      "ytd": -10.74
     },
     {
       "ticker": "TKO",
-      "ytd": -2.57
+      "ytd": -2.43
     },
     {
       "ticker": "TSCO",
-      "ytd": -24.78
+      "ytd": -26.3
     },
     {
       "ticker": "TT",
-      "ytd": 6.48
+      "ytd": 7.5
     },
     {
       "ticker": "TDG",
-      "ytd": -9.79
+      "ytd": -8.36
     },
     {
       "ticker": "TRV",
-      "ytd": 42.12
+      "ytd": 41.65
     },
     {
       "ticker": "TRMB",
-      "ytd": -30.1
+      "ytd": -27.89
     },
     {
       "ticker": "TFC",
@@ -2205,199 +2205,199 @@
     },
     {
       "ticker": "TWLO",
-      "ytd": 49.35
+      "ytd": 58.63
     },
     {
       "ticker": "TYL",
-      "ytd": -3.25
+      "ytd": -2.37
     },
     {
       "ticker": "TSN",
-      "ytd": 6.58
+      "ytd": 5.84
     },
     {
       "ticker": "USB",
-      "ytd": 15.86
+      "ytd": 15.76
     },
     {
       "ticker": "UBER",
-      "ytd": -14.11
+      "ytd": -14.7
     },
     {
       "ticker": "UDR",
-      "ytd": 3.99
+      "ytd": 3.71
     },
     {
       "ticker": "ULTA",
-      "ytd": 7.16
+      "ytd": 6.3
     },
     {
       "ticker": "UNP",
-      "ytd": 31.59
+      "ytd": 32.24
     },
     {
       "ticker": "UAL",
-      "ytd": 6.68
+      "ytd": 4.74
     },
     {
       "ticker": "UPS",
-      "ytd": 15.15
+      "ytd": 16.6
     },
     {
       "ticker": "URI",
-      "ytd": 31.77
+      "ytd": 37.24
     },
     {
       "ticker": "UNH",
-      "ytd": 22.81
+      "ytd": 22.15
     },
     {
       "ticker": "UHS",
-      "ytd": -10.82
+      "ytd": -10.19
     },
     {
       "ticker": "VLO",
-      "ytd": 115.29
+      "ytd": 123.27
     },
     {
       "ticker": "VEEV",
-      "ytd": 39.6
+      "ytd": 38.85
     },
     {
       "ticker": "VTR",
-      "ytd": 18.97
+      "ytd": 19.08
     },
     {
       "ticker": "VLTO",
-      "ytd": 20.38
+      "ytd": 21.1
     },
     {
       "ticker": "VRSN",
-      "ytd": 30.56
+      "ytd": 31.8
     },
     {
       "ticker": "VRSK",
-      "ytd": -6.96
+      "ytd": -6.06
     },
     {
       "ticker": "VZ",
-      "ytd": 21.89
+      "ytd": 22.66
     },
     {
       "ticker": "VRTX",
-      "ytd": 21.18
+      "ytd": 20.99
     },
     {
       "ticker": "VRT",
-      "ytd": 14.24
+      "ytd": 17.68
     },
     {
       "ticker": "VTRS",
-      "ytd": 71.28
+      "ytd": 73.01
     },
     {
       "ticker": "VICI",
-      "ytd": -5.88
+      "ytd": -6.7
     },
     {
       "ticker": "V",
-      "ytd": 23.05
+      "ytd": 23.79
     },
     {
       "ticker": "VST",
-      "ytd": -18.59
+      "ytd": -18.88
     },
     {
       "ticker": "VMRK",
-      "ytd": 9.68
+      "ytd": 7.82
     },
     {
       "ticker": "VMC",
-      "ytd": -1.08
+      "ytd": -2.09
     },
     {
       "ticker": "VYLR",
-      "ytd": 6.26
+      "ytd": 5.63
     },
     {
       "ticker": "WRB",
-      "ytd": 12.07
+      "ytd": 11.84
     },
     {
       "ticker": "GWW",
-      "ytd": 47.85
+      "ytd": 49.22
     },
     {
       "ticker": "WAB",
-      "ytd": 40.81
+      "ytd": 41.13
     },
     {
       "ticker": "WMT",
-      "ytd": 12.05
+      "ytd": 12.16
     },
     {
       "ticker": "DIS",
-      "ytd": 7.4
+      "ytd": 7.79
     },
     {
       "ticker": "WM",
-      "ytd": 10.08
+      "ytd": 11.43
     },
     {
       "ticker": "WAT",
-      "ytd": 24.49
+      "ytd": 23.29
     },
     {
       "ticker": "WEC",
-      "ytd": 12.75
+      "ytd": 13.19
     },
     {
       "ticker": "WFC",
-      "ytd": -7.89
+      "ytd": -7.85
     },
     {
       "ticker": "WELL",
-      "ytd": 34.37
+      "ytd": 34.2
     },
     {
       "ticker": "WST",
-      "ytd": 49.7
+      "ytd": 49.81
     },
     {
       "ticker": "WDC",
-      "ytd": 54.24
+      "ytd": 67.1
     },
     {
       "ticker": "WY",
-      "ytd": -11.01
+      "ytd": -10.92
     },
     {
       "ticker": "WSM",
-      "ytd": 41.12
+      "ytd": 41.41
     },
     {
       "ticker": "WMB",
-      "ytd": 13.3
+      "ytd": 15.75
     },
     {
       "ticker": "WTW",
-      "ytd": 3.08
+      "ytd": 3.48
     },
     {
       "ticker": "WDAY",
-      "ytd": -7.57
+      "ytd": -7.11
     },
     {
       "ticker": "WYNN",
-      "ytd": -28.26
+      "ytd": -29.84
     },
     {
       "ticker": "XEL",
-      "ytd": 9.77
+      "ytd": 11.11
     },
     {
       "ticker": "XYL",
-      "ytd": -28.58
+      "ytd": -29.86
     },
     {
       "ticker": "YUM",
@@ -2405,261 +2405,261 @@
     },
     {
       "ticker": "ZBRA",
-      "ytd": 29.43
+      "ytd": 31.87
     },
     {
       "ticker": "ZBH",
-      "ytd": 20.18
+      "ytd": 20.34
     },
     {
       "ticker": "ZTS",
-      "ytd": -33.15
+      "ytd": -32.95
     }
   ],
   "SP500_IT": [
     {
       "ticker": "ACN",
-      "ytd": 2.31
+      "ytd": 0.39
     },
     {
       "ticker": "ADBE",
-      "ytd": -28.98
+      "ytd": -28.71
     },
     {
       "ticker": "AMD",
-      "ytd": 130.55
+      "ytd": 147.42
     },
     {
       "ticker": "AKAM",
-      "ytd": -1.63
+      "ytd": 1.86
     },
     {
       "ticker": "APH",
-      "ytd": 15.03
+      "ytd": 14.11
     },
     {
       "ticker": "ADI",
-      "ytd": 44.96
+      "ytd": 50.78
     },
     {
       "ticker": "AAPL",
-      "ytd": 28.95
+      "ytd": 31.58
     },
     {
       "ticker": "AMAT",
-      "ytd": 39.05
+      "ytd": 47.46
     },
     {
       "ticker": "ANET",
-      "ytd": 39.35
+      "ytd": 47.22
     },
     {
       "ticker": "ADSK",
-      "ytd": -9.28
+      "ytd": -9.32
     },
     {
       "ticker": "AVGO",
-      "ytd": -3.97
+      "ytd": -0.14
     },
     {
       "ticker": "CDNS",
-      "ytd": 6.84
+      "ytd": 6.08
     },
     {
       "ticker": "CDW",
-      "ytd": 25.58
+      "ytd": 32.04
     },
     {
       "ticker": "CIEN",
-      "ytd": 10.58
+      "ytd": 20.31
     },
     {
       "ticker": "CSCO",
-      "ytd": 30.77
+      "ytd": 34.24
     },
     {
       "ticker": "CTSH",
-      "ytd": -18.58
+      "ytd": -19.3
     },
     {
       "ticker": "COHR",
-      "ytd": 10.46
+      "ytd": 20.68
     },
     {
       "ticker": "GLW",
-      "ytd": 24.32
+      "ytd": 33.56
     },
     {
       "ticker": "CRWD",
-      "ytd": 101.58
+      "ytd": 102.0
     },
     {
       "ticker": "DDOG",
-      "ytd": 34.28
+      "ytd": 37.83
     },
     {
       "ticker": "DELL",
-      "ytd": 173.84
+      "ytd": 195.48
     },
     {
       "ticker": "P",
-      "ytd": 49.02
+      "ytd": 54.33
     },
     {
       "ticker": "FFIV",
-      "ytd": 23.64
+      "ytd": 24.7
     },
     {
       "ticker": "FICO",
-      "ytd": -55.54
+      "ytd": -55.65
     },
     {
       "ticker": "FSLR",
-      "ytd": -34.03
+      "ytd": -35.08
     },
     {
       "ticker": "FLEX",
-      "ytd": 19.49
+      "ytd": 24.01
     },
     {
       "ticker": "FTNT",
-      "ytd": 58.67
+      "ytd": 64.48
     },
     {
       "ticker": "IT",
-      "ytd": -20.3
+      "ytd": -18.58
     },
     {
       "ticker": "GEN",
-      "ytd": 16.86
+      "ytd": 19.31
     },
     {
       "ticker": "GDDY",
-      "ytd": -5.75
+      "ytd": -4.2
     },
     {
       "ticker": "HPE",
-      "ytd": 99.04
+      "ytd": 110.39
     },
     {
       "ticker": "HPQ",
-      "ytd": 33.44
+      "ytd": 35.98
     },
     {
       "ticker": "IBM",
-      "ytd": -13.81
+      "ytd": -12.51
     },
     {
       "ticker": "INTC",
-      "ytd": 47.61
+      "ytd": 58.71
     },
     {
       "ticker": "INTU",
-      "ytd": -45.15
+      "ytd": -44.8
     },
     {
       "ticker": "JBL",
-      "ytd": 4.0
+      "ytd": 7.78
     },
     {
       "ticker": "KEYS",
-      "ytd": 39.88
+      "ytd": 47.95
     },
     {
       "ticker": "KLAC",
-      "ytd": 20.49
+      "ytd": 26.8
     },
     {
       "ticker": "LRCX",
-      "ytd": 20.53
+      "ytd": 27.84
     },
     {
       "ticker": "LITE",
-      "ytd": 54.4
+      "ytd": 67.84
     },
     {
       "ticker": "MRVL",
-      "ytd": 73.01
+      "ytd": 89.15
     },
     {
       "ticker": "MCHP",
-      "ytd": -5.65
+      "ytd": -2.83
     },
     {
       "ticker": "MU",
-      "ytd": 130.06
+      "ytd": 157.4
     },
     {
       "ticker": "MSFT",
-      "ytd": 13.45
+      "ytd": 10.89
     },
     {
       "ticker": "MPWR",
-      "ytd": 45.72
+      "ytd": 58.72
     },
     {
       "ticker": "MSI",
-      "ytd": 39.55
+      "ytd": 41.63
     },
     {
       "ticker": "NTAP",
-      "ytd": 67.02
+      "ytd": 73.79
     },
     {
       "ticker": "NVDA",
-      "ytd": -10.36
+      "ytd": -7.79
     },
     {
       "ticker": "NXPI",
-      "ytd": 19.76
+      "ytd": 23.4
     },
     {
       "ticker": "OKTA",
-      "ytd": 112.3
+      "ytd": 117.9
     },
     {
       "ticker": "ON",
-      "ytd": 22.77
+      "ytd": 29.84
     },
     {
       "ticker": "ORCL",
-      "ytd": -38.91
+      "ytd": -33.53
     },
     {
       "ticker": "PLTR",
-      "ytd": 0.8
+      "ytd": 2.7
     },
     {
       "ticker": "PANW",
-      "ytd": 84.47
+      "ytd": 86.47
     },
     {
       "ticker": "PTC",
-      "ytd": 15.55
+      "ytd": 15.31
     },
     {
       "ticker": "Q",
-      "ytd": 47.47
+      "ytd": 49.21
     },
     {
       "ticker": "QCOM",
-      "ytd": 1.89
+      "ytd": 3.67
     },
     {
       "ticker": "ROP",
-      "ytd": 10.02
+      "ytd": 10.77
     },
     {
       "ticker": "CRM",
-      "ytd": -15.25
+      "ytd": -13.45
     },
     {
       "ticker": "SNDK",
-      "ytd": 222.09
+      "ytd": 255.21
     },
     {
       "ticker": "STX",
-      "ytd": 75.02
+      "ytd": 92.5
     },
     {
       "ticker": "NOW",
@@ -2667,341 +2667,341 @@
     },
     {
       "ticker": "SWKS",
-      "ytd": 31.1
+      "ytd": 38.92
     },
     {
       "ticker": "SMCI",
-      "ytd": -10.24
+      "ytd": -1.71
     },
     {
       "ticker": "SNPS",
-      "ytd": -4.26
+      "ytd": -3.81
     },
     {
       "ticker": "TEL",
-      "ytd": -5.61
+      "ytd": -4.9
     },
     {
       "ticker": "TDY",
-      "ytd": 24.55
+      "ytd": 25.51
     },
     {
       "ticker": "TER",
-      "ytd": 18.37
+      "ytd": 28.2
     },
     {
       "ticker": "TXN",
-      "ytd": 72.98
+      "ytd": 78.32
     },
     {
       "ticker": "TRMB",
-      "ytd": -30.1
+      "ytd": -27.89
     },
     {
       "ticker": "TWLO",
-      "ytd": 49.35
+      "ytd": 58.63
     },
     {
       "ticker": "TYL",
-      "ytd": -3.25
+      "ytd": -2.37
     },
     {
       "ticker": "VRSN",
-      "ytd": 30.56
+      "ytd": 31.8
     },
     {
       "ticker": "WDC",
-      "ytd": 54.24
+      "ytd": 67.1
     },
     {
       "ticker": "WDAY",
-      "ytd": -7.57
+      "ytd": -7.11
     },
     {
       "ticker": "ZBRA",
-      "ytd": 29.43
+      "ytd": 31.87
     }
   ],
   "SP500_FIN": [
     {
       "ticker": "AFL",
-      "ytd": 16.67
+      "ytd": 17.1
     },
     {
       "ticker": "ALL",
-      "ytd": 29.98
+      "ytd": 30.51
     },
     {
       "ticker": "AXP",
-      "ytd": -12.44
+      "ytd": -12.53
     },
     {
       "ticker": "AIG",
-      "ytd": -0.43
+      "ytd": 0.21
     },
     {
       "ticker": "AMP",
-      "ytd": 6.69
+      "ytd": 6.71
     },
     {
       "ticker": "AON",
-      "ytd": -1.57
+      "ytd": -1.51
     },
     {
       "ticker": "APO",
-      "ytd": -15.23
+      "ytd": -15.08
     },
     {
       "ticker": "ACGL",
-      "ytd": 16.28
+      "ytd": 16.31
     },
     {
       "ticker": "ARES",
-      "ytd": -13.18
+      "ytd": -14.23
     },
     {
       "ticker": "AJG",
-      "ytd": 11.41
+      "ytd": 11.16
     },
     {
       "ticker": "AIZ",
-      "ytd": 36.96
+      "ytd": 37.48
     },
     {
       "ticker": "BAC",
-      "ytd": -7.97
+      "ytd": -7.98
     },
     {
       "ticker": "BRK-B",
-      "ytd": 17.41
+      "ytd": 18.39
     },
     {
       "ticker": "BLK",
-      "ytd": 14.48
+      "ytd": 14.87
     },
     {
       "ticker": "BX",
-      "ytd": -19.66
+      "ytd": -20.0
     },
     {
       "ticker": "XYZ",
-      "ytd": 35.93
+      "ytd": 31.57
     },
     {
       "ticker": "BNY",
-      "ytd": 31.42
+      "ytd": 32.77
     },
     {
       "ticker": "BRO",
-      "ytd": -6.44
+      "ytd": -7.09
     },
     {
       "ticker": "COF",
-      "ytd": -20.09
+      "ytd": -19.57
     },
     {
       "ticker": "CBOE",
-      "ytd": 48.12
+      "ytd": 49.9
     },
     {
       "ticker": "SCHW",
-      "ytd": -7.5
+      "ytd": -7.75
     },
     {
       "ticker": "CB",
-      "ytd": 20.13
+      "ytd": 20.53
     },
     {
       "ticker": "CINF",
-      "ytd": 19.61
+      "ytd": 19.54
     },
     {
       "ticker": "C",
-      "ytd": 5.14
+      "ytd": 6.81
     },
     {
       "ticker": "CFG",
-      "ytd": 12.79
+      "ytd": 13.28
     },
     {
       "ticker": "CME",
-      "ytd": 18.52
+      "ytd": 21.12
     },
     {
       "ticker": "COIN",
-      "ytd": -42.46
+      "ytd": -42.39
     },
     {
       "ticker": "CPAY",
-      "ytd": 52.91
+      "ytd": 53.68
     },
     {
       "ticker": "ERIE",
-      "ytd": 0.25
+      "ytd": 0.28
     },
     {
       "ticker": "EG",
-      "ytd": 28.51
+      "ytd": 28.94
     },
     {
       "ticker": "FDS",
-      "ytd": 16.01
+      "ytd": 19.17
     },
     {
       "ticker": "FIS",
-      "ytd": -55.48
+      "ytd": -52.49
     },
     {
       "ticker": "FITB",
-      "ytd": 16.38
+      "ytd": 16.83
     },
     {
       "ticker": "FISV",
-      "ytd": -3.46
+      "ytd": -2.58
     },
     {
       "ticker": "BEN",
-      "ytd": 57.85
+      "ytd": 57.9
     },
     {
       "ticker": "GPN",
-      "ytd": 35.85
+      "ytd": 34.03
     },
     {
       "ticker": "GL",
-      "ytd": 19.05
+      "ytd": 17.84
     },
     {
       "ticker": "GS",
-      "ytd": 1.0
+      "ytd": 2.85
     },
     {
       "ticker": "HIG",
-      "ytd": 1.86
+      "ytd": 1.4
     },
     {
       "ticker": "HBAN",
-      "ytd": -6.72
+      "ytd": -6.48
     },
     {
       "ticker": "IBKR",
-      "ytd": 15.76
+      "ytd": 23.07
     },
     {
       "ticker": "ICE",
-      "ytd": 11.37
+      "ytd": 14.04
     },
     {
       "ticker": "IVZ",
-      "ytd": 9.6
+      "ytd": 8.69
     },
     {
       "ticker": "JKHY",
-      "ytd": -0.61
+      "ytd": -0.21
     },
     {
       "ticker": "JPM",
-      "ytd": 7.12
+      "ytd": 7.53
     },
     {
       "ticker": "KEY",
-      "ytd": 4.73
+      "ytd": 5.22
     },
     {
       "ticker": "KKR",
-      "ytd": -21.32
+      "ytd": -21.94
     },
     {
       "ticker": "L",
-      "ytd": 6.17
+      "ytd": 6.73
     },
     {
       "ticker": "MTB",
-      "ytd": 10.34
+      "ytd": 10.13
     },
     {
       "ticker": "MRSH",
-      "ytd": 15.89
+      "ytd": 16.22
     },
     {
       "ticker": "MA",
-      "ytd": 17.75
+      "ytd": 18.09
     },
     {
       "ticker": "MET",
-      "ytd": 31.01
+      "ytd": 31.65
     },
     {
       "ticker": "MCO",
-      "ytd": 3.03
+      "ytd": 3.89
     },
     {
       "ticker": "MS",
-      "ytd": 5.45
+      "ytd": 7.16
     },
     {
       "ticker": "MSCI",
-      "ytd": 17.51
+      "ytd": 18.34
     },
     {
       "ticker": "NDAQ",
-      "ytd": 14.98
+      "ytd": 14.62
     },
     {
       "ticker": "NTRS",
-      "ytd": 29.64
+      "ytd": 30.24
     },
     {
       "ticker": "PYPL",
-      "ytd": 4.2
+      "ytd": 3.21
     },
     {
       "ticker": "PNC",
-      "ytd": 12.98
+      "ytd": 13.33
     },
     {
       "ticker": "PFG",
-      "ytd": 32.93
+      "ytd": 31.44
     },
     {
       "ticker": "PGR",
-      "ytd": 9.41
+      "ytd": 10.25
     },
     {
       "ticker": "PRU",
-      "ytd": 12.53
+      "ytd": 12.29
     },
     {
       "ticker": "RJF",
-      "ytd": 3.86
+      "ytd": 3.26
     },
     {
       "ticker": "RF",
-      "ytd": 7.22
+      "ytd": 6.99
     },
     {
       "ticker": "HOOD",
-      "ytd": -27.68
+      "ytd": -26.59
     },
     {
       "ticker": "SPGI",
-      "ytd": -1.72
+      "ytd": -1.36
     },
     {
       "ticker": "STT",
-      "ytd": 35.23
+      "ytd": 37.24
     },
     {
       "ticker": "SYF",
-      "ytd": -12.02
+      "ytd": -13.46
     },
     {
       "ticker": "TROW",
-      "ytd": 10.22
+      "ytd": 10.01
     },
     {
       "ticker": "TRV",
-      "ytd": 42.12
+      "ytd": 41.65
     },
     {
       "ticker": "TFC",
@@ -3009,451 +3009,451 @@
     },
     {
       "ticker": "USB",
-      "ytd": 15.86
+      "ytd": 15.76
     },
     {
       "ticker": "V",
-      "ytd": 23.05
+      "ytd": 23.79
     },
     {
       "ticker": "WRB",
-      "ytd": 12.07
+      "ytd": 11.84
     },
     {
       "ticker": "WFC",
-      "ytd": -7.89
+      "ytd": -7.85
     },
     {
       "ticker": "WTW",
-      "ytd": 3.08
+      "ytd": 3.48
     }
   ],
   "SP500_HEALTH": [
     {
       "ticker": "ABT",
-      "ytd": -8.84
+      "ytd": -9.81
     },
     {
       "ticker": "ABBV",
-      "ytd": 31.73
+      "ytd": 32.49
     },
     {
       "ticker": "A",
-      "ytd": 29.91
+      "ytd": 29.23
     },
     {
       "ticker": "ALGN",
-      "ytd": 11.68
+      "ytd": 10.29
     },
     {
       "ticker": "AMGN",
-      "ytd": 44.9
+      "ytd": 45.8
     },
     {
       "ticker": "BAX",
-      "ytd": 35.68
+      "ytd": 35.27
     },
     {
       "ticker": "BDX",
-      "ytd": 41.43
+      "ytd": 42.7
     },
     {
       "ticker": "TECH",
-      "ytd": 22.6
+      "ytd": 22.57
     },
     {
       "ticker": "BIIB",
-      "ytd": 42.42
+      "ytd": 42.5
     },
     {
       "ticker": "BSX",
-      "ytd": -52.8
+      "ytd": -52.35
     },
     {
       "ticker": "BMY",
-      "ytd": 21.27
+      "ytd": 21.48
     },
     {
       "ticker": "CAH",
-      "ytd": 35.48
+      "ytd": 35.8
     },
     {
       "ticker": "COR",
-      "ytd": 3.52
+      "ytd": 3.87
     },
     {
       "ticker": "CNC",
-      "ytd": 68.0
+      "ytd": 68.69
     },
     {
       "ticker": "CRL",
-      "ytd": 70.83
+      "ytd": 69.3
     },
     {
       "ticker": "CI",
-      "ytd": 10.44
+      "ytd": 9.83
     },
     {
       "ticker": "COO",
-      "ytd": -21.62
+      "ytd": -22.41
     },
     {
       "ticker": "CVS",
-      "ytd": 14.49
+      "ytd": 15.15
     },
     {
       "ticker": "DHR",
-      "ytd": 3.09
+      "ytd": 2.74
     },
     {
       "ticker": "DVA",
-      "ytd": 56.56
+      "ytd": 60.25
     },
     {
       "ticker": "DXCM",
-      "ytd": 20.11
+      "ytd": 20.75
     },
     {
       "ticker": "EW",
-      "ytd": 21.89
+      "ytd": 24.0
     },
     {
       "ticker": "ELV",
-      "ytd": 23.06
+      "ytd": 23.01
     },
     {
       "ticker": "GEHC",
-      "ytd": 1.66
+      "ytd": -0.07
     },
     {
       "ticker": "GILD",
-      "ytd": 43.05
+      "ytd": 42.09
     },
     {
       "ticker": "HCA",
-      "ytd": 7.81
+      "ytd": 8.15
     },
     {
       "ticker": "HSIC",
-      "ytd": 15.52
+      "ytd": 15.1
     },
     {
       "ticker": "HUM",
-      "ytd": 67.22
+      "ytd": 70.37
     },
     {
       "ticker": "IDXX",
-      "ytd": 3.98
+      "ytd": 4.87
     },
     {
       "ticker": "ILMN",
-      "ytd": 59.96
+      "ytd": 58.49
     },
     {
       "ticker": "INCY",
-      "ytd": 18.62
+      "ytd": 20.56
     },
     {
       "ticker": "PODD",
-      "ytd": -47.67
+      "ytd": -46.97
     },
     {
       "ticker": "ISRG",
-      "ytd": -19.92
+      "ytd": -20.01
     },
     {
       "ticker": "IQV",
-      "ytd": 23.73
+      "ytd": 21.81
     },
     {
       "ticker": "JNJ",
-      "ytd": 37.59
+      "ytd": 37.41
     },
     {
       "ticker": "LH",
-      "ytd": 48.47
+      "ytd": 49.01
     },
     {
       "ticker": "LLY",
-      "ytd": 33.22
+      "ytd": 33.68
     },
     {
       "ticker": "MCK",
-      "ytd": 31.87
+      "ytd": 31.53
     },
     {
       "ticker": "MDT",
-      "ytd": 8.48
+      "ytd": 8.5
     },
     {
       "ticker": "MRK",
-      "ytd": 41.95
+      "ytd": 41.12
     },
     {
       "ticker": "MTD",
-      "ytd": 24.09
+      "ytd": 23.92
     },
     {
       "ticker": "MRNA",
-      "ytd": 771.68
+      "ytd": 705.87
     },
     {
       "ticker": "PFE",
-      "ytd": 24.41
+      "ytd": 24.79
     },
     {
       "ticker": "DGX",
-      "ytd": 51.21
+      "ytd": 51.36
     },
     {
       "ticker": "REGN",
-      "ytd": 18.46
+      "ytd": 24.06
     },
     {
       "ticker": "RMD",
-      "ytd": -3.59
+      "ytd": -1.77
     },
     {
       "ticker": "RVTY",
-      "ytd": 62.5
+      "ytd": 61.63
     },
     {
       "ticker": "SOLV",
-      "ytd": 14.44
+      "ytd": 12.15
     },
     {
       "ticker": "STE",
-      "ytd": 3.72
+      "ytd": 3.37
     },
     {
       "ticker": "SYK",
-      "ytd": -6.06
+      "ytd": -7.66
     },
     {
       "ticker": "TMO",
-      "ytd": 21.55
+      "ytd": 21.46
     },
     {
       "ticker": "UNH",
-      "ytd": 22.81
+      "ytd": 22.15
     },
     {
       "ticker": "UHS",
-      "ytd": -10.82
+      "ytd": -10.19
     },
     {
       "ticker": "VEEV",
-      "ytd": 39.6
+      "ytd": 38.85
     },
     {
       "ticker": "VRTX",
-      "ytd": 21.18
+      "ytd": 20.99
     },
     {
       "ticker": "VTRS",
-      "ytd": 71.28
+      "ytd": 73.01
     },
     {
       "ticker": "WAT",
-      "ytd": 24.49
+      "ytd": 23.29
     },
     {
       "ticker": "WST",
-      "ytd": 49.7
+      "ytd": 49.81
     },
     {
       "ticker": "ZBH",
-      "ytd": 20.18
+      "ytd": 20.34
     },
     {
       "ticker": "ZTS",
-      "ytd": -33.15
+      "ytd": -32.95
     }
   ],
   "SP500_CONS_DISC": [
     {
       "ticker": "ABNB",
-      "ytd": 43.06
+      "ytd": 36.18
     },
     {
       "ticker": "AMZN",
-      "ytd": 19.59
+      "ytd": 17.51
     },
     {
       "ticker": "APTV",
-      "ytd": -49.55
+      "ytd": -49.76
     },
     {
       "ticker": "AZO",
-      "ytd": -2.61
+      "ytd": -2.0
     },
     {
       "ticker": "BBY",
-      "ytd": 56.43
+      "ytd": 58.02
     },
     {
       "ticker": "BKNG",
-      "ytd": -24.66
+      "ytd": -24.21
     },
     {
       "ticker": "CCL",
-      "ytd": 1.53
+      "ytd": 1.33
     },
     {
       "ticker": "CVNA",
-      "ytd": -4.73
+      "ytd": -7.72
     },
     {
       "ticker": "CMG",
-      "ytd": -4.19
+      "ytd": -2.27
     },
     {
       "ticker": "DRI",
-      "ytd": 26.02
+      "ytd": 26.18
     },
     {
       "ticker": "DECK",
-      "ytd": -15.92
+      "ytd": -17.24
     },
     {
       "ticker": "DPZ",
-      "ytd": -21.03
+      "ytd": -21.38
     },
     {
       "ticker": "DASH",
-      "ytd": -17.67
+      "ytd": -18.9
     },
     {
       "ticker": "DHI",
-      "ytd": 3.64
+      "ytd": 2.11
     },
     {
       "ticker": "EBAY",
-      "ytd": 43.18
+      "ytd": 42.21
     },
     {
       "ticker": "EXPE",
-      "ytd": -9.79
+      "ytd": -7.65
     },
     {
       "ticker": "F",
-      "ytd": -3.6
+      "ytd": -3.84
     },
     {
       "ticker": "GRMN",
-      "ytd": 44.33
+      "ytd": 46.96
     },
     {
       "ticker": "GM",
-      "ytd": 10.25
+      "ytd": 10.51
     },
     {
       "ticker": "GPC",
-      "ytd": 3.4
+      "ytd": 2.6
     },
     {
       "ticker": "HAS",
-      "ytd": 50.17
+      "ytd": 52.88
     },
     {
       "ticker": "HLT",
-      "ytd": 27.57
+      "ytd": 28.83
     },
     {
       "ticker": "HD",
-      "ytd": 3.7
+      "ytd": 3.79
     },
     {
       "ticker": "LVS",
-      "ytd": -35.78
+      "ytd": -36.71
     },
     {
       "ticker": "LEN",
-      "ytd": -14.99
+      "ytd": -15.31
     },
     {
       "ticker": "LOW",
-      "ytd": -4.02
+      "ytd": -4.13
     },
     {
       "ticker": "LULU",
-      "ytd": -47.64
+      "ytd": -49.03
     },
     {
       "ticker": "MAR",
-      "ytd": 37.46
+      "ytd": 37.75
     },
     {
       "ticker": "MCD",
-      "ytd": -5.13
+      "ytd": -7.61
     },
     {
       "ticker": "MGM",
-      "ytd": -9.4
+      "ytd": -8.28
     },
     {
       "ticker": "NKE",
-      "ytd": -37.28
+      "ytd": -37.84
     },
     {
       "ticker": "NCLH",
-      "ytd": -19.1
+      "ytd": -17.38
     },
     {
       "ticker": "NVR",
-      "ytd": -17.07
+      "ytd": -19.01
     },
     {
       "ticker": "ORLY",
-      "ytd": -1.05
+      "ytd": 0.22
     },
     {
       "ticker": "PHM",
-      "ytd": 10.39
+      "ytd": 9.46
     },
     {
       "ticker": "RL",
-      "ytd": 11.12
+      "ytd": 9.57
     },
     {
       "ticker": "ROST",
-      "ytd": 31.55
+      "ytd": 32.83
     },
     {
       "ticker": "RCL",
-      "ytd": 21.96
+      "ytd": 20.29
     },
     {
       "ticker": "SBUX",
-      "ytd": 33.32
+      "ytd": 33.25
     },
     {
       "ticker": "TPR",
-      "ytd": 6.06
+      "ytd": 4.27
     },
     {
       "ticker": "TSLA",
-      "ytd": -13.31
+      "ytd": -10.78
     },
     {
       "ticker": "TJX",
-      "ytd": -10.43
+      "ytd": -10.74
     },
     {
       "ticker": "TSCO",
-      "ytd": -24.78
+      "ytd": -26.3
     },
     {
       "ticker": "ULTA",
-      "ytd": 7.16
+      "ytd": 6.3
     },
     {
       "ticker": "WSM",
-      "ytd": 41.12
+      "ytd": 41.41
     },
     {
       "ticker": "WYNN",
-      "ytd": -28.26
+      "ytd": -29.84
     },
     {
       "ticker": "YUM",
@@ -3463,97 +3463,97 @@
   "SP500_ENERGY": [
     {
       "ticker": "APA",
-      "ytd": 83.01
+      "ytd": 89.58
     },
     {
       "ticker": "BKR",
-      "ytd": 2.92
+      "ytd": 6.46
     },
     {
       "ticker": "CVX",
-      "ytd": 39.27
+      "ytd": 40.63
     },
     {
       "ticker": "COP",
-      "ytd": 43.31
+      "ytd": 45.71
     },
     {
       "ticker": "DVN",
-      "ytd": 16.8
+      "ytd": 20.94
     },
     {
       "ticker": "FANG",
-      "ytd": 18.95
+      "ytd": 20.83
     },
     {
       "ticker": "EOG",
-      "ytd": 45.74
+      "ytd": 47.91
     },
     {
       "ticker": "EQT",
-      "ytd": -1.57
+      "ytd": -0.26
     },
     {
       "ticker": "EXE",
-      "ytd": -20.31
+      "ytd": -17.84
     },
     {
       "ticker": "XOM",
-      "ytd": 36.79
+      "ytd": 38.65
     },
     {
       "ticker": "HAL",
-      "ytd": 9.12
+      "ytd": 12.79
     },
     {
       "ticker": "KMI",
-      "ytd": 16.8
+      "ytd": 18.3
     },
     {
       "ticker": "MPC",
-      "ytd": 138.63
+      "ytd": 146.77
     },
     {
       "ticker": "OXY",
-      "ytd": 36.14
+      "ytd": 36.96
     },
     {
       "ticker": "OKE",
-      "ytd": 23.36
+      "ytd": 24.49
     },
     {
       "ticker": "PSX",
-      "ytd": 97.84
+      "ytd": 102.26
     },
     {
       "ticker": "SLB",
-      "ytd": 26.17
+      "ytd": 28.85
     },
     {
       "ticker": "TRGP",
-      "ytd": 53.46
+      "ytd": 59.17
     },
     {
       "ticker": "TPL",
-      "ytd": -7.44
+      "ytd": -5.15
     },
     {
       "ticker": "VLO",
-      "ytd": 115.29
+      "ytd": 123.27
     },
     {
       "ticker": "WMB",
-      "ytd": 13.3
+      "ytd": 15.75
     }
   ],
   "NIFTY50": [
     {
       "ticker": "ADANIENT",
-      "ytd": 19.8
+      "ytd": 20.16
     },
     {
       "ticker": "ADANIPORTS",
-      "ytd": 31.72
+      "ytd": 29.3
     },
     {
       "ticker": "APOLLOHOSP",
@@ -3569,7 +3569,7 @@
     },
     {
       "ticker": "BAJAJ-AUTO",
-      "ytd": 16.48
+      "ytd": 17.13
     },
     {
       "ticker": "BAJFINANCE",
@@ -3577,19 +3577,19 @@
     },
     {
       "ticker": "BAJAJFINSV",
-      "ytd": -9.75
+      "ytd": -9.35
     },
     {
       "ticker": "BEL",
-      "ytd": -0.23
+      "ytd": 0.89
     },
     {
       "ticker": "BPCL",
-      "ytd": -14.83
+      "ytd": -15.03
     },
     {
       "ticker": "BHARTIARTL",
-      "ytd": -0.58
+      "ytd": 1.19
     },
     {
       "ticker": "BRITANNIA",
@@ -3597,59 +3597,59 @@
     },
     {
       "ticker": "CIPLA",
-      "ytd": -5.59
+      "ytd": -4.51
     },
     {
       "ticker": "COALINDIA",
-      "ytd": 6.93
+      "ytd": 8.21
     },
     {
       "ticker": "DIVISLAB",
-      "ytd": 83.06
+      "ytd": 79.92
     },
     {
       "ticker": "DRREDDY",
-      "ytd": 11.2
+      "ytd": 10.56
     },
     {
       "ticker": "EICHERMOT",
-      "ytd": 4.91
+      "ytd": 4.4
     },
     {
       "ticker": "GRASIM",
-      "ytd": 11.5
+      "ytd": 11.04
     },
     {
       "ticker": "HCLTECH",
-      "ytd": -9.94
+      "ytd": -10.71
     },
     {
       "ticker": "HDFCBANK",
-      "ytd": -18.14
+      "ytd": -17.27
     },
     {
       "ticker": "HDFCLIFE",
-      "ytd": -24.35
+      "ytd": -23.26
     },
     {
       "ticker": "HEROMOTOCO",
-      "ytd": -4.18
+      "ytd": -5.34
     },
     {
       "ticker": "HINDALCO",
-      "ytd": 7.83
+      "ytd": 8.09
     },
     {
       "ticker": "HINDUNILVR",
-      "ytd": -13.45
+      "ytd": -12.05
     },
     {
       "ticker": "ICICIBANK",
-      "ytd": 19.76
+      "ytd": 18.45
     },
     {
       "ticker": "ITC",
-      "ytd": -19.64
+      "ytd": -17.85
     },
     {
       "ticker": "INDUSINDBK",
@@ -3657,19 +3657,19 @@
     },
     {
       "ticker": "INFY",
-      "ytd": -26.0
+      "ytd": -25.94
     },
     {
       "ticker": "JSWSTEEL",
-      "ytd": 15.64
+      "ytd": 16.18
     },
     {
       "ticker": "KOTAKBANK",
-      "ytd": 8.29
+      "ytd": 10.14
     },
     {
       "ticker": "LT",
-      "ytd": 2.06
+      "ytd": 2.72
     },
     {
       "ticker": "LTIM",
@@ -3681,39 +3681,39 @@
     },
     {
       "ticker": "MARUTI",
-      "ytd": -21.85
+      "ytd": -20.29
     },
     {
       "ticker": "NTPC",
-      "ytd": 0.51
+      "ytd": -0.03
     },
     {
       "ticker": "NESTLEIND",
-      "ytd": 1.24
+      "ytd": 0.48
     },
     {
       "ticker": "ONGC",
-      "ytd": 0.87
+      "ytd": 1.43
     },
     {
       "ticker": "POWERGRID",
-      "ytd": -0.63
+      "ytd": 1.6
     },
     {
       "ticker": "RELIANCE",
-      "ytd": -15.55
+      "ytd": -14.85
     },
     {
       "ticker": "SBILIFE",
-      "ytd": -14.21
+      "ytd": -13.28
     },
     {
       "ticker": "SHRIRAMFIN",
-      "ytd": -4.08
+      "ytd": -3.67
     },
     {
       "ticker": "SBIN",
-      "ytd": 7.72
+      "ytd": 9.71
     },
     {
       "ticker": "SUNPHARMA",
@@ -3721,7 +3721,7 @@
     },
     {
       "ticker": "TCS",
-      "ytd": -19.99
+      "ytd": -20.1
     },
     {
       "ticker": "TATACONSUM",
@@ -3733,15 +3733,15 @@
     },
     {
       "ticker": "TATASTEEL",
-      "ytd": 3.72
+      "ytd": 6.21
     },
     {
       "ticker": "TECHM",
-      "ytd": 16.14
+      "ytd": 15.08
     },
     {
       "ticker": "TITAN",
-      "ytd": 24.01
+      "ytd": 23.14
     },
     {
       "ticker": "ULTRACEMCO",
@@ -3749,7 +3749,7 @@
     },
     {
       "ticker": "WIPRO",
-      "ytd": -22.77
+      "ytd": -23.16
     }
   ],
   "NIFTYNEXT50": [
@@ -3759,11 +3759,11 @@
     },
     {
       "ticker": "AMBUJACEM",
-      "ytd": -30.05
+      "ytd": -30.0
     },
     {
       "ticker": "BANKBARODA",
-      "ytd": -10.75
+      "ytd": -5.6
     },
     {
       "ticker": "BERGEPAINT",
@@ -3775,15 +3775,15 @@
     },
     {
       "ticker": "BOSCHLTD",
-      "ytd": 38.01
+      "ytd": 40.63
     },
     {
       "ticker": "CANBK",
-      "ytd": -14.21
+      "ytd": -11.4
     },
     {
       "ticker": "CGPOWER",
-      "ytd": 25.69
+      "ytd": 29.24
     },
     {
       "ticker": "CHOLAFIN",
@@ -3795,23 +3795,23 @@
     },
     {
       "ticker": "DLF",
-      "ytd": 10.57
+      "ytd": 8.76
     },
     {
       "ticker": "DMART",
-      "ytd": -6.71
+      "ytd": -6.68
     },
     {
       "ticker": "GAIL",
-      "ytd": 13.19
+      "ytd": 14.33
     },
     {
       "ticker": "GODREJPROP",
-      "ytd": -9.52
+      "ytd": -10.32
     },
     {
       "ticker": "HAL",
-      "ytd": 14.84
+      "ytd": 13.7
     },
     {
       "ticker": "HAVELLS",
@@ -3819,35 +3819,35 @@
     },
     {
       "ticker": "ICICIGI",
-      "ytd": -14.49
+      "ytd": -13.61
     },
     {
       "ticker": "ICICIPRULI",
-      "ytd": -11.82
+      "ytd": -9.48
     },
     {
       "ticker": "IOC",
-      "ytd": -9.56
+      "ytd": -8.61
     },
     {
       "ticker": "IRCTC",
-      "ytd": -32.47
+      "ytd": -30.69
     },
     {
       "ticker": "IRFC",
-      "ytd": -31.9
+      "ytd": -29.29
     },
     {
       "ticker": "JINDALSTEL",
-      "ytd": 7.46
+      "ytd": 8.93
     },
     {
       "ticker": "JIOFIN",
-      "ytd": -22.04
+      "ytd": -21.83
     },
     {
       "ticker": "JSWENERGY",
-      "ytd": 4.57
+      "ytd": 3.84
     },
     {
       "ticker": "LICOFI",
@@ -3855,47 +3855,47 @@
     },
     {
       "ticker": "LODHA",
-      "ytd": 11.78
+      "ytd": 9.86
     },
     {
       "ticker": "MAXHEALTH",
-      "ytd": -12.65
+      "ytd": -11.38
     },
     {
       "ticker": "MOTHERSON",
-      "ytd": 32.79
+      "ytd": 39.17
     },
     {
       "ticker": "NAUKRI",
-      "ytd": -9.8
+      "ytd": -10.56
     },
     {
       "ticker": "NHPC",
-      "ytd": 3.15
+      "ytd": -0.04
     },
     {
       "ticker": "OIL",
-      "ytd": 4.46
+      "ytd": 6.08
     },
     {
       "ticker": "PAYTM",
-      "ytd": 38.42
+      "ytd": 38.87
     },
     {
       "ticker": "PFC",
-      "ytd": -3.25
+      "ytd": -1.5
     },
     {
       "ticker": "PNB",
-      "ytd": 9.74
+      "ytd": 14.98
     },
     {
       "ticker": "POLICYBZR",
-      "ytd": -47.18
+      "ytd": -45.95
     },
     {
       "ticker": "POONAWALLA",
-      "ytd": -1.83
+      "ytd": 0.57
     },
     {
       "ticker": "REC",
@@ -3903,15 +3903,15 @@
     },
     {
       "ticker": "RVNL",
-      "ytd": -43.86
+      "ytd": -41.71
     },
     {
       "ticker": "SIEMENS",
-      "ytd": 18.82
+      "ytd": 19.95
     },
     {
       "ticker": "SRF",
-      "ytd": -19.25
+      "ytd": -17.57
     },
     {
       "ticker": "SUPREMEIND",
@@ -3923,7 +3923,7 @@
     },
     {
       "ticker": "TRENT",
-      "ytd": 9.04
+      "ytd": 12.65
     },
     {
       "ticker": "TORNTPHARM",
@@ -3931,19 +3931,19 @@
     },
     {
       "ticker": "TVSMOTOR",
-      "ytd": 19.17
+      "ytd": 20.6
     },
     {
       "ticker": "UNITDSPR",
-      "ytd": 3.26
+      "ytd": 1.64
     },
     {
       "ticker": "VBL",
-      "ytd": -11.14
+      "ytd": -11.42
     },
     {
       "ticker": "VEDL",
-      "ytd": -54.92
+      "ytd": -54.6
     },
     {
       "ticker": "ZOMATO",
@@ -3951,29 +3951,29 @@
     },
     {
       "ticker": "ZYDUSLIFE",
-      "ytd": 33.0
+      "ytd": 31.2
     }
   ],
   "NIFTYIT": [
     {
       "ticker": "TCS",
-      "ytd": -19.99
+      "ytd": -20.1
     },
     {
       "ticker": "INFY",
-      "ytd": -26.0
+      "ytd": -25.94
     },
     {
       "ticker": "HCLTECH",
-      "ytd": -9.94
+      "ytd": -10.71
     },
     {
       "ticker": "WIPRO",
-      "ytd": -22.77
+      "ytd": -23.16
     },
     {
       "ticker": "TECHM",
-      "ytd": 16.14
+      "ytd": 15.08
     },
     {
       "ticker": "LTIM",
@@ -3981,37 +3981,37 @@
     },
     {
       "ticker": "PERSISTENT",
-      "ytd": -3.18
+      "ytd": -4.25
     },
     {
       "ticker": "COFORGE",
-      "ytd": 24.21
+      "ytd": 22.42
     },
     {
       "ticker": "MPHASIS",
-      "ytd": -10.88
+      "ytd": -13.24
     },
     {
       "ticker": "OFSS",
-      "ytd": 34.33
+      "ytd": 35.15
     }
   ],
   "NIFTYBANK": [
     {
       "ticker": "HDFCBANK",
-      "ytd": -18.14
+      "ytd": -17.27
     },
     {
       "ticker": "ICICIBANK",
-      "ytd": 19.76
+      "ytd": 18.45
     },
     {
       "ticker": "SBIN",
-      "ytd": 7.72
+      "ytd": 9.71
     },
     {
       "ticker": "KOTAKBANK",
-      "ytd": 8.29
+      "ytd": 10.14
     },
     {
       "ticker": "AXISBANK",
@@ -4019,23 +4019,23 @@
     },
     {
       "ticker": "BANKBARODA",
-      "ytd": -10.75
+      "ytd": -5.6
     },
     {
       "ticker": "PNB",
-      "ytd": 9.74
+      "ytd": 14.98
     },
     {
       "ticker": "CANBK",
-      "ytd": -14.21
+      "ytd": -11.4
     },
     {
       "ticker": "FEDERALBNK",
-      "ytd": 29.68
+      "ytd": 36.28
     },
     {
       "ticker": "IDFCFIRSTB",
-      "ytd": -8.77
+      "ytd": -6.01
     },
     {
       "ticker": "AUBANK",
@@ -4057,7 +4057,7 @@
     },
     {
       "ticker": "BAJAJFINSV",
-      "ytd": -9.75
+      "ytd": -9.35
     },
     {
       "ticker": "CHOLAFIN",
@@ -4065,35 +4065,35 @@
     },
     {
       "ticker": "HDFCBANK",
-      "ytd": -18.14
+      "ytd": -17.27
     },
     {
       "ticker": "HDFCLIFE",
-      "ytd": -24.35
+      "ytd": -23.26
     },
     {
       "ticker": "ICICIBANK",
-      "ytd": 19.76
+      "ytd": 18.45
     },
     {
       "ticker": "ICICIGI",
-      "ytd": -14.49
+      "ytd": -13.61
     },
     {
       "ticker": "ICICIPRULI",
-      "ytd": -11.82
+      "ytd": -9.48
     },
     {
       "ticker": "IDFCFIRSTB",
-      "ytd": -8.77
+      "ytd": -6.01
     },
     {
       "ticker": "JIOFIN",
-      "ytd": -22.04
+      "ytd": -21.83
     },
     {
       "ticker": "KOTAKBANK",
-      "ytd": 8.29
+      "ytd": 10.14
     },
     {
       "ticker": "LICHSGFIN",
@@ -4105,11 +4105,11 @@
     },
     {
       "ticker": "MUTHOOTFIN",
-      "ytd": -23.36
+      "ytd": -23.82
     },
     {
       "ticker": "PFC",
-      "ytd": -3.25
+      "ytd": -1.5
     },
     {
       "ticker": "REC",
@@ -4117,19 +4117,19 @@
     },
     {
       "ticker": "SBICARD",
-      "ytd": -31.1
+      "ytd": -31.73
     },
     {
       "ticker": "SBILIFE",
-      "ytd": -14.21
+      "ytd": -13.28
     },
     {
       "ticker": "SBIN",
-      "ytd": 7.72
+      "ytd": 9.71
     },
     {
       "ticker": "SHRIRAMFIN",
-      "ytd": -4.08
+      "ytd": -3.67
     }
   ],
   "NIFTYMIDCAP100": [
@@ -4143,11 +4143,11 @@
     },
     {
       "ticker": "AARTIIND",
-      "ytd": 22.63
+      "ytd": 28.88
     },
     {
       "ticker": "ALKEM",
-      "ytd": -0.21
+      "ytd": 0.7
     },
     {
       "ticker": "APLLTD",
@@ -4155,11 +4155,11 @@
     },
     {
       "ticker": "ASTRAL",
-      "ytd": -11.16
+      "ytd": -10.93
     },
     {
       "ticker": "AUROPHARMA",
-      "ytd": 55.52
+      "ytd": 53.77
     },
     {
       "ticker": "AUBANK",
@@ -4167,27 +4167,27 @@
     },
     {
       "ticker": "BALKRISIND",
-      "ytd": 1.71
+      "ytd": 0.19
     },
     {
       "ticker": "BANDHANBNK",
-      "ytd": 17.95
+      "ytd": 20.01
     },
     {
       "ticker": "BATAINDIA",
-      "ytd": -29.25
+      "ytd": -28.93
     },
     {
       "ticker": "BHEL",
-      "ytd": 45.59
+      "ytd": 48.7
     },
     {
       "ticker": "BIOCON",
-      "ytd": -4.85
+      "ytd": -4.97
     },
     {
       "ticker": "BSOFT",
-      "ytd": -21.2
+      "ytd": -22.53
     },
     {
       "ticker": "CANFINHOME",
@@ -4195,23 +4195,23 @@
     },
     {
       "ticker": "CHAMBLFERT",
-      "ytd": -17.84
+      "ytd": -16.48
     },
     {
       "ticker": "CONCOR",
-      "ytd": -13.92
+      "ytd": -13.07
     },
     {
       "ticker": "COROMANDEL",
-      "ytd": -16.55
+      "ytd": -11.59
     },
     {
       "ticker": "CROMPTON",
-      "ytd": -11.12
+      "ytd": -11.93
     },
     {
       "ticker": "CUMMINSIND",
-      "ytd": -6.31
+      "ytd": -4.17
     },
     {
       "ticker": "DALBHARAT",
@@ -4219,27 +4219,27 @@
     },
     {
       "ticker": "DEEPAKNTR",
-      "ytd": -9.07
+      "ytd": -6.18
     },
     {
       "ticker": "DELHIVERY",
-      "ytd": 8.13
+      "ytd": 9.02
     },
     {
       "ticker": "DIXON",
-      "ytd": 4.31
+      "ytd": 6.74
     },
     {
       "ticker": "ESCORTS",
-      "ytd": -35.27
+      "ytd": -35.57
     },
     {
       "ticker": "EXIDEIND",
-      "ytd": 6.51
+      "ytd": 6.76
     },
     {
       "ticker": "FEDERALBNK",
-      "ytd": 29.68
+      "ytd": 36.28
     },
     {
       "ticker": "GLAXO",
@@ -4251,7 +4251,7 @@
     },
     {
       "ticker": "GODREJPROP",
-      "ytd": -9.52
+      "ytd": -10.32
     },
     {
       "ticker": "GUJGASLTD",
@@ -4259,11 +4259,11 @@
     },
     {
       "ticker": "HDFCAMC",
-      "ytd": 1.08
+      "ytd": 4.76
     },
     {
       "ticker": "HINDPETRO",
-      "ytd": -18.65
+      "ytd": -15.61
     },
     {
       "ticker": "HONAUT",
@@ -4275,31 +4275,31 @@
     },
     {
       "ticker": "INDHOTEL",
-      "ytd": 21.26
+      "ytd": 18.72
     },
     {
       "ticker": "IPCALAB",
-      "ytd": 40.65
+      "ytd": 39.12
     },
     {
       "ticker": "JUBLFOOD",
-      "ytd": -22.31
+      "ytd": -21.15
     },
     {
       "ticker": "KALYANKJIL",
-      "ytd": 26.7
+      "ytd": 37.64
     },
     {
       "ticker": "KEI",
-      "ytd": -11.23
+      "ytd": -11.15
     },
     {
       "ticker": "KPITTECH",
-      "ytd": -52.87
+      "ytd": -52.56
     },
     {
       "ticker": "LAURUSLABS",
-      "ytd": 121.32
+      "ytd": 119.06
     },
     {
       "ticker": "LICHSGFIN",
@@ -4315,7 +4315,7 @@
     },
     {
       "ticker": "MGL",
-      "ytd": 2.21
+      "ytd": 5.55
     },
     {
       "ticker": "MRF",
@@ -4323,23 +4323,23 @@
     },
     {
       "ticker": "MUTHOOTFIN",
-      "ytd": -23.36
+      "ytd": -23.82
     },
     {
       "ticker": "NATIONALUM",
-      "ytd": 8.16
+      "ytd": 7.17
     },
     {
       "ticker": "NAVINFLUOR",
-      "ytd": 53.97
+      "ytd": 63.16
     },
     {
       "ticker": "NMDC",
-      "ytd": -10.74
+      "ytd": -10.49
     },
     {
       "ticker": "OBEROIRLTY",
-      "ytd": 5.18
+      "ytd": 3.36
     },
     {
       "ticker": "PETRONET",
@@ -4347,7 +4347,7 @@
     },
     {
       "ticker": "POLYCAB",
-      "ytd": 2.56
+      "ytd": 4.08
     },
     {
       "ticker": "RBLBANK",
@@ -4355,11 +4355,11 @@
     },
     {
       "ticker": "SAIL",
-      "ytd": 15.74
+      "ytd": 19.76
     },
     {
       "ticker": "SUZLON",
-      "ytd": -25.84
+      "ytd": -25.9
     },
     {
       "ticker": "TATACOMM",
@@ -4367,31 +4367,31 @@
     },
     {
       "ticker": "TATAELXSI",
-      "ytd": -24.02
+      "ytd": -24.51
     },
     {
       "ticker": "TIINDIA",
-      "ytd": -15.64
+      "ytd": -12.72
     },
     {
       "ticker": "UNIONBANK",
-      "ytd": 32.06
+      "ytd": 35.54
     },
     {
       "ticker": "UPL",
-      "ytd": -32.11
+      "ytd": -30.46
     },
     {
       "ticker": "VOLTAS",
-      "ytd": -21.01
+      "ytd": -18.64
     },
     {
       "ticker": "YESBANK",
-      "ytd": -20.75
+      "ytd": -19.78
     },
     {
       "ticker": "ZYDUSLIFE",
-      "ytd": 33.0
+      "ytd": 31.2
     },
     {
       "ticker": "AIAENG",
@@ -4419,7 +4419,7 @@
     },
     {
       "ticker": "BEML",
-      "ytd": 8.74
+      "ytd": 15.31
     },
     {
       "ticker": "BLSTARLTD",
@@ -4431,7 +4431,7 @@
     },
     {
       "ticker": "CASTROLIND",
-      "ytd": 6.05
+      "ytd": 6.65
     },
     {
       "ticker": "CEATLTD",
@@ -4447,11 +4447,11 @@
     },
     {
       "ticker": "CESC",
-      "ytd": -19.98
+      "ytd": -18.64
     },
     {
       "ticker": "CHALET",
-      "ytd": -9.66
+      "ytd": -10.63
     },
     {
       "ticker": "CHEMCON",
@@ -4463,7 +4463,7 @@
     },
     {
       "ticker": "CREDITACC",
-      "ytd": -12.52
+      "ytd": -13.97
     },
     {
       "ticker": "CYIENT",
@@ -4475,19 +4475,19 @@
     },
     {
       "ticker": "DEEPAKFERT",
-      "ytd": -4.68
+      "ytd": 1.14
     },
     {
       "ticker": "DEVYANI",
-      "ytd": -14.11
+      "ytd": -10.45
     },
     {
       "ticker": "EIDPARRY",
-      "ytd": -36.68
+      "ytd": -35.11
     },
     {
       "ticker": "EQUITASBNK",
-      "ytd": -12.37
+      "ytd": -12.59
     },
     {
       "ticker": "ERIS",
@@ -4495,11 +4495,11 @@
     },
     {
       "ticker": "FORTIS",
-      "ytd": -13.9
+      "ytd": -14.18
     },
     {
       "ticker": "GESHIP",
-      "ytd": 31.16
+      "ytd": 32.02
     },
     {
       "ticker": "GLS",
@@ -4507,7 +4507,7 @@
     },
     {
       "ticker": "GODREJIND",
-      "ytd": -7.59
+      "ytd": -5.94
     },
     {
       "ticker": "HAPPSTMNDS",
@@ -4537,7 +4537,7 @@
     },
     {
       "ticker": "AARTIIND",
-      "ytd": 22.63
+      "ytd": 28.88
     },
     {
       "ticker": "AAVAS",
@@ -4561,19 +4561,19 @@
     },
     {
       "ticker": "ADANIENSOL",
-      "ytd": 37.53
+      "ytd": 35.42
     },
     {
       "ticker": "ADANIENT",
-      "ytd": 19.8
+      "ytd": 20.16
     },
     {
       "ticker": "ADANIGREEN",
-      "ytd": 41.23
+      "ytd": 36.63
     },
     {
       "ticker": "ADANIPORTS",
-      "ytd": 31.72
+      "ytd": 29.3
     },
     {
       "ticker": "ADANIPOVR",
@@ -4593,7 +4593,7 @@
     },
     {
       "ticker": "AFCONS",
-      "ytd": -45.14
+      "ytd": -43.78
     },
     {
       "ticker": "AGI",
@@ -4617,7 +4617,7 @@
     },
     {
       "ticker": "ALKEM",
-      "ytd": -0.21
+      "ytd": 0.7
     },
     {
       "ticker": "ALKYLAMINE",
@@ -4625,7 +4625,7 @@
     },
     {
       "ticker": "ALLCARGO",
-      "ytd": -7.33
+      "ytd": -5.45
     },
     {
       "ticker": "ALLSEC",
@@ -4633,7 +4633,7 @@
     },
     {
       "ticker": "ALOKINDS",
-      "ytd": -48.26
+      "ytd": -48.2
     },
     {
       "ticker": "ALTY",
@@ -4641,11 +4641,11 @@
     },
     {
       "ticker": "AMBER",
-      "ytd": -3.37
+      "ytd": -3.92
     },
     {
       "ticker": "AMBUJACEM",
-      "ytd": -30.05
+      "ytd": -30.0
     },
     {
       "ticker": "ANANDRATHI",
@@ -4657,7 +4657,7 @@
     },
     {
       "ticker": "ANGELONE",
-      "ytd": 46.51
+      "ytd": 46.68
     },
     {
       "ticker": "ANURAS",
@@ -4669,7 +4669,7 @@
     },
     {
       "ticker": "APARINDS",
-      "ytd": 71.17
+      "ytd": 71.12
     },
     {
       "ticker": "APEX",
@@ -4685,11 +4685,11 @@
     },
     {
       "ticker": "APOLLOTYRE",
-      "ytd": -14.91
+      "ytd": -13.14
     },
     {
       "ticker": "APTUS",
-      "ytd": -37.01
+      "ytd": -37.15
     },
     {
       "ticker": "ARCHIDPLY",
@@ -4701,11 +4701,11 @@
     },
     {
       "ticker": "ASHOKLEY",
-      "ytd": -3.81
+      "ytd": -4.33
     },
     {
       "ticker": "ASHOKA",
-      "ytd": -38.68
+      "ytd": -31.87
     },
     {
       "ticker": "ASIANPAINT",
@@ -4713,11 +4713,11 @@
     },
     {
       "ticker": "ASTERDM",
-      "ytd": 21.43
+      "ytd": 19.89
     },
     {
       "ticker": "ASTRAL",
-      "ytd": -11.16
+      "ytd": -10.93
     },
     {
       "ticker": "ASTRAZEN",
@@ -4729,7 +4729,7 @@
     },
     {
       "ticker": "ATGL",
-      "ytd": -3.19
+      "ytd": -1.99
     },
     {
       "ticker": "ATUL",
@@ -4741,15 +4741,15 @@
     },
     {
       "ticker": "AUROPHARMA",
-      "ytd": 55.52
+      "ytd": 53.77
     },
     {
       "ticker": "AVANTIFEED",
-      "ytd": -16.82
+      "ytd": -18.94
     },
     {
       "ticker": "AWL",
-      "ytd": -30.17
+      "ytd": -29.63
     },
     {
       "ticker": "AXISBANK",
@@ -4761,7 +4761,7 @@
     },
     {
       "ticker": "BAJAJ-AUTO",
-      "ytd": 16.48
+      "ytd": 17.13
     },
     {
       "ticker": "BAJAJHCARE",
@@ -4773,7 +4773,7 @@
     },
     {
       "ticker": "BAJAJFINSV",
-      "ytd": -9.75
+      "ytd": -9.35
     },
     {
       "ticker": "BAJFINANCE",
@@ -4781,43 +4781,43 @@
     },
     {
       "ticker": "BALAMINES",
-      "ytd": 62.71
+      "ytd": 65.15
     },
     {
       "ticker": "BALKRISIND",
-      "ytd": 1.71
+      "ytd": 0.19
     },
     {
       "ticker": "BALMLAWRIE",
-      "ytd": -6.2
+      "ytd": 2.08
     },
     {
       "ticker": "BALRAMCHIN",
-      "ytd": 50.22
+      "ytd": 48.79
     },
     {
       "ticker": "BANDHANBNK",
-      "ytd": 17.95
+      "ytd": 20.01
     },
     {
       "ticker": "BANKBARODA",
-      "ytd": -10.75
+      "ytd": -5.6
     },
     {
       "ticker": "BANKINDIA",
-      "ytd": 1.87
+      "ytd": 5.8
     },
     {
       "ticker": "MAHABANK",
-      "ytd": 42.02
+      "ytd": 46.11
     },
     {
       "ticker": "BATAINDIA",
-      "ytd": -29.25
+      "ytd": -28.93
     },
     {
       "ticker": "BAYERCROP",
-      "ytd": -22.24
+      "ytd": -19.56
     },
     {
       "ticker": "BBL",
@@ -4825,15 +4825,15 @@
     },
     {
       "ticker": "BDL",
-      "ytd": -24.81
+      "ytd": -25.46
     },
     {
       "ticker": "BEL",
-      "ytd": -0.23
+      "ytd": 0.89
     },
     {
       "ticker": "BEML",
-      "ytd": 8.74
+      "ytd": 15.31
     },
     {
       "ticker": "BEPL",
@@ -4845,7 +4845,7 @@
     },
     {
       "ticker": "BFUTILITIE",
-      "ytd": -35.22
+      "ytd": -34.1
     },
     {
       "ticker": "BGRENERGY",
@@ -4865,19 +4865,19 @@
     },
     {
       "ticker": "BHARATRAS",
-      "ytd": -56.19
+      "ytd": -52.87
     },
     {
       "ticker": "BHARTIARTL",
-      "ytd": -0.58
+      "ytd": 1.19
     },
     {
       "ticker": "BHEL",
-      "ytd": 45.59
+      "ytd": 48.7
     },
     {
       "ticker": "BIOCON",
-      "ytd": -4.85
+      "ytd": -4.97
     },
     {
       "ticker": "BIRLACORPN",
@@ -4885,7 +4885,7 @@
     },
     {
       "ticker": "BIRLAMONEY",
-      "ytd": -20.22
+      "ytd": -18.46
     },
     {
       "ticker": "BLISSGVS",
@@ -4893,7 +4893,7 @@
     },
     {
       "ticker": "BLS",
-      "ytd": -29.33
+      "ytd": -27.09
     },
     {
       "ticker": "BLSTARLTD",
@@ -4913,11 +4913,11 @@
     },
     {
       "ticker": "BOSCHLTD",
-      "ytd": 38.01
+      "ytd": 40.63
     },
     {
       "ticker": "BPCL",
-      "ytd": -14.83
+      "ytd": -15.03
     },
     {
       "ticker": "BRIGADE",
@@ -4929,11 +4929,11 @@
     },
     {
       "ticker": "BSE",
-      "ytd": 45.61
+      "ytd": 49.02
     },
     {
       "ticker": "BSOFT",
-      "ytd": -21.2
+      "ytd": -22.53
     },
     {
       "ticker": "CAMPUS",
@@ -4941,7 +4941,7 @@
     },
     {
       "ticker": "CANBK",
-      "ytd": -14.21
+      "ytd": -11.4
     },
     {
       "ticker": "CANFINHOME",
@@ -4953,7 +4953,7 @@
     },
     {
       "ticker": "CGPOWER",
-      "ytd": 25.69
+      "ytd": 29.24
     },
     {
       "ticker": "CARBORUNIV",
@@ -4965,7 +4965,7 @@
     },
     {
       "ticker": "CASTROLIND",
-      "ytd": 6.05
+      "ytd": 6.65
     },
     {
       "ticker": "CCL",
@@ -4977,11 +4977,11 @@
     },
     {
       "ticker": "CENTRALBK",
-      "ytd": -15.13
+      "ytd": -12.92
     },
     {
       "ticker": "CDSL",
-      "ytd": -5.38
+      "ytd": -1.82
     },
     {
       "ticker": "CENTURYPLY",
@@ -4997,7 +4997,7 @@
     },
     {
       "ticker": "CESC",
-      "ytd": -19.98
+      "ytd": -18.64
     },
     {
       "ticker": "CGCL",
@@ -5005,11 +5005,11 @@
     },
     {
       "ticker": "CHALET",
-      "ytd": -9.66
+      "ytd": -10.63
     },
     {
       "ticker": "CHAMBLFERT",
-      "ytd": -17.84
+      "ytd": -16.48
     },
     {
       "ticker": "CHEMCON",
@@ -5033,7 +5033,7 @@
     },
     {
       "ticker": "CIPLA",
-      "ytd": -5.59
+      "ytd": -4.51
     },
     {
       "ticker": "CLEAN",
@@ -5045,15 +5045,15 @@
     },
     {
       "ticker": "COALINDIA",
-      "ytd": 6.93
+      "ytd": 8.21
     },
     {
       "ticker": "COCHINSHIP",
-      "ytd": -20.22
+      "ytd": -25.67
     },
     {
       "ticker": "COFORGE",
-      "ytd": 24.21
+      "ytd": 22.42
     },
     {
       "ticker": "COLPAL",
@@ -5065,11 +5065,11 @@
     },
     {
       "ticker": "CONCOR",
-      "ytd": -13.92
+      "ytd": -13.07
     },
     {
       "ticker": "COROMANDEL",
-      "ytd": -16.55
+      "ytd": -11.59
     },
     {
       "ticker": "CRAFTSMAN",
@@ -5077,11 +5077,11 @@
     },
     {
       "ticker": "CREDITACC",
-      "ytd": -12.52
+      "ytd": -13.97
     },
     {
       "ticker": "CROMPTON",
-      "ytd": -11.12
+      "ytd": -11.93
     },
     {
       "ticker": "CSBBANK",
@@ -5089,7 +5089,7 @@
     },
     {
       "ticker": "CUMMINSIND",
-      "ytd": -6.31
+      "ytd": -4.17
     },
     {
       "ticker": "CYIENT",
@@ -5097,11 +5097,11 @@
     },
     {
       "ticker": "DCAL",
-      "ytd": -34.85
+      "ytd": -31.77
     },
     {
       "ticker": "DCBBANK",
-      "ytd": 20.58
+      "ytd": 26.91
     },
     {
       "ticker": "DCM",
@@ -5113,19 +5113,19 @@
     },
     {
       "ticker": "DEEPAKFERT",
-      "ytd": -4.68
+      "ytd": 1.14
     },
     {
       "ticker": "DEEPAKNTR",
-      "ytd": -9.07
+      "ytd": -6.18
     },
     {
       "ticker": "DELHIVERY",
-      "ytd": 8.13
+      "ytd": 9.02
     },
     {
       "ticker": "DELTACORP",
-      "ytd": 17.35
+      "ytd": 20.24
     },
     {
       "ticker": "DEN",
@@ -5133,23 +5133,23 @@
     },
     {
       "ticker": "DEVYANI",
-      "ytd": -14.11
+      "ytd": -10.45
     },
     {
       "ticker": "DIVISLAB",
-      "ytd": 83.06
+      "ytd": 79.92
     },
     {
       "ticker": "DIXON",
-      "ytd": 4.31
+      "ytd": 6.74
     },
     {
       "ticker": "DLF",
-      "ytd": 10.57
+      "ytd": 8.76
     },
     {
       "ticker": "DMART",
-      "ytd": -6.71
+      "ytd": -6.68
     },
     {
       "ticker": "DOCKYARD",
@@ -5169,7 +5169,7 @@
     },
     {
       "ticker": "DRREDDY",
-      "ytd": 11.2
+      "ytd": 10.56
     },
     {
       "ticker": "ECLERX",
@@ -5177,23 +5177,23 @@
     },
     {
       "ticker": "EDELWEISS",
-      "ytd": 18.78
+      "ytd": 22.48
     },
     {
       "ticker": "EICHERMOT",
-      "ytd": 4.91
+      "ytd": 4.4
     },
     {
       "ticker": "EIDPARRY",
-      "ytd": -36.68
+      "ytd": -35.11
     },
     {
       "ticker": "EIHOTEL",
-      "ytd": -15.34
+      "ytd": -14.47
     },
     {
       "ticker": "ELGIEQUIP",
-      "ytd": 16.87
+      "ytd": 18.48
     },
     {
       "ticker": "EMAMILTD",
@@ -5221,11 +5221,11 @@
     },
     {
       "ticker": "EPL",
-      "ytd": 3.8
+      "ytd": 10.44
     },
     {
       "ticker": "EQUITASBNK",
-      "ytd": -12.37
+      "ytd": -12.59
     },
     {
       "ticker": "ERIS",
@@ -5233,31 +5233,31 @@
     },
     {
       "ticker": "ESCORTS",
-      "ytd": -35.27
+      "ytd": -35.57
     },
     {
       "ticker": "EXIDEIND",
-      "ytd": 6.51
+      "ytd": 6.76
     },
     {
       "ticker": "FDC",
-      "ytd": -4.69
+      "ytd": -4.9
     },
     {
       "ticker": "FEDERALBNK",
-      "ytd": 29.68
+      "ytd": 36.28
     },
     {
       "ticker": "FACT",
-      "ytd": -17.18
+      "ytd": -10.0
     },
     {
       "ticker": "FINCABLES",
-      "ytd": 57.84
+      "ytd": 56.94
     },
     {
       "ticker": "FINPIPE",
-      "ytd": -16.23
+      "ytd": -13.26
     },
     {
       "ticker": "FINOPB",
@@ -5269,11 +5269,11 @@
     },
     {
       "ticker": "FSL",
-      "ytd": -8.77
+      "ytd": -9.67
     },
     {
       "ticker": "FORTIS",
-      "ytd": -13.9
+      "ytd": -14.18
     },
     {
       "ticker": "FOUNDRY",
@@ -5281,19 +5281,19 @@
     },
     {
       "ticker": "GABRIEL",
-      "ytd": 37.19
+      "ytd": 36.06
     },
     {
       "ticker": "GAIL",
-      "ytd": 13.19
+      "ytd": 14.33
     },
     {
       "ticker": "GALAXYSURF",
-      "ytd": 9.24
+      "ytd": 11.16
     },
     {
       "ticker": "GANESHBE",
-      "ytd": 10.44
+      "ytd": 13.22
     },
     {
       "ticker": "GARFIBRES",
@@ -5305,7 +5305,7 @@
     },
     {
       "ticker": "GICRE",
-      "ytd": -8.01
+      "ytd": -7.93
     },
     {
       "ticker": "GILLETTE",
@@ -5313,7 +5313,7 @@
     },
     {
       "ticker": "GLAND",
-      "ytd": 94.0
+      "ytd": 91.74
     },
     {
       "ticker": "GLAXO",
@@ -5329,23 +5329,23 @@
     },
     {
       "ticker": "GMDCLTD",
-      "ytd": -18.86
+      "ytd": -15.91
     },
     {
       "ticker": "GODREJAGRO",
-      "ytd": 6.12
+      "ytd": 5.16
     },
     {
       "ticker": "GODREJCP",
-      "ytd": -30.15
+      "ytd": -27.87
     },
     {
       "ticker": "GODREJIND",
-      "ytd": -7.59
+      "ytd": -5.94
     },
     {
       "ticker": "GODREJPROP",
-      "ytd": -9.52
+      "ytd": -10.32
     },
     {
       "ticker": "GOKEX",
@@ -5361,15 +5361,15 @@
     },
     {
       "ticker": "GPIL",
-      "ytd": -21.39
+      "ytd": -18.55
     },
     {
       "ticker": "GPPL",
-      "ytd": -3.49
+      "ytd": -3.92
     },
     {
       "ticker": "GRANULES",
-      "ytd": 29.34
+      "ytd": 29.35
     },
     {
       "ticker": "GRAPHTITE",
@@ -5377,15 +5377,15 @@
     },
     {
       "ticker": "GRASIM",
-      "ytd": 11.5
+      "ytd": 11.04
     },
     {
       "ticker": "GRAVITA",
-      "ytd": -19.03
+      "ytd": -17.5
     },
     {
       "ticker": "GREAVESCOT",
-      "ytd": 6.43
+      "ytd": 15.12
     },
     {
       "ticker": "GRINDWELL",
@@ -5393,7 +5393,7 @@
     },
     {
       "ticker": "GSFC",
-      "ytd": -19.35
+      "ytd": -16.7
     },
     {
       "ticker": "GSPL",
@@ -5401,7 +5401,7 @@
     },
     {
       "ticker": "GTPL",
-      "ytd": -42.92
+      "ytd": -42.69
     },
     {
       "ticker": "GUJGASLTD",
@@ -5409,7 +5409,7 @@
     },
     {
       "ticker": "GNFC",
-      "ytd": -1.3
+      "ytd": 0.56
     },
     {
       "ticker": "GVKPIL",
@@ -5417,7 +5417,7 @@
     },
     {
       "ticker": "HAL",
-      "ytd": 14.84
+      "ytd": 13.7
     },
     {
       "ticker": "HAPPSTMNDS",
@@ -5425,7 +5425,7 @@
     },
     {
       "ticker": "HATHWAY",
-      "ytd": -24.5
+      "ytd": -23.53
     },
     {
       "ticker": "HAVELLS",
@@ -5433,23 +5433,23 @@
     },
     {
       "ticker": "HCLTECH",
-      "ytd": -9.94
+      "ytd": -10.71
     },
     {
       "ticker": "HDFCAMC",
-      "ytd": 1.08
+      "ytd": 4.76
     },
     {
       "ticker": "HDFCBANK",
-      "ytd": -18.14
+      "ytd": -17.27
     },
     {
       "ticker": "HDFCLIFE",
-      "ytd": -24.35
+      "ytd": -23.26
     },
     {
       "ticker": "HEG",
-      "ytd": -50.49
+      "ytd": -50.46
     },
     {
       "ticker": "HERITGFOOD",
@@ -5457,11 +5457,11 @@
     },
     {
       "ticker": "HEROMOTOCO",
-      "ytd": -4.18
+      "ytd": -5.34
     },
     {
       "ticker": "HFCL",
-      "ytd": 199.86
+      "ytd": 208.44
     },
     {
       "ticker": "HGS",
@@ -5469,7 +5469,7 @@
     },
     {
       "ticker": "HIKAL",
-      "ytd": -0.41
+      "ytd": -0.8
     },
     {
       "ticker": "HIL",
@@ -5477,15 +5477,15 @@
     },
     {
       "ticker": "HIMATSEIDE",
-      "ytd": -46.9
+      "ytd": -45.63
     },
     {
       "ticker": "HINDALCO",
-      "ytd": 7.83
+      "ytd": 8.09
     },
     {
       "ticker": "HINDCOPPER",
-      "ytd": -17.28
+      "ytd": -16.06
     },
     {
       "ticker": "HINDOILEX",
@@ -5493,15 +5493,15 @@
     },
     {
       "ticker": "HINDPETRO",
-      "ytd": -18.65
+      "ytd": -15.61
     },
     {
       "ticker": "HINDUNILVR",
-      "ytd": -13.45
+      "ytd": -12.05
     },
     {
       "ticker": "HINDZINC",
-      "ytd": -4.16
+      "ytd": -3.66
     },
     {
       "ticker": "HITACHI",
@@ -5517,11 +5517,11 @@
     },
     {
       "ticker": "HUDCO",
-      "ytd": -23.62
+      "ytd": -21.98
     },
     {
       "ticker": "HYUNDAI",
-      "ytd": -7.82
+      "ytd": -5.78
     },
     {
       "ticker": "IBREALEST",
@@ -5533,15 +5533,15 @@
     },
     {
       "ticker": "ICICIBANK",
-      "ytd": 19.76
+      "ytd": 18.45
     },
     {
       "ticker": "ICICIGI",
-      "ytd": -14.49
+      "ytd": -13.61
     },
     {
       "ticker": "ICICIPRULI",
-      "ytd": -11.82
+      "ytd": -9.48
     },
     {
       "ticker": "ICIL",
@@ -5553,23 +5553,23 @@
     },
     {
       "ticker": "IDBI",
-      "ytd": -23.2
+      "ytd": -23.41
     },
     {
       "ticker": "IDFCFIRSTB",
-      "ytd": -8.77
+      "ytd": -6.01
     },
     {
       "ticker": "IEX",
-      "ytd": -13.11
+      "ytd": -12.1
     },
     {
       "ticker": "IFCI",
-      "ytd": 16.15
+      "ytd": 19.2
     },
     {
       "ticker": "IIFL",
-      "ytd": 1.8
+      "ytd": 8.18
     },
     {
       "ticker": "IIFLSEC",
@@ -5581,7 +5581,7 @@
     },
     {
       "ticker": "INDHOTEL",
-      "ytd": 21.26
+      "ytd": 18.72
     },
     {
       "ticker": "INDIACEM",
@@ -5589,7 +5589,7 @@
     },
     {
       "ticker": "INDIAGLYCO",
-      "ytd": -69.19
+      "ytd": -69.22
     },
     {
       "ticker": "INDIAMART",
@@ -5597,7 +5597,7 @@
     },
     {
       "ticker": "INDIANB",
-      "ytd": 14.53
+      "ytd": 14.74
     },
     {
       "ticker": "INDIANHOSP",
@@ -5605,7 +5605,7 @@
     },
     {
       "ticker": "INDIGO",
-      "ytd": 6.25
+      "ytd": 10.85
     },
     {
       "ticker": "INDIGOPNTS",
@@ -5617,7 +5617,7 @@
     },
     {
       "ticker": "INDUSTOWER",
-      "ytd": -8.68
+      "ytd": -5.36
     },
     {
       "ticker": "INFIBEAM",
@@ -5625,19 +5625,19 @@
     },
     {
       "ticker": "NAUKRI",
-      "ytd": -9.8
+      "ytd": -10.56
     },
     {
       "ticker": "INFY",
-      "ytd": -26.0
+      "ytd": -25.94
     },
     {
       "ticker": "INGERRAND",
-      "ytd": 14.2
+      "ytd": 19.06
     },
     {
       "ticker": "INOXGREEN",
-      "ytd": -43.23
+      "ytd": -43.12
     },
     {
       "ticker": "INOXINDIA",
@@ -5645,23 +5645,23 @@
     },
     {
       "ticker": "INOXWIND",
-      "ytd": -45.71
+      "ytd": -46.37
     },
     {
       "ticker": "INTELLECT",
-      "ytd": -45.64
+      "ytd": -44.46
     },
     {
       "ticker": "IOC",
-      "ytd": -9.56
+      "ytd": -8.61
     },
     {
       "ticker": "IOB",
-      "ytd": -14.25
+      "ytd": -13.28
     },
     {
       "ticker": "IPCALAB",
-      "ytd": 40.65
+      "ytd": 39.12
     },
     {
       "ticker": "IRCB",
@@ -5669,15 +5669,15 @@
     },
     {
       "ticker": "IRCTC",
-      "ytd": -32.47
+      "ytd": -30.69
     },
     {
       "ticker": "IRFC",
-      "ytd": -31.9
+      "ytd": -29.29
     },
     {
       "ticker": "IREDA",
-      "ytd": -13.11
+      "ytd": -12.71
     },
     {
       "ticker": "IRON",
@@ -5689,7 +5689,7 @@
     },
     {
       "ticker": "ITC",
-      "ytd": -19.64
+      "ytd": -17.85
     },
     {
       "ticker": "ITDC",
@@ -5713,11 +5713,11 @@
     },
     {
       "ticker": "JAIBALAJI",
-      "ytd": -6.88
+      "ytd": -5.04
     },
     {
       "ticker": "JAICORPLTD",
-      "ytd": -30.48
+      "ytd": -28.3
     },
     {
       "ticker": "JAMNAAUTO",
@@ -5733,7 +5733,7 @@
     },
     {
       "ticker": "JINDALSTEL",
-      "ytd": 7.46
+      "ytd": 8.93
     },
     {
       "ticker": "JINDALWORLD",
@@ -5741,7 +5741,7 @@
     },
     {
       "ticker": "JIOFIN",
-      "ytd": -22.04
+      "ytd": -21.83
     },
     {
       "ticker": "JKCEMENT",
@@ -5749,7 +5749,7 @@
     },
     {
       "ticker": "JKPAPER",
-      "ytd": 3.96
+      "ytd": 5.35
     },
     {
       "ticker": "JKTYRE",
@@ -5761,11 +5761,11 @@
     },
     {
       "ticker": "JSWENERGY",
-      "ytd": 4.57
+      "ytd": 3.84
     },
     {
       "ticker": "JSWHL",
-      "ytd": -44.53
+      "ytd": -44.2
     },
     {
       "ticker": "JSWINFRA",
@@ -5773,19 +5773,19 @@
     },
     {
       "ticker": "JSWSTEEL",
-      "ytd": 15.64
+      "ytd": 16.18
     },
     {
       "ticker": "JTEKTINDIA",
-      "ytd": -15.03
+      "ytd": -13.58
     },
     {
       "ticker": "JUBLFOOD",
-      "ytd": -22.31
+      "ytd": -21.15
     },
     {
       "ticker": "JUBLINGREA",
-      "ytd": -16.29
+      "ytd": -14.61
     },
     {
       "ticker": "JUBLPHARMA",
@@ -5793,11 +5793,11 @@
     },
     {
       "ticker": "JUSTDIAL",
-      "ytd": -6.66
+      "ytd": -5.87
     },
     {
       "ticker": "JYOTHYLAB",
-      "ytd": -25.74
+      "ytd": -27.48
     },
     {
       "ticker": "KABRAEXTRU",
@@ -5805,39 +5805,39 @@
     },
     {
       "ticker": "KAJARIACER",
-      "ytd": 26.56
+      "ytd": 25.3
     },
     {
       "ticker": "KPITTECH",
-      "ytd": -52.87
+      "ytd": -52.56
     },
     {
       "ticker": "KALYANKJIL",
-      "ytd": 26.7
+      "ytd": 37.64
     },
     {
       "ticker": "KANSAINER",
-      "ytd": -15.16
+      "ytd": -12.95
     },
     {
       "ticker": "KARURVYSYA",
-      "ytd": 38.41
+      "ytd": 43.8
     },
     {
       "ticker": "KEC",
-      "ytd": -54.28
+      "ytd": -52.64
     },
     {
       "ticker": "KEI",
-      "ytd": -11.23
+      "ytd": -11.15
     },
     {
       "ticker": "KENNAMET",
-      "ytd": 42.86
+      "ytd": 43.9
     },
     {
       "ticker": "KFINTECH",
-      "ytd": -13.91
+      "ytd": -11.98
     },
     {
       "ticker": "KIKI",
@@ -5857,7 +5857,7 @@
     },
     {
       "ticker": "KNRCON",
-      "ytd": -30.57
+      "ytd": -30.44
     },
     {
       "ticker": "KOLTEPATIL",
@@ -5865,7 +5865,7 @@
     },
     {
       "ticker": "KOTAKBANK",
-      "ytd": 8.29
+      "ytd": 10.14
     },
     {
       "ticker": "KPRMILL",
@@ -5893,19 +5893,19 @@
     },
     {
       "ticker": "LAOPALA",
-      "ytd": -22.52
+      "ytd": -21.93
     },
     {
       "ticker": "LAURUSLABS",
-      "ytd": 121.32
+      "ytd": 119.06
     },
     {
       "ticker": "LXCHEM",
-      "ytd": -3.01
+      "ytd": -1.55
     },
     {
       "ticker": "LEMONTREE",
-      "ytd": -26.11
+      "ytd": -26.64
     },
     {
       "ticker": "LICHSGFIN",
@@ -5917,7 +5917,7 @@
     },
     {
       "ticker": "LINDEINDIA",
-      "ytd": 15.2
+      "ytd": 15.67
     },
     {
       "ticker": "LLOYDSME",
@@ -5925,7 +5925,7 @@
     },
     {
       "ticker": "LODHA",
-      "ytd": 11.78
+      "ytd": 9.86
     },
     {
       "ticker": "LTIM",
@@ -5933,7 +5933,7 @@
     },
     {
       "ticker": "LT",
-      "ytd": 2.06
+      "ytd": 2.72
     },
     {
       "ticker": "LTTS",
@@ -5949,7 +5949,7 @@
     },
     {
       "ticker": "M&M",
-      "ytd": -11.59
+      "ytd": -6.9
     },
     {
       "ticker": "M&MFIN",
@@ -5985,11 +5985,11 @@
     },
     {
       "ticker": "MANAPPURAM",
-      "ytd": 3.71
+      "ytd": 2.51
     },
     {
       "ticker": "MANKIND",
-      "ytd": 23.27
+      "ytd": 22.89
     },
     {
       "ticker": "MAPMYINDIA",
@@ -5997,19 +5997,19 @@
     },
     {
       "ticker": "MARICO",
-      "ytd": 19.16
+      "ytd": 22.19
     },
     {
       "ticker": "MARKSANS",
-      "ytd": 72.13
+      "ytd": 70.9
     },
     {
       "ticker": "MARUTI",
-      "ytd": -21.85
+      "ytd": -20.29
     },
     {
       "ticker": "MASTEK",
-      "ytd": -28.01
+      "ytd": -28.71
     },
     {
       "ticker": "MATRIMONY",
@@ -6017,11 +6017,11 @@
     },
     {
       "ticker": "MAXHEALTH",
-      "ytd": -12.65
+      "ytd": -11.38
     },
     {
       "ticker": "MAZDOCK",
-      "ytd": -23.58
+      "ytd": -23.09
     },
     {
       "ticker": "MEDANTA",
@@ -6041,7 +6041,7 @@
     },
     {
       "ticker": "MGL",
-      "ytd": 2.21
+      "ytd": 5.55
     },
     {
       "ticker": "MHAR",
@@ -6049,7 +6049,7 @@
     },
     {
       "ticker": "MHRIL",
-      "ytd": -35.83
+      "ytd": -35.57
     },
     {
       "ticker": "MICROLTD",
@@ -6057,7 +6057,7 @@
     },
     {
       "ticker": "MIDHANI",
-      "ytd": 16.43
+      "ytd": 16.56
     },
     {
       "ticker": "MINDACORP",
@@ -6065,7 +6065,7 @@
     },
     {
       "ticker": "MSUMI",
-      "ytd": -19.2
+      "ytd": -19.02
     },
     {
       "ticker": "MOIL",
@@ -6073,15 +6073,15 @@
     },
     {
       "ticker": "MOTILALOFS",
-      "ytd": 37.42
+      "ytd": 38.52
     },
     {
       "ticker": "MOTHERSON",
-      "ytd": 32.79
+      "ytd": 39.17
     },
     {
       "ticker": "MPHASIS",
-      "ytd": -10.88
+      "ytd": -13.24
     },
     {
       "ticker": "MPSLTD",
@@ -6093,27 +6093,27 @@
     },
     {
       "ticker": "MRPL",
-      "ytd": 19.35
+      "ytd": 21.17
     },
     {
       "ticker": "MSTCLTD",
-      "ytd": 20.66
+      "ytd": 31.75
     },
     {
       "ticker": "MTARTECH",
-      "ytd": 130.29
+      "ytd": 141.1
     },
     {
       "ticker": "MTNL",
-      "ytd": -26.11
+      "ytd": -27.18
     },
     {
       "ticker": "MUTHOOTFIN",
-      "ytd": -23.36
+      "ytd": -23.82
     },
     {
       "ticker": "NAM-INDIA",
-      "ytd": 25.28
+      "ytd": 26.97
     },
     {
       "ticker": "NATCOPHARM",
@@ -6121,27 +6121,27 @@
     },
     {
       "ticker": "NATIONALUM",
-      "ytd": 8.16
+      "ytd": 7.17
     },
     {
       "ticker": "NAVINFLUOR",
-      "ytd": 53.97
+      "ytd": 63.16
     },
     {
       "ticker": "NAZARA",
-      "ytd": 45.68
+      "ytd": 47.86
     },
     {
       "ticker": "NBCC",
-      "ytd": -33.61
+      "ytd": -33.22
     },
     {
       "ticker": "NCC",
-      "ytd": -17.74
+      "ytd": -13.75
     },
     {
       "ticker": "NEOGEN",
-      "ytd": 126.74
+      "ytd": 135.68
     },
     {
       "ticker": "NESCO",
@@ -6149,15 +6149,15 @@
     },
     {
       "ticker": "NESTLEIND",
-      "ytd": 1.24
+      "ytd": 0.48
     },
     {
       "ticker": "NETWEB",
-      "ytd": 24.89
+      "ytd": 35.15
     },
     {
       "ticker": "NETWORK18",
-      "ytd": -36.93
+      "ytd": -35.88
     },
     {
       "ticker": "NEULANDLAB",
@@ -6165,7 +6165,7 @@
     },
     {
       "ticker": "NEWGEN",
-      "ytd": -46.99
+      "ytd": -46.65
     },
     {
       "ticker": "NH",
@@ -6173,11 +6173,11 @@
     },
     {
       "ticker": "NHPC",
-      "ytd": 3.15
+      "ytd": -0.04
     },
     {
       "ticker": "NIITLTD",
-      "ytd": -20.16
+      "ytd": -19.05
     },
     {
       "ticker": "NIITMTS",
@@ -6189,15 +6189,15 @@
     },
     {
       "ticker": "NLCINDIA",
-      "ytd": -3.64
+      "ytd": -1.42
     },
     {
       "ticker": "NMDC",
-      "ytd": -10.74
+      "ytd": -10.49
     },
     {
       "ticker": "NOCIL",
-      "ytd": -8.77
+      "ytd": -4.96
     },
     {
       "ticker": "NOVA",
@@ -6205,11 +6205,11 @@
     },
     {
       "ticker": "NTPC",
-      "ytd": 0.51
+      "ytd": -0.03
     },
     {
       "ticker": "NUVAMA",
-      "ytd": 29.51
+      "ytd": 27.61
     },
     {
       "ticker": "NUVOCO",
@@ -6217,19 +6217,19 @@
     },
     {
       "ticker": "OBEROIRLTY",
-      "ytd": 5.18
+      "ytd": 3.36
     },
     {
       "ticker": "OFSS",
-      "ytd": 34.33
+      "ytd": 35.15
     },
     {
       "ticker": "OIL",
-      "ytd": 4.46
+      "ytd": 6.08
     },
     {
       "ticker": "OLECTRA",
-      "ytd": -10.04
+      "ytd": -12.21
     },
     {
       "ticker": "OMAXE",
@@ -6237,7 +6237,7 @@
     },
     {
       "ticker": "ONGC",
-      "ytd": 0.87
+      "ytd": 1.43
     },
     {
       "ticker": "ORIENTCEM",
@@ -6245,7 +6245,7 @@
     },
     {
       "ticker": "ORIENTELEC",
-      "ytd": 17.85
+      "ytd": 15.68
     },
     {
       "ticker": "ORIENTPAPER",
@@ -6253,7 +6253,7 @@
     },
     {
       "ticker": "PAISALO",
-      "ytd": 111.28
+      "ytd": 113.97
     },
     {
       "ticker": "PALRED",
@@ -6261,7 +6261,7 @@
     },
     {
       "ticker": "PARAGMILK",
-      "ytd": 7.56
+      "ytd": 8.68
     },
     {
       "ticker": "PARAS",
@@ -6273,23 +6273,23 @@
     },
     {
       "ticker": "PATELENG",
-      "ytd": -11.96
+      "ytd": -9.29
     },
     {
       "ticker": "PAYTM",
-      "ytd": 38.42
+      "ytd": 38.87
     },
     {
       "ticker": "PCJEWELLER",
-      "ytd": 63.44
+      "ytd": 69.68
     },
     {
       "ticker": "PFC",
-      "ytd": -3.25
+      "ytd": -1.5
     },
     {
       "ticker": "PFIZER",
-      "ytd": -19.01
+      "ytd": -19.52
     },
     {
       "ticker": "PGHL",
@@ -6305,19 +6305,19 @@
     },
     {
       "ticker": "PIDILITIND",
-      "ytd": 8.82
+      "ytd": 7.92
     },
     {
       "ticker": "PIIND",
-      "ytd": -46.51
+      "ytd": -45.01
     },
     {
       "ticker": "PNB",
-      "ytd": 9.74
+      "ytd": 14.98
     },
     {
       "ticker": "PNBHOUSING",
-      "ytd": 13.53
+      "ytd": 14.58
     },
     {
       "ticker": "PNCINFRA",
@@ -6325,11 +6325,11 @@
     },
     {
       "ticker": "POLICYBZR",
-      "ytd": -47.18
+      "ytd": -45.95
     },
     {
       "ticker": "POLYCAB",
-      "ytd": 2.56
+      "ytd": 4.08
     },
     {
       "ticker": "POLYMED",
@@ -6341,11 +6341,11 @@
     },
     {
       "ticker": "POONAWALLA",
-      "ytd": -1.83
+      "ytd": 0.57
     },
     {
       "ticker": "POWERGRID",
-      "ytd": -0.63
+      "ytd": 1.6
     },
     {
       "ticker": "POWMECH",
@@ -6353,7 +6353,7 @@
     },
     {
       "ticker": "PRAJIND",
-      "ytd": -20.65
+      "ytd": -17.74
     },
     {
       "ticker": "PRESTIGE",
@@ -6369,15 +6369,15 @@
     },
     {
       "ticker": "PRSMJOHNSN",
-      "ytd": -21.57
+      "ytd": -20.11
     },
     {
       "ticker": "PTC",
-      "ytd": 2.91
+      "ytd": 2.83
     },
     {
       "ticker": "PVRINOX",
-      "ytd": 56.32
+      "ytd": 55.69
     },
     {
       "ticker": "RAMCOCEAT",
@@ -6397,35 +6397,35 @@
     },
     {
       "ticker": "RCF",
-      "ytd": -28.08
+      "ytd": -23.94
     },
     {
       "ticker": "RECLTD",
-      "ytd": -12.8
+      "ytd": -11.27
     },
     {
       "ticker": "REDINGTON",
-      "ytd": 22.1
+      "ytd": 28.16
     },
     {
       "ticker": "RELIANCE",
-      "ytd": -15.55
+      "ytd": -14.85
     },
     {
       "ticker": "RELIGARE",
-      "ytd": -6.44
+      "ytd": -6.89
     },
     {
       "ticker": "RITES",
-      "ytd": -16.83
+      "ytd": -14.22
     },
     {
       "ticker": "RKFORGE",
-      "ytd": 38.74
+      "ytd": 48.72
     },
     {
       "ticker": "ROSSARI",
-      "ytd": -26.55
+      "ytd": -25.73
     },
     {
       "ticker": "ROUTE",
@@ -6437,7 +6437,7 @@
     },
     {
       "ticker": "RSYSTEMS",
-      "ytd": -32.21
+      "ytd": -32.55
     },
     {
       "ticker": "RTL",
@@ -6445,19 +6445,19 @@
     },
     {
       "ticker": "RVNL",
-      "ytd": -43.86
+      "ytd": -41.71
     },
     {
       "ticker": "SAIL",
-      "ytd": 15.74
+      "ytd": 19.76
     },
     {
       "ticker": "SANOFI",
-      "ytd": -15.82
+      "ytd": -16.39
     },
     {
       "ticker": "SANSERA",
-      "ytd": 163.84
+      "ytd": 163.94
     },
     {
       "ticker": "SAPPHIRE",
@@ -6469,23 +6469,23 @@
     },
     {
       "ticker": "SAREGAMA",
-      "ytd": 84.69
+      "ytd": 79.6
     },
     {
       "ticker": "SBICARD",
-      "ytd": -31.1
+      "ytd": -31.73
     },
     {
       "ticker": "SBILIFE",
-      "ytd": -14.21
+      "ytd": -13.28
     },
     {
       "ticker": "SBIN",
-      "ytd": 7.72
+      "ytd": 9.71
     },
     {
       "ticker": "SCHAEFFLER",
-      "ytd": -7.75
+      "ytd": -7.57
     },
     {
       "ticker": "SCHNEIDER",
@@ -6493,7 +6493,7 @@
     },
     {
       "ticker": "SCI",
-      "ytd": 15.78
+      "ytd": 18.15
     },
     {
       "ticker": "SDF",
@@ -6509,7 +6509,7 @@
     },
     {
       "ticker": "SHAKTIPUMP",
-      "ytd": -51.78
+      "ytd": -45.91
     },
     {
       "ticker": "SHARDACROP",
@@ -6517,11 +6517,11 @@
     },
     {
       "ticker": "SHARDAMOTR",
-      "ytd": -3.72
+      "ytd": -1.92
     },
     {
       "ticker": "SHAREINDIA",
-      "ytd": 13.55
+      "ytd": 15.43
     },
     {
       "ticker": "SHEL",
@@ -6529,7 +6529,7 @@
     },
     {
       "ticker": "SHK",
-      "ytd": -25.56
+      "ytd": -24.47
     },
     {
       "ticker": "SHOPERSTOP",
@@ -6549,7 +6549,7 @@
     },
     {
       "ticker": "SHRIRAMFIN",
-      "ytd": -4.08
+      "ytd": -3.67
     },
     {
       "ticker": "SHRIRAMPST",
@@ -6561,7 +6561,7 @@
     },
     {
       "ticker": "SIEMENS",
-      "ytd": 18.82
+      "ytd": 19.95
     },
     {
       "ticker": "SIGNATURE",
@@ -6569,7 +6569,7 @@
     },
     {
       "ticker": "SJS",
-      "ytd": 15.53
+      "ytd": 15.81
     },
     {
       "ticker": "SKFINDIA",
@@ -6585,11 +6585,11 @@
     },
     {
       "ticker": "SOLARINDS",
-      "ytd": 56.46
+      "ytd": 56.03
     },
     {
       "ticker": "SONACOMS",
-      "ytd": 96.01
+      "ytd": 96.23
     },
     {
       "ticker": "SONATSOFTW",
@@ -6597,15 +6597,15 @@
     },
     {
       "ticker": "SOUTHBANK",
-      "ytd": 56.23
+      "ytd": 60.97
     },
     {
       "ticker": "SPARC",
-      "ytd": 56.11
+      "ytd": 55.96
     },
     {
       "ticker": "SRF",
-      "ytd": -19.25
+      "ytd": -17.57
     },
     {
       "ticker": "SRHHYPOLTD",
@@ -6613,7 +6613,7 @@
     },
     {
       "ticker": "STARHEALTH",
-      "ytd": 17.98
+      "ytd": 20.03
     },
     {
       "ticker": "STARCEMENT",
@@ -6621,11 +6621,11 @@
     },
     {
       "ticker": "STLTECH",
-      "ytd": 554.59
+      "ytd": 587.27
     },
     {
       "ticker": "SUMICHEM",
-      "ytd": -27.44
+      "ytd": -25.5
     },
     {
       "ticker": "SUNDARMFIN",
@@ -6633,7 +6633,7 @@
     },
     {
       "ticker": "SUNDRMFAST",
-      "ytd": 17.54
+      "ytd": 14.12
     },
     {
       "ticker": "SUNPHARMA",
@@ -6641,7 +6641,7 @@
     },
     {
       "ticker": "SUNTV",
-      "ytd": 6.27
+      "ytd": 13.94
     },
     {
       "ticker": "SUNTECK",
@@ -6653,7 +6653,7 @@
     },
     {
       "ticker": "SUPRAJIT",
-      "ytd": -0.63
+      "ytd": -0.73
     },
     {
       "ticker": "SUPREMEIND",
@@ -6661,7 +6661,7 @@
     },
     {
       "ticker": "SUZLON",
-      "ytd": -25.84
+      "ytd": -25.9
     },
     {
       "ticker": "SWANENERGY",
@@ -6669,11 +6669,11 @@
     },
     {
       "ticker": "SYNGENE",
-      "ytd": -32.62
+      "ytd": -31.7
     },
     {
       "ticker": "SYRMA",
-      "ytd": 103.43
+      "ytd": 110.67
     },
     {
       "ticker": "TATACOMM",
@@ -6685,7 +6685,7 @@
     },
     {
       "ticker": "TATAELXSI",
-      "ytd": -24.02
+      "ytd": -24.51
     },
     {
       "ticker": "TATAMOTORS",
@@ -6697,23 +6697,23 @@
     },
     {
       "ticker": "TATASTEEL",
-      "ytd": 3.72
+      "ytd": 6.21
     },
     {
       "ticker": "TATATECH",
-      "ytd": 4.93
+      "ytd": 6.56
     },
     {
       "ticker": "TTML",
-      "ytd": -20.64
+      "ytd": -20.18
     },
     {
       "ticker": "TCS",
-      "ytd": -19.99
+      "ytd": -20.1
     },
     {
       "ticker": "TECHM",
-      "ytd": 16.14
+      "ytd": 15.08
     },
     {
       "ticker": "TECHNOE",
@@ -6721,19 +6721,19 @@
     },
     {
       "ticker": "TEJASNET",
-      "ytd": -7.34
+      "ytd": -7.03
     },
     {
       "ticker": "TEXRAIL",
-      "ytd": -21.1
+      "ytd": -15.42
     },
     {
       "ticker": "NIACL",
-      "ytd": 2.8
+      "ytd": 3.75
     },
     {
       "ticker": "THERMAX",
-      "ytd": -8.69
+      "ytd": -10.67
     },
     {
       "ticker": "THOMASCOOK",
@@ -6749,11 +6749,11 @@
     },
     {
       "ticker": "TIIL",
-      "ytd": 26.27
+      "ytd": 26.03
     },
     {
       "ticker": "TIINDIA",
-      "ytd": -15.64
+      "ytd": -12.72
     },
     {
       "ticker": "TIMKEN",
@@ -6765,11 +6765,11 @@
     },
     {
       "ticker": "TITAN",
-      "ytd": 24.01
+      "ytd": 23.14
     },
     {
       "ticker": "TNPL",
-      "ytd": 3.26
+      "ytd": 4.04
     },
     {
       "ticker": "TORNTPHARM",
@@ -6781,15 +6781,15 @@
     },
     {
       "ticker": "TRENT",
-      "ytd": 9.04
+      "ytd": 12.65
     },
     {
       "ticker": "TRIDENT",
-      "ytd": -10.33
+      "ytd": -10.9
     },
     {
       "ticker": "TRIVENI",
-      "ytd": -36.66
+      "ytd": -34.96
     },
     {
       "ticker": "TRITURBINE",
@@ -6797,11 +6797,11 @@
     },
     {
       "ticker": "TI",
-      "ytd": 6.77
+      "ytd": 10.51
     },
     {
       "ticker": "TVSMOTOR",
-      "ytd": 19.17
+      "ytd": 20.6
     },
     {
       "ticker": "TVSSCS",
@@ -6813,7 +6813,7 @@
     },
     {
       "ticker": "UBL",
-      "ytd": -23.25
+      "ytd": -23.53
     },
     {
       "ticker": "UCOBANK",
@@ -6821,7 +6821,7 @@
     },
     {
       "ticker": "UFLEX",
-      "ytd": 22.5
+      "ytd": 25.99
     },
     {
       "ticker": "UGRASEN",
@@ -6833,15 +6833,15 @@
     },
     {
       "ticker": "UNIONBANK",
-      "ytd": 32.06
+      "ytd": 35.54
     },
     {
       "ticker": "UNIPARTS",
-      "ytd": 52.01
+      "ytd": 54.66
     },
     {
       "ticker": "UNITDSPR",
-      "ytd": 3.26
+      "ytd": 1.64
     },
     {
       "ticker": "UNOMINDA",
@@ -6849,7 +6849,7 @@
     },
     {
       "ticker": "UPL",
-      "ytd": -32.11
+      "ytd": -30.46
     },
     {
       "ticker": "UTIAMC",
@@ -6857,15 +6857,15 @@
     },
     {
       "ticker": "VAIBHAVGBL",
-      "ytd": -28.92
+      "ytd": -26.64
     },
     {
       "ticker": "VAKRANGEE",
-      "ytd": -27.67
+      "ytd": -26.16
     },
     {
       "ticker": "VALIANTORG",
-      "ytd": 26.11
+      "ytd": 32.62
     },
     {
       "ticker": "VGUARD",
@@ -6873,11 +6873,11 @@
     },
     {
       "ticker": "VBL",
-      "ytd": -11.14
+      "ytd": -11.42
     },
     {
       "ticker": "VEDL",
-      "ytd": -54.92
+      "ytd": -54.6
     },
     {
       "ticker": "VENKEYS",
@@ -6885,11 +6885,11 @@
     },
     {
       "ticker": "VESUVIUS",
-      "ytd": -24.15
+      "ytd": -23.7
     },
     {
       "ticker": "VIJAYA",
-      "ytd": 42.01
+      "ytd": 36.78
     },
     {
       "ticker": "VINATIORGA",
@@ -6897,15 +6897,15 @@
     },
     {
       "ticker": "VIPIND",
-      "ytd": -37.53
+      "ytd": -35.18
     },
     {
       "ticker": "VOLTAS",
-      "ytd": -21.01
+      "ytd": -18.64
     },
     {
       "ticker": "VRLLOG",
-      "ytd": 22.52
+      "ytd": 27.72
     },
     {
       "ticker": "VSTIND",
@@ -6913,23 +6913,23 @@
     },
     {
       "ticker": "VSTTILLERS",
-      "ytd": -36.06
+      "ytd": -35.53
     },
     {
       "ticker": "VTL",
-      "ytd": 21.93
+      "ytd": 20.67
     },
     {
       "ticker": "WABAG",
-      "ytd": 53.19
+      "ytd": 58.7
     },
     {
       "ticker": "WELCORP",
-      "ytd": 176.4
+      "ytd": 177.69
     },
     {
       "ticker": "WELSPUNLIV",
-      "ytd": 91.11
+      "ytd": 93.78
     },
     {
       "ticker": "WESTLIFE",
@@ -6945,7 +6945,7 @@
     },
     {
       "ticker": "WIPRO",
-      "ytd": -22.77
+      "ytd": -23.16
     },
     {
       "ticker": "WOCKPHARM",
@@ -6961,11 +6961,11 @@
     },
     {
       "ticker": "YESBANK",
-      "ytd": -20.75
+      "ytd": -19.78
     },
     {
       "ticker": "ZEEL",
-      "ytd": -21.05
+      "ytd": -19.81
     },
     {
       "ticker": "ZENTEC",
@@ -6973,7 +6973,7 @@
     },
     {
       "ticker": "ZENSARTECH",
-      "ytd": -17.06
+      "ytd": -18.87
     },
     {
       "ticker": "ZOMATO",
@@ -6981,11 +6981,11 @@
     },
     {
       "ticker": "ZUARI",
-      "ytd": -42.28
+      "ytd": -39.91
     },
     {
       "ticker": "ZYDUSLIFE",
-      "ytd": 33.0
+      "ytd": 31.2
     }
   ]
 }
